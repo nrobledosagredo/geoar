@@ -1,3 +1,4 @@
 export { auth } from './firebase';
-export { LogOutButton } from './LogOutButton';
-export { SignInAnonymouslyButton } from './SignInAnonymouslyButton';
+export { LogOutButton } from './log-out-button';
+export { SignInAnonymouslyButton } from './sign-in-anonymously-button';
+export { ShowUidButton } from './show-uid-button';

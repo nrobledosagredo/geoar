@@ -1,2 +1,2 @@
-export { Register } from './Register';
-export { registerSchema } from './registerSchema';
+export { Register } from './register';
+export { registerSchema } from './register-schema';

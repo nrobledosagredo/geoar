@@ -1,9 +1,8 @@
-// Login.tsx
-import { SignInAnonymouslyButton } from "@/pages/auth"
-import { auth } from "@/pages/auth/"
-import { loginSchema } from "@/pages/auth/login"
+// register.tsx
+import { auth } from "@/pages/auth/firebase"
+import { registerSchema } from "@/pages/auth/register"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { signInWithEmailAndPassword } from "firebase/auth"
+import { createUserWithEmailAndPassword } from "firebase/auth"
 import { useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
 
@@ -18,10 +17,10 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 
-export const Login = () => {
+export const Register = () => {
   const navigate = useNavigate()
   const form = useForm({
-    resolver: zodResolver(loginSchema),
+    resolver: zodResolver(registerSchema),
     defaultValues: {
       email: "",
       password: "",
@@ -29,9 +28,11 @@ export const Login = () => {
   })
 
   const onSubmit = (values: { email: string; password: string }) => {
-    signInWithEmailAndPassword(auth, values.email, values.password)
+    createUserWithEmailAndPassword(auth, values.email, values.password)
       .then((userCredential) => {
         navigate("/")
+
+        // Redirige o maneja el estado del usuario aquí
       })
       .catch((error) => {
         console.error(error.message)
@@ -71,9 +72,8 @@ export const Login = () => {
             </FormItem>
           )}
         />
-        <Button type="submit">Login</Button>
+        <Button type="submit">Register</Button>
       </form>
-      <SignInAnonymouslyButton />
     </Form>
   )
 }

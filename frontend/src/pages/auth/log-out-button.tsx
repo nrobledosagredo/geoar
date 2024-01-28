@@ -1,4 +1,4 @@
-// LogOutButton.tsx
+// log-out-button.tsx
 import { auth } from "@/pages/auth"
 import { signOut } from "firebase/auth"
 import { LogOut } from "lucide-react"

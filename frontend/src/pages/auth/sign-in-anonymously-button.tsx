@@ -1,4 +1,4 @@
-// SignInAnonymouslyButton.tsx
+// sign-in-anonymously-button.tsx
 import { getAuth, signInAnonymously } from "firebase/auth"
 import { useNavigate } from "react-router-dom"
 

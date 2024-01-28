@@ -1,6 +1,5 @@
-// Home.tsx
-import { LogOutButton } from '@/pages/auth';
-import ShowUidButton from '@/pages/auth/ShowUidButton';
+// home.tsx
+import { LogOutButton, ShowUidButton } from '@/pages/auth';
 
 export const Home = () => {
   return (
