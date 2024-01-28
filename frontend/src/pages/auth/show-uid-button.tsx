@@ -1,7 +1,7 @@
 // show-uid-button.tsx
 import { getAuth } from "firebase/auth"
 
-export const ShowUidButton = () => {
+export function ShowUidButton() {
   const showUid = () => {
     const auth = getAuth()
     const user = auth.currentUser
@@ -13,5 +13,5 @@ export const ShowUidButton = () => {
     }
   }
 
-  return <button onClick={showUid}>Mostrar UID del Usuario</button>
+  return <button onClick={showUid}>UID</button>
 }

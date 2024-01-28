@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 
-export const Register = () => {
+export function Register() {
   const navigate = useNavigate()
   const form = useForm({
     resolver: zodResolver(registerSchema),

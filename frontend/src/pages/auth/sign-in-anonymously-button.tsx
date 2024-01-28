@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"
 
 import { Button } from "@/components/ui/button"
 
-export const SignInAnonymouslyButton = () => {
+export function SignInAnonymouslyButton() {
   const navigate = useNavigate() // Hook para la navegación
   const handlesignInAnonymously = () => {
     const auth = getAuth()

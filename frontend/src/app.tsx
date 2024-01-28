@@ -18,6 +18,8 @@ import {
   Routes,
 } from "react-router-dom"
 
+import { ThemeProvider } from "@/components/theme-provider"
+
 function App() {
   const [currentUser, setCurrentUser] = useState<User | null>(null)
   const [loading, setLoading] = useState(true)
@@ -39,17 +41,19 @@ function App() {
   }
 
   return (
-    <Router>
-      <Routes>
-        <Route path="/auth/login" element={<Login />} />
-        <Route path="/auth/register" element={<Register />} />
-        <Route
-          path="/"
-          element={currentUser ? <Home /> : <Navigate to="/auth/login" />}
-        />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </Router>
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      <Router>
+        <Routes>
+          <Route path="/auth/login" element={<Login />} />
+          <Route path="/auth/register" element={<Register />} />
+          <Route
+            path="/"
+            element={currentUser ? <Home /> : <Navigate to="/auth/login" />}
+          />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Router>
+    </ThemeProvider>
   )
 }
 

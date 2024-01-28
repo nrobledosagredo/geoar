@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { signInWithEmailAndPassword } from "firebase/auth"
 import { useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
+import { ShowUidButton } from "@/pages/auth"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -18,7 +19,7 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 
-export const Login = () => {
+export function Login() {
   const navigate = useNavigate()
   const form = useForm({
     resolver: zodResolver(loginSchema),
@@ -74,6 +75,7 @@ export const Login = () => {
         <Button type="submit">Login</Button>
       </form>
       <SignInAnonymouslyButton />
+      <ShowUidButton />
     </Form>
   )
 }
