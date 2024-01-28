@@ -1,5 +1,6 @@
-// firebaseConfig.js
+// firebase.ts
 import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
 
 // Configuración de Firebase desde variables de entorno
 const firebaseConfig = {
@@ -13,6 +14,10 @@ const firebaseConfig = {
 };
 
 // Inicializa Firebase
-const firebaseApp = initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 
-export default firebaseApp;
+// Inicializa Firebase Authentication y obtén una referencia al servicio
+const auth = getAuth(app);
+
+// Exporta la referencia de autenticación
+export { auth };
