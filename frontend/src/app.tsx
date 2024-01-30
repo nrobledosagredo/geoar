@@ -18,6 +18,7 @@ import {
   Routes,
 } from "react-router-dom"
 
+import { Toaster } from "@/components/ui/toaster"
 import { ThemeProvider } from "@/components/theme-provider"
 
 function App() {
@@ -53,6 +54,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
+      <Toaster />
     </ThemeProvider>
   )
 }

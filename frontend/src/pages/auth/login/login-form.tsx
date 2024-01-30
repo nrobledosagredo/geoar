@@ -17,6 +17,7 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { useToast } from "@/components/ui/use-toast"
 
 export function LoginForm({
   isLoading,
@@ -26,6 +27,7 @@ export function LoginForm({
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
 }) {
   const navigate = useNavigate()
+  const { toast } = useToast()
 
   // Función para manejar el envío del formulario
   const onSubmit = (values: { email: string; password: string }) => {
@@ -36,6 +38,10 @@ export function LoginForm({
       })
       .catch((error) => {
         console.error(error.message)
+        toast({
+          description: error.message,
+          variant: "destructive",
+        })
       })
       .finally(() => {
         setIsLoading(false)
