@@ -1,6 +1,6 @@
 // home.tsx
-import MainNav from "@/components/main-nav";
-import { LogoVertical } from "@/components/logo-vertical";
+import { LogoVertical } from "@/components/logo-vertical"
+import MainNav from "@/components/main-nav"
 
 export function Home() {
   return (
@@ -12,7 +12,7 @@ export function Home() {
       <div className="flex-1 flex flex-col justify-center items-center text-center p-6">
         {/* Título */}
         <div className="mb-8 scale-150">
-          <LogoVertical />  
+          <LogoVertical />
         </div>
 
         {/* Descripción */}
@@ -25,5 +25,5 @@ export function Home() {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}

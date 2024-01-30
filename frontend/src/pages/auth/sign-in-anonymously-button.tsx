@@ -1,27 +1,54 @@
 // sign-in-anonymously-button.tsx
 import { getAuth, signInAnonymously } from "firebase/auth"
+import { Loader2, User } from "lucide-react"
 import { useNavigate } from "react-router-dom"
 
 import { Button } from "@/components/ui/button"
 
-export function SignInAnonymouslyButton() {
+export function SignInAnonymouslyButton({
+  isLoading,
+  setIsLoading,
+}: {
+  isLoading: boolean
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
+}) {
   const navigate = useNavigate() // Hook para la navegación
   const handlesignInAnonymously = () => {
+    setIsLoading(true)
     const auth = getAuth()
     signInAnonymously(auth)
       .then(() => {
-        // El usuario ha iniciado sesión de forma anónima
         console.log("Inicio de sesión anónimo exitoso")
-        navigate("/") // Redirige al usuario a la página de inicio
+        navigate("/")
       })
+
       .catch((error) => {
         const errorCode = error.code
         const errorMessage = error.message
-        console.error("Error en inicio de sesión anónimo: ", errorMessage)
+        console.error(
+          "Error en inicio de sesión anónimo: ",
+          errorCode,
+          errorMessage
+        )
+      })
+      .finally(() => {
+        setIsLoading(false)
       })
   }
 
   return (
-    <Button onClick={handlesignInAnonymously}>Continuar como invitado</Button>
+    <Button
+      variant="secondary"
+      className="w-full"
+      onClick={handlesignInAnonymously}
+      disabled={isLoading}
+    >
+      {isLoading ? (
+        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+      ) : (
+        <User className="mr-2 h-4 w-4" />
+      )}
+      Continuar como invitado
+    </Button>
   )
 }

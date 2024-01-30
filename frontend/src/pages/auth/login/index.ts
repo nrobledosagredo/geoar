@@ -1,2 +1,1 @@
-export { Login } from './login';
-export { loginSchema } from './login-schema';
+export { Login } from "./login"

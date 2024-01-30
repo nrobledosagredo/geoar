@@ -1,81 +1,52 @@
 // login.tsx
+import { useState } from "react"
 import { SignInAnonymouslyButton } from "@/pages/auth"
-import { auth } from "@/pages/auth/"
-import { loginSchema } from "@/pages/auth/login"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { signInWithEmailAndPassword } from "firebase/auth"
-import { useForm } from "react-hook-form"
-import { useNavigate } from "react-router-dom"
-import { ShowUidButton } from "@/pages/auth"
+import { LoginForm } from "@/pages/auth/login/login-form"
 
-import { Button } from "@/components/ui/button"
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
+import { LogoVertical } from "@/components/logo-vertical"
 
 export function Login() {
-  const navigate = useNavigate()
-  const form = useForm({
-    resolver: zodResolver(loginSchema),
-    defaultValues: {
-      email: "",
-      password: "",
-    },
-  })
-
-  const onSubmit = (values: { email: string; password: string }) => {
-    signInWithEmailAndPassword(auth, values.email, values.password)
-      .then((userCredential) => {
-        navigate("/")
-      })
-      .catch((error) => {
-        console.error(error.message)
-      })
-  }
-
+  const [isLoading, setIsLoading] = useState(false)
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field, fieldState }) => (
-            <FormItem>
-              <FormLabel>Email</FormLabel>
-              <FormControl>
-                <Input type="email" placeholder="Email" {...field} />
-              </FormControl>
-              {fieldState.error && (
-                <FormMessage>{fieldState.error.message}</FormMessage>
-              )}
-            </FormItem>
-          )}
+    <div className="max-w-sm mx-auto">
+      {/* Logo */}
+      <div className="my-20">
+        <LogoVertical />
+      </div>
+
+      {/* Titulo del formulario */}
+      <h1 className="text-2xl font-bold text-center mb-4">Login</h1>
+
+      {/* Formulario de login */}
+      <div>
+        <LoginForm isLoading={isLoading} setIsLoading={setIsLoading} />
+      </div>
+
+      {/* Separador */}
+      <div className="relative mt-6">
+        <div className="absolute inset-0 flex items-center">
+          <span className="w-full border-t" />
+        </div>
+        <div className="relative flex justify-center text-xs uppercase">
+          <span className="bg-background px-2 text-muted-foreground">O</span>
+        </div>
+      </div>
+
+      {/* Botón de login anónimo */}
+      <div className="mt-6">
+        <SignInAnonymouslyButton
+          isLoading={isLoading}
+          setIsLoading={setIsLoading}
         />
-        <FormField
-          control={form.control}
-          name="password"
-          render={({ field, fieldState }) => (
-            <FormItem>
-              <FormLabel>Password</FormLabel>
-              <FormControl>
-                <Input type="password" placeholder="Password" {...field} />
-              </FormControl>
-              {fieldState.error && (
-                <FormMessage>{fieldState.error.message}</FormMessage>
-              )}
-            </FormItem>
-          )}
-        />
-        <Button type="submit">Login</Button>
-      </form>
-      <SignInAnonymouslyButton />
-      <ShowUidButton />
-    </Form>
+      </div>
+
+      {/* Enlace a la página de registro */}
+      <div className="mt-6 text-center text-sm">
+        ¿No tienes una cuenta?{" "}
+        <a href="/auth/register" className="underline">
+          Regístrate
+        </a>
+      </div>
+    </div>
   )
 }
