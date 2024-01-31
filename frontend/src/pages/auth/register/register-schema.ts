@@ -6,4 +6,8 @@ export const registerSchema = z.object({
   password: z
     .string()
     .min(6, { message: "Password must be at least 6 characters" }),
+
+  dob: z.date({
+    required_error: "A date of birth is required.",
+  }),
 })

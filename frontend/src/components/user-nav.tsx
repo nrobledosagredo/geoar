@@ -1,5 +1,6 @@
 import { auth } from "@/pages/auth"
 import { signOut } from "firebase/auth"
+import { useUser } from "@/hooks/use-user"
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
@@ -15,6 +16,8 @@ import {
 } from "@/components/ui/dropdown-menu"
 
 export function UserNav() {
+  const user = useUser()
+  const userEmail = user?.email || "Invitado"
   const handleLogOut = () => {
     signOut(auth)
       .then(() => {
@@ -40,7 +43,7 @@ export function UserNav() {
           <div className="flex flex-col space-y-1">
             <p className="text-sm font-medium leading-none">shadcn</p>
             <p className="text-xs leading-none text-muted-foreground">
-              m@example.com
+              {userEmail}
             </p>
           </div>
         </DropdownMenuLabel>

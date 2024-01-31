@@ -30,15 +30,15 @@ function App() {
     setPersistence(authInstance, browserLocalPersistence).then(() => {
       const unsubscribe = onAuthStateChanged(authInstance, (user) => {
         setCurrentUser(user)
-        setLoading(false) // Actualiza el estado de carga cuando la autenticación se ha verificado
+        setLoading(false)
       })
 
-      return () => unsubscribe() // Limpiar suscripción
+      return () => unsubscribe()
     })
   }, [])
 
   if (loading) {
-    return <div>Cargando...</div> // O cualquier otra representación de carga
+    return <div>Cargando...</div>
   }
 
   return (
