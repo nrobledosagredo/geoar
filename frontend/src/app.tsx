@@ -38,7 +38,7 @@ function App() {
   }, [])
 
   if (loading) {
-    return <div>Cargando...</div>
+    return <div className="w-full h-full bg-black"></div>
   }
 
   return (
