@@ -1,7 +1,7 @@
 // show-uid-button.tsx
 import { getAuth } from "firebase/auth"
 
-export function ShowUidButton() {
+export function UserIdButton() {
   const showUid = () => {
     const auth = getAuth()
     const user = auth.currentUser

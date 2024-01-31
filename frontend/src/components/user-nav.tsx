@@ -1,4 +1,4 @@
-import { auth } from "@/pages/auth"
+import { auth } from "@/lib/firebase"
 import { signOut } from "firebase/auth"
 import { useUser } from "@/hooks/use-user"
 

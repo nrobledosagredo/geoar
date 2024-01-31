@@ -1,9 +1,9 @@
 // app.tsx
 import { useEffect, useState } from "react"
-import { Login } from "@/pages/auth/login"
-import { Register } from "@/pages/auth/register"
-import { Home } from "@/pages/home"
-import { NotFound } from "@/pages/not-found"
+import { Login } from "@/pages/auth/login/login"
+import { Register } from "@/pages/auth/register/register"
+import { Home } from "@/pages/home/home"
+import { NotFound } from "@/pages/not-found/not-found"
 import {
   browserLocalPersistence,
   getAuth,

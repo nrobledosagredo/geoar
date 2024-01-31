@@ -1,4 +1,4 @@
-import { ShowUidButton } from "@/pages/auth"
+import { UserIdButton } from "@/components/user-id-button"
 
 import { LogoHorizontal } from "@/components/logo-horizontal"
 import { ModeToggle } from "@/components/mode-toggle"
@@ -11,7 +11,7 @@ export default function MainNav() {
         <div className="flex h-16 items-center px-4">
           <LogoHorizontal />
           <div className="ml-auto flex items-center space-x-4">
-            <ShowUidButton />
+            <UserIdButton />
             <ModeToggle />
             <UserNav />
           </div>

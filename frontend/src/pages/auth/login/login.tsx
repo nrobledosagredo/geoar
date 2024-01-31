@@ -1,7 +1,7 @@
 // login.tsx
 import { useState } from "react"
-import { SignInAnonymouslyButton } from "@/pages/auth"
-import { LoginForm } from "@/pages/auth/login/login-form"
+import { SignInAnonymouslyButton } from "@/components/sign-in-anonymously-button"
+import { LoginForm } from "@/pages/auth/login/components/login-form"
 
 import { LogoVertical } from "@/components/logo-vertical"
 
@@ -15,7 +15,9 @@ export function Login() {
       </div>
 
       {/* Titulo del formulario */}
-      <h1 className="text-2xl font-bold text-center mb-4">Login</h1>
+      <h1 className="text-xl font-bold text-center mb-4">
+        Ingresa con tu cuenta
+      </h1>
 
       {/* Formulario de login */}
       <div>
@@ -45,6 +47,17 @@ export function Login() {
         ¿No tienes una cuenta?{" "}
         <a href="/auth/register" className="underline">
           Regístrate
+        </a>
+      </div>
+
+      {/* Enlaces a Términos de uso y Política de privacidad */}
+      <div className="mt-6 text-center text-sm">
+        <a href="/terms-of-uso" className="underline mr-4">
+          Términos de uso
+        </a>
+        |
+        <a href="/privacy-policy" className="underline ml-4">
+          Política de privacidad
         </a>
       </div>
     </div>

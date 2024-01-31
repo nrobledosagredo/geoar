@@ -1,8 +1,9 @@
 // login-form.tsx
-import { auth } from "@/pages/auth/"
-import { registerSchema } from "@/pages/auth/register/register-schema"
+import { auth } from  "@/lib/firebase"
+import { registerSchema } from "@/pages/auth/register/components/register-schema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { format } from "date-fns"
+import { es } from 'date-fns/locale'
 import { createUserWithEmailAndPassword } from "firebase/auth"
 import { CalendarIcon, Loader2 } from "lucide-react"
 import { useForm } from "react-hook-form"
@@ -28,6 +29,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 import { useToast } from "@/components/ui/use-toast"
+import { getErrorMessage } from "@/lib/get-error-message"
 
 export function RegisterForm({
   isLoading,
@@ -58,8 +60,9 @@ export function RegisterForm({
       })
       .catch((error) => {
         console.error(error.message)
+        const errorMessage = getErrorMessage(error.code);
         toast({
-          description: error.message,
+          description: errorMessage,
           variant: "destructive",
         })
       })
@@ -103,12 +106,12 @@ export function RegisterForm({
             name="password"
             render={({ field, fieldState }) => (
               <FormItem>
-                <FormLabel>Password</FormLabel>
+                <FormLabel>Contraseña</FormLabel>
                 <FormControl>
                   <Input
                     disabled={isLoading}
                     type="password"
-                    placeholder="Password"
+                    placeholder="Contraseña"
                     {...field}
                   />
                 </FormControl>
@@ -125,7 +128,7 @@ export function RegisterForm({
             name="dob"
             render={({ field }) => (
               <FormItem className="flex flex-col">
-                <FormLabel>Date of birth</FormLabel>
+                <FormLabel>Fecha de nacimiento</FormLabel>
                 <Popover>
                   <PopoverTrigger asChild>
                     <FormControl>
@@ -137,9 +140,9 @@ export function RegisterForm({
                         )}
                       >
                         {field.value ? (
-                          format(field.value, "PPP")
+                          format(field.value, "PPP", { locale: es })
                         ) : (
-                          <span>Pick a date</span>
+                          <span>Selecciona una fecha</span>
                         )}
                         <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                       </Button>
@@ -147,6 +150,7 @@ export function RegisterForm({
                   </PopoverTrigger>
                   <PopoverContent className="w-auto p-0" align="start">
                     <Calendar
+                      locale={es}
                       mode="single"
                       selected={field.value}
                       onSelect={field.onChange}
@@ -161,7 +165,7 @@ export function RegisterForm({
                   </PopoverContent>
                 </Popover>
                 <FormDescription>
-                  Your date of birth is used to calculate your age.
+                  Tu fecha de nacimiento es utilizada para calcular tu edad.
                 </FormDescription>
                 <FormMessage />
               </FormItem>

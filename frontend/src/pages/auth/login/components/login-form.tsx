@@ -1,11 +1,12 @@
 // login-form.tsx
-import { auth } from "@/pages/auth/"
-import { loginSchema } from "@/pages/auth/login/login-schema"
+import { auth } from "@/lib/firebase"
+import { loginSchema } from "@/pages/auth/login/components/login-schema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { signInWithEmailAndPassword } from "firebase/auth"
 import { Loader2 } from "lucide-react"
 import { useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
+import { z } from "zod"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -18,6 +19,7 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { useToast } from "@/components/ui/use-toast"
+import { getErrorMessage } from "@/lib/get-error-message"
 
 export function LoginForm({
   isLoading,
@@ -29,27 +31,8 @@ export function LoginForm({
   const navigate = useNavigate()
   const { toast } = useToast()
 
-  // Función para manejar el envío del formulario
-  const onSubmit = (values: { email: string; password: string }) => {
-    setIsLoading(true)
-    signInWithEmailAndPassword(auth, values.email, values.password)
-      .then(() => {
-        navigate("/")
-      })
-      .catch((error) => {
-        console.error(error.message)
-        toast({
-          description: error.message,
-          variant: "destructive",
-        })
-      })
-      .finally(() => {
-        setIsLoading(false)
-      })
-  }
-
   // Hook de react-hook-form para manejar formularios en React
-  const form = useForm({
+  const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
       email: "",
@@ -57,6 +40,25 @@ export function LoginForm({
     },
   })
 
+  // Función para manejar el envío del formulario
+  function onSubmit(data: z.infer<typeof loginSchema>) {
+    setIsLoading(true);
+    signInWithEmailAndPassword(auth, data.email, data.password)
+      .then(() => {
+        navigate("/");
+      })
+      .catch((error) => {
+        console.error(error.message);
+        const errorMessage = getErrorMessage(error.code);
+        toast({
+          description: errorMessage,
+          variant: "destructive",
+        });
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }
   return (
     <div>
       {/* Formulario de login */}
@@ -92,12 +94,12 @@ export function LoginForm({
             name="password"
             render={({ field, fieldState }) => (
               <FormItem>
-                <FormLabel>Password</FormLabel>
+                <FormLabel>Contraseña</FormLabel>
                 <FormControl>
                   <Input
                     disabled={isLoading}
                     type="password"
-                    placeholder="Password"
+                    placeholder="Contraseña"
                     {...field}
                   />
                 </FormControl>
