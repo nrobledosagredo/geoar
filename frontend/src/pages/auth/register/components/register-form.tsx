@@ -56,6 +56,9 @@ export function RegisterForm({
     createUserWithEmailAndPassword(auth, data.email, data.password)
       .then(() => {
         navigate("/")
+        toast({
+          description: "Te has registrado exitosamente.",
+        })
         console.log(data.dob)
       })
       .catch((error) => {
@@ -127,7 +130,7 @@ export function RegisterForm({
             control={form.control}
             name="dob"
             render={({ field }) => (
-              <FormItem className="flex flex-col">
+              <FormItem>
                 <FormLabel>Fecha de nacimiento</FormLabel>
                 <Popover>
                   <PopoverTrigger asChild>
@@ -135,7 +138,7 @@ export function RegisterForm({
                       <Button
                         variant={"outline"}
                         className={cn(
-                          "w-[240px] pl-3 text-left font-normal",
+                          "w-full pl-3 text-left font-normal",
                           !field.value && "text-muted-foreground"
                         )}
                       >

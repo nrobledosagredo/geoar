@@ -45,8 +45,14 @@ function App() {
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <Router>
         <Routes>
-          <Route path="/auth/login" element={<Login />} />
-          <Route path="/auth/register" element={<Register />} />
+        <Route
+            path="/auth/login"
+            element={currentUser ? <Navigate to="/" /> : <Login />}
+          />
+          <Route
+            path="/auth/register"
+            element={currentUser ? <Navigate to="/" /> : <Register />}
+          />
           <Route
             path="/"
             element={currentUser ? <Home /> : <Navigate to="/auth/login" />}

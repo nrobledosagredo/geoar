@@ -46,6 +46,9 @@ export function LoginForm({
     signInWithEmailAndPassword(auth, data.email, data.password)
       .then(() => {
         navigate("/");
+        toast({
+          description: "Has iniciado sesión exitosamente.",
+        });
       })
       .catch((error) => {
         console.error(error.message);

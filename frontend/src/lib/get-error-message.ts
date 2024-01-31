@@ -4,7 +4,7 @@ export const getErrorMessage = (errorCode: string): string => {
     case "auth/wrong-password":
       return "Contraseña incorrecta."
     case "auth/user-not-found":
-      return "No se encontró una cuenta con este correo electrónico."
+      return "No se encontró una cuenta asociada a este correo electrónico."
     case "auth/too-many-requests":
         return "Error: Demasiados intentos. Inténtalo de nuevo más tarde."
     case "auth/email-already-in-use":

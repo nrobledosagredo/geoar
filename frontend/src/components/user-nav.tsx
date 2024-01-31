@@ -14,14 +14,21 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { useToast } from "@/components/ui/use-toast"
+import { User } from "lucide-react"
 
 export function UserNav() {
   const user = useUser()
+  const userID = user?.uid
   const userEmail = user?.email || "Invitado"
+  const { toast } = useToast()
   const handleLogOut = () => {
     signOut(auth)
       .then(() => {
-        console.log("Cierre de sesión exitoso")
+        toast({
+          description: "Has cerrado sesión exitosamente.",
+        })
+
       })
       .catch((error) => {
         console.error("Error al cerrar sesión: ", error)
@@ -31,43 +38,47 @@ export function UserNav() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="relative h-8 w-8 rounded-full">
-          <Avatar className="h-8 w-8">
-            <AvatarImage src="/avatars/01.png" alt="@shadcn" />
-            <AvatarFallback>SC</AvatarFallback>
+        <Button variant="ghost" size="icon" className="rounded-full">
+          <Avatar>
+            <AvatarImage src="/avatars/01.png" alt="@user" />
+            <AvatarFallback> <User></User></AvatarFallback>
           </Avatar>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56" align="end" forceMount>
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-1">
-            <p className="text-sm font-medium leading-none">shadcn</p>
+            <p className="text-sm font-medium leading-none">{userEmail}</p>
             <p className="text-xs leading-none text-muted-foreground">
-              {userEmail}
+              {userID}
             </p>
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
+
+          {/* Perfíl */}
           <DropdownMenuItem>
             Profile
             <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
           </DropdownMenuItem>
-          <DropdownMenuItem>
-            Billing
-            <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
-          </DropdownMenuItem>
+
+          {/* Configuración */}
           <DropdownMenuItem>
             Settings
             <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
           </DropdownMenuItem>
-          <DropdownMenuItem>New Team</DropdownMenuItem>
         </DropdownMenuGroup>
+
+        {/* Separador */}
         <DropdownMenuSeparator />
+
+        {/* Cerrar sesión */}
         <DropdownMenuItem onSelect={handleLogOut}>
           Log out
           <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
         </DropdownMenuItem>
+
       </DropdownMenuContent>
     </DropdownMenu>
   )

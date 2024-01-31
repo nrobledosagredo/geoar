@@ -4,6 +4,8 @@ import { Loader2, User } from "lucide-react"
 import { useNavigate } from "react-router-dom"
 
 import { Button } from "@/components/ui/button"
+import { useToast } from "@/components/ui/use-toast"
+import { getErrorMessage } from "@/lib/get-error-message"
 
 export function SignInAnonymouslyButton({
   isLoading,
@@ -12,25 +14,28 @@ export function SignInAnonymouslyButton({
   isLoading: boolean
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
 }) {
-  const navigate = useNavigate() // Hook para la navegación
+  const navigate = useNavigate()
+  const { toast } = useToast()
   const handlesignInAnonymously = () => {
     setIsLoading(true)
     const auth = getAuth()
     signInAnonymously(auth)
       .then(() => {
-        console.log("Inicio de sesión anónimo exitoso")
         navigate("/")
+        toast({
+          description: "Has iniciado sesión exitosamente.",
+        })
       })
 
       .catch((error) => {
-        const errorCode = error.code
-        const errorMessage = error.message
-        console.error(
-          "Error en inicio de sesión anónimo: ",
-          errorCode,
-          errorMessage
-        )
+        console.error(error.message);
+        const errorMessage = getErrorMessage(error.code);
+        toast({
+          description: errorMessage,
+          variant: "destructive",
+        });
       })
+      
       .finally(() => {
         setIsLoading(false)
       })
