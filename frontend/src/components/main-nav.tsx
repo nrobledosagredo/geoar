@@ -2,7 +2,7 @@ import { LogoHorizontal } from "@/components/logo-horizontal"
 import { ModeToggle } from "@/components/mode-toggle"
 import { UserNav } from "@/components/user-nav"
 
-export default function MainNav() {
+export function MainNav() {
   return (
     <div className="flex-col md:flex">
       <div className="border-b">

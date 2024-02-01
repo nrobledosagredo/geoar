@@ -4,6 +4,8 @@ import { Login } from "@/pages/auth/login/login"
 import { Register } from "@/pages/auth/register/register"
 import { Home } from "@/pages/home/home"
 import { NotFound } from "@/pages/not-found/not-found"
+import { Account } from "@/pages/settings/account/account"
+import { Accessibility } from "@/pages/settings/accessibility/accessibility"
 import {
   browserLocalPersistence,
   getAuth,
@@ -45,7 +47,7 @@ function App() {
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <Router>
         <Routes>
-        <Route
+          <Route
             path="/auth/login"
             element={currentUser ? <Navigate to="/" /> : <Login />}
           />
@@ -57,6 +59,17 @@ function App() {
             path="/"
             element={currentUser ? <Home /> : <Navigate to="/auth/login" />}
           />
+
+          <Route
+            path="/account"
+            element={currentUser ? <Account /> : <Navigate to="/auth/login" />}
+          />
+
+          <Route
+            path="/accessibility"
+            element={currentUser ? <Accessibility /> : <Navigate to="/auth/login" />}
+          />
+
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>

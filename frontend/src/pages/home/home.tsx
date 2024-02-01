@@ -1,6 +1,6 @@
 // home.tsx
 import { LogoVertical } from "@/components/logo-vertical"
-import MainNav from "@/components/main-nav"
+import { MainNav } from "@/components/main-nav"
 
 export function Home() {
   return (
