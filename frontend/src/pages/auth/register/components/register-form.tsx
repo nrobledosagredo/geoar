@@ -80,7 +80,7 @@ export function RegisterForm({
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="max-w-sm mx-auto space-y-8"
+          className="max-w-sm mx-auto space-y-4"
         >
           {/* Email */}
           <FormField
@@ -88,12 +88,12 @@ export function RegisterForm({
             name="email"
             render={({ field, fieldState }) => (
               <FormItem>
-                <FormLabel>Email</FormLabel>
+                <FormLabel className="font-semibold">Email</FormLabel>
                 <FormControl>
                   <Input
                     disabled={isLoading}
                     type="email"
-                    placeholder="Email"
+                    placeholder="Ejemplo@correo.com"
                     {...field}
                   />
                 </FormControl>
@@ -109,12 +109,12 @@ export function RegisterForm({
             name="password"
             render={({ field, fieldState }) => (
               <FormItem>
-                <FormLabel>Contraseña</FormLabel>
+                <FormLabel className="font-semibold">Contraseña</FormLabel>
                 <FormControl>
                   <Input
                     disabled={isLoading}
                     type="password"
-                    placeholder="Contraseña"
+                    placeholder="Debe tener al menos 6 caracteres"
                     {...field}
                   />
                 </FormControl>
@@ -131,7 +131,7 @@ export function RegisterForm({
             name="dob"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Fecha de nacimiento</FormLabel>
+                <FormLabel className="font-semibold">Fecha de nacimiento</FormLabel>
                 <Popover>
                   <PopoverTrigger asChild>
                     <FormControl>
@@ -177,7 +177,7 @@ export function RegisterForm({
 
           <FormControl>
             {/* Botón para registrarse */}
-            <Button type="submit" className="w-full" disabled={isLoading}>
+            <Button type="submit" className="w-full font-semibold" disabled={isLoading}>
               {isLoading ? (
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
               ) : null}

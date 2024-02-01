@@ -68,7 +68,7 @@ export function LoginForm({
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="max-w-sm mx-auto space-y-8"
+          className="max-w-sm mx-auto space-y-4"
         >
           {/* Email */}
           <FormField
@@ -76,12 +76,12 @@ export function LoginForm({
             name="email"
             render={({ field, fieldState }) => (
               <FormItem>
-                <FormLabel>Email</FormLabel>
+                <FormLabel className="font-semibold">Email</FormLabel>
                 <FormControl>
                   <Input
                     disabled={isLoading}
                     type="email"
-                    placeholder="Email"
+                    placeholder="Ejemplo@correo.com"
                     {...field}
                   />
                 </FormControl>
@@ -97,7 +97,7 @@ export function LoginForm({
             name="password"
             render={({ field, fieldState }) => (
               <FormItem>
-                <FormLabel>Contraseña</FormLabel>
+                <FormLabel className="font-semibold">Contraseña</FormLabel>
                 <FormControl>
                   <Input
                     disabled={isLoading}
@@ -114,7 +114,7 @@ export function LoginForm({
           />
           <FormControl>
             {/* Boton para logearse */}
-            <Button type="submit" className="w-full" disabled={isLoading}>
+            <Button type="submit" className="w-full font-semibold" disabled={isLoading}>
               {isLoading ? (
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
               ) : null}
