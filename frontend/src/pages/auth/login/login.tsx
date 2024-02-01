@@ -63,7 +63,7 @@ export function Login() {
       </div>
 
       {/* Enlaces a términos de uso y política de privacidad */}
-      <div className="mb-2 w-full">
+      <div className="my-2 w-full">
         <div className="text-center text-sm text-muted-foreground">
           <a href="/terms-of-uso" className="underline mr-2">
             Términos de uso
