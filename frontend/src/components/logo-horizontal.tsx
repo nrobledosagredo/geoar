@@ -8,7 +8,7 @@ export const LogoHorizontal = () => {
       <Trees className="h-6 w-6 text-green-600 mr-1" />
 
       {/* Nombre de la aplicación */}
-      <span className="self-center whitespace-nowrap text-xl text-black">
+      <span className="self-center whitespace-nowrap text-xl">
         {" "}
         {/* Asegúrate de agregar estilos para el texto si es necesario */}
         <span className="font-bold">Geo</span>

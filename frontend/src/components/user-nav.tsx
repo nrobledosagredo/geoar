@@ -1,10 +1,9 @@
 import { signOut } from "firebase/auth"
-import { LogOut, Settings, User } from "lucide-react"
+import { Menu, LogOut, Settings, User } from "lucide-react"
 import { useNavigate } from "react-router-dom"
 
 import { auth } from "@/lib/firebase"
 import { useUser } from "@/hooks/use-user"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -45,13 +44,7 @@ export function UserNav() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" size="icon" className="rounded-full">
-          <Avatar>
-            <AvatarImage src="/avatars/01.png" alt="@user" />
-            <AvatarFallback>
-              {" "}
-              <User></User>
-            </AvatarFallback>
-          </Avatar>
+          <Menu />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56" align="end" forceMount>
@@ -73,9 +66,9 @@ export function UserNav() {
           </DropdownMenuItem>
 
           {/* Accesibilidad */}
-          <DropdownMenuItem onSelect={navigateTo("/accessibility")}>
+          <DropdownMenuItem onSelect={navigateTo("/settings")}>
             <Settings className="mr-2 h-4 w-4" />
-            <span>Accessibility</span>
+            <span>Settings</span>
             <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
           </DropdownMenuItem>
         </DropdownMenuGroup>

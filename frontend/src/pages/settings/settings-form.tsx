@@ -50,7 +50,7 @@ export function SettingsForm() {
           control={form.control}
           name="theme"
           render={({ field }) => (
-            <FormItem className="space-y-1">
+            <FormItem className="flex flex-col">
               <FormLabel>Theme</FormLabel>
               <FormDescription>
                 Select the theme for the dashboard.
