@@ -31,13 +31,13 @@ export function Register() {
             <RegisterForm isLoading={isLoading} setIsLoading={setIsLoading} />
           </div>
 
-                 {/* Enlace a la página de login */}
-        <div className="mt-4 text-center text-sm">
-          ¿Ya tienes una cuenta?{" "}
-          <a href="/auth/login" className="underline font-bold text-primary">
-            Iniciar sesión
-          </a>
-        </div>
+          {/* Enlace a la página de login */}
+          <div className="mt-4 text-center text-sm">
+            ¿Ya tienes una cuenta?{" "}
+            <a href="/auth/login" className="underline font-bold text-primary">
+              Iniciar sesión
+            </a>
+          </div>
 
           {/* Separador */}
           <div className="relative mt-4">

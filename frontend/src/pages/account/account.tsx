@@ -1,11 +1,10 @@
 // account.tsx
-import { Settings } from "@/pages/settings/settings"
-
 import { Separator } from "@/components/ui/separator"
+import { ControlPanel } from "@/components/control-panel"
 
 export function Account() {
   return (
-    <Settings>
+    <ControlPanel>
       <div>
         <h3 className="text-lg font-medium">Account</h3>
         <p className="text-sm text-muted-foreground">
@@ -14,6 +13,6 @@ export function Account() {
         </p>
       </div>
       <Separator />
-    </Settings>
+    </ControlPanel>
   )
 }

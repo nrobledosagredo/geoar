@@ -3,9 +3,9 @@ import { getAuth, signInAnonymously } from "firebase/auth"
 import { Loader2, User } from "lucide-react"
 import { useNavigate } from "react-router-dom"
 
+import { getErrorMessage } from "@/lib/get-error-message"
 import { Button } from "@/components/ui/button"
 import { useToast } from "@/components/ui/use-toast"
-import { getErrorMessage } from "@/lib/get-error-message"
 
 export function SignInAnonymouslyButton({
   isLoading,
@@ -28,14 +28,14 @@ export function SignInAnonymouslyButton({
       })
 
       .catch((error) => {
-        console.error(error.message);
-        const errorMessage = getErrorMessage(error.code);
+        console.error(error.message)
+        const errorMessage = getErrorMessage(error.code)
         toast({
           description: errorMessage,
           variant: "destructive",
-        });
+        })
       })
-      
+
       .finally(() => {
         setIsLoading(false)
       })

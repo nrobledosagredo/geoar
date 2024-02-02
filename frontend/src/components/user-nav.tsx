@@ -1,6 +1,6 @@
 import { signOut } from "firebase/auth"
-import { User, Settings, LogOut } from "lucide-react"
-import { useNavigate } from 'react-router-dom';
+import { LogOut, Settings, User } from "lucide-react"
+import { useNavigate } from "react-router-dom"
 
 import { auth } from "@/lib/firebase"
 import { useUser } from "@/hooks/use-user"
@@ -23,11 +23,11 @@ export function UserNav() {
   const userID = user?.uid
   const userEmail = user?.email || "Invitado"
   const { toast } = useToast()
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const navigateTo = (path: string) => () => {
-    navigate(path);
-  };
+    navigate(path)
+  }
 
   const handleLogOut = () => {
     signOut(auth)
@@ -66,14 +66,14 @@ export function UserNav() {
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           {/* Cuenta */}
-          <DropdownMenuItem onSelect={navigateTo('/account')}>
-          <User className="mr-2 h-4 w-4" />
+          <DropdownMenuItem onSelect={navigateTo("/account")}>
+            <User className="mr-2 h-4 w-4" />
             <span>Account</span>
             <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
           </DropdownMenuItem>
 
           {/* Accesibilidad */}
-          <DropdownMenuItem onSelect={navigateTo('/accessibility')}>
+          <DropdownMenuItem onSelect={navigateTo("/accessibility")}>
             <Settings className="mr-2 h-4 w-4" />
             <span>Accessibility</span>
             <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>

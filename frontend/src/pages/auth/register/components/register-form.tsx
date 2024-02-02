@@ -1,15 +1,16 @@
 // login-form.tsx
-import { auth } from  "@/lib/firebase"
 import { registerSchema } from "@/pages/auth/register/components/register-schema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { format } from "date-fns"
-import { es } from 'date-fns/locale'
+import { es } from "date-fns/locale"
 import { createUserWithEmailAndPassword } from "firebase/auth"
 import { CalendarIcon, Loader2 } from "lucide-react"
 import { useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
 import { z } from "zod"
 
+import { auth } from "@/lib/firebase"
+import { getErrorMessage } from "@/lib/get-error-message"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
@@ -29,7 +30,6 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 import { useToast } from "@/components/ui/use-toast"
-import { getErrorMessage } from "@/lib/get-error-message"
 
 export function RegisterForm({
   isLoading,
@@ -63,7 +63,7 @@ export function RegisterForm({
       })
       .catch((error) => {
         console.error(error.message)
-        const errorMessage = getErrorMessage(error.code);
+        const errorMessage = getErrorMessage(error.code)
         toast({
           description: errorMessage,
           variant: "destructive",
@@ -131,7 +131,9 @@ export function RegisterForm({
             name="dob"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="font-semibold">Fecha de nacimiento</FormLabel>
+                <FormLabel className="font-semibold">
+                  Fecha de nacimiento
+                </FormLabel>
                 <Popover>
                   <PopoverTrigger asChild>
                     <FormControl>
@@ -177,7 +179,11 @@ export function RegisterForm({
 
           <FormControl>
             {/* Botón para registrarse */}
-            <Button type="submit" className="w-full font-semibold" disabled={isLoading}>
+            <Button
+              type="submit"
+              className="w-full font-semibold"
+              disabled={isLoading}
+            >
               {isLoading ? (
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
               ) : null}

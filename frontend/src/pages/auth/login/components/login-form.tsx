@@ -1,5 +1,4 @@
 // login-form.tsx
-import { auth } from "@/lib/firebase"
 import { loginSchema } from "@/pages/auth/login/components/login-schema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { signInWithEmailAndPassword } from "firebase/auth"
@@ -8,6 +7,8 @@ import { useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
 import { z } from "zod"
 
+import { auth } from "@/lib/firebase"
+import { getErrorMessage } from "@/lib/get-error-message"
 import { Button } from "@/components/ui/button"
 import {
   Form,
@@ -19,7 +20,6 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { useToast } from "@/components/ui/use-toast"
-import { getErrorMessage } from "@/lib/get-error-message"
 
 export function LoginForm({
   isLoading,
@@ -42,25 +42,25 @@ export function LoginForm({
 
   // Función para manejar el envío del formulario
   function onSubmit(data: z.infer<typeof loginSchema>) {
-    setIsLoading(true);
+    setIsLoading(true)
     signInWithEmailAndPassword(auth, data.email, data.password)
       .then(() => {
-        navigate("/");
+        navigate("/")
         toast({
           description: "Has iniciado sesión exitosamente.",
-        });
+        })
       })
       .catch((error) => {
-        console.error(error.message);
-        const errorMessage = getErrorMessage(error.code);
+        console.error(error.message)
+        const errorMessage = getErrorMessage(error.code)
         toast({
           description: errorMessage,
           variant: "destructive",
-        });
+        })
       })
       .finally(() => {
-        setIsLoading(false);
-      });
+        setIsLoading(false)
+      })
   }
   return (
     <div>
@@ -114,7 +114,11 @@ export function LoginForm({
           />
           <FormControl>
             {/* Boton para logearse */}
-            <Button type="submit" className="w-full font-semibold" disabled={isLoading}>
+            <Button
+              type="submit"
+              className="w-full font-semibold"
+              disabled={isLoading}
+            >
               {isLoading ? (
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
               ) : null}

@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom';
-import { Trees } from 'lucide-react';
+import { Trees } from "lucide-react"
+import { Link } from "react-router-dom"
 
 export const LogoHorizontal = () => {
   return (
@@ -8,10 +8,12 @@ export const LogoHorizontal = () => {
       <Trees className="h-6 w-6 text-green-600 mr-1" />
 
       {/* Nombre de la aplicación */}
-      <span className="self-center whitespace-nowrap text-xl text-black"> {/* Asegúrate de agregar estilos para el texto si es necesario */}
+      <span className="self-center whitespace-nowrap text-xl text-black">
+        {" "}
+        {/* Asegúrate de agregar estilos para el texto si es necesario */}
         <span className="font-bold">Geo</span>
         <span className="font-black">AR</span>
       </span>
     </Link>
-  );
-};
+  )
+}

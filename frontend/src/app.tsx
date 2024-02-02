@@ -1,11 +1,11 @@
 // app.tsx
 import { useEffect, useState } from "react"
+import { Account } from "@/pages/account/account"
 import { Login } from "@/pages/auth/login/login"
 import { Register } from "@/pages/auth/register/register"
 import { Home } from "@/pages/home/home"
 import { NotFound } from "@/pages/not-found/not-found"
-import { Account } from "@/pages/settings/account/account"
-import { Accessibility } from "@/pages/settings/accessibility/accessibility"
+import { Settings } from "@/pages/settings/settings"
 import {
   browserLocalPersistence,
   getAuth,
@@ -66,8 +66,8 @@ function App() {
           />
 
           <Route
-            path="/accessibility"
-            element={currentUser ? <Accessibility /> : <Navigate to="/auth/login" />}
+            path="/settings"
+            element={currentUser ? <Settings /> : <Navigate to="/auth/login" />}
           />
 
           <Route path="*" element={<NotFound />} />
