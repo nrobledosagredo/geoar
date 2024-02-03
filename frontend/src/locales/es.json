@@ -1,0 +1,59 @@
+{
+  "welcome_title": "GeoAR",
+  "welcome_description": "Explora nuestros senderos disponibles con",
+  "augmented_reality": "realidad aumentada",
+  "start_button": "Comenzar",
+
+  "search": "Buscar",
+  "filter": "Filtrar",
+  "search_trails_placeholder": "Buscar senderos...",
+  "search_failed": "No se encontraron senderos que coincidan con tu búsqueda.",
+
+  "difficulty_tooltip": "Dificultad",
+  "distance_tooltip": "Distancia",
+  "duration_tooltip": "Duración",
+
+  "loading1": "Cargando...",
+  "loading2": "Por favor espera...",
+  "loading3": "Casi listo...",
+
+  "start_message": "Dirígete a la entrada para comenzar el sendero",
+  "end_message": "¡Has llegado al final del sendero!",
+
+  "head": "Dirígete al",
+  "for": "por",
+  "meters": "metros",
+  "directions": {
+    "North": "norte",
+    "Northeast": "noreste",
+    "East": "este",
+    "Southeast": "sureste",
+    "South": "sur",
+    "Southwest": "suroeste",
+    "West": "oeste",
+    "Northwest": "noroeste"
+  },
+
+  "taxonomy": {
+    "title": "Taxonomía",
+    "kingdom": "Reino",
+    "division": "División",
+    "class": "Clase",
+    "order": "Orden",
+    "family": "Familia",
+    "genus": "Género",
+    "species": "Especie"
+  },
+
+  "conservation_status": {
+    "title": "Estado de conservación",
+    "LC": "Preocupación menor",
+    "NT": "Casi amenazado",
+    "VU": "Vulnerable",
+    "EN": "En peligro",
+    "CR": "En peligro crítico",
+    "EW": "Extinto en estado silvestre",
+    "EX": "Extinto",
+    "DD": "Datos insuficientes"
+  }
+}

@@ -1,5 +1,5 @@
 import { signOut } from "firebase/auth"
-import { Menu, LogOut, Settings, User } from "lucide-react"
+import { LogOut, Menu, Settings, User } from "lucide-react"
 import { useNavigate } from "react-router-dom"
 
 import { auth } from "@/lib/firebase"

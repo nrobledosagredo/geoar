@@ -1,5 +1,6 @@
 // app.tsx
 import { useEffect, useState } from "react"
+import { LanguageProvider } from "@/contexts/language-context"
 import { Account } from "@/pages/account/account"
 import { Login } from "@/pages/auth/login/login"
 import { Register } from "@/pages/auth/register/register"
@@ -44,37 +45,43 @@ function App() {
   }
 
   return (
-    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-      <Router>
-        <Routes>
-          <Route
-            path="/auth/login"
-            element={currentUser ? <Navigate to="/" /> : <Login />}
-          />
-          <Route
-            path="/auth/register"
-            element={currentUser ? <Navigate to="/" /> : <Register />}
-          />
-          <Route
-            path="/"
-            element={currentUser ? <Home /> : <Navigate to="/auth/login" />}
-          />
+    <LanguageProvider>
+      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+        <Router>
+          <Routes>
+            <Route
+              path="/auth/login"
+              element={currentUser ? <Navigate to="/" /> : <Login />}
+            />
+            <Route
+              path="/auth/register"
+              element={currentUser ? <Navigate to="/" /> : <Register />}
+            />
+            <Route
+              path="/"
+              element={currentUser ? <Home /> : <Navigate to="/auth/login" />}
+            />
 
-          <Route
-            path="/account"
-            element={currentUser ? <Account /> : <Navigate to="/auth/login" />}
-          />
+            <Route
+              path="/account"
+              element={
+                currentUser ? <Account /> : <Navigate to="/auth/login" />
+              }
+            />
 
-          <Route
-            path="/settings"
-            element={currentUser ? <Settings /> : <Navigate to="/auth/login" />}
-          />
+            <Route
+              path="/settings"
+              element={
+                currentUser ? <Settings /> : <Navigate to="/auth/login" />
+              }
+            />
 
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </Router>
-      <Toaster />
-    </ThemeProvider>
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Router>
+        <Toaster />
+      </ThemeProvider>
+    </LanguageProvider>
   )
 }
 

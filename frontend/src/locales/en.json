@@ -1,0 +1,59 @@
+{
+  "welcome_title": "GeoAR",
+  "welcome_description": "Explore our available trails with",
+  "augmented_reality": "augmented reality",
+  "start_button": "Start",
+
+  "search": "Search",
+  "filter": "Filter",
+  "search_trails_placeholder": "Search trails...",
+  "search_failed": "No trails were found that match your search.",
+
+  "difficulty_tooltip": "Difficulty",
+  "distance_tooltip": "Distance",
+  "duration_tooltip": "Duration",
+
+  "loading1": "Loading...",
+  "loading2": "Please wait...",
+  "loading3": "Almost ready...",
+
+  "start_message": "Go to the entrance to start the trail",
+  "end_message": "You have reached the end of the trail!",
+
+  "head": "Head",
+  "meters": "meters",
+  "for": "for",
+  "directions": {
+    "North": "north",
+    "Northeast": "northeast",
+    "East": "east",
+    "Southeast": "southeast",
+    "South": "South",
+    "Southwest": "southwest",
+    "West": "west",
+    "Northwest": "northwest"
+  },
+
+  "taxonomy": {
+    "title": "Taxonomy",
+    "kingdom": "Kingdom",
+    "division": "Division",
+    "class": "Class",
+    "order": "Order",
+    "family": "Family",
+    "genus": "Genus",
+    "species": "Species"
+  },
+
+  "conservation_status": {
+    "title": "Conservation Status",
+    "LC": "Least Concern",
+    "NT": "Near Threatened",
+    "VU": "Vulnerable",
+    "EN": "Endangered",
+    "CR": "Critically Endangered",
+    "EW": "Extinct in the Wild",
+    "EX": "Extinct",
+    "DD": "Data Deficient"
+  }
+}

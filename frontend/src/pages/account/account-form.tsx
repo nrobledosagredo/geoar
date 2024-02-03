@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 
 import { cn } from "@/lib/utils"
+import { useLanguage } from "@/hooks/use-language"
 import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
 import {
@@ -49,6 +50,13 @@ const defaultValues: Partial<AccountFormValues> = {
 }
 
 export function AccountForm() {
+  const { language, setLanguage } = useLanguage()
+
+  // Cambia el idioma de la aplicación
+  const changeLanguage = (newLanguage: string) => {
+    setLanguage(newLanguage)
+  }
+
   const form = useForm<AccountFormValues>({
     resolver: zodResolver(accountFormSchema),
     defaultValues,
@@ -122,7 +130,15 @@ export function AccountForm() {
           render={({ field }) => (
             <FormItem className="flex flex-col">
               <FormLabel>Language</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select
+                onValueChange={(value) => {
+                  // Actualiza el valor del formulario
+                  field.onChange(value)
+                  // Cambia el idioma de la aplicación
+                  changeLanguage(value)
+                }}
+                defaultValue={language}
+              >
                 <FormControl>
                   <SelectTrigger className="w-[240px] pl-3 text-left font-normal">
                     <SelectValue placeholder="Select a language" />
