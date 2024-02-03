@@ -1,13 +1,15 @@
 // login-form.tsx
 import { registerSchema } from "@/pages/auth/register/components/register-schema"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { format } from "date-fns"
-import { es } from "date-fns/locale"
+import { format, Locale } from "date-fns"
+import { enUS, es } from "date-fns/locale"
 import { createUserWithEmailAndPassword } from "firebase/auth"
 import { CalendarIcon, Loader2 } from "lucide-react"
 import { useForm } from "react-hook-form"
+import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
 import { z } from "zod"
+import { makeZodI18nMap } from "zod-i18n-map"
 
 import { auth } from "@/lib/firebase"
 import { getErrorMessage } from "@/lib/get-error-message"
@@ -38,8 +40,21 @@ export function RegisterForm({
   isLoading: boolean
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
 }) {
-  const navigate = useNavigate()
+  const { t, i18n } = useTranslation()
   const { toast } = useToast()
+  const navigate = useNavigate()
+
+  // Mapeo de códigos de idioma i18next a locales de date-fns
+  const locales: { [key: string]: Locale } = {
+    en: enUS,
+    es: es,
+  }
+
+  // Obtener el locale de date-fns basado en el idioma actual de i18next
+  const currentLocale = locales[i18n.language] || locales.en // 'en' como fallback
+
+  // Configura el mapa de errores de Zod para que use i18n
+  z.setErrorMap(makeZodI18nMap({ t, handlePath: { ns: ["common", "zod"] } }))
 
   // Hook de react-hook-form para manejar formularios en React
   const form = useForm<z.infer<typeof registerSchema>>({
@@ -57,7 +72,7 @@ export function RegisterForm({
       .then(() => {
         navigate("/")
         toast({
-          description: "Te has registrado exitosamente.",
+          description: t("register_success"),
         })
         console.log(data.dob)
       })
@@ -88,12 +103,14 @@ export function RegisterForm({
             name="email"
             render={({ field, fieldState }) => (
               <FormItem>
-                <FormLabel className="font-semibold">Email</FormLabel>
+                <FormLabel className="font-semibold">
+                  {t("register_email")}(*)
+                </FormLabel>
                 <FormControl>
                   <Input
                     disabled={isLoading}
                     type="email"
-                    placeholder="Ejemplo@correo.com"
+                    placeholder={t("register_email_placeholder")}
                     {...field}
                   />
                 </FormControl>
@@ -109,12 +126,14 @@ export function RegisterForm({
             name="password"
             render={({ field, fieldState }) => (
               <FormItem>
-                <FormLabel className="font-semibold">Contraseña</FormLabel>
+                <FormLabel className="font-semibold">
+                  {t("register_password")}(*)
+                </FormLabel>
                 <FormControl>
                   <Input
                     disabled={isLoading}
                     type="password"
-                    placeholder="Debe tener al menos 6 caracteres"
+                    placeholder={t("register_password_placeholder")}
                     {...field}
                   />
                 </FormControl>
@@ -132,7 +151,7 @@ export function RegisterForm({
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="font-semibold">
-                  Fecha de nacimiento
+                  {t("register_dob")}(*)
                 </FormLabel>
                 <Popover>
                   <PopoverTrigger asChild>
@@ -145,9 +164,9 @@ export function RegisterForm({
                         )}
                       >
                         {field.value ? (
-                          format(field.value, "PPP", { locale: es })
+                          format(field.value, "PPP", { locale: currentLocale })
                         ) : (
-                          <span>Selecciona una fecha</span>
+                          <span>{t("register_dob_placeholder")}</span>
                         )}
                         <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                       </Button>
@@ -155,7 +174,7 @@ export function RegisterForm({
                   </PopoverTrigger>
                   <PopoverContent className="w-auto p-0" align="start">
                     <Calendar
-                      locale={es}
+                      locale={currentLocale}
                       mode="single"
                       selected={field.value}
                       onSelect={field.onChange}
@@ -170,7 +189,7 @@ export function RegisterForm({
                   </PopoverContent>
                 </Popover>
                 <FormDescription>
-                  Tu fecha de nacimiento es utilizada para calcular tu edad.
+                  {t("register_dob_description")}
                 </FormDescription>
                 <FormMessage />
               </FormItem>
@@ -187,7 +206,7 @@ export function RegisterForm({
               {isLoading ? (
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
               ) : null}
-              Registrarse
+              {t("register_button")}
             </Button>
           </FormControl>
         </form>

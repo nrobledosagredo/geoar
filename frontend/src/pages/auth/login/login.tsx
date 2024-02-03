@@ -1,7 +1,7 @@
 // login.tsx
-import { useTranslation } from "react-i18next"
 import { useState } from "react"
 import { LoginForm } from "@/pages/auth/login/components/login-form"
+import { useTranslation } from "react-i18next"
 
 import { LogoVertical } from "@/components/logo-vertical"
 import { SignInAnonymouslyButton } from "@/components/sign-in-anonymously-button"
@@ -21,7 +21,7 @@ export function Login() {
         <div className="text-center">
           <h1 className="text-2xl font-semibold">{t("login_title")}</h1>
           <p className="mt-2 mx-8 mb-4 text-sm text-muted-foreground">
-          {t("login_description")}
+            {t("login_description")}
           </p>
         </div>
 

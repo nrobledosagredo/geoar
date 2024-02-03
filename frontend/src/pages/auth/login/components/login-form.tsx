@@ -1,12 +1,13 @@
 // login-form.tsx
-import { useEffect } from "react"
 import { loginSchema } from "@/pages/auth/login/components/login-schema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { signInWithEmailAndPassword } from "firebase/auth"
 import { Loader2 } from "lucide-react"
 import { useForm } from "react-hook-form"
+import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
 import { z } from "zod"
+import { makeZodI18nMap } from "zod-i18n-map"
 
 import { auth } from "@/lib/firebase"
 import { getErrorMessage } from "@/lib/get-error-message"
@@ -21,8 +22,6 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { useToast } from "@/components/ui/use-toast"
-import { useTranslation } from "react-i18next";
-import { makeZodI18nMap } from "zod-i18n-map";
 
 export function LoginForm({
   isLoading,
@@ -33,14 +32,10 @@ export function LoginForm({
 }) {
   const navigate = useNavigate()
   const { toast } = useToast()
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
 
-
-  useEffect(() => {
-    const zodI18nMap = makeZodI18nMap({ t, ns: "zod" });
-    z.setErrorMap(zodI18nMap);
-  }, [t, i18n.language]);
-
+  // Configura el mapa de errores de Zod para que use i18n
+  z.setErrorMap(makeZodI18nMap({ t, handlePath: { ns: ["common", "zod"] } }))
 
   // Hook de react-hook-form para manejar formularios en React
   const form = useForm<z.infer<typeof loginSchema>>({
@@ -58,7 +53,7 @@ export function LoginForm({
       .then(() => {
         navigate("/")
         toast({
-          description: "Has iniciado sesión exitosamente.",
+          description: t("login_success"),
         })
       })
       .catch((error) => {
@@ -87,12 +82,14 @@ export function LoginForm({
             name="email"
             render={({ field, fieldState }) => (
               <FormItem>
-                <FormLabel className="font-semibold">Email</FormLabel>
+                <FormLabel className="font-semibold">
+                  {t("login_email")}
+                </FormLabel>
                 <FormControl>
                   <Input
                     disabled={isLoading}
                     type="email"
-                    placeholder="Ejemplo@correo.com"
+                    placeholder={t("login_email_placeholder")}
                     {...field}
                   />
                 </FormControl>
@@ -108,12 +105,14 @@ export function LoginForm({
             name="password"
             render={({ field, fieldState }) => (
               <FormItem>
-                <FormLabel className="font-semibold">Contraseña</FormLabel>
+                <FormLabel className="font-semibold">
+                  {t("login_password")}
+                </FormLabel>
                 <FormControl>
                   <Input
                     disabled={isLoading}
                     type="password"
-                    placeholder="Contraseña"
+                    placeholder={t("login_password_placeholder")}
                     {...field}
                   />
                 </FormControl>
@@ -133,7 +132,7 @@ export function LoginForm({
               {isLoading ? (
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
               ) : null}
-              Iniciar sesión
+              {t("login_button")}
             </Button>
           </FormControl>
         </form>

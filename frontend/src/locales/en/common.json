@@ -3,9 +3,47 @@
   "login_description": "Enter your email and password to log in",
   "no_account": "Don't have an account?",
   "register": "Register",
+
+  "register_title": "Create an account",
+  "register_description": "Fill the form to register",
+  "already_have_account": "Already have an account?",
+  "login": "Log in",
+
   "or": "Or",
   "terms_of_use": "Terms of use",
   "privacy_policy": "Privacy policy",
+
+  "login_success": "You have successfully logged in.",
+  "login_email": "Email",
+  "login_email_placeholder": "Example@email.com",
+  "login_password": "Password",
+  "login_password_placeholder": "Password",
+  "login_button": "Log in",
+
+  "register_success": "You have successfully registered.",
+  "register_email": "Email",
+  "register_email_placeholder": "Example@email.com",
+  "register_password": "Password",
+  "register_password_placeholder": "Must be at least 6 characters",
+  "register_dob": "Date of birth",
+  "register_dob_placeholder": "Select a date",
+  "register_dob_description": "You birth date is used to calculate your age.",
+  "register_button": "Register",
+
+  "guest": "Guest",
+  "guest_button": "Continue as guest",
+
+  "logout_success": "You have successfully logged out.",
+  "logout_button": "Log out",
+  "account": "Account",
+  "settings": "Settings",
+
+  "auth_wrong_password": "Incorrect password.",
+  "auth_user_not_found": "No account found associated with this email.",
+  "auth_too_many_requests": "Error: Too many attempts. Please try again later.",
+  "auth_email_already_in_use": "The email address is already in use.",
+  "auth_invalid_email": "The email address is invalid.",
+  "auth_default_error": "An unexpected error occurred. Please try again.",
 
   "welcome_title": "GeoAR",
   "welcome_description": "Explore our available trails with",

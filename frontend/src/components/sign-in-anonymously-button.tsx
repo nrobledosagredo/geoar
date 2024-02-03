@@ -1,6 +1,7 @@
 // sign-in-anonymously-button.tsx
 import { getAuth, signInAnonymously } from "firebase/auth"
 import { Loader2, User } from "lucide-react"
+import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
 
 import { getErrorMessage } from "@/lib/get-error-message"
@@ -16,6 +17,7 @@ export function SignInAnonymouslyButton({
 }) {
   const navigate = useNavigate()
   const { toast } = useToast()
+  const { t } = useTranslation()
   const handlesignInAnonymously = () => {
     setIsLoading(true)
     const auth = getAuth()
@@ -23,7 +25,7 @@ export function SignInAnonymouslyButton({
       .then(() => {
         navigate("/")
         toast({
-          description: "Has iniciado sesión exitosamente.",
+          description: t("login_success"),
         })
       })
 
@@ -53,7 +55,7 @@ export function SignInAnonymouslyButton({
       ) : (
         <User className="mr-2 h-4 w-4" />
       )}
-      Continuar como invitado
+      {t("guest_button")}
     </Button>
   )
 }

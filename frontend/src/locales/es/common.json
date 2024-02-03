@@ -3,9 +3,47 @@
   "login_description": "Escribe tu email y contraseña para iniciar sesión",
   "no_account": "¿No tienes una cuenta?",
   "register": "Regístrate",
+
+  "register_title": "Crea una cuenta",
+  "register_description": "Rellena el formulario para registrarte",
+  "already_have_account": "¿Ya tienes una cuenta?",
+  "login": "Iniciar sesión",
+
   "or": "O",
   "terms_of_use": "Términos de uso",
   "privacy_policy": "Política de privacidad",
+
+  "login_success": "Has iniciado sesión exitosamente.",
+  "login_email": "Email",
+  "login_email_placeholder": "Ejemplo@correo.com",
+  "login_password": "Contraseña",
+  "login_password_placeholder": "Contraseña",
+  "login_button": "Iniciar sesión",
+
+  "register_success": "Tu cuenta ha sido creada exitosamente.",
+  "register_email": "Email",
+  "register_email_placeholder": "Ejemplo@correo.com",
+  "register_password": "Contraseña",
+  "register_password_placeholder": "Debe tener al menos 6 caracteres",
+  "register_dob": "Fecha de nacimiento",
+  "register_dob_placeholder": "Selecciona una fecha",
+  "register_dob_description": "Tu fecha de nacimiento es utilzada para calcular tu edad.",
+  "register_button": "Registrarse",
+
+  "guest": "Invitado",
+  "guest_button": "Continuar como invitado",
+
+  "logout_success": "Has cerrado sesión exitosamente.",
+  "logout_button": "Cerrar sesión",
+  "account": "Cuenta",
+  "settings": "Ajustes",
+
+  "auth_wrong_password": "Contraseña incorrecta.",
+  "auth_user_not_found": "No se encontró una cuenta asociada a este correo electrónico.",
+  "auth_too_many_requests": "Error: Demasiados intentos. Inténtalo de nuevo más tarde.",
+  "auth_email_already_in_use": "La dirección de correo electrónico ya está en uso.",
+  "auth_invalid_email": "La dirección de correo electrónico no es válida.",
+  "auth_default_error": "Ha ocurrido un error inesperado. Por favor, inténtalo de nuevo.",
 
   "welcome_title": "GeoAR",
   "welcome_description": "Explora nuestros senderos disponibles con",

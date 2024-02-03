@@ -1,11 +1,13 @@
 // login.tsx
 import { useState } from "react"
 import { RegisterForm } from "@/pages/auth/register/components/register-form"
+import { useTranslation } from "react-i18next"
 
 import { LogoVertical } from "@/components/logo-vertical"
 import { SignInAnonymouslyButton } from "@/components/sign-in-anonymously-button"
 
 export function Register() {
+  const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   return (
     <div className="flex flex-col min-h-screen max-w-sm mx-auto">
@@ -18,10 +20,10 @@ export function Register() {
       <div className="flex-col flex-grow">
         <div className="text-center">
           <h1 className="text-2xl font-semibold text-center">
-            Crea una cuenta
+            {t("register_title")}
           </h1>
           <p className="mt-2 mx-8 mb-4 text-sm text-muted-foreground">
-            Rellena el formulario para crear una cuenta
+            {t("register_description")}
           </p>
         </div>
 
@@ -33,9 +35,9 @@ export function Register() {
 
           {/* Enlace a la página de login */}
           <div className="mt-4 text-center text-sm">
-            ¿Ya tienes una cuenta?{" "}
+            {t("already_have_account")}{" "}
             <a href="/auth/login" className="underline font-bold text-primary">
-              Iniciar sesión
+              {t("login")}
             </a>
           </div>
 
@@ -46,7 +48,7 @@ export function Register() {
             </div>
             <div className="relative flex justify-center text-xs uppercase">
               <span className="bg-background px-2 text-muted-foreground">
-                O
+                {t("or")}
               </span>
             </div>
           </div>
@@ -65,11 +67,11 @@ export function Register() {
       <div className="my-2 w-full">
         <div className="text-center text-sm text-muted-foreground">
           <a href="/terms-of-uso" className="underline mr-2">
-            Términos de uso
+            {t("terms_of_use")}
           </a>
           |
           <a href="/privacy-policy" className="underline ml-2">
-            Política de privacidad
+            {t("privacy_policy")}
           </a>
         </div>
       </div>

@@ -1,17 +1,21 @@
 // get-error-message.ts
+import { useTranslation } from "react-i18next"
+
 export const getErrorMessage = (errorCode: string): string => {
+  const { t } = useTranslation()
+
   switch (errorCode) {
     case "auth/wrong-password":
-      return "Contraseña incorrecta."
+      return t("auth_wrong_password")
     case "auth/user-not-found":
-      return "No se encontró una cuenta asociada a este correo electrónico."
+      return t("auth_user_not_found")
     case "auth/too-many-requests":
-      return "Error: Demasiados intentos. Inténtalo de nuevo más tarde."
+      return t("auth_too_many_requests")
     case "auth/email-already-in-use":
-      return "La dirección de correo electrónico ya está en uso."
+      return t("auth_email_already_in_use")
     case "auth/invalid-email":
-      return "La dirección de correo electrónico no es válida."
+      return t("auth_invalid_email")
     default:
-      return "Ha ocurrido un error inesperado. Por favor, inténtalo de nuevo."
+      return t("auth_default_error")
   }
 }

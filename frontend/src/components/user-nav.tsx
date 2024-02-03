@@ -1,5 +1,6 @@
 import { signOut } from "firebase/auth"
 import { LogOut, Menu, Settings, User } from "lucide-react"
+import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
 
 import { auth } from "@/lib/firebase"
@@ -18,9 +19,10 @@ import {
 import { useToast } from "@/components/ui/use-toast"
 
 export function UserNav() {
+  const { t } = useTranslation()
   const user = useUser()
   const userID = user?.uid
-  const userEmail = user?.email || "Invitado"
+  const userEmail = user?.email || t("guest")
   const { toast } = useToast()
   const navigate = useNavigate()
 
@@ -32,7 +34,7 @@ export function UserNav() {
     signOut(auth)
       .then(() => {
         toast({
-          description: "Has cerrado sesión exitosamente.",
+          description: t("logout_success"),
         })
       })
       .catch((error) => {
@@ -61,14 +63,14 @@ export function UserNav() {
           {/* Cuenta */}
           <DropdownMenuItem onSelect={navigateTo("/account")}>
             <User className="mr-2 h-4 w-4" />
-            <span>Account</span>
+            <span>{t("account")}</span>
             <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
           </DropdownMenuItem>
 
           {/* Accesibilidad */}
           <DropdownMenuItem onSelect={navigateTo("/settings")}>
             <Settings className="mr-2 h-4 w-4" />
-            <span>Settings</span>
+            <span>{t("settings")}</span>
             <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
           </DropdownMenuItem>
         </DropdownMenuGroup>
@@ -79,7 +81,7 @@ export function UserNav() {
         {/* Cerrar sesión */}
         <DropdownMenuItem onSelect={handleLogOut}>
           <LogOut className="mr-2 h-4 w-4" />
-          <span>Log out</span>
+          <span>{t("logout_button")}</span>
           <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
         </DropdownMenuItem>
       </DropdownMenuContent>
