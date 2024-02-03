@@ -1,3 +1,4 @@
+// use-user.ts
 import { useEffect, useState } from "react"
 import { getAuth, User } from "firebase/auth"
 

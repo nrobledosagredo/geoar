@@ -1,4 +1,12 @@
 {
+  "login_title": "Ingresa con tu cuenta",
+  "login_description": "Escribe tu email y contraseña para iniciar sesión",
+  "no_account": "¿No tienes una cuenta?",
+  "register": "Regístrate",
+  "or": "O",
+  "terms_of_use": "Términos de uso",
+  "privacy_policy": "Política de privacidad",
+
   "welcome_title": "GeoAR",
   "welcome_description": "Explora nuestros senderos disponibles con",
   "augmented_reality": "realidad aumentada",

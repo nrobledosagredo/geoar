@@ -1,4 +1,12 @@
 {
+  "login_title": "Log in with your account",
+  "login_description": "Enter your email and password to log in",
+  "no_account": "Don't have an account?",
+  "register": "Register",
+  "or": "Or",
+  "terms_of_use": "Terms of use",
+  "privacy_policy": "Privacy policy",
+
   "welcome_title": "GeoAR",
   "welcome_description": "Explore our available trails with",
   "augmented_reality": "augmented reality",

@@ -1,4 +1,5 @@
 // login-form.tsx
+import { useEffect } from "react"
 import { loginSchema } from "@/pages/auth/login/components/login-schema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { signInWithEmailAndPassword } from "firebase/auth"
@@ -20,6 +21,8 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { useToast } from "@/components/ui/use-toast"
+import { useTranslation } from "react-i18next";
+import { makeZodI18nMap } from "zod-i18n-map";
 
 export function LoginForm({
   isLoading,
@@ -30,6 +33,14 @@ export function LoginForm({
 }) {
   const navigate = useNavigate()
   const { toast } = useToast()
+  const { t, i18n } = useTranslation()
+
+
+  useEffect(() => {
+    const zodI18nMap = makeZodI18nMap({ t, ns: "zod" });
+    z.setErrorMap(zodI18nMap);
+  }, [t, i18n.language]);
+
 
   // Hook de react-hook-form para manejar formularios en React
   const form = useForm<z.infer<typeof loginSchema>>({
