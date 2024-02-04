@@ -1,5 +1,7 @@
+import { settingsSchema } from "@/pages/settings/components/settings-schema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
+import { useTranslation } from "react-i18next"
 import { z } from "zod"
 
 import { Button } from "@/components/ui/button"
@@ -15,8 +17,6 @@ import {
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { toast } from "@/components/ui/use-toast"
 import { useTheme } from "@/components/theme-provider"
-import { useTranslation } from "react-i18next"
-import { settingsSchema } from "@/pages/settings/components/settings-schema"
 
 type SettingsFormValues = z.infer<typeof settingsSchema>
 

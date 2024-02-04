@@ -1,8 +1,12 @@
+import { accountSchema } from "@/pages/account/components/account-schema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { format, Locale } from "date-fns"
+import { enUS, es } from "date-fns/locale"
 import { CalendarIcon } from "lucide-react"
 import { useForm } from "react-hook-form"
+import { useTranslation } from "react-i18next"
 import { z } from "zod"
+import { makeZodI18nMap } from "zod-i18n-map"
 
 import { cn } from "@/lib/utils"
 import { useLanguage } from "@/hooks/use-language"
@@ -30,10 +34,6 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { toast } from "@/components/ui/use-toast"
-import { accountSchema } from "@/pages/account/components/account-schema"
-import { useTranslation } from "react-i18next"
-import { makeZodI18nMap } from "zod-i18n-map"
-import { enUS, es } from "date-fns/locale"
 
 type AccountFormValues = z.infer<typeof accountSchema>
 
@@ -83,57 +83,55 @@ export function AccountForm() {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-         {/* Fecha de nacimiento */}
-         <FormField
-            control={form.control}
-            name="dob"
-            render={({ field }) => (
-              <FormItem className="flex flex-col">
-                <FormLabel className="font-semibold">
-                  {t("account_dob_label")}
-                </FormLabel>
-                <Popover>
-                  <PopoverTrigger asChild>
-                    <FormControl>
-                      <Button
-                        variant={"outline"}
-                        className={cn(
-                          "w-[240px] pl-3 text-left font-normal",
-                          !field.value && "text-muted-foreground"
-                        )}
-                      >
-                        {field.value ? (
-                          format(field.value, "PPP", { locale: currentLocale })
-                        ) : (
-                          <span>{t("account_dob_placeholder")}</span>
-                        )}
-                        <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                      </Button>
-                    </FormControl>
-                  </PopoverTrigger>
-                  <PopoverContent className="w-auto p-0" align="start">
-                    <Calendar
-                      locale={currentLocale}
-                      mode="single"
-                      selected={field.value}
-                      onSelect={field.onChange}
-                      disabled={(date) =>
-                        date > new Date() || date < new Date("1900-01-01")
-                      }
-                      initialFocus
-                      captionLayout="dropdown-buttons"
-                      fromYear={1900}
-                      toYear={2024}
-                    />
-                  </PopoverContent>
-                </Popover>
-                <FormDescription>
-                  {t("register_dob_description")}
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+        {/* Fecha de nacimiento */}
+        <FormField
+          control={form.control}
+          name="dob"
+          render={({ field }) => (
+            <FormItem className="flex flex-col">
+              <FormLabel className="font-semibold">
+                {t("account_dob_label")}
+              </FormLabel>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <FormControl>
+                    <Button
+                      variant={"outline"}
+                      className={cn(
+                        "w-[240px] pl-3 text-left font-normal",
+                        !field.value && "text-muted-foreground"
+                      )}
+                    >
+                      {field.value ? (
+                        format(field.value, "PPP", { locale: currentLocale })
+                      ) : (
+                        <span>{t("account_dob_placeholder")}</span>
+                      )}
+                      <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                    </Button>
+                  </FormControl>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0" align="start">
+                  <Calendar
+                    locale={currentLocale}
+                    mode="single"
+                    selected={field.value}
+                    onSelect={field.onChange}
+                    disabled={(date) =>
+                      date > new Date() || date < new Date("1900-01-01")
+                    }
+                    initialFocus
+                    captionLayout="dropdown-buttons"
+                    fromYear={1900}
+                    toYear={2024}
+                  />
+                </PopoverContent>
+              </Popover>
+              <FormDescription>{t("register_dob_description")}</FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         <FormField
           control={form.control}
           name="language"
@@ -157,12 +155,8 @@ export function AccountForm() {
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value="es">
-                    {t("account_language_es")}
-                  </SelectItem>
-                  <SelectItem value="en">
-                    {t("account_language_en")}
-                  </SelectItem>
+                  <SelectItem value="es">{t("account_language_es")}</SelectItem>
+                  <SelectItem value="en">{t("account_language_en")}</SelectItem>
                 </SelectContent>
               </Select>
               <FormDescription>

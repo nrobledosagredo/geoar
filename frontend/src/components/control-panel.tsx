@@ -1,9 +1,9 @@
 import React from "react"
+import { useTranslation } from "react-i18next"
 
 import { Separator } from "@/components/ui/separator"
 import { MainNav } from "@/components/main-nav"
 import { SidebarNav } from "@/components/sidebar-nav"
-import { useTranslation } from "react-i18next"
 
 interface SettingsProps {
   children: React.ReactNode
@@ -21,7 +21,7 @@ export const ControlPanel: React.FC<SettingsProps> = ({ children }) => {
       href: "/settings",
     },
   ]
-  
+
   return (
     <>
       <MainNav />
