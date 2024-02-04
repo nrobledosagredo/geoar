@@ -44,6 +44,9 @@ export function RegisterForm({
   const { toast } = useToast()
   const navigate = useNavigate()
 
+  // Configura el mapa de errores de Zod para que use i18n
+  z.setErrorMap(makeZodI18nMap({ t, handlePath: { ns: ["common", "zod"] } }))
+
   // Mapeo de códigos de idioma i18next a locales de date-fns
   const locales: { [key: string]: Locale } = {
     en: enUS,
@@ -52,9 +55,6 @@ export function RegisterForm({
 
   // Obtener el locale de date-fns basado en el idioma actual de i18next
   const currentLocale = locales[i18n.language] || locales.en // 'en' como fallback
-
-  // Configura el mapa de errores de Zod para que use i18n
-  z.setErrorMap(makeZodI18nMap({ t, handlePath: { ns: ["common", "zod"] } }))
 
   // Hook de react-hook-form para manejar formularios en React
   const form = useForm<z.infer<typeof registerSchema>>({
@@ -72,7 +72,7 @@ export function RegisterForm({
       .then(() => {
         navigate("/")
         toast({
-          description: t("register_success"),
+          description: t("register_toast"),
         })
         console.log(data.dob)
       })
@@ -104,7 +104,7 @@ export function RegisterForm({
             render={({ field, fieldState }) => (
               <FormItem>
                 <FormLabel className="font-semibold">
-                  {t("register_email")}(*)
+                  {t("register_email_label")}(*)
                 </FormLabel>
                 <FormControl>
                   <Input
@@ -127,7 +127,7 @@ export function RegisterForm({
             render={({ field, fieldState }) => (
               <FormItem>
                 <FormLabel className="font-semibold">
-                  {t("register_password")}(*)
+                  {t("register_password_label")}(*)
                 </FormLabel>
                 <FormControl>
                   <Input
@@ -151,7 +151,7 @@ export function RegisterForm({
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="font-semibold">
-                  {t("register_dob")}(*)
+                  {t("register_dob_label")}(*)
                 </FormLabel>
                 <Popover>
                   <PopoverTrigger asChild>

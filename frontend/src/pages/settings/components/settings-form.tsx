@@ -15,26 +15,23 @@ import {
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { toast } from "@/components/ui/use-toast"
 import { useTheme } from "@/components/theme-provider"
+import { useTranslation } from "react-i18next"
+import { settingsSchema } from "@/pages/settings/components/settings-schema"
 
-const settingsFormSchema = z.object({
-  theme: z.enum(["light", "dark", "system"], {
-    required_error: "Please select a theme.",
-  }),
-})
-
-type SettingsFormValues = z.infer<typeof settingsFormSchema>
+type SettingsFormValues = z.infer<typeof settingsSchema>
 
 export function SettingsForm() {
+  const { t } = useTranslation()
   const { theme: currentTheme, setTheme } = useTheme()
   const form = useForm<SettingsFormValues>({
-    resolver: zodResolver(settingsFormSchema),
+    resolver: zodResolver(settingsSchema),
     defaultValues: {
       theme: currentTheme,
     },
   })
   function onSubmit(data: SettingsFormValues) {
     toast({
-      title: "You submitted the following values:",
+      title: t("settings_toast"),
       description: (
         <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
           <code className="text-white">{JSON.stringify(data, null, 2)}</code>
@@ -51,9 +48,11 @@ export function SettingsForm() {
           name="theme"
           render={({ field }) => (
             <FormItem className="flex flex-col">
-              <FormLabel>Theme</FormLabel>
+              <FormLabel className="font-semibold">
+                {t("settings_theme_label")}
+              </FormLabel>
               <FormDescription>
-                Select the theme for the dashboard.
+                {t("settings_theme_description")}
               </FormDescription>
               <FormMessage />
               <RadioGroup
@@ -83,7 +82,7 @@ export function SettingsForm() {
                       </div>
                     </div>
                     <span className="block w-full p-2 text-center font-normal">
-                      Light
+                      {t("settings_theme_light")}
                     </span>
                   </FormLabel>
                 </FormItem>
@@ -109,7 +108,7 @@ export function SettingsForm() {
                       </div>
                     </div>
                     <span className="block w-full p-2 text-center font-normal">
-                      Dark
+                      {t("settings_theme_dark")}
                     </span>
                   </FormLabel>
                 </FormItem>
@@ -118,7 +117,9 @@ export function SettingsForm() {
           )}
         />
 
-        <Button type="submit">Update preferences</Button>
+        <Button type="submit" className="font-semibold">
+          {t("settings_button")}
+        </Button>
       </form>
     </Form>
   )

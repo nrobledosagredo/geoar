@@ -1,6 +1,9 @@
 // home.tsx
+import { ChevronRight } from "lucide-react"
 import { useTranslation } from "react-i18next"
+import { Link } from "react-router-dom"
 
+import { Button } from "@/components/ui/button"
 import { LogoVertical } from "@/components/logo-vertical"
 import { MainNav } from "@/components/main-nav"
 
@@ -25,6 +28,16 @@ export function Home() {
             <span className="font-black"> {t("augmented_reality")}</span>
             <span className="font-bold">.</span>
           </p>
+        </div>
+
+        {/* Botón para ir a la lista de senderos */}
+        <div>
+          <Link to="/trails">
+            <Button className="font-semibold">
+              {t("start_button")}
+              <ChevronRight className="h-4 w-4 ml-2" />
+            </Button>
+          </Link>
         </div>
       </div>
     </div>

@@ -53,7 +53,7 @@ export function LoginForm({
       .then(() => {
         navigate("/")
         toast({
-          description: t("login_success"),
+          description: t("login_toast"),
         })
       })
       .catch((error) => {
@@ -83,7 +83,7 @@ export function LoginForm({
             render={({ field, fieldState }) => (
               <FormItem>
                 <FormLabel className="font-semibold">
-                  {t("login_email")}
+                  {t("login_email_label")}
                 </FormLabel>
                 <FormControl>
                   <Input
@@ -106,7 +106,7 @@ export function LoginForm({
             render={({ field, fieldState }) => (
               <FormItem>
                 <FormLabel className="font-semibold">
-                  {t("login_password")}
+                  {t("login_password_label")}
                 </FormLabel>
                 <FormControl>
                   <Input

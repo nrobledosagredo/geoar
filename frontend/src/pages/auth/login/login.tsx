@@ -2,6 +2,7 @@
 import { useState } from "react"
 import { LoginForm } from "@/pages/auth/login/components/login-form"
 import { useTranslation } from "react-i18next"
+import { Link } from "react-router-dom"
 
 import { LogoVertical } from "@/components/logo-vertical"
 import { SignInAnonymouslyButton } from "@/components/sign-in-anonymously-button"
@@ -34,12 +35,12 @@ export function Login() {
           {/* Enlace a la página de registro */}
           <div className="mt-4 text-center text-sm">
             {t("no_account")}{" "}
-            <a
-              href="/auth/register"
+            <Link
+              to="/auth/register"
               className="underline font-bold text-primary"
             >
               {t("register")}
-            </a>
+            </Link>
           </div>
 
           {/* Separador */}
@@ -67,13 +68,13 @@ export function Login() {
       {/* Enlaces a términos de uso y política de privacidad */}
       <div className="my-2 w-full">
         <div className="text-center text-sm text-muted-foreground">
-          <a href="/terms-of-uso" className="underline mr-2">
+          <Link to="/terms-of-uso" className="underline mr-2">
             {t("terms_of_use")}
-          </a>
+          </Link>
           |
-          <a href="/privacy-policy" className="underline ml-2">
+          <Link to="/privacy-policy" className="underline ml-2">
             {t("privacy_policy")}
-          </a>
+          </Link>
         </div>
       </div>
     </div>

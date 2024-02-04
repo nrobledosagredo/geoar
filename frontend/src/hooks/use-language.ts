@@ -8,7 +8,7 @@ import {
 export const useLanguage = (): LanguageContextType => {
   const context = useContext(LanguageContext)
   if (context === undefined) {
-    // Este error solo ocurrirá si intentas usar el contexto fuera de un proveedor
+    // Este error solo ocurrirá si se usa el contexto fuera de un proveedor
     throw new Error("useLanguage must be used within a LanguageProvider")
   }
   return context

@@ -34,7 +34,7 @@ export function UserNav() {
     signOut(auth)
       .then(() => {
         toast({
-          description: t("logout_success"),
+          description: t("logout_toast"),
         })
       })
       .catch((error) => {
