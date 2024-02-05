@@ -1,34 +1,34 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose"
 
 const treeSchema = new mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
   name: {
     type: String,
-    required: true
+    required: true,
   },
   geometry: {
     type: {
       type: String,
-      enum: ['Point'],
-      required: true
+      enum: ["Point"],
+      required: true,
     },
     coordinates: {
       type: [Number], // [longitude, latitude]
-      required: true
-    }
+      required: true,
+    },
   },
   treeCard: {
     type: mongoose.Schema.Types.ObjectId,
-    required: false
+    required: false,
   },
   habilitado: {
     type: Boolean,
-    required: true
+    required: true,
   },
   updatedAt: {
     type: Date,
-    required: true
-  }
-});
+    required: true,
+  },
+})
 
-module.exports = mongoose.model('Tree', treeSchema, 'trees');
+export default mongoose.model("Tree", treeSchema, "trees")

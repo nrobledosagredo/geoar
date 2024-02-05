@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose"
 
 const treeCardSchema = new mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
@@ -6,7 +6,7 @@ const treeCardSchema = new mongoose.Schema({
   commonName: [String],
   binomialName: {
     type: String,
-    required: true
+    required: true,
   },
   taxonomy: {
     kingdom: String,
@@ -15,15 +15,15 @@ const treeCardSchema = new mongoose.Schema({
     order: String,
     family: String,
     genus: String,
-    species: String
+    species: String,
   },
   conservationStatus: {
     acronym: String,
-    description: String
+    description: String,
   },
   isNative: {
     type: Boolean,
-    required: true
+    required: true,
   },
   origin: [String],
   sector: [String],
@@ -35,16 +35,16 @@ const treeCardSchema = new mongoose.Schema({
     geometry: {
       type: {
         type: String,
-        enum: ['Point'],
-        required: true
+        enum: ["Point"],
+        required: true,
       },
       coordinates: {
         type: [Number],
-        required: true
-      }
+        required: true,
+      },
     },
-    treeCard: mongoose.Schema.Types.ObjectId
-  }
-});
+    treeCard: mongoose.Schema.Types.ObjectId,
+  },
+})
 
-module.exports = mongoose.model('TreeCard', treeCardSchema, 'treeCards');
+export default mongoose.model("TreeCard", treeCardSchema, "treeCards")

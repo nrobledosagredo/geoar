@@ -1,57 +1,58 @@
-require("dotenv").config();
-const fs = require("fs");
-const path = require('path');
-const https = require("https");
-const express = require("express");
-const cors = require("cors");
-const mongoose = require("mongoose");
-const serveManifest = require('./src/middlewares/serveManifest');
+import fs from "fs"
+import https from "https"
+import path from "path"
+import express from "express"
+import cors from "cors"
+import dotenv from "dotenv"
+import mongoose from "mongoose"
+import serveManifest from "./src/middlewares/serve-manifest.js"
+import imageProxyRoutes from "./src/routes/image-proxy.routes.js"
+import infoCardRoutes from "./src/routes/info-card.routes.js"
+import pointRoutes from "./src/routes/point.routes.js"
+import trailRoutes from "./src/routes/trail.routes.js"
+import treeCardRoutes from "./src/routes/tree-card.routes.js"
+import treeRoutes from "./src/routes/tree.routes.js"
 
-const mongoString = process.env.DATABASE_URL;
+dotenv.config()
 
-const imageProxyRoutes = require("./src/routes/imageProxy");
-const infoCardsRoutes = require("./src/routes/infoCards");
-const pointsRoutes = require("./src/routes/points");
-const trailsRoutes = require("./src/routes/trails");
-const treeCardsRoutes = require("./src/routes/treeCards");
-const treesRoutes = require("./src/routes/trees");
+const mongoString = process.env.DATABASE_URL
 
-mongoose.connect(mongoString);
-const database = mongoose.connection;
+mongoose.connect(mongoString)
+const database = mongoose.connection
 
 database.on("error", (error) => {
-  console.log(error);
-});
+  console.error(error)
+})
 
 database.once("connected", () => {
-  console.log("Database Connected");
-});
+  console.log("Database Connected")
+})
 
-const app = express();
+const app = express()
 
 // Habilitar CORS
 app.use(
   cors({
     origin: [process.env.ORIGIN1, process.env.ORIGIN2, process.env.ORIGIN3],
   })
-);
+)
 
-app.use(express.json());
-app.use(serveManifest);
-app.use("/api/", imageProxyRoutes);
-app.use("/api/", infoCardsRoutes);
-app.use("/api/", pointsRoutes);
-app.use("/api/", trailsRoutes);
-app.use("/api/", treeCardsRoutes);
-app.use("/api/", treesRoutes);
+app.use(express.json())
+app.use(serveManifest)
+app.use("/api/", imageProxyRoutes)
+app.use("/api/", infoCardRoutes)
+app.use("/api/", pointRoutes)
+app.use("/api/", trailRoutes)
+app.use("/api/", treeCardRoutes)
+app.use("/api/", treeRoutes)
 
 // Configuración de HTTPS
 const httpsOptions = {
-  key: fs.readFileSync(path.join(__dirname, '192.168.159.129+3-key.pem')),
-  cert: fs.readFileSync(path.join(__dirname, '192.168.159.129+3.pem'))
-};
+  key: fs.readFileSync(path.join(path.resolve(), "192.168.159.129+3-key.pem")),
+  cert: fs.readFileSync(path.join(path.resolve(), "192.168.159.129+3.pem")),
+}
 
 // Crear servidor HTTPS
 https.createServer(httpsOptions, app).listen(3000, () => {
-  console.log("HTTPS server running on port 3000");
-});
+  console.log("HTTPS server running on port 3000")
+})

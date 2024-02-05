@@ -31,6 +31,7 @@
   "register_button": "Registrarse",
 
   "guest": "Invitado",
+  "guest_toast" : "Has iniciado sesión exitosamente como invitado.",
   "guest_button": "Continuar como invitado",
 
   "logout_toast": "Has cerrado sesión exitosamente.",
@@ -67,7 +68,7 @@
   "settings_theme_description": "Selecciona el tema para la aplicación.",
   "settings_theme_light": "Claro",
   "settings_theme_dark": "Oscuro",
-  "settings_submit": "Actualizar preferencias",
+  "settings_button": "Actualizar preferencias",
 
   "welcome_title": "GeoAR",
   "welcome_description": "Explora nuestros senderos disponibles con",

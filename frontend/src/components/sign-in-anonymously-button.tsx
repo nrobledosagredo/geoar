@@ -25,7 +25,7 @@ export function SignInAnonymouslyButton({
       .then(() => {
         navigate("/")
         toast({
-          description: t("login_success"),
+          description: t("guest_toast"),
         })
       })
 
