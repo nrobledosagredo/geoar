@@ -1,6 +1,7 @@
 import mongoose from "mongoose"
+const { Schema } = mongoose
 
-const trailSchema = new mongoose.Schema({
+const trailSchema = new Schema({
   name: {
     type: String,
     required: true,
@@ -29,9 +30,10 @@ const trailSchema = new mongoose.Schema({
   ],
 })
 
-const getTrailModel = (language) => {
-  const collectionName = language === "en" ? "trailsEN" : "trails"
-  return mongoose.model("Trail", trailSchema, collectionName)
+const getTrailModel = (lang) => {
+  const collectionName = lang === "en" ? "trailsEN" : "trails"
+  const Trail = mongoose.model("Trail", trailSchema, collectionName)
+  return Trail
 }
 
 export default getTrailModel

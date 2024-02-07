@@ -1,13 +1,12 @@
-// Importaciones usando ES Modules
 import express from "express"
-import getTrailModel from "../models/trail.model.js"
+import getTrailModel from "../models/trails.model.js"
 
-// Creación del router
 const router = express.Router()
 
+// Obtiene todos los senderos
 router.get("/trails", async (req, res) => {
-  const language = req.query.lang || "es"
-  const Trail = getTrailModel(language)
+  const lang = req.query.lang || "es"
+  const Trail = getTrailModel(lang)
 
   try {
     const trails = await Trail.find()
@@ -17,12 +16,13 @@ router.get("/trails", async (req, res) => {
   }
 })
 
-router.get("/trail/:id", async (req, res) => {
-  const language = req.query.lang || "es"
-  const Trail = getTrailModel(language)
+// Obtiene un sendero por su id
+router.get("/trail/:trailId", async (req, res) => {
+  const lang = req.query.lang || "es"
+  const Trail = getTrailModel(lang)
 
   try {
-    const trail = await Trail.findById(req.params.id)
+    const trail = await Trail.findById(req.params.trailId)
     if (!trail) return res.status(404).json({ message: "Trail not found" })
     res.json(trail)
   } catch (err) {
@@ -30,5 +30,4 @@ router.get("/trail/:id", async (req, res) => {
   }
 })
 
-// Exportación del router usando export default
 export default router

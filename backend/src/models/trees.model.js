@@ -1,6 +1,8 @@
 import mongoose from "mongoose"
 
-const treeSchema = new mongoose.Schema({
+const { Schema } = mongoose
+
+const treeSchema = new Schema({
   _id: mongoose.Schema.Types.ObjectId,
   name: {
     type: String,
@@ -13,7 +15,7 @@ const treeSchema = new mongoose.Schema({
       required: true,
     },
     coordinates: {
-      type: [Number], // [longitude, latitude]
+      type: [Number], // [longitud, latitud]
       required: true,
     },
   },
@@ -31,4 +33,6 @@ const treeSchema = new mongoose.Schema({
   },
 })
 
-export default mongoose.model("Tree", treeSchema, "trees")
+const Tree = mongoose.model("Tree", treeSchema, "trees")
+
+export default Tree

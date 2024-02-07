@@ -1,6 +1,7 @@
 import mongoose from "mongoose"
+const { Schema } = mongoose
 
-const pointSchema = new mongoose.Schema({
+const pointSchema = new Schema({
   trailId: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
@@ -16,10 +17,12 @@ const pointSchema = new mongoose.Schema({
       required: true,
     },
     coordinates: {
-      type: [Number], // [longitude, latitude]
+      type: [Number], // [longitud, latitud]
       required: true,
     },
   },
 })
 
-export default mongoose.model("Point", pointSchema, "points")
+const Point = mongoose.model("Point", pointSchema, "points");
+
+export default Point;

@@ -7,6 +7,7 @@ import { Register } from "@/pages/auth/register/register"
 import { Home } from "@/pages/home/home"
 import { NotFound } from "@/pages/not-found/not-found"
 import { Settings } from "@/pages/settings/settings"
+import { List } from "@/pages/trails/list/list"
 import {
   browserLocalPersistence,
   getAuth,
@@ -74,6 +75,11 @@ function App() {
               element={
                 currentUser ? <Settings /> : <Navigate to="/auth/login" />
               }
+            />
+
+            <Route
+              path="/trails/list"
+              element={currentUser ? <List /> : <Navigate to="/auth/login" />}
             />
 
             <Route path="*" element={<NotFound />} />

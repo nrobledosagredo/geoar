@@ -1,6 +1,7 @@
 import mongoose from "mongoose"
+const { Schema } = mongoose
 
-const treeCardSchema = new mongoose.Schema({
+const treeCardSchema = new Schema({
   _id: mongoose.Schema.Types.ObjectId,
   images: [String],
   commonName: [String],
@@ -47,4 +48,6 @@ const treeCardSchema = new mongoose.Schema({
   },
 })
 
-export default mongoose.model("TreeCard", treeCardSchema, "treeCards")
+const TreeCard = mongoose.model("TreeCard", treeCardSchema, "treeCards");
+
+export default TreeCard;

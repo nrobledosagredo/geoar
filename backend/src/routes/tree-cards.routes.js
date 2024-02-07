@@ -1,11 +1,10 @@
 // Importaciones usando ES Modules
 import express from "express"
-import TreeCard from "../models/tree-card.model.js"
+import TreeCard from "../models/tree-cards.model.js"
 
-// Creación del router
 const router = express.Router()
 
-// Obtener todas las tarjetas de árboles
+// Obtiene todas las treeCards
 router.get("/treecards", async (req, res) => {
   try {
     const treeCards = await TreeCard.find()
@@ -15,10 +14,10 @@ router.get("/treecards", async (req, res) => {
   }
 })
 
-// Obtener una sola tarjeta de árbol por ID
-router.get("/treecard/:id", async (req, res) => {
+// Obtiene una treeCard por su id
+router.get("/treecards/:treeCardId", async (req, res) => {
   try {
-    const treeCard = await TreeCard.findById(req.params.id)
+    const treeCard = await TreeCard.findById(req.params.treeCardId)
     if (!treeCard)
       return res.status(404).json({ message: "TreeCard not found" })
     res.json(treeCard)
@@ -27,5 +26,4 @@ router.get("/treecard/:id", async (req, res) => {
   }
 })
 
-// Exportación del router usando export default
 export default router

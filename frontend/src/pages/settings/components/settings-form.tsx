@@ -63,7 +63,11 @@ export function SettingsForm() {
                 <FormItem>
                   <FormLabel className="[&:has([data-state=checked])>div]:border-primary">
                     <FormControl>
-                      <RadioGroupItem onClick={() => setTheme("light")} value="light" className="sr-only" />
+                      <RadioGroupItem
+                        onClick={() => setTheme("light")}
+                        value="light"
+                        className="sr-only"
+                      />
                     </FormControl>
                     <div className="items-center rounded-md border-2 border-muted p-1 hover:border-accent">
                       <div className="space-y-2 rounded-sm bg-[#ecedef] p-2">
@@ -89,7 +93,11 @@ export function SettingsForm() {
                 <FormItem>
                   <FormLabel className="[&:has([data-state=checked])>div]:border-primary">
                     <FormControl>
-                      <RadioGroupItem onClick={() => setTheme("dark")} value="dark" className="sr-only" />
+                      <RadioGroupItem
+                        onClick={() => setTheme("dark")}
+                        value="dark"
+                        className="sr-only"
+                      />
                     </FormControl>
                     <div className="items-center rounded-md border-2 border-muted bg-popover p-1 hover:bg-accent hover:text-accent-foreground">
                       <div className="space-y-2 rounded-sm bg-slate-950 p-2">

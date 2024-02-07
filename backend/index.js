@@ -7,11 +7,11 @@ import dotenv from "dotenv"
 import mongoose from "mongoose"
 import serveManifest from "./src/middlewares/serve-manifest.js"
 import imageProxyRoutes from "./src/routes/image-proxy.routes.js"
-import infoCardRoutes from "./src/routes/info-card.routes.js"
-import pointRoutes from "./src/routes/point.routes.js"
-import trailRoutes from "./src/routes/trail.routes.js"
-import treeCardRoutes from "./src/routes/tree-card.routes.js"
-import treeRoutes from "./src/routes/tree.routes.js"
+import infoCardRoutes from "./src/routes/info-cards.routes.js"
+import pointRoutes from "./src/routes/points.routes.js"
+import trailRoutes from "./src/routes/trails.routes.js"
+import treeCardRoutes from "./src/routes/tree-cards.routes.js"
+import treeRoutes from "./src/routes/trees.routes.js"
 
 dotenv.config()
 

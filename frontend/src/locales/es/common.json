@@ -31,7 +31,7 @@
   "register_button": "Registrarse",
 
   "guest": "Invitado",
-  "guest_toast" : "Has iniciado sesión exitosamente como invitado.",
+  "guest_toast": "Has iniciado sesión exitosamente como invitado.",
   "guest_button": "Continuar como invitado",
 
   "logout_toast": "Has cerrado sesión exitosamente.",

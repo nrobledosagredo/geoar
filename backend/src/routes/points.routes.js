@@ -1,10 +1,9 @@
-// Importaciones usando ES Modules
 import express from "express"
-import Point from "../models/point.model.js" // Corregido el error en la extensión
+import Point from "../models/points.model.js"
 
-// Creación del router
 const router = express.Router()
 
+// Obtiene todos los puntos
 router.get("/points", async (req, res) => {
   try {
     const points = await Point.find()
@@ -14,9 +13,10 @@ router.get("/points", async (req, res) => {
   }
 })
 
-router.get("/point/:id", async (req, res) => {
+// Obtiene un punto por su id
+router.get("/points/:pointId", async (req, res) => {
   try {
-    const point = await Point.findById(req.params.id)
+    const point = await Point.findById(req.params.pointId)
     if (!point) return res.status(404).json({ message: "Point not found" })
     res.json(point)
   } catch (err) {
@@ -24,7 +24,8 @@ router.get("/point/:id", async (req, res) => {
   }
 })
 
-router.get("/points/trail/:trailId", async (req, res) => {
+// Obtiene todos los puntos de un sendero
+router.get("/points/trails/:trailId", async (req, res) => {
   try {
     const points = await Point.find({ trailId: req.params.trailId })
     if (points.length === 0)
@@ -35,5 +36,4 @@ router.get("/points/trail/:trailId", async (req, res) => {
   }
 })
 
-// Exportación del router usando export default
 export default router

@@ -10,7 +10,7 @@ import { MainNav } from "@/components/main-nav"
 export function Home() {
   const { t } = useTranslation()
   return (
-    <div className="h-screen flex flex-col justify-between bg-[#ffffff] dark:bg-[#0c0a09]">
+    <div className="h-screen flex flex-col">
       {/* Barra de navegación */}
       <MainNav />
 
@@ -32,10 +32,10 @@ export function Home() {
 
         {/* Botón para ir a la lista de senderos */}
         <div>
-          <Link to="/trails">
+          <Link to="/trails/list">
             <Button className="font-semibold">
               {t("start_button")}
-              <ChevronRight className="h-4 w-4 ml-2" />
+              <ChevronRight className="h-4 ml-2" />
             </Button>
           </Link>
         </div>

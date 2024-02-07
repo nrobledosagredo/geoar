@@ -1,6 +1,7 @@
 import mongoose from "mongoose"
+const { Schema } = mongoose
 
-const dataSchema = new mongoose.Schema({
+const infoCardSchema = new Schema({
   name: {
     required: true,
     type: String,
@@ -28,7 +29,8 @@ const dataSchema = new mongoose.Schema({
 
 const getInfoCardModel = (language) => {
   const collectionName = language === "en" ? "infoCardsEN" : "infoCards"
-  return mongoose.model("InfoCard", dataSchema, collectionName)
+  const InfoCard = mongoose.model("InfoCard", infoCardSchema, collectionName)
+  return InfoCard
 }
 
 export default getInfoCardModel
