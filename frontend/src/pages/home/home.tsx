@@ -32,7 +32,7 @@ export function Home() {
 
         {/* Botón para ir a la lista de senderos */}
         <div>
-          <Link to="/trails/list">
+          <Link to="/trails">
             <Button className="font-semibold">
               {t("start_button")}
               <ChevronRight className="h-4 ml-2" />

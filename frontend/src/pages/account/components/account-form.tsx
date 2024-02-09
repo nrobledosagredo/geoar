@@ -60,7 +60,7 @@ export function AccountForm() {
     es: es,
   }
 
-  // Obtener el locale de date-fns basado en el idioma actual de i18next
+  // Obtiene el locale de date-fns basado en el idioma actual de i18next
   const currentLocale = locales[i18n.language] || locales.en // 'en' como fallback
 
   // Lógica del formulario

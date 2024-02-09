@@ -6,8 +6,8 @@ const BACKEND_PORT = import.meta.env.VITE_BACKEND_PORT
 const BACKEND_URL = `${BACKEND_HOST}:${BACKEND_PORT}/api`
 
 export const getAllInfoCards = async () => {
-  const language = i18n.language
-  const response = await fetch(`${BACKEND_URL}/infoCards?lang=${language}`)
+  const lang = i18n.language
+  const response = await fetch(`${BACKEND_URL}/infoCards?lang=${lang}`)
   if (!response.ok) {
     throw new Error("Network response was not ok")
   }
@@ -15,8 +15,8 @@ export const getAllInfoCards = async () => {
 }
 
 export const getInfoCardById = async (id: any) => {
-  const language = i18n.language
-  const response = await fetch(`${BACKEND_URL}/infoCard/${id}?lang=${language}`)
+  const lang = i18n.language
+  const response = await fetch(`${BACKEND_URL}/infoCard/${id}?lang=${lang}`)
   if (!response.ok) {
     throw new Error("Network response was not ok")
   }

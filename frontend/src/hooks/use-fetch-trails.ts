@@ -1,6 +1,7 @@
 // use-fetch-trails.ts
 import { useEffect, useState } from "react"
 import { getAllTrails } from "@/services/trails-service"
+import { useLanguage } from "./use-language"
 
 interface Distance {
   value: number
@@ -31,6 +32,7 @@ export const useFetchTrails = () => {
   const [trails, setTrails] = useState<Trail[]>([])
   const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<string | null>(null)
+  const { language } = useLanguage()
 
   useEffect(() => {
     const fetchTrails = async () => {
@@ -49,7 +51,7 @@ export const useFetchTrails = () => {
     }
 
     fetchTrails()
-  }, [])
+  }, [language])
 
   return { trails, loading, error }
 }
