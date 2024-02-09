@@ -1,6 +1,7 @@
 // use-fetch-trails.ts
 import { useEffect, useState } from "react"
 import { getAllTrails } from "@/services/trails-service"
+
 import { useLanguage } from "./use-language"
 
 interface Distance {

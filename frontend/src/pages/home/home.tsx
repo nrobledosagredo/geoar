@@ -17,16 +17,16 @@ export function Home() {
       {/* Contenedor de la página de inicio */}
       <div className="flex-1 flex flex-col justify-center items-center text-center p-6">
         {/* Título */}
-        <div className="mb-8 scale-150">
+        <div className="mb-4">
           <LogoVertical />
         </div>
 
         {/* Descripción */}
         <div className="mb-6">
-          <p className="text-xl text-gray-700 dark:text-gray-300">
-            <span className="font-bold">{t("welcome_description")}</span>
-            <span className="font-black"> {t("augmented_reality")}</span>
-            <span className="font-bold">.</span>
+          <p className="text-xl text-muted-foreground">
+            <span className="font-semibold">{t("welcome_description")}</span>
+            <span className="font-bold"> {t("augmented_reality")}</span>
+            <span className="font-semibold">.</span>
           </p>
         </div>
 
@@ -35,7 +35,7 @@ export function Home() {
           <Link to="/trails">
             <Button className="font-semibold">
               {t("start_button")}
-              <ChevronRight className="h-4 ml-2" />
+              <ChevronRight className="h-4 mt-0.5 -mr-2" />
             </Button>
           </Link>
         </div>

@@ -75,6 +75,9 @@
   "augmented_reality": "realidad aumentada",
   "start_button": "Comenzar",
 
+  "trails_title": "Senderos disponibles",
+  "trails_description": "Explora nuestros senderos disponibles. Selecciona un sendero para ver más detalles.",
+
   "search": "Buscar",
   "filter": "Filtrar",
   "search_trails_placeholder": "Buscar senderos...",
@@ -83,6 +86,9 @@
   "difficulty_tooltip": "Dificultad",
   "distance_tooltip": "Distancia",
   "duration_tooltip": "Duración",
+
+  "pagination_prev": "Anterior",
+  "pagination_next": "Siguiente",
 
   "loading1": "Cargando...",
   "loading2": "Por favor espera...",

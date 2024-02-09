@@ -75,6 +75,9 @@
   "augmented_reality": "augmented reality",
   "start_button": "Get Started",
 
+  "trails_title": "Available trails",
+  "trails_description": "Explore our available trails. Select a trail to see more details.",
+
   "search": "Search",
   "filter": "Filter",
   "search_trails_placeholder": "Search trails...",
@@ -83,6 +86,9 @@
   "difficulty_tooltip": "Difficulty",
   "distance_tooltip": "Distance",
   "duration_tooltip": "Duration",
+
+  "pagination_prev": "Previous",
+  "pagination_next": "Next",
 
   "loading1": "Loading...",
   "loading2": "Please wait...",
