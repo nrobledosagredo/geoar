@@ -1,9 +1,9 @@
 import * as React from "react"
 import { ChevronLeft, ChevronRight, MoreHorizontal } from "lucide-react"
+import { useTranslation } from "react-i18next"
 
 import { cn } from "@/lib/utils"
 import { ButtonProps, buttonVariants } from "@/components/ui/button"
-import { useTranslation } from "react-i18next"
 
 const Pagination = ({ className, ...props }: React.ComponentProps<"nav">) => (
   <nav
@@ -64,7 +64,7 @@ const PaginationPrevious = ({
   className,
   ...props
 }: React.ComponentProps<typeof PaginationLink>) => {
-  const { t } = useTranslation(); // Usa useTranslation para acceder a la función de traducción
+  const { t } = useTranslation() // Usa useTranslation para acceder a la función de traducción
   return (
     <PaginationLink
       aria-label={t("pagination.previous")} // Usa la función de traducción para obtener el texto
@@ -75,15 +75,15 @@ const PaginationPrevious = ({
       <ChevronLeft className="h-4 w-4" />
       <span>{t("pagination_prev")}</span> {/* Traduce el texto "Previous" */}
     </PaginationLink>
-  );
-};
-PaginationPrevious.displayName = "PaginationPrevious";
+  )
+}
+PaginationPrevious.displayName = "PaginationPrevious"
 
 const PaginationNext = ({
   className,
   ...props
 }: React.ComponentProps<typeof PaginationLink>) => {
-  const { t } = useTranslation(); // Usa useTranslation aquí también
+  const { t } = useTranslation() // Usa useTranslation aquí también
   return (
     <PaginationLink
       aria-label={t("pagination.next")} // Usa la función de traducción para el atributo aria-label
@@ -94,9 +94,9 @@ const PaginationNext = ({
       <span>{t("pagination_next")}</span> {/* Traduce el texto "Next" */}
       <ChevronRight className="h-4 w-4" />
     </PaginationLink>
-  );
-};
-PaginationNext.displayName = "PaginationNext";
+  )
+}
+PaginationNext.displayName = "PaginationNext"
 
 const PaginationEllipsis = ({
   className,

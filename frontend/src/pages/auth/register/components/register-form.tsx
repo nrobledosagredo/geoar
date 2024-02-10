@@ -104,7 +104,8 @@ export function RegisterForm({
             render={({ field, fieldState }) => (
               <FormItem>
                 <FormLabel className="font-semibold">
-                  {t("register_email_label")} <span className="text-red-500"> *</span>
+                  {t("register_email_label")}{" "}
+                  <span className="text-red-500"> *</span>
                 </FormLabel>
                 <FormControl>
                   <Input
@@ -127,7 +128,8 @@ export function RegisterForm({
             render={({ field, fieldState }) => (
               <FormItem>
                 <FormLabel className="font-semibold">
-                  {t("register_password_label")} <span className="text-red-500"> *</span>
+                  {t("register_password_label")}{" "}
+                  <span className="text-red-500"> *</span>
                 </FormLabel>
                 <FormControl>
                   <Input
@@ -151,7 +153,8 @@ export function RegisterForm({
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="font-semibold">
-                  {t("register_dob_label")} <span className="text-red-500"> *</span>
+                  {t("register_dob_label")}{" "}
+                  <span className="text-red-500"> *</span>
                 </FormLabel>
                 <Popover>
                   <PopoverTrigger asChild>

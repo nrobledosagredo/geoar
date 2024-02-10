@@ -78,10 +78,14 @@
   "trails_title": "Available trails",
   "trails_description": "Explore our available trails. Select a trail to see more details.",
 
-  "search": "Search",
-  "filter": "Filter",
-  "search_trails_placeholder": "Search trails...",
-  "search_failed": "No trails were found that match your search.",
+  "search_bar_label": "Search",
+  "search_bar_placeholder": "Search trails...",
+  "search_bar_description": "Search trails by name, difficulty, distance, or any related keyword.",
+
+  "search_alert_title": "No trails were found that match your search.",
+  "search_alert_description": "Try a different search term or clear the search field to see all trails.",
+
+  "trails_toast_description": "An error occurred while fetching the data.",
 
   "difficulty_tooltip": "Difficulty",
   "distance_tooltip": "Distance",

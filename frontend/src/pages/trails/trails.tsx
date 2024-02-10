@@ -1,12 +1,13 @@
 // trails.tsx
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Autoplay from "embla-carousel-autoplay"
-import { Clock, Footprints } from "lucide-react"
+import { Clock, Footprints, SearchX } from "lucide-react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
 
 import { useFetchInfoCards } from "@/hooks/use-fetch-info-cards"
 import { useFetchTrails } from "@/hooks/use-fetch-trails"
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { AspectRatio } from "@/components/ui/aspect-ratio"
 import {
   Card,
@@ -36,9 +37,11 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
+import { useToast } from "@/components/ui/use-toast"
 import { DifficultyStars } from "@/components/difficulty-stars"
 import { MainNav } from "@/components/main-nav"
 import { SearchBar } from "@/components/search-bar"
+import { SkeletonCard } from "@/components/skeleton-card"
 
 export function Trails() {
   const {
@@ -52,20 +55,46 @@ export function Trails() {
     error: errorInfoCards,
   } = useFetchInfoCards()
   const navigate = useNavigate()
+  const { toast } = useToast()
   const { t } = useTranslation()
+  const [searchTerm, setSearchTerm] = useState("")
   const [currentPage, setCurrentPage] = useState(1)
   const [cardsPerPage] = useState(3)
-  
 
-  // TODO: Mostrar skeleton
-  if (loadingTrails || loadingInfoCards) return <div>Loading trails...</div>
+  useEffect(() => {
+    // Verificar si hay algún error
+    if (errorTrails || errorInfoCards) {
+      // Mostrar el toast de error
+      toast({
+        title: "Error",
+        description: t("trails_toast_description"),
+        variant: "destructive",
+      })
+      navigate("/")
+    }
+  }, [errorTrails, errorInfoCards, navigate, toast])
 
-  // TODO: Mostrar toast con error
-  if (errorTrails || errorInfoCards)
-    return <div>Error: {errorTrails || errorInfoCards}</div>
+  // Filtrar senderos por término de búsqueda
+  const filteredTrails =
+    searchTerm.trim() === ""
+      ? trails
+      : trails.filter(
+          (trail) =>
+            trail.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            trail.description
+              .toLowerCase()
+              .includes(searchTerm.toLowerCase()) ||
+            trail.difficulty.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            trail.distance.value.toString().includes(searchTerm) ||
+            trail.distance.unit
+              .toLowerCase()
+              .includes(searchTerm.toLowerCase()) ||
+            trail.duration.value.toString().includes(searchTerm) ||
+            trail.duration.unit.toLowerCase().includes(searchTerm.toLowerCase())
+        )
 
   // Combinar trails con las imágenes de sus infoCards correspondientes
-  const trailsWithImages = trails.map((trail) => ({
+  const trailsWithImages = filteredTrails.map((trail) => ({
     ...trail,
     images: trail.infoCards.flatMap(
       (infoCard) =>
@@ -84,8 +113,8 @@ export function Trails() {
     <div className="flex flex-col">
       <div className="sticky top-0 backdrop-blur-3xl z-20">
         <MainNav />
-        <div className="absolute top-3 px-32 w-full sm:w-[350px] sm:px-0 sm:right-16">
-          <SearchBar />
+        <div className="absolute top-3 pl-32 pr-16 w-full sm:w-[350px] sm:px-0 sm:right-16">
+          <SearchBar onSearch={setSearchTerm} />
         </div>
       </div>
 
@@ -97,102 +126,140 @@ export function Trails() {
         <p className="text-center px-4 w-full md:w-[740px] text-lg text-muted-foreground md:text-xl">
           {t("trails_description")}
         </p>
+
+        {/* Texto de término de búsqueda y cantidad de resultados */}
+        {searchTerm && filteredTrails.length > 0 && (
+          <div className="mt-4">
+            <span className="text-lg font-semibold">"{searchTerm}"</span>
+            <span className="text-sm font-medium text-muted-foreground">
+              {" "}
+              {filteredTrails.length}{" "}
+              {filteredTrails.length > 1 ? "resultados" : "resultado"}
+            </span>
+          </div>
+        )}
+
+        {/* Alerta si no hay resultados */}
+        {searchTerm && filteredTrails.length === 0 && (
+          <div className="mt-6 mx-4">
+            <Alert variant="destructive">
+              <SearchX className="h-6 mr-2" />
+              <AlertTitle className="ml-2">
+                {t("search_alert_title")}
+              </AlertTitle>
+              <AlertDescription className="ml-2">
+                {t("search_alert_description", { searchTerm })}
+              </AlertDescription>
+            </Alert>
+          </div>
+        )}
       </div>
 
       {/* Tarjetas de senderos */}
       <div className="flex flex-col items-center mx-4">
-        {currentCards.map((trail) => (
-          <Card key={trail._id} className="w-full md:w-[740px] mb-4">
-            {/* Header de la tarjeta */}
-            <CardHeader
-              className="cursor-pointer"
-              onClick={() => navigate(`/trails/${trail._id}`)}
-            >
-              <CardTitle className="text-center">{trail.name}</CardTitle>
-            </CardHeader>
-
-            {/* Contenido de la tarjeta */}
-            <CardContent>
-              {trail.images && trail.images.length > 0 ? (
-                <Carousel
-                  opts={{
-                    align: "start",
-                  }}
-                  plugins={[
-                    Autoplay({
-                      delay: 5000,
-                    }),
-                  ]}
+        {loadingTrails || loadingInfoCards
+          ? // Repite SkeletonCard basado en cardsPerPage
+            Array.from({ length: cardsPerPage }, (_, index) => (
+              <SkeletonCard key={index} />
+            ))
+          : // Renderiza el contenido real aquí si no está cargando
+            currentCards.map((trail) => (
+              <Card key={trail._id} className="w-full md:w-[740px] mb-4">
+                {/* Header de la tarjeta */}
+                <CardHeader
+                  className="cursor-pointer"
+                  onClick={() => navigate(`/trails/${trail._id}`)}
                 >
-                  <CarouselContent>
-                    {trail.images.map((image, index) => (
-                      <CarouselItem key={index} className="flex justify-center">
-                        <AspectRatio ratio={16 / 9}>
-                          <img
-                            src={image}
-                            alt={`Trail image ${index + 1}`}
-                            className="border rounded-lg object-cover w-full h-full"
-                          />
-                        </AspectRatio>
-                      </CarouselItem>
-                    ))}
-                  </CarouselContent>
-                  <CarouselPrevious />
-                  <CarouselNext />
-                </Carousel>
-              ) : (
-                <div>No images available</div>
-              )}
-            </CardContent>
+                  <CardTitle className="text-center">{trail.name}</CardTitle>
+                </CardHeader>
 
-            {/* Footer de la tarjeta */}
-            <CardFooter
-              className="flex justify-between text-center cursor-pointer"
-              onClick={() => navigate(`/trails/${trail._id}`)}
-            >
-              {/* Dificultad */}
-              <div className="basis-1/3 flex flex-col items-center justify-center">
-                <TooltipProvider>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <div>
-                        <DifficultyStars difficulty={trail.difficulty} />
-                      </div>
-                    </TooltipTrigger>
-                    <TooltipContent>{t("difficulty_tooltip")}</TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
-                <div className="mt-1">{trail.difficulty}</div>
-              </div>
+                {/* Contenido de la tarjeta */}
+                <CardContent>
+                  {trail.images && trail.images.length > 0 ? (
+                    <Carousel
+                      opts={{
+                        align: "start",
+                      }}
+                      plugins={[
+                        Autoplay({
+                          delay: 5000,
+                        }),
+                      ]}
+                    >
+                      <CarouselContent>
+                        {trail.images.map((image, index) => (
+                          <CarouselItem
+                            key={index}
+                            className="flex justify-center"
+                          >
+                            <AspectRatio ratio={20 / 9}>
+                              <img
+                                src={image}
+                                alt={`Trail image ${index + 1}`}
+                                className="border rounded-lg object-cover w-full h-full"
+                              />
+                            </AspectRatio>
+                          </CarouselItem>
+                        ))}
+                      </CarouselContent>
+                      <CarouselPrevious />
+                      <CarouselNext />
+                    </Carousel>
+                  ) : (
+                    <div>No images available</div>
+                  )}
+                </CardContent>
 
-              {/* Distancia */}
-              <div className="basis-1/3 flex flex-col items-center justify-center">
-                <TooltipProvider>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <Footprints className="h-6" />
-                    </TooltipTrigger>
-                    <TooltipContent>{t("distance_tooltip")}</TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
-                {trail.distance.value} {trail.distance.unit}
-              </div>
+                {/* Footer de la tarjeta */}
+                <CardFooter
+                  className="flex justify-between text-center cursor-pointer"
+                  onClick={() => navigate(`/trails/${trail._id}`)}
+                >
+                  {/* Dificultad */}
+                  <div className="basis-1/3 flex flex-col items-center justify-center">
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <div>
+                            <DifficultyStars difficulty={trail.difficulty} />
+                          </div>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          {t("difficulty_tooltip")}
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                    <div className="mt-1">{trail.difficulty}</div>
+                  </div>
 
-              {/* Duración */}
-              <div className="basis-1/3 flex flex-col items-center justify-center">
-                <TooltipProvider>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <Clock className="h-6" />
-                    </TooltipTrigger>
-                    <TooltipContent>{t("duration_tooltip")}</TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
-                {trail.duration.value} {trail.duration.unit}
-              </div>
-            </CardFooter>
-          </Card>
-        ))}
+                  {/* Distancia */}
+                  <div className="basis-1/3 flex flex-col items-center justify-center">
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <Footprints className="h-6" />
+                        </TooltipTrigger>
+                        <TooltipContent>{t("distance_tooltip")}</TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                    {trail.distance.value} {trail.distance.unit}
+                  </div>
+
+                  {/* Duración */}
+                  <div className="basis-1/3 flex flex-col items-center justify-center">
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <Clock className="h-6" />
+                        </TooltipTrigger>
+                        <TooltipContent>{t("duration_tooltip")}</TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                    {trail.duration.value} {trail.duration.unit}
+                  </div>
+                </CardFooter>
+              </Card>
+            ))}
       </div>
 
       {/* Paginación */}
