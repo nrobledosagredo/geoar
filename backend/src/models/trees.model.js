@@ -3,7 +3,6 @@ import mongoose from "mongoose"
 const { Schema } = mongoose
 
 const treeSchema = new Schema({
-  _id: mongoose.Schema.Types.ObjectId,
   name: {
     type: String,
     required: true,
@@ -15,7 +14,7 @@ const treeSchema = new Schema({
       required: true,
     },
     coordinates: {
-      type: [Number], // [longitud, latitud]
+      type: [Number],
       required: true,
     },
   },

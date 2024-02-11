@@ -6,12 +6,13 @@ import cors from "cors"
 import dotenv from "dotenv"
 import mongoose from "mongoose"
 import serveManifest from "./src/middlewares/serve-manifest.js"
-import imageProxyRoutes from "./src/routes/image-proxy.routes.js"
-import infoCardRoutes from "./src/routes/info-cards.routes.js"
-import pointRoutes from "./src/routes/points.routes.js"
-import trailRoutes from "./src/routes/trails.routes.js"
-import treeCardRoutes from "./src/routes/tree-cards.routes.js"
-import treeRoutes from "./src/routes/trees.routes.js"
+import imagesRoutes from "./src/routes/images.routes.js"
+import infoCardsRoutes from "./src/routes/infocards.routes.js"
+import pointsRoutes from "./src/routes/points.routes.js"
+import trailsRoutes from "./src/routes/trails.routes.js"
+import treeCardsRoutes from "./src/routes/treecards.routes.js"
+import treesRoutes from "./src/routes/trees.routes.js"
+import usersRoutes from "./src/routes/users.routes.js"
 
 dotenv.config()
 
@@ -39,12 +40,13 @@ app.use(
 
 app.use(express.json())
 app.use(serveManifest)
-app.use("/api/", imageProxyRoutes)
-app.use("/api/", infoCardRoutes)
-app.use("/api/", pointRoutes)
-app.use("/api/", trailRoutes)
-app.use("/api/", treeCardRoutes)
-app.use("/api/", treeRoutes)
+app.use("/api/", imagesRoutes)
+app.use("/api/", infoCardsRoutes)
+app.use("/api/", pointsRoutes)
+app.use("/api/", trailsRoutes)
+app.use("/api/", treeCardsRoutes)
+app.use("/api/", treesRoutes)
+app.use("/api/", usersRoutes)
 
 // Configuración de HTTPS
 const httpsOptions = {

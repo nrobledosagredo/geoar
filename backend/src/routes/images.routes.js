@@ -1,10 +1,10 @@
-// trees.routes.js
+// routes/images.routes.js
 import { Router } from "express";
 import { verifyToken } from "../middlewares/check-auth.js";
-import { getTrees } from "../controllers/trees.controller.js";
+import { getImages } from "../controllers/images.controller.js";
 
 const router = Router();
 
-router.get("/trees", verifyToken, getTrees);
+router.get("/images", verifyToken, getImages);
 
 export default router;

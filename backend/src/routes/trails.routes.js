@@ -1,33 +1,11 @@
-import express from "express"
-import getTrailModel from "../models/trails.model.js"
+// trails.routes.js
+import { Router } from "express";
+import { verifyToken } from "../middlewares/check-auth.js";
+import { getTrails, getTrail } from "../controllers/trails.controller.js";
 
-const router = express.Router()
+const router = Router();
 
-// Obtiene todos los senderos
-router.get("/trails", async (req, res) => {
-  const lang = req.query.lang || "es"
-  const Trail = getTrailModel(lang)
+router.get("/trails", verifyToken, getTrails);
+router.get("/trails/:id", verifyToken, getTrail);
 
-  try {
-    const trails = await Trail.find()
-    res.json(trails)
-  } catch (error) {
-    res.status(500).json({ message: error.message })
-  }
-})
-
-// Obtiene un sendero por su id
-router.get("/trail/:trailId", async (req, res) => {
-  const lang = req.query.lang || "es"
-  const Trail = getTrailModel(lang)
-
-  try {
-    const trail = await Trail.findById(req.params.trailId)
-    if (!trail) return res.status(404).json({ message: "Trail not found" })
-    res.json(trail)
-  } catch (err) {
-    res.status(500).json({ message: err.message })
-  }
-})
-
-export default router
+export default router;

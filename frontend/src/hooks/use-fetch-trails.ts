@@ -1,6 +1,6 @@
 // use-fetch-trails.ts
 import { useEffect, useState } from "react"
-import { getAllTrails } from "@/services/trails-service"
+import { getTrails } from "@/services/trails-service"
 
 import { useLanguage } from "./use-language"
 
@@ -39,7 +39,7 @@ export const useFetchTrails = () => {
     const fetchTrails = async () => {
       try {
         setLoading(true)
-        const fetchedTrails = await getAllTrails()
+        const fetchedTrails = await getTrails()
         setTrails(fetchedTrails)
         setError(null)
       } catch (err: unknown) {

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { getAllInfoCards } from "@/services/info-cards-service"
+import { getInfoCards } from "@/services/info-cards-service"
 
 import { useLanguage } from "./use-language"
 
@@ -26,7 +26,7 @@ export function useFetchInfoCards() {
     async function fetchInfoCards() {
       try {
         setLoading(true)
-        const fetchedInfoCards = await getAllInfoCards()
+        const fetchedInfoCards = await getInfoCards()
         setInfoCards(fetchedInfoCards)
         setError(null)
       } catch (err: unknown) {
