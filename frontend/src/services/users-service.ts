@@ -41,3 +41,7 @@ export async function createUser(user: User): Promise<any> {
     throw error;
   }
 }
+
+//TODO export async function getUser(userId: string): Promise<any> {
+
+//TODO export async function updateUser(user: User): Promise<any> {

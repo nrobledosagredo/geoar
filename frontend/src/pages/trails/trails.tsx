@@ -111,10 +111,12 @@ export function Trails() {
 
   return (
     <div className="flex flex-col">
-      <div className="sticky top-0 backdrop-blur-3xl z-20">
+      <div className="sticky top-0 backdrop-blur-3xl z-50">
         <MainNav />
-        <div className="absolute top-3 pl-32 pr-16 w-full sm:w-[350px] sm:px-0 sm:right-16">
-          <SearchBar onSearch={setSearchTerm} />
+        <div className="pointer-events-none absolute top-3 w-full pl-32 pr-16  sm:w-[350px] sm:px-0 sm:right-16">
+          <div className="pointer-events-auto">
+            <SearchBar onSearch={setSearchTerm} />
+          </div>
         </div>
       </div>
 
