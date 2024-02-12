@@ -10,12 +10,14 @@ import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
 import { z } from "zod"
 import { makeZodI18nMap } from "zod-i18n-map"
+import { useCreateUser } from "@/hooks/use-create-user"
 
 import { auth } from "@/lib/firebase"
 import { getErrorMessage } from "@/lib/get-error-message"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
+import { useToast } from "@/components/ui/use-toast"
 import {
   Form,
   FormControl,
@@ -31,7 +33,6 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
-import { useToast } from "@/components/ui/use-toast"
 
 export function RegisterForm({
   isLoading,
@@ -41,6 +42,7 @@ export function RegisterForm({
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
 }) {
   const { t, i18n } = useTranslation()
+  const { handleCreateUser } = useCreateUser()
   const { toast } = useToast()
   const navigate = useNavigate()
 
@@ -53,8 +55,8 @@ export function RegisterForm({
     es: es,
   }
 
-  // Obtener el locale de date-fns basado en el idioma actual de i18next
-  const currentLocale = locales[i18n.language] || locales.en // 'en' como fallback
+  // Obtiene el locale de date-fns basado en el idioma actual de i18next
+  const currentLocale = locales[i18n.language] || locales.es
 
   // Hook de react-hook-form para manejar formularios en React
   const form = useForm<z.infer<typeof registerSchema>>({
@@ -69,7 +71,17 @@ export function RegisterForm({
   function onSubmit(data: z.infer<typeof registerSchema>) {
     setIsLoading(true)
     createUserWithEmailAndPassword(auth, data.email, data.password)
-      .then(() => {
+      .then((result) => {
+        handleCreateUser({
+          userId: result.user.uid,
+          dob: data.dob,
+          language: i18n.language,
+        }).then(() => {
+          navigate("/")
+          toast({
+            description: t("register_toast"),
+          })
+        })
         navigate("/")
         toast({
           description: t("register_toast"),

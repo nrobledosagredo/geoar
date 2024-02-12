@@ -18,7 +18,7 @@ export async function createUser(user: User): Promise<any> {
     const auth = getAuth();
     const currentUser = auth.currentUser;
     if (!currentUser) {
-      throw new Error("Usuario no autenticado");
+      throw new Error("User not authenticated");
     }
     const token = await currentUser.getIdToken();
 
@@ -37,7 +37,7 @@ export async function createUser(user: User): Promise<any> {
 
     return response.json();
   } catch (error) {
-    console.error("Error al crear el usuario:", error);
+    console.error("Error creating user:", error);
     throw error;
   }
 }

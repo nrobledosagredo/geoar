@@ -27,7 +27,7 @@
   "register_password_placeholder": "Debe tener al menos 6 caracteres",
   "register_dob_label": "Fecha de nacimiento",
   "register_dob_placeholder": "Selecciona una fecha",
-  "register_dob_description": "Tu fecha de nacimiento es utilzada para calcular tu edad.",
+  "register_dob_description": "Tu fecha de nacimiento es utilizada para calcular tu edad.",
   "register_button": "Registrarse",
 
   "guest": "Invitado",
@@ -56,7 +56,7 @@
   "account_dob_placeholder": "Selecciona una fecha",
   "account_dob_description": "Tu fecha de nacimiento se utiliza para calcular tu edad.",
   "account_language_label": "Idioma",
-  "account_language_description": "Este es el idioma que se utilizará en la aplicación.",
+  "account_language_description": "Este es el idioma que se utiliza en la aplicación.",
   "account_language_en": "Inglés",
   "account_language_es": "Español",
   "account_button": "Actualizar cuenta",

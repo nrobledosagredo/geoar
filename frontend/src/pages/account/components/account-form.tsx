@@ -37,9 +37,8 @@ import { toast } from "@/components/ui/use-toast"
 
 type AccountFormValues = z.infer<typeof accountSchema>
 
-// This can come from your database or API.
 const defaultValues: Partial<AccountFormValues> = {
-  // name: "Your name",
+  // name: "name",
   // dob: new Date("2023-01-23"),
 }
 
@@ -127,7 +126,7 @@ export function AccountForm() {
                   />
                 </PopoverContent>
               </Popover>
-              <FormDescription>{t("register_dob_description")}</FormDescription>
+              <FormDescription>{t("account_dob_description")}</FormDescription>
               <FormMessage />
             </FormItem>
           )}
