@@ -1,14 +1,12 @@
 // trails.tsx
 import { useEffect, useState } from "react"
-import Autoplay from "embla-carousel-autoplay"
-import { Clock, Footprints, SearchX } from "lucide-react"
+import { SearchX } from "lucide-react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
 
-import { useFetchInfoCards } from "@/hooks/use-fetch-info-cards"
-import { useFetchTrails } from "@/hooks/use-fetch-trails"
+import { useFetchInfoCards } from "@/hooks/use-get-infocards"
+import { useFetchTrails } from "@/hooks/use-get-trails"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { AspectRatio } from "@/components/ui/aspect-ratio"
 import {
   Card,
   CardContent,
@@ -17,13 +15,6 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel"
-import {
   Pagination,
   PaginationContent,
   PaginationItem,
@@ -31,17 +22,13 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination"
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip"
 import { useToast } from "@/components/ui/use-toast"
-import { DifficultyStars } from "@/components/difficulty-stars"
 import { MainNav } from "@/components/main-nav"
 import { SearchBar } from "@/components/search-bar"
 import { SkeletonCard } from "@/components/skeleton-card"
+import { TrailCarousel } from "@/components/trail-carousel"
+import { TrailDetails } from "@/components/trail-details"
+import { TrailDrawer } from "@/components/trail-drawer"
 
 export function Trails() {
   const {
@@ -61,10 +48,9 @@ export function Trails() {
   const [currentPage, setCurrentPage] = useState(1)
   const [cardsPerPage] = useState(3)
 
+  // Mostrar alerta si hay errores
   useEffect(() => {
-    // Verificar si hay algún error
     if (errorTrails || errorInfoCards) {
-      // Mostrar el toast de error
       toast({
         title: "Error",
         description: t("trails_toast_description"),
@@ -93,32 +79,31 @@ export function Trails() {
             trail.duration.unit.toLowerCase().includes(searchTerm.toLowerCase())
         )
 
-  // Combinar trails con las imágenes de sus infoCards correspondientes
-  const trailsWithImages = filteredTrails.map((trail) => ({
+  // Combinar trails con sus infoCards correspondientes
+  const trailsWithInfoCards = filteredTrails.map((trail) => ({
     ...trail,
-    images: trail.infoCards.flatMap(
-      (infoCard) =>
-        infoCards
-          .find((ic) => ic._id === infoCard._id)
-          ?.images.map((image) => `/info-cards/${image}`) || []
+    infoCards: trail.infoCards.flatMap(
+      (infoCardId) => infoCards.find((ic) => ic._id === infoCardId._id) || []
     ),
   }))
+  const lastCardIndex = currentPage * cardsPerPage
+  const firstCardIndex = lastCardIndex - cardsPerPage
+  const currentCards = trailsWithInfoCards.slice(firstCardIndex, lastCardIndex)
+  const totalPages = Math.ceil(trailsWithInfoCards.length / cardsPerPage)
 
-  const indexOfLastCard = currentPage * cardsPerPage
-  const indexOfFirstCard = indexOfLastCard - cardsPerPage
-  const currentCards = trailsWithImages.slice(indexOfFirstCard, indexOfLastCard)
-  const totalPages = Math.ceil(trailsWithImages.length / cardsPerPage)
+  // Reinicia la página actual a 1 cuando cambie el término de búsqueda
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [searchTerm])
 
   return (
     <div className="flex flex-col">
-      <div className="sticky top-0 backdrop-blur-3xl z-50">
         <MainNav />
         <div className="pointer-events-none absolute top-3 w-full pl-32 pr-16  sm:w-[350px] sm:px-0 sm:right-16">
           <div className="pointer-events-auto">
             <SearchBar onSearch={setSearchTerm} />
           </div>
         </div>
-      </div>
 
       {/* Título */}
       <div className="mx-auto flex max-w-[980px] flex-col items-center gap-2 py-8">
@@ -168,97 +153,19 @@ export function Trails() {
             currentCards.map((trail) => (
               <Card key={trail._id} className="w-full md:w-[740px] mb-4">
                 {/* Header de la tarjeta */}
-                <CardHeader
-                  className="cursor-pointer"
-                  onClick={() => navigate(`/trails/${trail._id}`)}
-                >
+                <CardHeader>
                   <CardTitle className="text-center">{trail.name}</CardTitle>
                 </CardHeader>
 
                 {/* Contenido de la tarjeta */}
                 <CardContent>
-                  {trail.images && trail.images.length > 0 ? (
-                    <Carousel
-                      opts={{
-                        align: "start",
-                      }}
-                      plugins={[
-                        Autoplay({
-                          delay: 5000,
-                        }),
-                      ]}
-                    >
-                      <CarouselContent>
-                        {trail.images.map((image, index) => (
-                          <CarouselItem
-                            key={index}
-                            className="flex justify-center"
-                          >
-                            <AspectRatio ratio={20 / 9}>
-                              <img
-                                src={image}
-                                alt={`Trail image ${index + 1}`}
-                                className="border rounded-lg object-cover w-full h-full"
-                              />
-                            </AspectRatio>
-                          </CarouselItem>
-                        ))}
-                      </CarouselContent>
-                      <CarouselPrevious />
-                      <CarouselNext />
-                    </Carousel>
-                  ) : (
-                    <div>No images available</div>
-                  )}
+                  <TrailCarousel trail={trail} />
                 </CardContent>
 
                 {/* Footer de la tarjeta */}
-                <CardFooter
-                  className="flex justify-between text-center cursor-pointer"
-                  onClick={() => navigate(`/trails/${trail._id}`)}
-                >
-                  {/* Dificultad */}
-                  <div className="basis-1/3 flex flex-col items-center justify-center">
-                    <TooltipProvider>
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <div>
-                            <DifficultyStars difficulty={trail.difficulty} />
-                          </div>
-                        </TooltipTrigger>
-                        <TooltipContent>
-                          {t("difficulty_tooltip")}
-                        </TooltipContent>
-                      </Tooltip>
-                    </TooltipProvider>
-                    <div className="mt-1">{trail.difficulty}</div>
-                  </div>
-
-                  {/* Distancia */}
-                  <div className="basis-1/3 flex flex-col items-center justify-center">
-                    <TooltipProvider>
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <Footprints className="h-6" />
-                        </TooltipTrigger>
-                        <TooltipContent>{t("distance_tooltip")}</TooltipContent>
-                      </Tooltip>
-                    </TooltipProvider>
-                    {trail.distance.value} {trail.distance.unit}
-                  </div>
-
-                  {/* Duración */}
-                  <div className="basis-1/3 flex flex-col items-center justify-center">
-                    <TooltipProvider>
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <Clock className="h-6" />
-                        </TooltipTrigger>
-                        <TooltipContent>{t("duration_tooltip")}</TooltipContent>
-                      </Tooltip>
-                    </TooltipProvider>
-                    {trail.duration.value} {trail.duration.unit}
-                  </div>
+                <CardFooter className="flex flex-col">
+                  <TrailDetails trail={trail} />
+                  <TrailDrawer trail={trail} />
                 </CardFooter>
               </Card>
             ))}

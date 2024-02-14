@@ -1,46 +1,53 @@
-import { zodResolver } from "@hookform/resolvers/zod"
+import { useState } from "react"
 import { Search } from "lucide-react"
-import { useForm } from "react-hook-form"
 import { useTranslation } from "react-i18next"
-import { z } from "zod"
 
+import { useMediaQuery } from "@/hooks/use-media-query"
 import { Button } from "@/components/ui/button"
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
 import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogTrigger,
-} from "@/components/ui/dialog"
-import { Form, FormControl, FormDescription } from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-
-// Esquema de validación con Zod para el término de búsqueda
-const SearchSchema = z.object({
-  searchTerm: z.string().min(0),
-})
+  Drawer,
+  DrawerContent,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTrigger,
+} from "@/components/ui/drawer"
+import { SearchForm } from "@/components/search-form"
 
 // Props del componente SearchBar
-type SearchBarProps = {
+type SearchProps = {
   onSearch: (searchTerm: string) => void
 }
-export function SearchBar({ onSearch }: SearchBarProps) {
+export function SearchBar({ onSearch }: SearchProps) {
   const { t } = useTranslation()
-  const form = useForm<z.infer<typeof SearchSchema>>({
-    resolver: zodResolver(SearchSchema),
-    defaultValues: {
-      searchTerm: "",
-    },
-  })
+  const [open, setOpen] = useState(false)
+  const isDesktop = useMediaQuery("(min-width: 768px)")
 
-  // Función para manejar el envío del formulario
-  const onSubmit = (data: z.infer<typeof SearchSchema>) => {
-    onSearch(data.searchTerm)
+  if (isDesktop) {
+    return (
+      <Dialog>
+        {/* Botón para abrir el diálogo de búsqueda */}
+        <DialogTrigger asChild>
+          <Button
+            variant="outline"
+            className="w-full justify-start text-muted-foreground"
+          >
+            <Search className="h-4 -ml-2 mr-2" />
+            {t("search_bar_placeholder")}
+          </Button>
+        </DialogTrigger>
+
+        {/* Contenido del diálogo de búsqueda */}
+        <DialogContent className="rounded-lg">
+          <SearchForm onSearch={onSearch} />
+        </DialogContent>
+      </Dialog>
+    )
   }
 
   return (
-    <Dialog>
-      {/* Botón para abrir el diálogo de búsqueda */}
-      <DialogTrigger asChild>
+    <Drawer open={open} onOpenChange={setOpen}>
+      <DrawerTrigger asChild>
         <Button
           variant="outline"
           className="w-full justify-start text-muted-foreground"
@@ -48,33 +55,12 @@ export function SearchBar({ onSearch }: SearchBarProps) {
           <Search className="h-4 -ml-2 mr-2" />
           {t("search_bar_placeholder")}
         </Button>
-      </DialogTrigger>
-
-      {/* Contenido del diálogo de búsqueda */}
-      <DialogContent className="rounded-lg">
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-            <div className="flex items-center">
-              {/* Campo de búsqueda */}
-              <FormControl className="flex-grow">
-                <Input
-                  placeholder={t("search_bar_placeholder")}
-                  {...form.register("searchTerm")}
-                />
-              </FormControl>
-
-              {/* Botón para cerrar el diálogo */}
-              <DialogClose asChild>
-                <Button size="icon" type="submit" className="-ml-[38px] mr-4">
-                  <Search className="h-5" />
-                  <span className="sr-only">{t("search_bar_label")}</span>
-                </Button>
-              </DialogClose>
-            </div>
-            <FormDescription>{t("search_bar_description")}</FormDescription>
-          </form>
-        </Form>
-      </DialogContent>
-    </Dialog>
+      </DrawerTrigger>
+      <DrawerContent>
+        <DrawerHeader className="pt-2"></DrawerHeader>
+        <SearchForm onSearch={onSearch} />
+        <DrawerFooter className="pt-2"></DrawerFooter>
+      </DrawerContent>
+    </Drawer>
   )
 }

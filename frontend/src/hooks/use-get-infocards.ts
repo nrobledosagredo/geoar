@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { getInfoCards } from "@/services/info-cards-service"
+import { getInfoCards } from "@/services/infocards-service"
 
 import { useLanguage } from "./use-language"
 
