@@ -23,13 +23,13 @@ export function TrailCarousel({ trail }: { trail: any }) {
         ]}
       >
         <CarouselContent>
-          {trail.infoCards.flatMap((infoCard: { images: any[]; }) =>
-            infoCard.images.map((image, index) => (
-              <CarouselItem key={index} className="flex justify-center">
+        {trail.infoCards.flatMap((infoCard: { images: any[]; }, infoCardIndex: number) =>
+            infoCard.images.map((image, imageIndex) => (
+              <CarouselItem key={`${infoCardIndex}-${imageIndex}`} className="flex justify-center">
                 <AspectRatio ratio={20 / 9}>
                   <img
                     src={`/infocards/${image}`}
-                    alt={`InfoCard image ${index + 1}`}
+                    alt={`InfoCard image ${imageIndex + 1}`}
                     className="border rounded-lg object-cover w-full h-full"
                   />
                 </AspectRatio>

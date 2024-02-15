@@ -14,14 +14,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import {
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from "@/components/ui/pagination"
 import { useToast } from "@/components/ui/use-toast"
 import { MainNav } from "@/components/main-nav"
 import { SearchBar } from "@/components/search-bar"
@@ -29,6 +21,7 @@ import { SkeletonCard } from "@/components/skeleton-card"
 import { TrailCarousel } from "@/components/trail-carousel"
 import { TrailDetails } from "@/components/trail-details"
 import { TrailDrawer } from "@/components/trail-drawer"
+import { TrailPagination } from "@/components/trail-pagination"
 
 export function Trails() {
   const {
@@ -56,7 +49,7 @@ export function Trails() {
         description: t("trails_toast_description"),
         variant: "destructive",
       })
-      navigate("/")
+      //navigate("/")
     }
   }, [errorTrails, errorInfoCards, navigate, toast])
 
@@ -98,15 +91,17 @@ export function Trails() {
 
   return (
     <div className="flex flex-col">
+      <div className="fixed top-0 z-50 w-full">
         <MainNav />
-        <div className="pointer-events-none absolute top-3 w-full pl-32 pr-16  sm:w-[350px] sm:px-0 sm:right-16">
-          <div className="pointer-events-auto">
+        <div className="pointer-events-none absolute top-3 w-full pl-32 pr-16  md:w-[350px] md:px-0 md:right-16">
+          <div className="w-full pointer-events-auto">
             <SearchBar onSearch={setSearchTerm} />
           </div>
         </div>
+      </div>
 
       {/* Título */}
-      <div className="mx-auto flex max-w-[980px] flex-col items-center gap-2 py-8">
+      <div className="mt-16 mx-auto flex max-w-[980px] flex-col items-center gap-2 py-8">
         <h1 className="text-center text-4xl font-bold leading-tight tracking-tighter sm:text-5xl md:text-6xl">
           {t("trails_title")}
         </h1>
@@ -154,17 +149,24 @@ export function Trails() {
               <Card key={trail._id} className="w-full md:w-[740px] mb-4">
                 {/* Header de la tarjeta */}
                 <CardHeader>
+
+                  {/* Título del sendero */}
                   <CardTitle className="text-center">{trail.name}</CardTitle>
                 </CardHeader>
 
                 {/* Contenido de la tarjeta */}
                 <CardContent>
+                  {/* Carrusel de senderos */}
                   <TrailCarousel trail={trail} />
                 </CardContent>
 
                 {/* Footer de la tarjeta */}
                 <CardFooter className="flex flex-col">
+
+                  {/* Detalles del sendero */}
                   <TrailDetails trail={trail} />
+
+                  {/* Cajón de sendero */}
                   <TrailDrawer trail={trail} />
                 </CardFooter>
               </Card>
@@ -172,42 +174,11 @@ export function Trails() {
       </div>
 
       {/* Paginación */}
-      <Pagination className="mb-4">
-        <PaginationContent>
-          {/* Botón de página anterior */}
-          <PaginationItem>
-            <PaginationPrevious
-              href="#"
-              onClick={() =>
-                currentPage !== 1 && setCurrentPage(currentPage - 1)
-              }
-            />
-          </PaginationItem>
-
-          {/* Páginas */}
-          {[...Array(totalPages)].map((_, i) => (
-            <PaginationItem key={i}>
-              <PaginationLink
-                href="#"
-                onClick={() => setCurrentPage(i + 1)}
-                isActive={currentPage === i + 1}
-              >
-                {i + 1}
-              </PaginationLink>
-            </PaginationItem>
-          ))}
-
-          {/* Botón de página siguiente */}
-          <PaginationItem>
-            <PaginationNext
-              href="#"
-              onClick={() =>
-                currentPage !== totalPages && setCurrentPage(currentPage + 1)
-              }
-            />
-          </PaginationItem>
-        </PaginationContent>
-      </Pagination>
+      <TrailPagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        setCurrentPage={setCurrentPage}
+      />
     </div>
   )
 }

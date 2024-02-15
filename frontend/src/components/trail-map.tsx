@@ -22,8 +22,8 @@ export function TrailMap() {
       <MapContainer
         center={[DEFAULT_LAT, DEFAULT_LNG]}
         zoom={17}
-        scrollWheelZoom={true}
-        zoomControl={true}
+        scrollWheelZoom={false}
+        zoomControl={false}
         className="w-full h-full rounded-lg border"
       >
         {/* Capa de OpenStreetMap */}

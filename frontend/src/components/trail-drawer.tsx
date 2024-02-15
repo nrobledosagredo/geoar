@@ -20,26 +20,31 @@ export function TrailDrawer({ trail }: { trail: any }) {
       <DrawerTrigger className="w-full mt-4">
         <Button className="w-full font-semibold">Ver más detalles</Button>
       </DrawerTrigger>
-      <DrawerContent className="px-4">
+      <DrawerContent className="h-full px-4">
+        <DrawerHeader>
+          <DrawerTitle>{trail.name}</DrawerTitle>
+        </DrawerHeader>
+
         <ScrollArea>
-          <DrawerHeader>
+          <div className="space-y-6">
             <TrailMap />
             <TrailDetails trail={trail} />
-            <DrawerTitle>{trail.name}</DrawerTitle>
-            <DrawerDescription>{trail.description}</DrawerDescription>
-          </DrawerHeader>
-
-          {/* Botones de acción */}
-          <DrawerFooter className="flex flex-row justify-center">
-            <DrawerClose>
-              <Button variant="destructive" className="w-24">
-                Cerrar
-              </Button>
-            </DrawerClose>
-            
-            <Button className="w-24 font-semibold">Comenzar</Button>
-          </DrawerFooter>
+            <DrawerDescription className="text-justify">
+              {trail.description}
+            </DrawerDescription>
+          </div>
         </ScrollArea>
+
+        {/* Botones de acción */}
+        <DrawerFooter className="flex flex-row justify-center">
+          <DrawerClose>
+            <Button variant="destructive" className="w-24">
+              Cerrar
+            </Button>
+          </DrawerClose>
+
+          <Button className="w-24 font-semibold">Comenzar</Button>
+        </DrawerFooter>
       </DrawerContent>
     </Drawer>
   )
