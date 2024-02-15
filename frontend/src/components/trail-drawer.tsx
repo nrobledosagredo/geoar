@@ -20,13 +20,13 @@ export function TrailDrawer({ trail }: { trail: any }) {
       <DrawerTrigger className="w-full mt-4">
         <Button className="w-full font-semibold">Ver más detalles</Button>
       </DrawerTrigger>
-      <DrawerContent className="h-full px-4">
+      <DrawerContent className="h-full">
         <DrawerHeader>
           <DrawerTitle>{trail.name}</DrawerTitle>
         </DrawerHeader>
 
         <ScrollArea>
-          <div className="space-y-6">
+          <div className="space-y-6 mx-4">
             <TrailMap />
             <TrailDetails trail={trail} />
             <DrawerDescription className="text-justify">
