@@ -25,12 +25,12 @@ export function TrailDrawer({ trail }: { trail: TrailWithInfoCards }) {
         <Button className="w-full font-semibold">Ver más detalles</Button>
       </DrawerTrigger>
       <DrawerContent className="h-auto max-h-screen overflow-hidden">
-        <DrawerHeader>
+        <DrawerHeader className="justify-center">
           <DrawerTitle>{trail.name}</DrawerTitle>
         </DrawerHeader>
 
         <ScrollArea className="max-h-[calc(100vh-10rem)] overflow-auto">
-          <div className="space-y-4 mx-4">
+          <div className="space-y-6 mx-4">
             <TrailMap trail={trail} />
             <TrailDetails trail={trail} />
             <DrawerDescription className="text-justify">
@@ -38,6 +38,23 @@ export function TrailDrawer({ trail }: { trail: TrailWithInfoCards }) {
             </DrawerDescription>
           </div>
         </ScrollArea>
+
+        {/*}
+        <ScrollArea className="max-h-[calc(100vh-10rem)] overflow-auto">
+          <div className="mx-4 lg:flex lg:space-y-0 lg:space-x-4">
+            <div className="lg:flex-shrink-0 lg:w-1/2 mb-4 lg:mb-0">
+              <TrailMap trail={trail} />
+            </div>
+            <div className="lg:w-1/2">
+              <TrailDetails trail={trail} />
+              <DrawerDescription className="text-justify mt-4">
+                {trail.description}
+              </DrawerDescription>
+            </div>
+          </div>
+        </ScrollArea>
+        */}
+
 
         {/* Botones de acción */}
         <DrawerFooter className="flex flex-row justify-center">
