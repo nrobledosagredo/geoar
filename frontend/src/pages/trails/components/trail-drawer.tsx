@@ -1,4 +1,9 @@
 // trail-drawer.tsx
+import { TrailDetails } from "@/pages/trails/components/trail-details"
+import { TrailMap } from "@/pages/trails/components/trail-map"
+import { useNavigate } from "react-router-dom"
+
+import { TrailWithInfoCards } from "@/types/trail-with-infocards"
 import { Button } from "@/components/ui/button"
 import {
   Drawer,
@@ -11,23 +16,22 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer"
 import { ScrollArea } from "@/components/ui/scroll-area"
-import { TrailDetails } from "@/components/trail-details"
-import { TrailMap } from "@/components/trail-map"
 
-export function TrailDrawer({ trail }: { trail: any }) {
+export function TrailDrawer({ trail }: { trail: TrailWithInfoCards }) {
+  const navigate = useNavigate()
   return (
     <Drawer>
-      <DrawerTrigger className="w-full mt-4">
+      <DrawerTrigger asChild className="w-full">
         <Button className="w-full font-semibold">Ver más detalles</Button>
       </DrawerTrigger>
-      <DrawerContent className="h-full">
+      <DrawerContent className="h-auto max-h-screen overflow-hidden">
         <DrawerHeader>
           <DrawerTitle>{trail.name}</DrawerTitle>
         </DrawerHeader>
 
-        <ScrollArea>
-          <div className="space-y-6 mx-4">
-            <TrailMap />
+        <ScrollArea className="max-h-[calc(100vh-10rem)] overflow-auto">
+          <div className="space-y-4 mx-4">
+            <TrailMap trail={trail} />
             <TrailDetails trail={trail} />
             <DrawerDescription className="text-justify">
               {trail.description}
@@ -37,13 +41,18 @@ export function TrailDrawer({ trail }: { trail: any }) {
 
         {/* Botones de acción */}
         <DrawerFooter className="flex flex-row justify-center">
-          <DrawerClose>
+          <DrawerClose asChild>
             <Button variant="destructive" className="w-24">
               Cerrar
             </Button>
           </DrawerClose>
 
-          <Button className="w-24 font-semibold">Comenzar</Button>
+          <Button
+            onClick={() => navigate(`/trails/${trail._id}`)}
+            className="w-24 font-semibold"
+          >
+            Comenzar
+          </Button>
         </DrawerFooter>
       </DrawerContent>
     </Drawer>

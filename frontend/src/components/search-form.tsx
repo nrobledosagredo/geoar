@@ -34,7 +34,10 @@ export function SearchForm({ onSearch }: SearchProps) {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 ml-4 md:ml-0">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="space-y-4 ml-4 md:ml-0"
+      >
         <div className="flex items-center">
           {/* Campo de búsqueda */}
           <FormControl className="flex-grow">

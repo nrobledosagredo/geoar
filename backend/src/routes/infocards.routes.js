@@ -1,11 +1,14 @@
 // infocards.routes.js
-import { Router } from "express";
-import { verifyToken } from "../middlewares/check-auth.js";
-import { getInfoCards, getInfoCard } from "../controllers/infocards.controller.js";
+import { Router } from "express"
+import {
+  getInfoCard,
+  getInfoCards,
+} from "../controllers/infocards.controller.js"
+import { verifyToken } from "../middlewares/check-auth.js"
 
-const router = Router();
+const router = Router()
 
-router.get("/infocards", verifyToken, getInfoCards);
-router.get("/infocards/:id", verifyToken, getInfoCard);
+router.get("/infocards", verifyToken, getInfoCards)
+router.get("/infocards/:id", verifyToken, getInfoCard)
 
-export default router;
+export default router

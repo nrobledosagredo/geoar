@@ -1,4 +1,5 @@
 import mongoose from "mongoose"
+
 const { Schema } = mongoose
 
 const pointSchema = new Schema({
@@ -23,6 +24,6 @@ const pointSchema = new Schema({
   },
 })
 
-const Point = mongoose.model("Point", pointSchema, "points");
+const Point = mongoose.model("Point", pointSchema, "points")
 
-export default Point;
+export default Point

@@ -1,20 +1,21 @@
+import { TrailDifficulty } from "@/pages/trails/components/trail-difficulty"
 import { Clock, Footprints } from "lucide-react"
 import { useTranslation } from "react-i18next"
 
+import { TrailWithInfoCards } from "@/types/trail-with-infocards"
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
-import { TrailDifficulty } from "@/components/trail-difficulty"
 
-export function TrailDetails({ trail }: { trail: any }) {
+export function TrailDetails({ trail }: { trail: TrailWithInfoCards }) {
   const { t } = useTranslation()
   return (
     <div className="w-full flex justify-between text-center">
       {/* Dificultad */}
-      <div className="basis-1/3 flex flex-col items-center justify-center">
+      <div className="basis-1/3 flex flex-col items-center justify-center text-sm text-muted-foreground">
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
@@ -29,7 +30,7 @@ export function TrailDetails({ trail }: { trail: any }) {
       </div>
 
       {/* Distancia */}
-      <div className="basis-1/3 flex flex-col items-center justify-center">
+      <div className="basis-1/3 flex flex-col items-center justify-center text-sm text-muted-foreground">
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
@@ -42,7 +43,7 @@ export function TrailDetails({ trail }: { trail: any }) {
       </div>
 
       {/* Duración */}
-      <div className="basis-1/3 flex flex-col items-center justify-center">
+      <div className="basis-1/3 flex flex-col items-center justify-center text-sm text-muted-foreground">
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>

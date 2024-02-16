@@ -10,14 +10,13 @@ import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
 import { z } from "zod"
 import { makeZodI18nMap } from "zod-i18n-map"
-import { useCreateUser } from "@/hooks/use-create-user"
 
 import { auth } from "@/lib/firebase"
 import { getErrorMessage } from "@/lib/get-error-message"
 import { cn } from "@/lib/utils"
+import { useCreateUser } from "@/hooks/use-create-user"
 import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
-import { useToast } from "@/components/ui/use-toast"
 import {
   Form,
   FormControl,
@@ -33,6 +32,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
+import { useToast } from "@/components/ui/use-toast"
 
 export function RegisterForm({
   isLoading,

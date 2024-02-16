@@ -6,6 +6,7 @@ import { Login } from "@/pages/auth/login/login"
 import { Register } from "@/pages/auth/register/register"
 import { Home } from "@/pages/home/home"
 import { NotFound } from "@/pages/not-found/not-found"
+import { Scene } from "@/pages/scene/scene"
 import { Settings } from "@/pages/settings/settings"
 import { Trails } from "@/pages/trails/trails"
 import {
@@ -80,6 +81,11 @@ function App() {
             <Route
               path="/trails"
               element={currentUser ? <Trails /> : <Navigate to="/auth/login" />}
+            />
+
+            <Route
+              path="/trails/:id"
+              element={currentUser ? <Scene /> : <Navigate to="/auth/login" />}
             />
 
             <Route path="*" element={<NotFound />} />

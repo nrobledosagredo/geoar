@@ -1,46 +1,23 @@
-// use-fetch-trails.ts
+// use-get-trails.ts
 import { useEffect, useState } from "react"
 import { getTrails } from "@/services/trails-service"
 
+import { Trail } from "@/types/trail"
+
 import { useLanguage } from "./use-language"
 
-interface Distance {
-  value: number
-  unit: string
-}
-
-interface Duration {
-  value: number
-  unit: string
-}
-
-interface InfoCard {
-  _id: string
-  order: number
-}
-
-interface Trail {
-  distance: Distance
-  duration: Duration
-  _id: string
-  name: string
-  description: string
-  difficulty: string
-  infoCards: InfoCard[]
-}
-
-export const useFetchTrails = () => {
+export const useGetTrails = () => {
   const [trails, setTrails] = useState<Trail[]>([])
   const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<string | null>(null)
   const { language } = useLanguage()
 
   useEffect(() => {
-    const fetchTrails = async () => {
+    const handleGetTrails = async () => {
       try {
         setLoading(true)
-        const fetchedTrails = await getTrails()
-        setTrails(fetchedTrails)
+        const trails = await getTrails()
+        setTrails(trails)
         setError(null)
       } catch (err: unknown) {
         const message =
@@ -51,7 +28,7 @@ export const useFetchTrails = () => {
       }
     }
 
-    fetchTrails()
+    handleGetTrails()
   }, [language])
 
   return { trails, loading, error }

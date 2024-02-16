@@ -1,26 +1,20 @@
 // users-service.ts
-import { getAuth } from "firebase/auth";
+import { getAuth } from "firebase/auth"
 
-const BACKEND_HOST = import.meta.env.VITE_BACKEND_HOST;
-const BACKEND_PORT = import.meta.env.VITE_BACKEND_PORT;
-const BACKEND_URL = `${BACKEND_HOST}:${BACKEND_PORT}/api`;
+import { User } from "@/types/user"
 
-interface User {
-  userId: string;
-  dob?: Date;
-  ageRange?: string;
-  disabilities?: string[];
-  language: string;
-}
+const BACKEND_HOST = import.meta.env.VITE_BACKEND_HOST
+const BACKEND_PORT = import.meta.env.VITE_BACKEND_PORT
+const BACKEND_URL = `${BACKEND_HOST}:${BACKEND_PORT}/api`
 
 export async function createUser(user: User): Promise<any> {
   try {
-    const auth = getAuth();
-    const currentUser = auth.currentUser;
+    const auth = getAuth()
+    const currentUser = auth.currentUser
     if (!currentUser) {
-      throw new Error("User not authenticated");
+      throw new Error("User not authenticated")
     }
-    const token = await currentUser.getIdToken();
+    const token = await currentUser.getIdToken()
 
     const response = await fetch(`${BACKEND_URL}/users`, {
       method: "POST",
@@ -29,16 +23,16 @@ export async function createUser(user: User): Promise<any> {
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(user),
-    });
+    })
 
     if (!response.ok) {
-      throw new Error("Network response was not ok");
+      throw new Error("Network response was not ok")
     }
 
-    return response.json();
+    return response.json()
   } catch (error) {
-    console.error("Error creating user:", error);
-    throw error;
+    console.error("Error creating user:", error)
+    throw error
   }
 }
 

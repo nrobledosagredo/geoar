@@ -1,11 +1,14 @@
 // treecards.routes.js
-import { Router } from "express";
-import { verifyToken } from "../middlewares/check-auth.js";
-import { getTreeCards, getTreeCard } from "../controllers/treecards.controller.js";
+import { Router } from "express"
+import {
+  getTreeCard,
+  getTreeCards,
+} from "../controllers/treecards.controller.js"
+import { verifyToken } from "../middlewares/check-auth.js"
 
-const router = Router();
+const router = Router()
 
-router.get("/treecards", verifyToken, getTreeCards);
-router.get("/treecards/:id", verifyToken, getTreeCard);
+router.get("/treecards", verifyToken, getTreeCards)
+router.get("/treecards/:id", verifyToken, getTreeCard)
 
-export default router;
+export default router

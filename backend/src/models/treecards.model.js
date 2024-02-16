@@ -1,4 +1,5 @@
 import mongoose from "mongoose"
+
 const { Schema } = mongoose
 
 const treeCardSchema = new Schema({
@@ -47,6 +48,6 @@ const treeCardSchema = new Schema({
   },
 })
 
-const TreeCard = mongoose.model("TreeCard", treeCardSchema, "treeCards");
+const TreeCard = mongoose.model("TreeCard", treeCardSchema, "treeCards")
 
-export default TreeCard;
+export default TreeCard

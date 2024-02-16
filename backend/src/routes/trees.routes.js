@@ -1,10 +1,10 @@
 // trees.routes.js
-import { Router } from "express";
-import { verifyToken } from "../middlewares/check-auth.js";
-import { getTrees } from "../controllers/trees.controller.js";
+import { Router } from "express"
+import { getTrees } from "../controllers/trees.controller.js"
+import { verifyToken } from "../middlewares/check-auth.js"
 
-const router = Router();
+const router = Router()
 
-router.get("/trees", verifyToken, getTrees);
+router.get("/trees", verifyToken, getTrees)
 
-export default router;
+export default router

@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton"
 
-export function SkeletonCard() {
+export function TrailSkeleton() {
   return (
     <Card className="w-full md:w-[740px] mb-4">
       {/* Header del skeleton */}

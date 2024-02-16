@@ -1,11 +1,15 @@
 // trails.tsx
 import { useEffect, useState } from "react"
+import { TrailCarousel } from "@/pages/trails/components/trail-carousel"
+import { TrailDetails } from "@/pages/trails/components/trail-details"
+import { TrailDrawer } from "@/pages/trails/components/trail-drawer"
+import { TrailPagination } from "@/pages/trails/components/trail-pagination"
+import { TrailSkeleton } from "@/pages/trails/components/trail-skeleton"
 import { SearchX } from "lucide-react"
 import { useTranslation } from "react-i18next"
-import { useNavigate } from "react-router-dom"
 
-import { useFetchInfoCards } from "@/hooks/use-get-infocards"
-import { useFetchTrails } from "@/hooks/use-get-trails"
+import { useGetInfoCards } from "@/hooks/use-get-infocards"
+import { useGetTrails } from "@/hooks/use-get-trails"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import {
   Card,
@@ -17,24 +21,14 @@ import {
 import { useToast } from "@/components/ui/use-toast"
 import { MainNav } from "@/components/main-nav"
 import { SearchBar } from "@/components/search-bar"
-import { SkeletonCard } from "@/components/skeleton-card"
-import { TrailCarousel } from "@/components/trail-carousel"
-import { TrailDetails } from "@/components/trail-details"
-import { TrailDrawer } from "@/components/trail-drawer"
-import { TrailPagination } from "@/components/trail-pagination"
 
 export function Trails() {
-  const {
-    trails,
-    loading: loadingTrails,
-    error: errorTrails,
-  } = useFetchTrails()
+  const { trails, loading: trailsLoading, error: trailsError } = useGetTrails()
   const {
     infoCards,
-    loading: loadingInfoCards,
-    error: errorInfoCards,
-  } = useFetchInfoCards()
-  const navigate = useNavigate()
+    loading: infoCardsLoading,
+    error: infoCardsError,
+  } = useGetInfoCards()
   const { toast } = useToast()
   const { t } = useTranslation()
   const [searchTerm, setSearchTerm] = useState("")
@@ -43,15 +37,14 @@ export function Trails() {
 
   // Mostrar alerta si hay errores
   useEffect(() => {
-    if (errorTrails || errorInfoCards) {
+    if (trailsError || infoCardsError) {
       toast({
         title: "Error",
         description: t("trails_toast_description"),
         variant: "destructive",
       })
-      //navigate("/")
     }
-  }, [errorTrails, errorInfoCards, navigate, toast])
+  }, [trailsError, infoCardsError, toast])
 
   // Filtrar senderos por término de búsqueda
   const filteredTrails =
@@ -79,6 +72,7 @@ export function Trails() {
       (infoCardId) => infoCards.find((ic) => ic._id === infoCardId._id) || []
     ),
   }))
+
   const lastCardIndex = currentPage * cardsPerPage
   const firstCardIndex = lastCardIndex - cardsPerPage
   const currentCards = trailsWithInfoCards.slice(firstCardIndex, lastCardIndex)
@@ -139,34 +133,27 @@ export function Trails() {
 
       {/* Tarjetas de senderos */}
       <div className="flex flex-col items-center mx-4">
-        {loadingTrails || loadingInfoCards
+        {trailsLoading || infoCardsLoading
           ? // Repite SkeletonCard basado en cardsPerPage
             Array.from({ length: cardsPerPage }, (_, index) => (
-              <SkeletonCard key={index} />
+              <TrailSkeleton key={index} />
             ))
           : // Renderiza el contenido real aquí si no está cargando
             currentCards.map((trail) => (
               <Card key={trail._id} className="w-full md:w-[740px] mb-4">
                 {/* Header de la tarjeta */}
                 <CardHeader>
-
-                  {/* Título del sendero */}
                   <CardTitle className="text-center">{trail.name}</CardTitle>
                 </CardHeader>
 
                 {/* Contenido de la tarjeta */}
-                <CardContent>
-                  {/* Carrusel de senderos */}
+                <CardContent className="space-y-6">
                   <TrailCarousel trail={trail} />
+                  <TrailDetails trail={trail} />
                 </CardContent>
 
                 {/* Footer de la tarjeta */}
-                <CardFooter className="flex flex-col">
-
-                  {/* Detalles del sendero */}
-                  <TrailDetails trail={trail} />
-
-                  {/* Cajón de sendero */}
+                <CardFooter>
                   <TrailDrawer trail={trail} />
                 </CardFooter>
               </Card>

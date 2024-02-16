@@ -1,33 +1,23 @@
+// use-get-infocards.ts
 import { useEffect, useState } from "react"
 import { getInfoCards } from "@/services/infocards-service"
 
+import { InfoCard } from "@/types/infocard"
+
 import { useLanguage } from "./use-language"
 
-interface Geometry {
-  type: "Point"
-  coordinates: [number, number]
-}
-
-interface InfoCard {
-  _id: string
-  geometry: Geometry
-  name: string
-  description: string
-  images: string[]
-}
-
-export function useFetchInfoCards() {
+export function useGetInfoCards() {
   const [infoCards, setInfoCards] = useState<InfoCard[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const { language } = useLanguage()
 
   useEffect(() => {
-    async function fetchInfoCards() {
+    async function handleGetInfoCards() {
       try {
         setLoading(true)
-        const fetchedInfoCards = await getInfoCards()
-        setInfoCards(fetchedInfoCards)
+        const infoCards = await getInfoCards()
+        setInfoCards(infoCards)
         setError(null)
       } catch (err: unknown) {
         const message =
@@ -38,7 +28,7 @@ export function useFetchInfoCards() {
       }
     }
 
-    fetchInfoCards()
+    handleGetInfoCards()
   }, [language])
 
   return { infoCards, loading, error }
