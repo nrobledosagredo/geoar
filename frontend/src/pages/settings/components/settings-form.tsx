@@ -2,6 +2,7 @@ import { settingsSchema } from "@/pages/settings/components/settings-schema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { useTranslation } from "react-i18next"
+import { useNavigate } from "react-router-dom"
 import { z } from "zod"
 
 import { Button } from "@/components/ui/button"
@@ -21,6 +22,7 @@ import { useTheme } from "@/components/theme-provider"
 type SettingsFormValues = z.infer<typeof settingsSchema>
 
 export function SettingsForm() {
+  const navigate = useNavigate()
   const { t } = useTranslation()
   const { theme: currentTheme, setTheme } = useTheme()
   const form = useForm<SettingsFormValues>({
@@ -30,6 +32,7 @@ export function SettingsForm() {
     },
   })
   function onSubmit(data: SettingsFormValues) {
+    navigate(-1)
     toast({
       title: t("settings_toast"),
       description: (
@@ -125,7 +128,10 @@ export function SettingsForm() {
           )}
         />
 
-        <Button type="submit" className="font-semibold">
+        <Button
+          type="submit"
+          className="font-semibold"
+        >
           {t("settings_button")}
         </Button>
       </form>

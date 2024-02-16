@@ -6,7 +6,7 @@ import { Trail } from "@/types/trail"
 
 import { useLanguage } from "./use-language"
 
-export const useGetTrails = () => {
+export function useGetTrails() {
   const [trails, setTrails] = useState<Trail[]>([])
   const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<string | null>(null)

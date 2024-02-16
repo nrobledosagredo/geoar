@@ -1,5 +1,5 @@
 import React from "react"
-import { Link, useLocation } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
@@ -17,6 +17,7 @@ export const SidebarNav: React.FC<SidebarNavProps> = ({
   ...props
 }) => {
   const location = useLocation()
+  const navigate = useNavigate()
 
   return (
     <nav
@@ -27,9 +28,9 @@ export const SidebarNav: React.FC<SidebarNavProps> = ({
       {...props}
     >
       {items.map((item) => (
-        <Link
+        <button
           key={item.href}
-          to={item.href}
+          onClick={() => navigate(item.href, { replace: true })}
           className={cn(
             buttonVariants({ variant: "ghost" }),
             location.pathname === item.href
@@ -39,7 +40,7 @@ export const SidebarNav: React.FC<SidebarNavProps> = ({
           )}
         >
           {item.title}
-        </Link>
+        </button>
       ))}
     </nav>
   )

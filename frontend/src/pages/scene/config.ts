@@ -8,7 +8,7 @@ export const config = {
 
   // Points
   CAMERA_HEIGHT: 1.6, // Altura en metros de la cámara (default: 1.6)
-  POINT_IS_VISIBLE: false, // Mostrar las esferas 3D en el sendero (default: false)
+  POINT_IS_VISIBLE: true, // Mostrar las esferas 3D en el sendero (default: false)
 
   // TargetFinder
   LOADING_DELAY: 7000, // Tiempo en ms que se demora en cargar la lógica de navegación (default: 3000)

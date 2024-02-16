@@ -1,7 +1,7 @@
 // trail-drawer.tsx
 import { TrailDetails } from "@/pages/trails/components/trail-details"
 import { TrailMap } from "@/pages/trails/components/trail-map"
-import { useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 import { TrailWithInfoCards } from "@/types/trail-with-infocards"
 import { Button } from "@/components/ui/button"
@@ -18,7 +18,6 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area"
 
 export function TrailDrawer({ trail }: { trail: TrailWithInfoCards }) {
-  const navigate = useNavigate()
   return (
     <Drawer>
       <DrawerTrigger asChild className="w-full">
@@ -64,12 +63,11 @@ export function TrailDrawer({ trail }: { trail: TrailWithInfoCards }) {
             </Button>
           </DrawerClose>
 
-          <Button
-            onClick={() => navigate(`/trails/${trail._id}`)}
-            className="w-24 font-semibold"
-          >
-            Comenzar
-          </Button>
+          <Button className="w-24 font-semibold">
+  <Link to={`/trails/${trail._id}`} className="block w-full h-full">
+    Comenzar
+  </Link>
+</Button>
         </DrawerFooter>
       </DrawerContent>
     </Drawer>

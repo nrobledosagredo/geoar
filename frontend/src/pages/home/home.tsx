@@ -14,21 +14,18 @@ export function Home() {
       {/* Barra de navegación */}
       <MainNav />
 
+
       {/* Contenedor de la página de inicio */}
-      <div className="flex-1 flex flex-col justify-center items-center text-center p-6">
+      <div className="flex flex-col flex-1 justify-center text-center p-6 space-y-8">
         {/* Título */}
-        <div className="mb-4">
-          <LogoVertical />
-        </div>
+        <LogoVertical />
 
         {/* Descripción */}
-        <div className="mb-6">
-          <p className="text-xl text-muted-foreground">
-            <span className="font-semibold">{t("welcome_description")}</span>
-            <span className="font-bold"> {t("augmented_reality")}</span>
-            <span className="font-semibold">.</span>
-          </p>
-        </div>
+        <p className="text-xl text-muted-foreground pb-4">
+          <span className="font-semibold">{t("welcome_description")}</span>
+          <span className="font-bold"> {t("augmented_reality")}</span>
+          <span className="font-semibold">.</span>
+        </p>
 
         {/* Botón para ir a la lista de senderos */}
         <div>

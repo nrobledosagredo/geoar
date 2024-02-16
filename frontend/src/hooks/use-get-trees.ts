@@ -4,7 +4,7 @@ import { getTrees } from "@/services/trees-service"
 
 import { Tree } from "@/types/tree"
 
-export const useGetTrees = () => {
+export function useGetTrees() {
   const [trees, setTrees] = useState<Tree[]>([])
   const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<string | null>(null)

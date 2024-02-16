@@ -5,12 +5,12 @@ import { createUser } from "@/services/users-service"
 import { User } from "@/types/user"
 
 export function useCreateUser() {
-  const [isLoading, setIsLoading] = useState(false)
+  const [loading, setLoading] = useState(false)
   const [error, setError] = useState<Error | null>(null)
   const [response, setResponse] = useState<any>(null)
 
   const handleCreateUser = async (user: User) => {
-    setIsLoading(true)
+    setLoading(true)
     setError(null)
     try {
       const result = await createUser(user)
@@ -18,9 +18,9 @@ export function useCreateUser() {
     } catch (error) {
       setError(error as Error)
     } finally {
-      setIsLoading(false)
+      setLoading(false)
     }
   }
 
-  return { handleCreateUser, isLoading, error, response }
+  return { handleCreateUser, loading, error, response }
 }

@@ -25,7 +25,7 @@ export const ControlPanel: React.FC<SettingsProps> = ({ children }) => {
   return (
     <>
       <MainNav />
-      <div className="space-y-6 p-10 pb-16 md:block">
+      <div className="space-y-6 px-10 py-4 md:block">
         <div className="space-y-0.5">
           <h2 className="text-2xl font-bold tracking-tight">
             {t("control_panel_title")}

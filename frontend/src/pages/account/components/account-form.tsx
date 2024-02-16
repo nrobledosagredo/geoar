@@ -5,6 +5,7 @@ import { enUS, es } from "date-fns/locale"
 import { CalendarIcon } from "lucide-react"
 import { useForm } from "react-hook-form"
 import { useTranslation } from "react-i18next"
+import { useNavigate } from "react-router-dom"
 import { z } from "zod"
 import { makeZodI18nMap } from "zod-i18n-map"
 
@@ -43,7 +44,7 @@ const defaultValues: Partial<AccountFormValues> = {
 }
 
 export function AccountForm() {
-  // Lógica para cambiar el idioma de la aplicación
+  const navigate = useNavigate()
   const { t, i18n } = useTranslation()
   const { language, setLanguage } = useLanguage()
   const changeLanguage = (newLanguage: string) => {
@@ -69,6 +70,7 @@ export function AccountForm() {
   })
 
   function onSubmit(data: AccountFormValues) {
+    navigate(-1)
     toast({
       title: t("account_toast"),
       description: (
@@ -165,7 +167,10 @@ export function AccountForm() {
             </FormItem>
           )}
         />
-        <Button type="submit" className="font-semibold">
+        <Button
+          type="submit"
+          className="font-semibold"
+        >
           {t("account_button")}
         </Button>
       </form>

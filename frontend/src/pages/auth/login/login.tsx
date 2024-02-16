@@ -13,7 +13,7 @@ export function Login() {
   return (
     <div className="flex flex-col min-h-screen max-w-sm mx-auto">
       {/* Logo */}
-      <div className="flex flex-grow items-center justify-center">
+      <div className="flex flex-grow items-center justify-center scale-75">
         <LogoVertical />
       </div>
 
