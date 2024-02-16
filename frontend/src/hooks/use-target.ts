@@ -1,24 +1,24 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from "react"
 
 interface UpdateTargetEventDetail {
-  order: number;
+  order: number
 }
 
-export function useTarget(): number{
-  const [target, setTarget] = useState<number>(0);
+export function useTarget(): number {
+  const [target, setTarget] = useState<number>(0)
 
   useEffect(() => {
     const handleUpdateTarget: EventListener = (event) => {
-      const customEvent = event as CustomEvent<UpdateTargetEventDetail>;
-      setTarget(customEvent.detail.order);
-    };
+      const customEvent = event as CustomEvent<UpdateTargetEventDetail>
+      setTarget(customEvent.detail.order)
+    }
 
-    document.addEventListener("updateTarget", handleUpdateTarget);
+    document.addEventListener("updateTarget", handleUpdateTarget)
 
     return () => {
-      document.removeEventListener("updateTarget", handleUpdateTarget);
-    };
-  }, []);
+      document.removeEventListener("updateTarget", handleUpdateTarget)
+    }
+  }, [])
 
-  return target;
-};
+  return target
+}

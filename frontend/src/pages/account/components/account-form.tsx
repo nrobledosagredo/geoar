@@ -167,10 +167,7 @@ export function AccountForm() {
             </FormItem>
           )}
         />
-        <Button
-          type="submit"
-          className="font-semibold"
-        >
+        <Button type="submit" className="font-semibold">
           {t("account_button")}
         </Button>
       </form>

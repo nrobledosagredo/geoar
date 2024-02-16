@@ -128,10 +128,7 @@ export function SettingsForm() {
           )}
         />
 
-        <Button
-          type="submit"
-          className="font-semibold"
-        >
+        <Button type="submit" className="font-semibold">
           {t("settings_button")}
         </Button>
       </form>

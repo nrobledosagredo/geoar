@@ -54,7 +54,6 @@ export function TrailDrawer({ trail }: { trail: TrailWithInfoCards }) {
         </ScrollArea>
         */}
 
-
         {/* Botones de acción */}
         <DrawerFooter className="flex flex-row justify-center">
           <DrawerClose asChild>
@@ -64,10 +63,10 @@ export function TrailDrawer({ trail }: { trail: TrailWithInfoCards }) {
           </DrawerClose>
 
           <Button className="w-24 font-semibold">
-  <Link to={`/trails/${trail._id}`} className="block w-full h-full">
-    Comenzar
-  </Link>
-</Button>
+            <Link to={`/trails/${trail._id}`} className="block w-full h-full">
+              Comenzar
+            </Link>
+          </Button>
         </DrawerFooter>
       </DrawerContent>
     </Drawer>

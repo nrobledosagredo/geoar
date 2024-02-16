@@ -4,7 +4,7 @@ import { getPoints } from "@/services/points-service"
 
 import { Point } from "@/types/point"
 
-export function useGetPoints (trailId: string) {
+export function useGetPoints(trailId: string) {
   const [points, setPoints] = useState<Point[]>([])
   const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<string | null>(null)

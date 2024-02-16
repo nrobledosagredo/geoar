@@ -14,7 +14,6 @@ export function Home() {
       {/* Barra de navegación */}
       <MainNav />
 
-
       {/* Contenedor de la página de inicio */}
       <div className="flex flex-col flex-1 justify-center text-center p-6 space-y-8">
         {/* Título */}

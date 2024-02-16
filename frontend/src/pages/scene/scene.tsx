@@ -1,12 +1,13 @@
-import { Point } from "@/pages/scene/components/point"
 import { Arrow } from "@/pages/scene/components/arrow"
+import { Point } from "@/pages/scene/components/point"
 import { config } from "@/pages/scene/config"
 import { useParams } from "react-router-dom"
 
 import { useGetPoints } from "@/hooks/use-get-points"
-import "@/lib/color-changer";
-import "@/lib/target-finder";
-import "@/lib/distance-displayer";
+
+import "@/lib/color-changer"
+import "@/lib/target-finder"
+import "@/lib/distance-displayer"
 
 export function Scene() {
   const SIMULATE_LONGITUDE = config.SIMULATE_LONGITUDE
@@ -37,7 +38,6 @@ export function Scene() {
           far={CAMERA_MAX_DISTANCE}
           target-finder
         >
-
           {/* Flecha 3D que apunta al siguiente punto */}
           <Arrow />
         </a-camera>

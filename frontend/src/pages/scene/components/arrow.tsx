@@ -1,28 +1,29 @@
 // Arrow.tsx
-import { useEffect, useState } from "react";
-import { useTarget } from "@/hooks/use-target";
-import { config } from "@/pages/scene/config";
+import { useEffect, useState } from "react"
+import { config } from "@/pages/scene/config"
+
+import { useTarget } from "@/hooks/use-target"
 
 export function Arrow() {
   // Variables de entorno
-  const ARROW_DELAY = config.ARROW_DELAY;
-  const ARROW_SCALE = config.ARROW_SCALE;
-  const ARROW_POSITION_X = config.ARROW_POSITION_X;
-  const ARROW_POSITION_Y = config.ARROW_POSITION_Y;
-  const ARROW_POSITION_Z = config.ARROW_POSITION_Z;
+  const ARROW_DELAY = config.ARROW_DELAY
+  const ARROW_SCALE = config.ARROW_SCALE
+  const ARROW_POSITION_X = config.ARROW_POSITION_X
+  const ARROW_POSITION_Y = config.ARROW_POSITION_Y
+  const ARROW_POSITION_Z = config.ARROW_POSITION_Z
 
   // Variables de estado
-  const [showArrow, setShowArrow] = useState(false);
-  const target = useTarget();
+  const [showArrow, setShowArrow] = useState(false)
+  const target = useTarget()
 
   // Mostrar flecha al cargar A-Frame después de ARROW_DELAY milisegundos
   useEffect(() => {
     const timer = setTimeout(() => {
-      setShowArrow(true);
-    }, ARROW_DELAY);
+      setShowArrow(true)
+    }, ARROW_DELAY)
 
-    return () => clearTimeout(timer);
-  }, []);
+    return () => clearTimeout(timer)
+  }, [])
 
   return (
     <>
@@ -40,5 +41,5 @@ export function Arrow() {
         </a-entity>
       )}
     </>
-  );
+  )
 }

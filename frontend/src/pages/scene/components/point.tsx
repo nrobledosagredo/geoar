@@ -1,17 +1,18 @@
 // point.tsx
-import robotoRegular from '/fonts/Roboto/Roboto-Regular.ttf';
 import { config } from "@/pages/scene/config"
 
+import robotoRegular from "/fonts/Roboto/Roboto-Regular.ttf"
+
 interface PointProps {
-  latitude: number;
-  longitude: number;
-  order: number;
+  latitude: number
+  longitude: number
+  order: number
 }
 
 export function Point({ latitude, longitude, order }: PointProps) {
   // Variables de entorno
-  const CAMERA_HEIGHT = config.CAMERA_HEIGHT;
-  const POINT_IS_VISIBLE = config.POINT_IS_VISIBLE;
+  const CAMERA_HEIGHT = config.CAMERA_HEIGHT
+  const POINT_IS_VISIBLE = config.POINT_IS_VISIBLE
 
   return (
     <>
@@ -38,5 +39,5 @@ export function Point({ latitude, longitude, order }: PointProps) {
         ></a-troika-text>
       </a-sphere>
     </>
-  );
-};
+  )
+}
