@@ -74,9 +74,9 @@ export function Scene() {
         {treesExtended.map((tree, index) => (
           <TreeCard
             key={index}
-            name={tree.treeCard?.binomialName}
-            taxonomy={tree.treeCard?.taxonomy}
-            conservationStatus={tree.treeCard?.conservationStatus}
+            name={tree.treeCard?.binomialName ?? ""}
+            taxonomy={tree.treeCard?.taxonomy ?? { kingdom: "", division: "", class: "", order: "", family: "", genus: "", species: "" }}
+            conservationStatus={tree.treeCard?.conservationStatus ?? { acronym: "", description: "" }}
             imageSrc={getImage(tree.treeCard?.images ? tree.treeCard.images[0] : "")}
             longitude={tree.geometry.coordinates[0]}
             latitude={tree.geometry.coordinates[1]}

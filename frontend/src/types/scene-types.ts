@@ -20,7 +20,7 @@ export interface CircleProps {
 }
 
 // Definición de tipos para TreeCard
-interface Taxonomy {
+export interface Taxonomy {
   kingdom: string
   division: string
   class: string
@@ -30,16 +30,16 @@ interface Taxonomy {
   species: string
 }
 
-interface ConservationStatus {
+export interface ConservationStatus {
   acronym: string
   description: string
 }
 
 export interface TreeCardProps {
-  name?: string
-  taxonomy?: Taxonomy
-  conservationStatus?: ConservationStatus
-  imageSrc?: string
+  name: string
+  taxonomy: Taxonomy
+  conservationStatus: ConservationStatus
+  imageSrc: string
   latitude: number
   longitude: number
 }
