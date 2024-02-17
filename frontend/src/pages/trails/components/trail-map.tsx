@@ -1,19 +1,19 @@
+// trail-map.tsx
 import { useEffect } from "react"
 import { Loader2 } from "lucide-react"
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet"
 
-import { useGetTrees } from "@/hooks/use-get-trees"
-
 import "leaflet/dist/leaflet.css"
 
-import { TrailWithInfoCards } from "@/types/trail-with-infocards"
+import { TrailExtended } from "@/types/trail-types"
 import { infoCardIcon, primaryPathOptions, treeIcon } from "@/lib/map-utils"
 import { useGetPoints } from "@/hooks/use-get-points"
+import { useGetTrees } from "@/hooks/use-get-trees"
 import { useToast } from "@/components/ui/use-toast"
 import { MapPathLayer } from "@/components/map-path-layer"
 import { useTheme } from "@/components/theme-provider"
 
-export function TrailMap({ trail }: { trail: TrailWithInfoCards }) {
+export function TrailMap({ trail }: { trail: TrailExtended }) {
   const DEFAULT_LAT = -39.8046
   const DEFAULT_LNG = -73.24997
   const { theme } = useTheme()
@@ -102,7 +102,7 @@ export function TrailMap({ trail }: { trail: TrailWithInfoCards }) {
               icon={treeIcon}
             >
               {/* Popup con el nombre del árbol */}
-              <Popup>{tree.name}</Popup>
+              <Popup className="font-bold">{tree.name}</Popup>
             </Marker>
           ))}
         </MapContainer>

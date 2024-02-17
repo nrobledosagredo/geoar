@@ -1,3 +1,4 @@
+// tree-types.ts
 export interface Geometry {
   type: "Point"
   coordinates: [number, number]
@@ -6,7 +7,7 @@ export interface Geometry {
 export interface Tree {
   name: string
   geometry: Geometry
-  treeCard?: string
+  treeCard: string
   habilitado: boolean
   updatedAt: Date
 }

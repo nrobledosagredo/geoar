@@ -7,7 +7,7 @@ import { TrailPagination } from "@/pages/trails/components/trail-pagination"
 import { TrailSkeleton } from "@/pages/trails/components/trail-skeleton"
 import { SearchX } from "lucide-react"
 import { useTranslation } from "react-i18next"
-
+import { TrailExtended } from "@/types/trail-types"
 import { useGetInfoCards } from "@/hooks/use-get-infocards"
 import { useGetTrails } from "@/hooks/use-get-trails"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
@@ -65,18 +65,19 @@ export function Trails() {
             trail.duration.unit.toLowerCase().includes(searchTerm.toLowerCase())
         )
 
-  // Combinar trails con sus infoCards correspondientes
-  const trailsWithInfoCards = filteredTrails.map((trail) => ({
+  // Extiende trails con sus infoCards correspondientes
+  const trailsExtended = filteredTrails.map((trail) => ({
     ...trail,
-    infoCards: trail.infoCards.flatMap(
-      (infoCardId) => infoCards.find((ic) => ic._id === infoCardId._id) || []
-    ),
+    infoCards: trail.infoCards.map((infoCard) => ({
+      ...infoCard,
+      ...infoCards.find((ic) => ic._id === infoCard._id),
+    })),
   }))
 
   const lastCardIndex = currentPage * cardsPerPage
   const firstCardIndex = lastCardIndex - cardsPerPage
-  const currentCards = trailsWithInfoCards.slice(firstCardIndex, lastCardIndex)
-  const totalPages = Math.ceil(trailsWithInfoCards.length / cardsPerPage)
+  const currentCards = trailsExtended.slice(firstCardIndex, lastCardIndex)
+  const totalPages = Math.ceil(trailsExtended.length / cardsPerPage)
 
   // Reinicia la página actual a 1 cuando cambie el término de búsqueda
   useEffect(() => {
@@ -148,13 +149,13 @@ export function Trails() {
 
                 {/* Contenido de la tarjeta */}
                 <CardContent className="space-y-6">
-                  <TrailCarousel trail={trail} />
-                  <TrailDetails trail={trail} />
+                  <TrailCarousel trail={trail as TrailExtended} />
+                  <TrailDetails trail={trail as TrailExtended} />
                 </CardContent>
 
                 {/* Footer de la tarjeta */}
                 <CardFooter>
-                  <TrailDrawer trail={trail} />
+                  <TrailDrawer trail={trail as TrailExtended} />
                 </CardFooter>
               </Card>
             ))}

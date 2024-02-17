@@ -1,5 +1,6 @@
 // trail-carousel.tsx
 import Autoplay from "embla-carousel-autoplay"
+import { TrailExtended } from "@/types/trail-types"
 
 import { AspectRatio } from "@/components/ui/aspect-ratio"
 import {
@@ -10,7 +11,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel"
 
-export function TrailCarousel({ trail }: { trail: any }) {
+export function TrailCarousel({ trail }: { trail: TrailExtended }) {
   return trail.infoCards && trail.infoCards.length > 0 ? (
     <Carousel
       opts={{

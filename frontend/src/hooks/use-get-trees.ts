@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react"
 import { getTrees } from "@/services/trees-service"
 
-import { Tree } from "@/types/tree"
+import { Tree } from "@/types/tree-types"
 
 export function useGetTrees() {
   const [trees, setTrees] = useState<Tree[]>([])
@@ -10,7 +10,7 @@ export function useGetTrees() {
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    const handleGetTrees = async () => {
+    async function handleGetTrees() {
       try {
         setLoading(true)
         const trees = await getTrees()

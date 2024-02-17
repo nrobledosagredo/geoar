@@ -1,8 +1,9 @@
+// trail-details.tsx
 import { TrailDifficulty } from "@/pages/trails/components/trail-difficulty"
 import { Clock, Footprints } from "lucide-react"
 import { useTranslation } from "react-i18next"
 
-import { TrailWithInfoCards } from "@/types/trail-with-infocards"
+import { TrailExtended } from "@/types/trail-types"
 import {
   Tooltip,
   TooltipContent,
@@ -10,7 +11,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 
-export function TrailDetails({ trail }: { trail: TrailWithInfoCards }) {
+export function TrailDetails({ trail }: { trail: TrailExtended }) {
   const { t } = useTranslation()
   return (
     <div className="w-full flex justify-between text-center">

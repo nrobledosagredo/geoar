@@ -1,3 +1,4 @@
+// trail-skeleton.tsx
 import { AspectRatio } from "@/components/ui/aspect-ratio"
 import {
   Card,

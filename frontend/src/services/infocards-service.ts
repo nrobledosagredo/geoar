@@ -1,5 +1,5 @@
 // info-cards-service.ts
-import { InfoCard } from "@/types/infocard"
+import { InfoCard } from "@/types/infocard-types"
 import { getAuthToken } from "@/lib/get-auth-token"
 import i18n from "@/lib/i18n"
 

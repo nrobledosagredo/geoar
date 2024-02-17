@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react"
 import { getInfoCards } from "@/services/infocards-service"
 
-import { InfoCard } from "@/types/infocard"
+import { InfoCard } from "@/types/infocard-types"
 
 import { useLanguage } from "./use-language"
 

@@ -1,13 +1,7 @@
-import React from "react"
+// trail-difficulty.tsx
 import { Star } from "lucide-react"
 
-interface TrailDifficultyProps {
-  difficulty: string
-}
-
-export const TrailDifficulty: React.FC<TrailDifficultyProps> = ({
-  difficulty,
-}) => {
+export function TrailDifficulty({ difficulty }: { difficulty: string }) {
   let config = ["fill-none", "fill-none", "fill-none"]
 
   switch (difficulty) {

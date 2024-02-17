@@ -1,5 +1,5 @@
 // trees-service.ts
-import { Tree } from "@/types/tree"
+import { Tree } from "@/types/tree-types"
 import { getAuthToken } from "@/lib/get-auth-token"
 
 const BACKEND_HOST = import.meta.env.VITE_BACKEND_HOST

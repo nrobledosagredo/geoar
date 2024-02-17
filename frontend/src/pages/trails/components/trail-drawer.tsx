@@ -3,7 +3,7 @@ import { TrailDetails } from "@/pages/trails/components/trail-details"
 import { TrailMap } from "@/pages/trails/components/trail-map"
 import { Link } from "react-router-dom"
 
-import { TrailWithInfoCards } from "@/types/trail-with-infocards"
+import { TrailExtended } from "@/types/trail-types"
 import { Button } from "@/components/ui/button"
 import {
   Drawer,
@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/drawer"
 import { ScrollArea } from "@/components/ui/scroll-area"
 
-export function TrailDrawer({ trail }: { trail: TrailWithInfoCards }) {
+export function TrailDrawer({ trail }: { trail: TrailExtended }) {
   return (
     <Drawer>
       <DrawerTrigger asChild className="w-full">

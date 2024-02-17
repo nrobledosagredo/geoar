@@ -1,5 +1,5 @@
 // trails-service.ts
-import { Trail } from "@/types/trail"
+import { Trail } from "@/types/trail-types"
 import { getAuthToken } from "@/lib/get-auth-token"
 import i18n from "@/lib/i18n"
 

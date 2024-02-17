@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react"
 import { getTrails } from "@/services/trails-service"
 
-import { Trail } from "@/types/trail"
+import { Trail } from "@/types/trail-types"
 
 import { useLanguage } from "./use-language"
 

@@ -1,20 +1,20 @@
-// use-get-points.ts
+// use-get-trees.ts
 import { useEffect, useState } from "react"
-import { getPoints } from "@/services/points-service"
+import { getTreeCards } from "@/services/treecards-service"
 
-import { Point } from "@/types/point-types"
+import { TreeCard } from "@/types/treecard-types"
 
-export function useGetPoints(trailId: string) {
-  const [points, setPoints] = useState<Point[]>([])
+export function useGetTreeCards() {
+  const [treeCards, setTreeCards] = useState<TreeCard[]>([])
   const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    async function handleGetPoints() {
+    async function handleGetTreeCards() {
       try {
         setLoading(true)
-        const points = await getPoints(trailId)
-        setPoints(points)
+        const trees = await getTreeCards()
+        setTreeCards(trees)
         setError(null)
       } catch (err: unknown) {
         const message =
@@ -25,10 +25,8 @@ export function useGetPoints(trailId: string) {
       }
     }
 
-    if (trailId) {
-      handleGetPoints()
-    }
-  }, [trailId])
+    handleGetTreeCards()
+  }, [])
 
-  return { points, loading, error }
+  return { treeCards, loading, error }
 }

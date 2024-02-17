@@ -1,10 +1,9 @@
-// routes/images.routes.js
+// images.routes.js
 import { Router } from "express"
-import { getImages } from "../controllers/images.controller.js"
-import { verifyToken } from "../middlewares/check-auth.js"
+import { getImage } from "../controllers/images.controller.js"
 
 const router = Router()
 
-router.get("/images", verifyToken, getImages)
+router.get("/images", getImage)
 
 export default router

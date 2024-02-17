@@ -2,7 +2,7 @@ import { config } from "@/pages/scene/config"
 
 import { getWalkingInstruction } from "@/lib/get-walking-instruction"
 
-//const UPDATE_INTERVAL = parseInt(import.meta.env.VITE_UPDATE_INTERVAL, 10);
+//const UPDATE_INTERVAL = parseInt(config.UPDATE_INTERVAL, 10);
 const FIRST_POINT_THRESHOLD = parseInt(config.FIRST_POINT_THRESHOLD, 10)
 const SEARCH_RADIUS = parseInt(config.SEARCH_RADIUS, 10)
 const ORDER_INCREMENT = parseInt(config.ORDER_INCREMENT, 10)

@@ -1,4 +1,4 @@
-// user.ts
+// user-types.ts
 export interface User {
   userId: string
   dob?: Date

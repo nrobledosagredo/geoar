@@ -1,23 +1,19 @@
 // images.controller.js
-import axios from "axios"
+import axios from 'axios';
 
-export async function getImages(req, res) {
-  const imageUrl = req.query.url
-
+export const getImage = async (req, res) => {
+  const imageUrl = req.query.url;
   if (!imageUrl) {
-    return res.status(400).send("No image URL provided")
+    return res.status(400).json({ message: 'URL is required' });
   }
 
   try {
-    const response = await axios.get(imageUrl, { responseType: "stream" })
-
-    if (response.headers["content-type"]) {
-      res.setHeader("Content-Type", response.headers["content-type"])
-    }
-
-    response.data.pipe(res)
+    const response = await axios.get(imageUrl, { responseType: 'arraybuffer' });
+    const imageBuffer = Buffer.from(response.data, 'binary');
+    const contentType = response.headers['content-type'];
+    res.setHeader('Content-Type', contentType);
+    res.send(imageBuffer);
   } catch (error) {
-    console.error(error)
-    res.status(500).send("Error fetching image")
+    res.status(500).json({ message: 'Error fetching image' });
   }
-}
+};

@@ -1,4 +1,4 @@
-// point.ts
+// point-types.ts
 export interface Point {
   trailId: string
   order: number

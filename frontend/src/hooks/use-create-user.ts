@@ -2,14 +2,14 @@
 import { useState } from "react"
 import { createUser } from "@/services/users-service"
 
-import { User } from "@/types/user"
+import { User } from "@/types/user-types"
 
 export function useCreateUser() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<Error | null>(null)
   const [response, setResponse] = useState<any>(null)
 
-  const handleCreateUser = async (user: User) => {
+  async function handleCreateUser(user: User){
     setLoading(true)
     setError(null)
     try {
