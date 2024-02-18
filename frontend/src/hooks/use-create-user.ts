@@ -9,7 +9,7 @@ export function useCreateUser() {
   const [error, setError] = useState<Error | null>(null)
   const [response, setResponse] = useState<any>(null)
 
-  async function handleCreateUser(user: User){
+  async function handleCreateUser(user: User) {
     setLoading(true)
     setError(null)
     try {

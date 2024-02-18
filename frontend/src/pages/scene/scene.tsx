@@ -1,27 +1,41 @@
 import { Arrow } from "@/pages/scene/components/arrow"
+import { InfoCard } from "@/pages/scene/components/infocard"
 import { Point } from "@/pages/scene/components/point"
 import { TreeCard } from "@/pages/scene/components/treecard"
 import { config } from "@/pages/scene/config"
+import { getImage } from "@/services/images-service"
 import { useParams } from "react-router-dom"
 
+import { useGetInfoCardsByTrail } from "@/hooks/use-get-infocards-by-trail"
 import { useGetPoints } from "@/hooks/use-get-points"
+import { useGetTrail } from "@/hooks/use-get-trail"
 import { useGetTreeCards } from "@/hooks/use-get-treecards"
 import { useGetTrees } from "@/hooks/use-get-trees"
-import { getImage } from "@/services/images-service"
 
 import "@/lib/color-changer"
 import "@/lib/target-finder"
 import "@/lib/distance-displayer"
 
+const SIMULATE_LONGITUDE = config.SIMULATE_LONGITUDE
+const SIMULATE_LATITUDE = config.SIMULATE_LATITUDE
+
 export function Scene() {
-  const SIMULATE_LONGITUDE = config.SIMULATE_LONGITUDE
-  const SIMULATE_LATITUDE = config.SIMULATE_LATITUDE
   const trailId = useParams().id
+  const {
+    trail,
+    loading: trailLoading,
+    error: trailError,
+  } = useGetTrail(trailId as string)
   const {
     points,
     loading: pointsLoading,
     error: pointsError,
   } = useGetPoints(trailId as string)
+  const {
+    infoCards,
+    loading: infoCardsLoading,
+    error: infoCardsError,
+  } = useGetInfoCardsByTrail(trail as any)
   const { trees, loading: treesLoading, error: treesError } = useGetTrees()
   const {
     treeCards,
@@ -30,11 +44,24 @@ export function Scene() {
   } = useGetTreeCards()
 
   //TODO: Agregar pantalla de carga
-  if (pointsLoading || treesLoading || treeCardsLoading)
+  if (
+    trailLoading ||
+    pointsLoading ||
+    infoCardsLoading ||
+    treesLoading ||
+    treeCardsLoading
+  )
     return <p>Loading...</p>
 
   //TODO: Agregar algún tipo de manejo de errores
-  if (pointsError || treesError || treeCardsError) return <p>Error</p>
+  if (
+    trailError ||
+    pointsError ||
+    infoCardsError ||
+    treesError ||
+    treeCardsError
+  )
+    return <p>Error</p>
 
   const treesExtended = trees.map((tree) => {
     const treeCard = treeCards.find((card) => card._id === tree.treeCard)
@@ -70,14 +97,48 @@ export function Scene() {
           />
         ))}
 
+        {/* infoCards */}
+        {infoCards.map((infoCard, index) => (
+          <InfoCard
+            key={index}
+            id={index as any}
+            name={infoCard.name}
+            description={infoCard.description}
+            imageSrc={`/infocards/${encodeURIComponent(
+              Array.isArray(infoCard.images)
+                ? infoCard.images[0]
+                : infoCard.images
+            )}`}
+            longitude={infoCard.geometry.coordinates[0]}
+            latitude={infoCard.geometry.coordinates[1]}
+          />
+        ))}
+
         {/* treeCards */}
         {treesExtended.map((tree, index) => (
           <TreeCard
             key={index}
             name={tree.treeCard?.binomialName ?? ""}
-            taxonomy={tree.treeCard?.taxonomy ?? { kingdom: "", division: "", class: "", order: "", family: "", genus: "", species: "" }}
-            conservationStatus={tree.treeCard?.conservationStatus ?? { acronym: "", description: "" }}
-            imageSrc={getImage(tree.treeCard?.images ? tree.treeCard.images[0] : "")}
+            taxonomy={
+              tree.treeCard?.taxonomy ?? {
+                kingdom: "",
+                division: "",
+                class: "",
+                order: "",
+                family: "",
+                genus: "",
+                species: "",
+              }
+            }
+            conservationStatus={
+              tree.treeCard?.conservationStatus ?? {
+                acronym: "",
+                description: "",
+              }
+            }
+            imageSrc={getImage(
+              tree.treeCard?.images ? tree.treeCard.images[0] : ""
+            )}
             longitude={tree.geometry.coordinates[0]}
             latitude={tree.geometry.coordinates[1]}
           />

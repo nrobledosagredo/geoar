@@ -19,6 +19,16 @@ export interface CircleProps {
   cardYPosition: number
 }
 
+// Definición de tipos para InfoCard
+export interface InfoCardProps {
+  id: string
+  name: string
+  description: string
+  imageSrc: string
+  latitude: number
+  longitude: number
+}
+
 // Definición de tipos para TreeCard
 export interface Taxonomy {
   kingdom: string

@@ -7,6 +7,7 @@ import { TrailPagination } from "@/pages/trails/components/trail-pagination"
 import { TrailSkeleton } from "@/pages/trails/components/trail-skeleton"
 import { SearchX } from "lucide-react"
 import { useTranslation } from "react-i18next"
+
 import { TrailExtended } from "@/types/trail-types"
 import { useGetInfoCards } from "@/hooks/use-get-infocards"
 import { useGetTrails } from "@/hooks/use-get-trails"

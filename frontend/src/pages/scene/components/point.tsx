@@ -1,5 +1,6 @@
 // point.tsx
 import { config } from "@/pages/scene/config"
+
 import { PointProps } from "@/types/scene-types"
 
 import robotoRegular from "/fonts/Roboto/Roboto-Regular.ttf"

@@ -8,7 +8,6 @@ AFRAME.registerComponent("color-changer", {
       const mesh = this.el.getObject3D("mesh")
       mesh.traverse((node) => {
         if (node.isMesh) {
-          // Aplica el color al material
           node.material.color = color
         }
       })

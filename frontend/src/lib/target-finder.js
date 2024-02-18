@@ -202,7 +202,6 @@ AFRAME.registerComponent("target-finder", {
           endPointData = this.points.get(this.nearestPointOrder + i)
           // Si no hay más puntos, salimos del bucle
           if (!endPointData) break
-
           ;[nextBearing, nextDistance] = calculateBearing(
             startPointData,
             endPointData

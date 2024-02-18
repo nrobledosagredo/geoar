@@ -1,8 +1,8 @@
 // TreeCard.jsx
 import { useRef } from "react"
 import { Circle } from "@/pages/scene/components/circle"
-import { useTranslation } from "react-i18next"
 import { config } from "@/pages/scene/config"
+import { useTranslation } from "react-i18next"
 
 import { TreeCardProps } from "@/types/scene-types"
 import { useToggleClick } from "@/hooks/use-toggle-click"

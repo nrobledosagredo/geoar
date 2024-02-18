@@ -10,8 +10,8 @@ interface Duration {
 }
 
 interface Geometry {
-  type: "Point";
-  coordinates: [number, number];
+  type: "Point"
+  coordinates: [number, number]
 }
 
 interface InfoCard {
@@ -30,18 +30,18 @@ export interface Trail {
 }
 
 export interface TrailExtended {
-  distance: Distance;
-  duration: Duration;
-  _id: string;
-  name: string;
-  description: string;
-  difficulty: string;
+  distance: Distance
+  duration: Duration
+  _id: string
+  name: string
+  description: string
+  difficulty: string
   infoCards: {
-    _id: string;
-    order: number;
-    geometry: Geometry;
-    name: string;
-    description: string;
-    images: string[];
-  }[];
+    _id: string
+    order: number
+    geometry: Geometry
+    name: string
+    description: string
+    images: string[]
+  }[]
 }

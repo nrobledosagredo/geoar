@@ -1,5 +1,6 @@
 // arrow.tsx
 import { config } from "@/pages/scene/config"
+
 import { useTarget } from "@/hooks/use-target"
 
 export function Arrow() {

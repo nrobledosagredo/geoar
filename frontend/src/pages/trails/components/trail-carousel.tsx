@@ -1,7 +1,7 @@
 // trail-carousel.tsx
 import Autoplay from "embla-carousel-autoplay"
-import { TrailExtended } from "@/types/trail-types"
 
+import { TrailExtended } from "@/types/trail-types"
 import { AspectRatio } from "@/components/ui/aspect-ratio"
 import {
   Carousel,
