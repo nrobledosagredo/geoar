@@ -1,11 +1,13 @@
+import { useParams } from "react-router-dom"
+import { config } from "@/pages/scene/scene-config"
 import { Arrow } from "@/pages/scene/components/arrow"
 import { InfoCard } from "@/pages/scene/components/infocard"
 import { Point } from "@/pages/scene/components/point"
 import { TreeCard } from "@/pages/scene/components/treecard"
-import { config } from "@/pages/scene/scene-config"
-import { getImage } from "@/services/images-service"
-import { useParams } from "react-router-dom"
+import { DirectionBar} from "@/pages/scene/components/direction-bar"
 
+
+import { getImage } from "@/services/images-service"
 import { useGetInfoCardsByTrail } from "@/hooks/use-get-infocards-by-trail"
 import { useGetPoints } from "@/hooks/use-get-points"
 import { useGetTrail } from "@/hooks/use-get-trail"
@@ -18,6 +20,7 @@ import "@/lib/distance-displayer"
 
 const simulateLongitude = config.simulateLongitude
 const simulateLatitude = config.simulateLatitude
+const cameraMaxDistance = config.cameraMaxDistance
 
 export function Scene() {
   const trailId = useParams().id
@@ -70,18 +73,24 @@ export function Scene() {
 
   return (
     <div className="relative bg-opacity-0 h-screen">
+
+      {/* Barra de dirección */}
+      <div className="relative z-50">
+        <DirectionBar />
+      </div>
+
       <a-scene
         vr-mode-ui="enabled: false"
         cursor="rayOrigin: mouse"
         raycaster="objects: .raycastable; near: 0; far: 50000"
         arjs="sourceType: webcam; videoTexture: true; debugUIEnabled: false;"
         renderer="antialias: true; alpha: true"
-        stats
+        //stats
       >
         <a-camera
           gps-new-camera={`gpsMinDistance: 5; simulateLatitude: ${String(simulateLatitude)}; simulateLongitude: ${String(simulateLongitude)}`}
           target-finder
-          //far={CAMERA_MAX_DISTANCE}
+          far={cameraMaxDistance}
         >
           {/* Flecha 3D que apunta al siguiente punto */}
           <Arrow />
