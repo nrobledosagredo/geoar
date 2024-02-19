@@ -4,9 +4,9 @@ AFRAME.registerComponent("color-changer", {
 
   init: function () {
     this.el.addEventListener("model-loaded", () => {
-      const color = new THREE.Color(this.data)
+      const color = new AFRAME.THREE.Color(this.data)
       const mesh = this.el.getObject3D("mesh")
-      mesh.traverse((node) => {
+      mesh.traverse((node: any) => {
         if (node.isMesh) {
           node.material.color = color
         }

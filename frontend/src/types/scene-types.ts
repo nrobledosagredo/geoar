@@ -9,14 +9,14 @@ export interface PointProps {
 
 // Definición de tipos para Circle
 export interface CircleProps {
-  src: string
-  isExpanded: any
   latitude: number
   longitude: number
   scale: number
+  yPosition: number
+  image: string
+  color: string
+  isExpanded: any
   handleToggleClick: any
-  torusColor: string
-  cardYPosition: number
 }
 
 // Definición de tipos para InfoCard
@@ -24,7 +24,7 @@ export interface InfoCardProps {
   id: string
   name: string
   description: string
-  imageSrc: string
+  image: string
   latitude: number
   longitude: number
 }
@@ -49,7 +49,7 @@ export interface TreeCardProps {
   name: string
   taxonomy: Taxonomy
   conservationStatus: ConservationStatus
-  imageSrc: string
+  image: string
   latitude: number
   longitude: number
 }

@@ -1,22 +1,22 @@
 // point.tsx
-import { config } from "@/pages/scene/config"
+import { config } from "@/pages/scene/scene-config"
 
 import { PointProps } from "@/types/scene-types"
 
 import robotoRegular from "/fonts/Roboto/Roboto-Regular.ttf"
 
-export function Point({ latitude, longitude, order }: PointProps) {
-  const CAMERA_HEIGHT = config.CAMERA_HEIGHT
-  const POINT_IS_VISIBLE = config.POINT_IS_VISIBLE
+const cameraHeight = config.cameraHeight
+const pointIsVisible = config.pointIsVisible
 
+export function Point({ latitude, longitude, order }: PointProps) {
   return (
     <>
       {/* Esfera 3D que representa el punto */}
       <a-sphere
         gps-new-entity-place={`latitude: ${latitude}; longitude: ${longitude}`}
         look-at="[gps-new-camera]"
-        position={`0 ${CAMERA_HEIGHT} 0`}
-        visible={POINT_IS_VISIBLE}
+        position={`0 ${cameraHeight} 0`}
+        visible={pointIsVisible}
         scale="0.5 0.5 0.5"
         color="orange"
         data-order={order}

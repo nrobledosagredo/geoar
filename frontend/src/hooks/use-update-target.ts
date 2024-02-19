@@ -1,15 +1,12 @@
+// use-update-target.ts
 import { useEffect, useState } from "react"
 
-interface UpdateTargetEventDetail {
-  order: number
-}
-
-export function useTarget(): number {
+export function useUpdateTarget(): number {
   const [target, setTarget] = useState<number>(0)
 
   useEffect(() => {
     const handleUpdateTarget: EventListener = (event) => {
-      const customEvent = event as CustomEvent<UpdateTargetEventDetail>
+      const customEvent = event as CustomEvent<{ order: number }>
       setTarget(customEvent.detail.order)
     }
 

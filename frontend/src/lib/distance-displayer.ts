@@ -11,7 +11,7 @@ AFRAME.registerComponent("distance-displayer", {
     this.el.appendChild(this.text)
   },
   tick: function () {
-    const cameraEl = document.querySelector("[gps-new-camera]")
+    const cameraEl = document.querySelector("[gps-new-camera]" as any)
     if (cameraEl) {
       // Clona la posición para no modificar la posición original del objeto
       let pointPosition = this.el.object3D.position.clone()

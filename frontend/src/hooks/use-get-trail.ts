@@ -1,3 +1,4 @@
+// use-get-trail.ts
 import { useEffect, useState } from "react"
 import { getTrail } from "@/services/trails-service"
 

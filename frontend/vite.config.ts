@@ -1,7 +1,10 @@
 import fs from "fs"
 import path from "path"
 import react from "@vitejs/plugin-react"
+import dotenv from "dotenv"
 import { defineConfig } from "vite"
+
+dotenv.config()
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -9,10 +12,8 @@ export default defineConfig({
   server: {
     host: true,
     https: {
-      key: fs.readFileSync(
-        path.resolve(__dirname, "./192.168.159.129+3-key.pem")
-      ),
-      cert: fs.readFileSync(path.resolve(__dirname, "./192.168.159.129+3.pem")),
+      key: fs.readFileSync(path.resolve(__dirname, process.env.SSL_KEY_PATH)),
+      cert: fs.readFileSync(path.resolve(__dirname, process.env.SSL_CERT_PATH)),
     },
   },
   resolve: {

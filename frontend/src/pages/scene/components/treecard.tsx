@@ -1,7 +1,7 @@
-// TreeCard.jsx
+// treecard.tsx
 import { useRef } from "react"
 import { Circle } from "@/pages/scene/components/circle"
-import { config } from "@/pages/scene/config"
+import { config } from "@/pages/scene/scene-config"
 import { useTranslation } from "react-i18next"
 
 import { TreeCardProps } from "@/types/scene-types"
@@ -12,11 +12,14 @@ import robotoMedium from "/fonts/Roboto/Roboto-Medium.ttf"
 import robotoRegular from "/fonts/Roboto/Roboto-Regular.ttf"
 import cardIcon from "/icons/g0.png"
 
-const CARD_Y_POSITION = 13
-const CARD_PRIMARY_COLOR = "#16a34a"
-const CARD_SECONDARY_COLOR = "#f9f9f9"
+const cardPrimaryColor = "#16a34a"
+const cardSecondaryColor = "#f9f9f9"
+const cardYPosition = config.cardYPosition
+const cardScale = config.cardScale
+const cardDelay = config.cardDelay
+const cameraHeight = config.cameraHeight
 
-const CONSERVATION_STATUS_COLORS: {
+const conservationStatusColors: {
   [key: string]: { circleColor: string; textColor: string; text: string }
 } = {
   LC: { circleColor: "#006666", textColor: "#ffffff", text: "LC" },
@@ -32,32 +35,26 @@ export function TreeCard({
   name,
   taxonomy,
   conservationStatus,
-  imageSrc,
+  image,
   latitude,
   longitude,
 }: TreeCardProps) {
-  // Variables de entorno
-  const CARD_SCALE = config.CARD_SCALE
-  const CARD_DELAY = config.CARD_DELAY
-  const CAMERA_HEIGHT = config.CAMERA_HEIGHT
-
-  // Hooks de React y otras bibliotecas
   const ref = useRef(null)
   const { t } = useTranslation()
-  const [isExpanded, handleToggleClick] = useToggleClick(CARD_DELAY)
+  const [isExpanded, handleToggleClick] = useToggleClick(cardDelay)
 
   return (
     <>
       {/* Componente de círculo que actúa como marcador */}
       <Circle
-        isExpanded={isExpanded}
-        handleToggleClick={handleToggleClick}
-        src={cardIcon}
         latitude={latitude}
         longitude={longitude}
-        scale={CARD_SCALE}
-        torusColor={CARD_PRIMARY_COLOR}
-        cardYPosition={CARD_Y_POSITION}
+        scale={cardScale}
+        yPosition={cardYPosition}
+        image={cardIcon}
+        color={cardPrimaryColor}
+        isExpanded={isExpanded}
+        handleToggleClick={handleToggleClick}
       />
 
       {/* Entidad principal que contiene toda la información de la ficha */}
@@ -65,20 +62,20 @@ export function TreeCard({
         ref={ref}
         look-at="[gps-new-camera]"
         gps-new-entity-place={`latitude: ${latitude}; longitude: ${longitude}`}
-        position={`0 ${CAMERA_HEIGHT} 0`}
-        scale={`${CARD_SCALE} ${CARD_SCALE} ${CARD_SCALE}`}
+        position={`0 ${cameraHeight} 0`}
+        scale={`${cardScale} ${cardScale} ${cardScale}`}
         visible={isExpanded}
       >
         {/* Caja que contiene todos los elementos de la ficha */}
         <a-box
-          color={CARD_SECONDARY_COLOR}
+          color={cardSecondaryColor}
           width="35"
           height="55"
-          position={`0 ${CARD_Y_POSITION} 0`}
+          position={`0 ${cardYPosition} 0`}
         >
           {/* Sección del título de la ficha */}
           <a-plane
-            color={CARD_PRIMARY_COLOR}
+            color={cardPrimaryColor}
             width="34.8"
             height="5"
             position="0 24.8 1"
@@ -96,7 +93,7 @@ export function TreeCard({
 
           {/* Sección que contiene la imagen */}
           <a-plane
-            src={imageSrc}
+            src={image}
             width="32"
             height="20"
             position="0 10.9 2"
@@ -104,7 +101,7 @@ export function TreeCard({
 
           {/* Sección del estado de conservación */}
           <a-plane
-            color={CARD_PRIMARY_COLOR}
+            color={cardPrimaryColor}
             width="34.8"
             height="2.5"
             position="0 -1.3 1"
@@ -122,7 +119,7 @@ export function TreeCard({
             {/* Circulo con el color indicativo del estado de conservación */}
             <a-circle
               color={
-                CONSERVATION_STATUS_COLORS[conservationStatus.acronym]
+                conservationStatusColors[conservationStatus.acronym]
                   ?.circleColor || "#FFFFFF"
               }
               radius="1.2"
@@ -133,7 +130,7 @@ export function TreeCard({
                 value={conservationStatus.acronym}
                 font={robotoBold}
                 color={
-                  CONSERVATION_STATUS_COLORS[conservationStatus.acronym]
+                  conservationStatusColors[conservationStatus.acronym]
                     ?.textColor || "black"
                 }
                 font-size="1.2"
@@ -155,7 +152,7 @@ export function TreeCard({
 
           {/* Sección de la taxonomía */}
           <a-plane
-            color={CARD_PRIMARY_COLOR}
+            color={cardPrimaryColor}
             width="34.8"
             height="2.5"
             position="0 -9.6 1"

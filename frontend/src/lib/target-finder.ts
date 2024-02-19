@@ -1,14 +1,17 @@
-import { config } from "@/pages/scene/config"
+import { config } from "@/pages/scene/scene-config"
 
 import { getWalkingInstruction } from "@/lib/get-walking-instruction"
 
-//const UPDATE_INTERVAL = parseInt(config.UPDATE_INTERVAL, 10);
-const FIRST_POINT_THRESHOLD = parseInt(config.FIRST_POINT_THRESHOLD, 10)
-const SEARCH_RADIUS = parseInt(config.SEARCH_RADIUS, 10)
-const ORDER_INCREMENT = parseInt(config.ORDER_INCREMENT, 10)
-const LOADING_DELAY = parseInt(config.LOADING_DELAY, 10)
+//const updateInterval = parseInt(config.updateInterval, 10);
+const firstPointThreshold = config.firstPointThreshold
+const searchRadius = config.searchRadius
+const orderIncrement = config.orderIncrement
+const loadingDelay = config.loadingDelay
 
-function calculateBearing(startElement, endElement) {
+function calculateBearing(
+  startElement: { dataset: { latitude: string; longitude: string } },
+  endElement: { dataset: { latitude: string; longitude: string } }
+) {
   if (!startElement || !endElement) return null
 
   const startCoords = {
@@ -30,19 +33,19 @@ function calculateBearing(startElement, endElement) {
 
 AFRAME.registerComponent("target-finder", {
   init: async function () {
-    //this.updateInterval = UPDATE_INTERVAL; // Intervalo de actualización la función
+    //this.updateInterval = updateInterval; // Intervalo de actualización la función
     //this.updateIntervalID = null;
 
     this.points = new Map() // Mapa de puntos cacheados
     this.pointsCached = false // Variable para comprobar si se han cacheado los puntos
     this.lastPointOrder = null // Variable para almacenar el último order de los puntos
 
-    this.firstPointThreshold = FIRST_POINT_THRESHOLD // Distancia mínima para alcanzar el primer punto
+    this.firstPointThreshold = firstPointThreshold // Distancia mínima para alcanzar el primer punto
     this.firstPointMessageShown = false // Variable para comprobar si se ha mostrado el mensaje de primer punto
     this.firstPointReached = false // Variable para comprobar si se ha alcanzado el primer punto
 
-    this.searchRadius = SEARCH_RADIUS // Radio de búsqueda de puntos
-    this.orderIncrement = ORDER_INCREMENT // Incremento de order para el siguiente punto
+    this.searchRadius = searchRadius // Radio de búsqueda de puntos
+    this.orderIncrement = orderIncrement // Incremento de order para el siguiente punto
     this.nearestPointOrder = 1 // Variable para almacenar el order del punto más cercano
     this.targetOrder = null // Variable para almacenar el order del punto objetivo
     this.pointsToCheck = [] // Array de puntos cercanos a comprobar
@@ -51,7 +54,7 @@ AFRAME.registerComponent("target-finder", {
     this.nextBearing = null // Variable para almacenar el siguiente bearing
 
     // Esperar a que se cargue el DOM antes de llamar a cachePoints
-    await new Promise((resolve) => setTimeout(resolve, LOADING_DELAY))
+    await new Promise((resolve) => setTimeout(resolve, loadingDelay))
     this.cachePoints()
   },
 
@@ -98,7 +101,7 @@ AFRAME.registerComponent("target-finder", {
 
     let maxOrder = 0 // Inicializa una variable para encontrar el valor máximo de 'order'
     document.querySelectorAll("a-sphere[data-order]").forEach((point) => {
-      const order = parseInt(point.dataset.order, 10)
+      const order = parseInt((point as any).dataset.order, 10)
       this.points.set(order, point)
       if (order > maxOrder) {
         maxOrder = order // Actualiza maxOrder si este 'order' es mayor que el actual maxOrder
@@ -193,7 +196,10 @@ AFRAME.registerComponent("target-finder", {
       let endPointData = this.points.get(this.nearestPointOrder + 1)
 
       if (startPointData && endPointData) {
-        let [bearing, distance] = calculateBearing(startPointData, endPointData)
+        let [bearing, distance] = calculateBearing(
+          startPointData,
+          endPointData
+        ) as [string, string]
         let totalDistance = +distance
         let nextBearing, nextDistance
 
@@ -202,11 +208,12 @@ AFRAME.registerComponent("target-finder", {
           endPointData = this.points.get(this.nearestPointOrder + i)
           // Si no hay más puntos, salimos del bucle
           if (!endPointData) break
-          ;[nextBearing, nextDistance] = calculateBearing(
-            startPointData,
-            endPointData
-          )
-
+          const bearingDistance = calculateBearing(startPointData, endPointData)
+          if (bearingDistance !== null) {
+            ;[nextBearing, nextDistance] = bearingDistance
+          } else {
+            break
+          }
           // Si el bearing cambia, salimos del bucle
           if (bearing !== nextBearing) break
 
@@ -237,7 +244,7 @@ AFRAME.registerComponent("target-finder", {
     let minDistance = Infinity
     let nearestOrder = null
 
-    this.pointsToCheck.forEach((point) => {
+    this.pointsToCheck.forEach((point: any) => {
       const distance = point.object3D.position.distanceTo(
         this.el.object3D.position
       )

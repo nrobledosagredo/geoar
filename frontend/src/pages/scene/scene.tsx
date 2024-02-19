@@ -2,7 +2,7 @@ import { Arrow } from "@/pages/scene/components/arrow"
 import { InfoCard } from "@/pages/scene/components/infocard"
 import { Point } from "@/pages/scene/components/point"
 import { TreeCard } from "@/pages/scene/components/treecard"
-import { config } from "@/pages/scene/config"
+import { config } from "@/pages/scene/scene-config"
 import { getImage } from "@/services/images-service"
 import { useParams } from "react-router-dom"
 
@@ -16,8 +16,8 @@ import "@/lib/color-changer"
 import "@/lib/target-finder"
 import "@/lib/distance-displayer"
 
-const SIMULATE_LONGITUDE = config.SIMULATE_LONGITUDE
-const SIMULATE_LATITUDE = config.SIMULATE_LATITUDE
+const simulateLongitude = config.simulateLongitude
+const simulateLatitude = config.simulateLatitude
 
 export function Scene() {
   const trailId = useParams().id
@@ -79,7 +79,7 @@ export function Scene() {
         stats
       >
         <a-camera
-          gps-new-camera={`gpsMinDistance: 5; simulateLatitude: ${String(SIMULATE_LATITUDE)}; simulateLongitude: ${String(SIMULATE_LONGITUDE)}`}
+          gps-new-camera={`gpsMinDistance: 5; simulateLatitude: ${String(simulateLatitude)}; simulateLongitude: ${String(simulateLongitude)}`}
           target-finder
           //far={CAMERA_MAX_DISTANCE}
         >
@@ -103,8 +103,8 @@ export function Scene() {
             key={index}
             id={index as any}
             name={infoCard.name}
-            description={infoCard.description}
-            imageSrc={`/infocards/${encodeURIComponent(
+            description={infoCard.description.replace(/\. /g, ".\n\n")}
+            image={`/infocards/${encodeURIComponent(
               Array.isArray(infoCard.images)
                 ? infoCard.images[0]
                 : infoCard.images
@@ -136,7 +136,7 @@ export function Scene() {
                 description: "",
               }
             }
-            imageSrc={getImage(
+            image={getImage(
               tree.treeCard?.images ? tree.treeCard.images[0] : ""
             )}
             longitude={tree.geometry.coordinates[0]}

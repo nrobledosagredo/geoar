@@ -2,17 +2,17 @@
 import { CircleProps } from "@/types/scene-types"
 
 export function Circle({
-  src,
-  isExpanded,
   latitude,
   longitude,
   scale,
+  yPosition,
+  image,
+  color,
+  isExpanded,
   handleToggleClick,
-  torusColor,
-  cardYPosition,
 }: CircleProps) {
   // Configuraciones para las líneas
-  const numberOfLines = 15 // Número total de líneas
+  const numberOfLines = 20 // Número total de líneas
   const spacing = 4 // Espaciado entre cada línea
   const lineLength = 2 // Longitud de cada línea
 
@@ -22,14 +22,14 @@ export function Circle({
     const start = -5 - i * spacing
     const end = start - lineLength
     lineProps[`line__${i + 1}`] =
-      `start: 0 ${start} 0; end: 0 ${end} 0; color: #020617`
+      `start: 0 ${start} 0; end: 0 ${end} 0; color: ${color}`
   }
 
   // Configuraciones para el círculo
   const circleScale = isExpanded ? "1 1 1" : "1.5 1.5 1.5"
   const circleOpacity = isExpanded ? "0.75" : "1"
   const linesIsVisible = isExpanded ? "false" : "true"
-  const circleYPosition = -2.4 + cardYPosition
+  const circleYPosition = -2.4 + yPosition
 
   return (
     <a-entity
@@ -40,7 +40,7 @@ export function Circle({
       distance-displayer
     >
       <a-circle
-        src={src}
+        src={image}
         scale={circleScale}
         class="raycastable"
         side="double"
@@ -52,7 +52,7 @@ export function Circle({
           class="raycastable"
           radius="3.5"
           opacity={circleOpacity}
-          color={torusColor}
+          color={color}
         ></a-torus>
       </a-circle>
 

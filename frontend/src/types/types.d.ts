@@ -1,5 +1,9 @@
 // types.d.ts
 declare module "leaflet-ant-path"
+
+declare const AFRAME: any
+declare const THREE: any
+
 declare namespace JSX {
   interface IntrinsicElements {
     "a-scene": any
@@ -12,9 +16,9 @@ declare namespace JSX {
     "a-box": any
     "a-cylinder": any
     "a-plane": any
-    "a-sky": any
-    "a-light": any
     "a-circle": any
     "a-torus": any
+    "a-camera": any
+    "a-image": any
   }
 }

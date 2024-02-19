@@ -1,3 +1,4 @@
+// use-media-query.ts
 import { useEffect, useState } from "react"
 
 export function useMediaQuery(query: string) {
