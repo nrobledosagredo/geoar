@@ -1,6 +1,5 @@
 // arrow.tsx
-import { config } from "@/pages/scene/scene-config"
-
+import { config } from "@/lib/scene-config"
 import { useUpdateTarget } from "@/hooks/use-update-target"
 
 const arrowScale = config.arrowScale
@@ -8,7 +7,7 @@ const arrowPositionX = config.arrowPositionX
 const arrowPositionY = config.arrowPositionY
 const arrowPositionZ = config.arrowPositionZ
 
-export function Arrow() {
+export function SceneArrow() {
   const target = useUpdateTarget()
 
   return (

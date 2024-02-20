@@ -4,8 +4,8 @@ import { useTranslation } from "react-i18next"
 import { Link } from "react-router-dom"
 
 import { Button } from "@/components/ui/button"
-import { LogoVertical } from "@/components/logo-vertical"
 import { MainNav } from "@/components/main-nav"
+import { VerticalLogo } from "@/components/vertical-logo"
 
 export function Home() {
   const { t } = useTranslation()
@@ -17,7 +17,7 @@ export function Home() {
       {/* Contenedor de la página de inicio */}
       <div className="flex flex-col flex-1 justify-center text-center p-6 space-y-8">
         {/* Título */}
-        <LogoVertical />
+        <VerticalLogo />
 
         {/* Descripción */}
         <p className="text-xl text-muted-foreground pb-4">

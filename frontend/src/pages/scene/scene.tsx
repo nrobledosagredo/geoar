@@ -1,13 +1,14 @@
-import { useParams } from "react-router-dom"
-import { config } from "@/pages/scene/scene-config"
-import { Arrow } from "@/pages/scene/components/arrow"
-import { InfoCard } from "@/pages/scene/components/infocard"
-import { Point } from "@/pages/scene/components/point"
-import { TreeCard } from "@/pages/scene/components/treecard"
-import { DirectionBar} from "@/pages/scene/components/direction-bar"
-
-
+import { SceneArrow } from "@/pages/scene/components/scene-arrow"
+import { SceneInfoCard } from "@/pages/scene/components/scene-infocard"
+import { SceneMap } from "@/pages/scene/components/scene-map"
+import { SceneNav } from "@/pages/scene/components/scene-nav"
+import { ScenePoint } from "@/pages/scene/components/scene-point"
+import { SceneTreeCard } from "@/pages/scene/components/scene-treecard"
+import { SceneLoadingScreen } from "@/pages/scene/components/scene-loading-screen"
 import { getImage } from "@/services/images-service"
+import { useParams } from "react-router-dom"
+
+import { config } from "@/lib/scene-config"
 import { useGetInfoCardsByTrail } from "@/hooks/use-get-infocards-by-trail"
 import { useGetPoints } from "@/hooks/use-get-points"
 import { useGetTrail } from "@/hooks/use-get-trail"
@@ -46,7 +47,6 @@ export function Scene() {
     error: treeCardsError,
   } = useGetTreeCards()
 
-  //TODO: Agregar pantalla de carga
   if (
     trailLoading ||
     pointsLoading ||
@@ -54,7 +54,7 @@ export function Scene() {
     treesLoading ||
     treeCardsLoading
   )
-    return <p>Loading...</p>
+  return <SceneLoadingScreen />;
 
   //TODO: Agregar algún tipo de manejo de errores
   if (
@@ -73,10 +73,14 @@ export function Scene() {
 
   return (
     <div className="relative bg-opacity-0 h-screen">
-
       {/* Barra de dirección */}
       <div className="relative z-50">
-        <DirectionBar />
+        <SceneNav />
+      </div>
+
+      {/* Mapa */}
+      <div className="relative z-50">
+        <SceneMap points={points} infoCards={infoCards} trees={trees} />
       </div>
 
       <a-scene
@@ -93,12 +97,12 @@ export function Scene() {
           far={cameraMaxDistance}
         >
           {/* Flecha 3D que apunta al siguiente punto */}
-          <Arrow />
+          <SceneArrow />
         </a-camera>
 
         {/* Puntos del sendero */}
         {points.map((point, index) => (
-          <Point
+          <ScenePoint
             key={index}
             longitude={point.geometry.coordinates[0]}
             latitude={point.geometry.coordinates[1]}
@@ -108,7 +112,7 @@ export function Scene() {
 
         {/* infoCards */}
         {infoCards.map((infoCard, index) => (
-          <InfoCard
+          <SceneInfoCard
             key={index}
             id={index as any}
             name={infoCard.name}
@@ -125,7 +129,7 @@ export function Scene() {
 
         {/* treeCards */}
         {treesExtended.map((tree, index) => (
-          <TreeCard
+          <SceneTreeCard
             key={index}
             name={tree.treeCard?.binomialName ?? ""}
             taxonomy={

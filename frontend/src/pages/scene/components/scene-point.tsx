@@ -1,14 +1,13 @@
 // point.tsx
-import { config } from "@/pages/scene/scene-config"
-
 import { PointProps } from "@/types/scene-types"
+import { config } from "@/lib/scene-config"
 
 import robotoRegular from "/fonts/Roboto/Roboto-Regular.ttf"
 
 const cameraHeight = config.cameraHeight
 const pointIsVisible = config.pointIsVisible
 
-export function Point({ latitude, longitude, order }: PointProps) {
+export function ScenePoint({ latitude, longitude, order }: PointProps) {
   return (
     <>
       {/* Esfera 3D que representa el punto */}

@@ -1,10 +1,10 @@
 // treecard.tsx
 import { useRef } from "react"
-import { Circle } from "@/pages/scene/components/circle"
-import { config } from "@/pages/scene/scene-config"
+import { SceneCircle } from "@/pages/scene/components/scene-circle"
 import { useTranslation } from "react-i18next"
 
 import { TreeCardProps } from "@/types/scene-types"
+import { config } from "@/lib/scene-config"
 import { useToggleClick } from "@/hooks/use-toggle-click"
 
 import robotoBold from "/fonts/Roboto/Roboto-Bold.ttf"
@@ -31,7 +31,7 @@ const conservationStatusColors: {
   EX: { circleColor: "#000000", textColor: "#cd3030", text: "EX" },
 }
 
-export function TreeCard({
+export function SceneTreeCard({
   name,
   taxonomy,
   conservationStatus,
@@ -46,7 +46,7 @@ export function TreeCard({
   return (
     <>
       {/* Componente de círculo que actúa como marcador */}
-      <Circle
+      <SceneCircle
         latitude={latitude}
         longitude={longitude}
         scale={cardScale}

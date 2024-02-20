@@ -1,4 +1,6 @@
+// trail-search-bar.tsx
 import { useState } from "react"
+import { TrailSearchForm } from "@/pages/trails/components/trail-search-form"
 import { Search } from "lucide-react"
 import { useTranslation } from "react-i18next"
 
@@ -12,13 +14,12 @@ import {
   DrawerHeader,
   DrawerTrigger,
 } from "@/components/ui/drawer"
-import { SearchForm } from "@/components/search-form"
 
 // Props del componente SearchBar
-type SearchProps = {
+type TrailSearchProps = {
   onSearch: (searchTerm: string) => void
 }
-export function SearchBar({ onSearch }: SearchProps) {
+export function TrailSearchBar({ onSearch }: TrailSearchProps) {
   const { t } = useTranslation()
   const [open, setOpen] = useState(false)
   const isDesktop = useMediaQuery("(min-width: 768px)")
@@ -39,7 +40,7 @@ export function SearchBar({ onSearch }: SearchProps) {
 
         {/* Contenido del diálogo de búsqueda */}
         <DialogContent className="rounded-lg">
-          <SearchForm onSearch={onSearch} />
+          <TrailSearchForm onSearch={onSearch} />
         </DialogContent>
       </Dialog>
     )
@@ -58,7 +59,7 @@ export function SearchBar({ onSearch }: SearchProps) {
       </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader className="pt-2"></DrawerHeader>
-        <SearchForm onSearch={onSearch} />
+        <TrailSearchForm onSearch={onSearch} />
         <DrawerFooter className="pt-2"></DrawerFooter>
       </DrawerContent>
     </Drawer>

@@ -6,16 +6,18 @@ import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet"
 import "leaflet/dist/leaflet.css"
 
 import { TrailExtended } from "@/types/trail-types"
-import { infoCardIcon, primaryPathOptions, treeIcon } from "@/lib/map-utils"
+import { infoCardIcon, primaryPathOptions, treeIcon } from "@/lib/map-config"
+import { config } from "@/lib/scene-config"
 import { useGetPoints } from "@/hooks/use-get-points"
 import { useGetTrees } from "@/hooks/use-get-trees"
 import { useToast } from "@/components/ui/use-toast"
 import { MapPathLayer } from "@/components/map-path-layer"
 import { useTheme } from "@/components/theme-provider"
 
+const defaultLatitude = config.simulateLatitude
+const defaultLongitude = config.simulateLongitude
+
 export function TrailMap({ trail }: { trail: TrailExtended }) {
-  const DEFAULT_LAT = -39.8046
-  const DEFAULT_LNG = -73.24997
   const { theme } = useTheme()
   const { toast } = useToast()
   const {
@@ -63,7 +65,7 @@ export function TrailMap({ trail }: { trail: TrailExtended }) {
         </div>
       ) : (
         <MapContainer
-          center={[DEFAULT_LAT, DEFAULT_LNG]}
+          center={[defaultLatitude, defaultLongitude]}
           zoom={17}
           scrollWheelZoom={false}
           zoomControl={false}

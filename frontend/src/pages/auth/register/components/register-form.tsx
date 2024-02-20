@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom"
 import { z } from "zod"
 import { makeZodI18nMap } from "zod-i18n-map"
 
-import { auth } from "@/lib/firebase"
+import { auth } from "@/lib/firebase-config"
 import { getErrorMessage } from "@/lib/get-error-message"
 import { cn } from "@/lib/utils"
 import { useCreateUser } from "@/hooks/use-create-user"

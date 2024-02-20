@@ -4,6 +4,7 @@ import { TrailCarousel } from "@/pages/trails/components/trail-carousel"
 import { TrailDetails } from "@/pages/trails/components/trail-details"
 import { TrailDrawer } from "@/pages/trails/components/trail-drawer"
 import { TrailPagination } from "@/pages/trails/components/trail-pagination"
+import { TrailSearchBar } from "@/pages/trails/components/trail-search-bar"
 import { TrailSkeleton } from "@/pages/trails/components/trail-skeleton"
 import { SearchX } from "lucide-react"
 import { useTranslation } from "react-i18next"
@@ -21,7 +22,6 @@ import {
 } from "@/components/ui/card"
 import { useToast } from "@/components/ui/use-toast"
 import { MainNav } from "@/components/main-nav"
-import { SearchBar } from "@/components/search-bar"
 
 export function Trails() {
   const { trails, loading: trailsLoading, error: trailsError } = useGetTrails()
@@ -91,7 +91,7 @@ export function Trails() {
         <MainNav />
         <div className="pointer-events-none absolute top-3 w-full pl-32 pr-16  md:w-[350px] md:px-0 md:right-16">
           <div className="w-full pointer-events-auto">
-            <SearchBar onSearch={setSearchTerm} />
+            <TrailSearchBar onSearch={setSearchTerm} />
           </div>
         </div>
       </div>

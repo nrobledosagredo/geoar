@@ -1,4 +1,4 @@
-// useTextScrolling.ts
+// useTextScroll.ts
 import { useEffect, useRef } from "react"
 
 export function useTextScroll(

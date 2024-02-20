@@ -1,7 +1,8 @@
+// horizontal-logo.tsx
 import { Trees } from "lucide-react"
 import { Link } from "react-router-dom"
 
-export const LogoHorizontal = () => {
+export const HorizontalLogo = () => {
   return (
     <Link to="/" className="flex flex-row items-center no-underline ml-[-3px]">
       {/* Logo de la aplicación */}

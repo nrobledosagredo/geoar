@@ -71,5 +71,4 @@ export function getWalkingInstruction(
   const direction = getCardinalDirection(bearing)
 
   return [direction, distance.toFixed(0)]
-  //return `Walk ${direction} for ${distance.toFixed(2)} meters.`;
 }

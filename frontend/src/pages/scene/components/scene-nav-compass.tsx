@@ -1,11 +1,11 @@
-// direction-compass-button.tsx
-import { useGetOrientation } from "@/hooks/use-get-orientation.ts"
+// scene-nav-compass.tsx
+import { useGetDeviceOrientation } from "@/hooks/use-get-device-orientation.ts"
 import { Button } from "@/components/ui/button"
 
 import compassIcon from "/icons/compass.png"
 
-export function DirectionCompassButton() {
-  const orientation = useGetOrientation()
+export function SceneNavCompass() {
+  const deviceOrientation = useGetDeviceOrientation()
 
   return (
     <div className="flex justify-center items-center">
@@ -17,7 +17,8 @@ export function DirectionCompassButton() {
         <img
           src={compassIcon}
           alt="Compass"
-          className={`h-12 w-12 object-contain rotate-[${orientation}deg]`}
+          className="h-12 w-12 object-contain"
+          style={{ transform: `rotate(${deviceOrientation}deg)` }}
         />
       </Button>
     </div>

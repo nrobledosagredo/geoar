@@ -4,8 +4,8 @@ import { LoginForm } from "@/pages/auth/login/components/login-form"
 import { useTranslation } from "react-i18next"
 import { Link } from "react-router-dom"
 
-import { LogoVertical } from "@/components/logo-vertical"
 import { SignInAnonymouslyButton } from "@/components/sign-in-anonymously-button"
+import { VerticalLogo } from "@/components/vertical-logo"
 
 export function Login() {
   const { t } = useTranslation()
@@ -14,7 +14,7 @@ export function Login() {
     <div className="flex flex-col min-h-screen max-w-sm mx-auto">
       {/* Logo */}
       <div className="flex flex-grow items-center justify-center scale-75">
-        <LogoVertical />
+        <VerticalLogo />
       </div>
 
       {/* Titulo del formulario */}

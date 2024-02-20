@@ -1,7 +1,7 @@
 // circle.tsx
 import { CircleProps } from "@/types/scene-types"
 
-export function Circle({
+export function SceneCircle({
   latitude,
   longitude,
   scale,

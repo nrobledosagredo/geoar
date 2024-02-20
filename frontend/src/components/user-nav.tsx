@@ -1,9 +1,10 @@
+// user-nav.tsx
 import { signOut } from "firebase/auth"
 import { LogOut, Menu, Settings, User } from "lucide-react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
 
-import { auth } from "@/lib/firebase"
+import { auth } from "@/lib/firebase-config"
 import { useUser } from "@/hooks/use-user"
 import { Button } from "@/components/ui/button"
 import {

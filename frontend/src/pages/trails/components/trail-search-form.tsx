@@ -1,3 +1,4 @@
+// trail-search-form.tsx
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Search } from "lucide-react"
 import { useForm } from "react-hook-form"
@@ -15,10 +16,10 @@ const SearchSchema = z.object({
 })
 
 // Props del componente SearchBar
-type SearchProps = {
+type TrailSearchProps = {
   onSearch: (searchTerm: string) => void
 }
-export function SearchForm({ onSearch }: SearchProps) {
+export function TrailSearchForm({ onSearch }: TrailSearchProps) {
   const { t } = useTranslation()
   const form = useForm<z.infer<typeof SearchSchema>>({
     resolver: zodResolver(SearchSchema),

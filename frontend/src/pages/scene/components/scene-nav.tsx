@@ -1,50 +1,45 @@
-// DirectionBar.jsx
-import { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
+// scene-nav.tsx
+import { useEffect, useState } from "react"
+import { SceneNavCompass } from "@/pages/scene/components/scene-nav-compass"
+import { SceneNavIcon } from "@/pages/scene/components/scene-nav-icon"
+import { SceneNavText } from "@/pages/scene/components/scene-nav-text"
+import { SceneNavToggleSpeech } from "@/pages/scene/components/scene-nav-toggle-speech"
+import { Flag, Trophy } from "lucide-react"
+import { useTranslation } from "react-i18next"
 
-import { DirectionDistance } from "@/pages/scene/components/direction-distance";
-import { DirectionIcon } from "@/pages/scene/components/direction-icon";
-import { DirectionSpeechButton } from "@/pages/scene/components/direction-speech-button";
-import { DirectionCompassButton } from "@/pages/scene/components/direction-compass-button";
-import { Flag, Trophy } from "lucide-react";
-
-export function DirectionBar () {
+export function SceneNav() {
   // Variables de estado
-  const { t } = useTranslation();
-  const [bearing, setBearing] = useState(null);
-  const [distance, setDistance] = useState(null);
-  const [statusCode, setStatusCode] = useState(null);
+  const { t } = useTranslation()
+  const [bearing, setBearing] = useState<string | null>(null)
+  const [distance, setDistance] = useState<string | null>(null)
+  const [statusCode, setStatusCode] = useState<null | string>(null)
 
   useEffect(() => {
-    // Manejador para el inicio del sendero
-    const handleTrailStart = (event) => {
-      // Lógica para manejar el inicio del sendero
-      setStatusCode("start");
-    };
+    const handleTrailStart = () => {
+      setStatusCode("start")
+    }
 
-    // Manejador para el final del sendero
-    const handleTrailEnd = (event) => {
-      // Lógica para manejar el final del sendero
-      setStatusCode("end");
-    };
+    const handleTrailEnd = () => {
+      setStatusCode("end")
+    }
 
-    // Manejador para el cambio de dirección
-    const handleBearingChange = (event) => {
-      setBearing(event.detail.bearing);
-      setDistance(event.detail.distance);
-      setStatusCode(null);
-    };
+    const handleBearingChange = (event: Event) => {
+      const customEvent = event as CustomEvent
+      setBearing(customEvent.detail.bearing)
+      setDistance(customEvent.detail.distance)
+      setStatusCode(null)
+    }
 
-    document.addEventListener("trailStarted", handleTrailStart);
-    document.addEventListener("trailEnded", handleTrailEnd);
-    document.addEventListener("bearingChanged", handleBearingChange);
+    document.addEventListener("trailStarted", handleTrailStart)
+    document.addEventListener("trailEnded", handleTrailEnd)
+    document.addEventListener("bearingChanged", handleBearingChange)
 
     return () => {
-      document.removeEventListener("trailStarted", handleTrailStart);
-      document.removeEventListener("trailEnded", handleTrailEnd);
-      document.removeEventListener("bearingChanged", handleBearingChange);
-    };
-  }, []);
+      document.removeEventListener("trailStarted", handleTrailStart)
+      document.removeEventListener("trailEnded", handleTrailEnd)
+      document.removeEventListener("bearingChanged", handleBearingChange)
+    }
+  }, [])
 
   // Renderizado condicional basado en el estado del sendero
   const renderDirectionBarContent = () => {
@@ -70,7 +65,7 @@ export function DirectionBar () {
               </div>
             </div>
           </>
-        );
+        )
 
       // Contenido para el final del sendero
       case "end":
@@ -83,7 +78,6 @@ export function DirectionBar () {
               </div>
             </div>
 
-
             {/* ------------ Sección derecha -----------*/}
             <div className="w-2/3 flex">
               <div className="flex-1 flex items-center justify-left">
@@ -93,7 +87,7 @@ export function DirectionBar () {
               </div>
             </div>
           </>
-        );
+        )
 
       // Contenido normal para la navegación del sendero
       default:
@@ -102,11 +96,11 @@ export function DirectionBar () {
             {/* ------------ Sección izquierda -----------*/}
             <div className="w-1/4 flex flex-col">
               <div className="flex-1 flex items-center justify-center">
-                <DirectionIcon direction={bearing} />
+                <SceneNavIcon direction={bearing || ""} />
               </div>
 
               <div className="flex-1 flex items-center justify-center">
-                <DirectionDistance distance={distance} />
+                <SceneNavText distance={distance ?? ""} />
               </div>
             </div>
 
@@ -121,9 +115,9 @@ export function DirectionBar () {
               </div>
             </div>
           </>
-        );
+        )
     }
-  };
+  }
 
   return (
     <div className="h-24 flex mx-1 my-1 rounded-xl bg-green-600 text-white bg-opacity-95">
@@ -131,9 +125,12 @@ export function DirectionBar () {
 
       {/* ------------- Barra vertical de botones ------------*/}
       <div className="absolute right-0 top-0 translate-y-24 h-full flex flex-col items-center mx-4 my-4 space-y-4">
-        <DirectionCompassButton />
-        <DirectionSpeechButton bearing={bearing} distance={distance} />
+        <SceneNavCompass />
+        <SceneNavToggleSpeech
+          bearing={bearing ?? ""}
+          distance={distance ?? ""}
+        />
       </div>
     </div>
-  );
-};
+  )
+}

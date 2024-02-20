@@ -53,3 +53,30 @@ export interface TreeCardProps {
   latitude: number
   longitude: number
 }
+
+type Point = {
+  order: number
+  geometry: {
+    coordinates: [number, number]
+  }
+}
+
+type InfoCard = {
+  name: string
+  geometry: {
+    coordinates: [number, number]
+  }
+}
+
+type Tree = {
+  name: string
+  geometry: {
+    coordinates: [number, number]
+  }
+}
+
+export interface SceneMapProps {
+  points: Point[]
+  infoCards: InfoCard[]
+  trees: Tree[]
+}

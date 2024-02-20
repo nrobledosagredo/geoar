@@ -1,3 +1,4 @@
+// use-get-infocards-by-trail.ts
 import { useEffect, useState } from "react"
 import { getInfoCard } from "@/services/infocards-service"
 

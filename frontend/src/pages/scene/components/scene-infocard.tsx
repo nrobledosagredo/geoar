@@ -1,9 +1,9 @@
 // infocard.tsx
 import { useRef, useState } from "react"
-import { Circle } from "@/pages/scene/components/circle"
-import { config } from "@/pages/scene/scene-config"
+import { SceneCircle } from "@/pages/scene/components/scene-circle"
 
 import { InfoCardProps } from "@/types/scene-types"
+import { config } from "@/lib/scene-config"
 import { useMaxScroll } from "@/hooks/use-max-scroll"
 import { useTextScroll } from "@/hooks/use-text-scroll"
 import { useToggleClick } from "@/hooks/use-toggle-click"
@@ -24,7 +24,7 @@ const cardScale = config.cardScale
 const cardDelay = config.cardDelay
 const cameraHeight = config.cameraHeight
 
-export function InfoCard({
+export function SceneInfoCard({
   id,
   name,
   description,
@@ -45,7 +45,7 @@ export function InfoCard({
   return (
     <>
       {/* Componente de círculo que actúa como marcador */}
-      <Circle
+      <SceneCircle
         latitude={latitude}
         longitude={longitude}
         scale={cardScale}

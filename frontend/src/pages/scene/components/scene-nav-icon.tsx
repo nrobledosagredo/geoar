@@ -1,4 +1,4 @@
-// direction-icon.tsx
+// scene-nav-icon.tsx
 import {
   MoveDown,
   MoveDownLeft,
@@ -21,7 +21,7 @@ const arrowIcons: { [key: string]: JSX.Element } = {
   Northwest: <MoveUpLeft />,
 }
 
-export function DirectionIcon({ direction }: { direction: string }) {
+export function SceneNavIcon({ direction }: { direction: string }) {
   const Icon = arrowIcons[direction] || null
 
   return <div className="text-5xl mb-[-16px]">{Icon}</div>

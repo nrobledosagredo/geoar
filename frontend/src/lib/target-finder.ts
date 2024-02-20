@@ -1,12 +1,8 @@
-import { config } from "@/pages/scene/scene-config"
-
 import { getWalkingInstruction } from "@/lib/get-walking-instruction"
+import { config } from "@/lib/scene-config"
 
-//const updateInterval = parseInt(config.updateInterval, 10);
-const firstPointThreshold = config.firstPointThreshold
-const searchRadius = config.searchRadius
-const orderIncrement = config.orderIncrement
-const loadingDelay = config.loadingDelay
+const { firstPointThreshold, searchRadius, orderIncrement, loadingDelay } =
+  config
 
 function calculateBearing(
   startElement: { dataset: { latitude: string; longitude: string } },
@@ -54,8 +50,9 @@ AFRAME.registerComponent("target-finder", {
     this.nextBearing = null // Variable para almacenar el siguiente bearing
 
     // Esperar a que se cargue el DOM antes de llamar a cachePoints
-    await new Promise((resolve) => setTimeout(resolve, loadingDelay))
-    this.cachePoints()
+    //await new Promise((resolve) => setTimeout(resolve, loadingDelay))
+    await this.cachePoints()
+    
   },
 
   /*

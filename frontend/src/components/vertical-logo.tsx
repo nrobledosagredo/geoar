@@ -1,7 +1,7 @@
-// logo-vertical.jsx
+// vertical-logo.jsx
 import { Trees } from "lucide-react"
 
-export const LogoVertical = () => {
+export const VerticalLogo = () => {
   return (
     <div className="flex flex-col items-center">
       {/* Logo de la aplicación */}

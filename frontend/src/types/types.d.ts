@@ -1,4 +1,3 @@
-// types.d.ts
 declare module "leaflet-ant-path"
 
 declare const AFRAME: any
