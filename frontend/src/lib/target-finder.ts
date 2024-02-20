@@ -1,7 +1,7 @@
 import { getWalkingInstruction } from "@/lib/get-walking-instruction"
 import { config } from "@/lib/scene-config"
 
-const { firstPointThreshold, searchRadius, orderIncrement, loadingDelay } =
+const { firstPointThreshold, searchRadius, orderIncrement } =
   config
 
 function calculateBearing(
