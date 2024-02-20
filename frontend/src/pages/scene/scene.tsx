@@ -1,10 +1,11 @@
+import { useEffect } from "react"
 import { SceneArrow } from "@/pages/scene/components/scene-arrow"
 import { SceneInfoCard } from "@/pages/scene/components/scene-infocard"
+import { SceneLoadingScreen } from "@/pages/scene/components/scene-loading-screen"
 import { SceneMap } from "@/pages/scene/components/scene-map"
 import { SceneNav } from "@/pages/scene/components/scene-nav"
 import { ScenePoint } from "@/pages/scene/components/scene-point"
 import { SceneTreeCard } from "@/pages/scene/components/scene-treecard"
-import { SceneLoadingScreen } from "@/pages/scene/components/scene-loading-screen"
 import { getImage } from "@/services/images-service"
 import { useParams } from "react-router-dom"
 
@@ -14,72 +15,88 @@ import { useGetPoints } from "@/hooks/use-get-points"
 import { useGetTrail } from "@/hooks/use-get-trail"
 import { useGetTreeCards } from "@/hooks/use-get-treecards"
 import { useGetTrees } from "@/hooks/use-get-trees"
+import { useToast } from "@/components/ui/use-toast"
 
 import "@/lib/color-changer"
 import "@/lib/target-finder"
 import "@/lib/distance-displayer"
 
-const simulateLongitude = config.simulateLongitude
-const simulateLatitude = config.simulateLatitude
-const cameraMaxDistance = config.cameraMaxDistance
+const { simulateLatitude, simulateLongitude, cameraMaxDistance } = config
 
 export function Scene() {
+  const { toast } = useToast()
   const trailId = useParams().id
+
   const {
     trail,
     loading: trailLoading,
     error: trailError,
   } = useGetTrail(trailId as string)
+
   const {
     points,
     loading: pointsLoading,
     error: pointsError,
   } = useGetPoints(trailId as string)
+
   const {
     infoCards,
     loading: infoCardsLoading,
     error: infoCardsError,
   } = useGetInfoCardsByTrail(trail as any)
+
   const { trees, loading: treesLoading, error: treesError } = useGetTrees()
+
   const {
     treeCards,
     loading: treeCardsLoading,
     error: treeCardsError,
   } = useGetTreeCards()
 
-  if (
-    trailLoading ||
-    pointsLoading ||
-    infoCardsLoading ||
-    treesLoading ||
-    treeCardsLoading
-  )
-  return <SceneLoadingScreen />;
-
-  //TODO: Agregar algún tipo de manejo de errores
-  if (
-    trailError ||
-    pointsError ||
-    infoCardsError ||
-    treesError ||
-    treeCardsError
-  )
-    return <p>Error</p>
-
   const treesExtended = trees.map((tree) => {
     const treeCard = treeCards.find((card) => card._id === tree.treeCard)
     return { ...tree, treeCard }
   })
 
-  return (
+  const loading =
+    trailLoading ||
+    pointsLoading ||
+    infoCardsLoading ||
+    treesLoading ||
+    treeCardsLoading
+
+  const error =
+    trailError || pointsError || infoCardsError || treesError || treeCardsError
+
+  // Toast con errores
+  useEffect(() => {
+    if (error) {
+      toast({
+        title: "Error",
+        description: "Error",
+        variant: "destructive",
+      })
+    }
+  }, [error, toast])
+
+  return loading ? (
+    <SceneLoadingScreen />
+  ) : (
     <div className="relative bg-opacity-0 h-screen">
+      {/* Overlay de pantalla de carga */}
+      {loading && (
+        <div className="absolute top-0 left-0 w-full h-full z-50">
+          <SceneLoadingScreen />
+        </div>
+      )}
+
       {/* Barra de dirección */}
-      <div className="relative z-50">
+      <div className="relative z-40">
         <SceneNav />
       </div>
 
       {/* Mapa */}
-      <div className="relative z-50">
+      <div className="relative z-40">
         <SceneMap points={points} infoCards={infoCards} trees={trees} />
       </div>
 

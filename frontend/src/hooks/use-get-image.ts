@@ -8,7 +8,7 @@ export function useGetImage(url: string) {
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    const fetchImage = async () => {
+    async function fetchImage() {
       try {
         setLoading(true)
         const proxiedUrl = await getImage(url)

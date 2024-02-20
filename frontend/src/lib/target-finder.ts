@@ -52,7 +52,6 @@ AFRAME.registerComponent("target-finder", {
     // Esperar a que se cargue el DOM antes de llamar a cachePoints
     //await new Promise((resolve) => setTimeout(resolve, loadingDelay))
     await this.cachePoints()
-    
   },
 
   /*
@@ -106,6 +105,7 @@ AFRAME.registerComponent("target-finder", {
     })
     this.lastPointOrder = maxOrder // Establece el último order después de iterar todos los puntos
     this.pointsCached = true
+    document.dispatchEvent(new CustomEvent('pointsCached'));
     //console.log("El último punto tiene el order:", this.lastPointOrder);
   },
 

@@ -13,7 +13,7 @@ export function useGetTrails() {
   const { language } = useLanguage()
 
   useEffect(() => {
-    const handleGetTrails = async () => {
+    async function handleGetTrails() {
       try {
         setLoading(true)
         const trails = await getTrails()
