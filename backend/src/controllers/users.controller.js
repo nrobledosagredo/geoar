@@ -28,3 +28,44 @@ export async function createUser(req, res) {
       .json({ message: "Error creating user", error: error.message })
   }
 }
+
+// Obtiene los datos de un usuario específico
+export async function getUser(req, res) {
+  try {
+    const { userId } = req.params;
+
+    const user = await User.findOne({ userId });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.status(200).json(user);
+  } catch (error) {
+    console.error("Error al obtener el usuario:", error);
+    res.status(500).json({ message: "Error getting user", error: error.message });
+  }
+}
+
+// Actualiza los datos de un usuario existente
+export async function updateUser(req, res) {
+  try {
+    const { userId } = req.params;
+    const updateData = req.body;
+
+    const updatedUser = await User.findOneAndUpdate(
+      { userId },
+      updateData,
+      { new: true }
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.status(200).json(updatedUser);
+  } catch (error) {
+    console.error("Error al actualizar el usuario:", error);
+    res.status(500).json({ message: "Error updating user", error: error.message });
+  }
+}

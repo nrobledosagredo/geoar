@@ -1,8 +1,7 @@
 import { getWalkingInstruction } from "@/lib/get-walking-instruction"
 import { config } from "@/lib/scene-config"
 
-const { firstPointThreshold, searchRadius, orderIncrement } =
-  config
+const { firstPointThreshold, searchRadius, orderIncrement } = config
 
 function calculateBearing(
   startElement: { dataset: { latitude: string; longitude: string } },
@@ -105,7 +104,7 @@ AFRAME.registerComponent("target-finder", {
     })
     this.lastPointOrder = maxOrder // Establece el último order después de iterar todos los puntos
     this.pointsCached = true
-    document.dispatchEvent(new CustomEvent('pointsCached'));
+    document.dispatchEvent(new CustomEvent("pointsCached"))
     //console.log("El último punto tiene el order:", this.lastPointOrder);
   },
 

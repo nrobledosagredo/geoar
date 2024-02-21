@@ -1,30 +1,34 @@
 // scene-loading-screen.tsx
-import { useState, useEffect } from "react";
-import { useTranslation } from "react-i18next";
-import { VerticalLogo } from "@/components/vertical-logo";
+import { useEffect, useState } from "react"
+import { useTranslation } from "react-i18next"
+
+import { VerticalLogo } from "@/components/vertical-logo"
+
 //import useRequestPermissions from '@/hooks/use-request-permissions';
 
 export function SceneLoadingScreen() {
-  const { t } = useTranslation();
-  const [currentText, setCurrentText] = useState(0);
-  const [texts, setTexts] = useState([t("loading1"), t("loading2"), t("loading3")]);
+  const { t } = useTranslation()
+  const [currentText, setCurrentText] = useState(0)
+  const [texts, setTexts] = useState([
+    t("loading1"),
+    t("loading2"),
+    t("loading3"),
+  ])
 
   //useRequestPermissions();
 
   useEffect(() => {
-    setTexts([t("loading1"), t("loading2"), t("loading3")]);
-    
+    setTexts([t("loading1"), t("loading2"), t("loading3")])
+
     const intervalId = setInterval(() => {
-      setCurrentText((currentText) => (currentText + 1) % texts.length);
-    }, 3000);
-  
-    return () => clearInterval(intervalId);
-  }, [t]);
-  
+      setCurrentText((currentText) => (currentText + 1) % texts.length)
+    }, 3000)
+
+    return () => clearInterval(intervalId)
+  }, [t])
 
   return (
     <div className="fixed inset-0 bg-background flex flex-col justify-between h-screen">
-
       {/* Logo */}
       <div className="flex items-center justify-center h-1/3 pt-20">
         <VerticalLogo />
@@ -37,10 +41,8 @@ export function SceneLoadingScreen() {
 
       {/* Textos */}
       <div className="flex items-center justify-center h-1/3">
-        <p className="text-3xl font-semibold mb-60">
-          {texts[currentText]}
-        </p>
+        <p className="text-3xl font-semibold mb-60">{texts[currentText]}</p>
       </div>
     </div>
-  );
-};
+  )
+}

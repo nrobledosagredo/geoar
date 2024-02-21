@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import { accountSchema } from "@/pages/account/components/account-schema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { format, Locale } from "date-fns"
@@ -10,7 +11,10 @@ import { z } from "zod"
 import { makeZodI18nMap } from "zod-i18n-map"
 
 import { cn } from "@/lib/utils"
+import { useGetUser } from "@/hooks/use-get-user"
 import { useLanguage } from "@/hooks/use-language"
+import { useUpdateUser } from "@/hooks/use-update-user"
+import { useUser } from "@/hooks/use-user"
 import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
 import {
@@ -38,12 +42,21 @@ import { toast } from "@/components/ui/use-toast"
 
 type AccountFormValues = z.infer<typeof accountSchema>
 
-const defaultValues: Partial<AccountFormValues> = {
-  // name: "name",
-  // dob: new Date("2023-01-23"),
-}
-
 export function AccountForm() {
+  const user = useUser()
+  const userID = user?.uid
+  const isAnonymous = user?.isAnonymous || false
+  const {
+    user: userAccount,
+    loading: userLoading,
+    error: userError,
+  } = useGetUser(userID || "")
+  const {
+    handleUpdateUser,
+    loading: updateLoading,
+    error: updateError,
+  } = useUpdateUser()
+
   const navigate = useNavigate()
   const { t, i18n } = useTranslation()
   const { language, setLanguage } = useLanguage()
@@ -66,18 +79,43 @@ export function AccountForm() {
   // Lógica del formulario
   const form = useForm<AccountFormValues>({
     resolver: zodResolver(accountSchema),
-    defaultValues,
   })
 
-  function onSubmit(data: AccountFormValues) {
-    navigate(-1)
+  // Actualiza los valores del formulario cuando cambian los datos del usuario
+  useEffect(() => {
+    if (userAccount) {
+      form.reset({
+        ...form.getValues(),
+        dob: userAccount.dob ? new Date(userAccount.dob) : undefined,
+        language: userAccount.language,
+      })
+    }
+  }, [userAccount, form])
+
+  async function onSubmit(data: AccountFormValues) {
+    await handleUpdateUser(userID || "", data)
+    if (!updateError) {
+      // Cambia el idioma de la aplicación
+      changeLanguage(data.language)
+      navigate(-1)
+      toast({
+        title: t("account_toast"),
+        description: (
+          <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+            <code className="text-white">{JSON.stringify(data, null, 2)}</code>
+          </pre>
+        ),
+      })
+    }
+  }
+
+  const loading = userLoading || updateLoading
+
+  const error = userError || updateError
+  if (error) {
     toast({
-      title: t("account_toast"),
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
+      title: t("error"),
+      description: userError,
     })
   }
 
@@ -97,6 +135,7 @@ export function AccountForm() {
                 <PopoverTrigger asChild>
                   <FormControl>
                     <Button
+                      disabled={isAnonymous || loading}
                       variant={"outline"}
                       className={cn(
                         "w-[240px] pl-3 text-left font-normal",
@@ -145,13 +184,14 @@ export function AccountForm() {
                 onValueChange={(value) => {
                   // Actualiza el valor del formulario
                   field.onChange(value)
-                  // Cambia el idioma de la aplicación
-                  changeLanguage(value)
                 }}
                 defaultValue={language}
               >
                 <FormControl>
-                  <SelectTrigger className="w-[240px] pl-3 text-left font-normal">
+                  <SelectTrigger
+                    disabled={loading}
+                    className="w-[240px] pl-3 text-left font-normal"
+                  >
                     <SelectValue placeholder="Select a language" />
                   </SelectTrigger>
                 </FormControl>
@@ -167,7 +207,7 @@ export function AccountForm() {
             </FormItem>
           )}
         />
-        <Button type="submit" className="font-semibold">
+        <Button disabled={loading} type="submit" className="font-semibold">
           {t("account_button")}
         </Button>
       </form>

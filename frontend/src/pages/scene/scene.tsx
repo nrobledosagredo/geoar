@@ -73,7 +73,7 @@ export function Scene() {
     if (error) {
       toast({
         title: "Error",
-        description: "Error",
+        description: error,
         variant: "destructive",
       })
     }
