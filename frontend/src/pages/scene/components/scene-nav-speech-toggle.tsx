@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next"
 import { speak } from "@/lib/speech-synthesis"
 import { Button } from "@/components/ui/button"
 
-export function SceneNavToggleSpeech({
+export function SceneNavSpeechToggle({
   bearing,
   distance,
 }: {
@@ -41,10 +41,10 @@ export function SceneNavToggleSpeech({
         variant="secondary"
         size="icon"
         onClick={toggleSpeech}
-        className="rounded-full transition duration-150 ease-in-out transform active:scale-90 h-16 w-16"
+        className="rounded-full transition duration-150 ease-in-out transform active:scale-90 h-14 w-14"
       >
         {speaking ? (
-          <Volume2 className="text-gray-700 h-10 w-10" />
+          <Volume2 className="h-10 w-10" />
         ) : (
           <VolumeX className="text-[#ef4928] h-10 w-10" />
         )}

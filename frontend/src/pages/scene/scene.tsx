@@ -8,6 +8,7 @@ import { ScenePoint } from "@/pages/scene/components/scene-point"
 import { SceneTreeCard } from "@/pages/scene/components/scene-treecard"
 import { getImage } from "@/services/images-service"
 import { useParams } from "react-router-dom"
+import { SceneCompass} from "@/pages/scene/components/scene-compass"
 
 import { config } from "@/lib/scene-config"
 import { useGetInfoCardsByTrail } from "@/hooks/use-get-infocards-by-trail"
@@ -93,12 +94,14 @@ export function Scene() {
       {/* Barra de dirección */}
       <div className="relative z-40">
         <SceneNav />
+        <SceneCompass />
       </div>
 
       {/* Mapa */}
       <div className="relative z-40">
         <SceneMap points={points} infoCards={infoCards} trees={trees} />
       </div>
+
 
       <a-scene
         vr-mode-ui="enabled: false"
@@ -131,7 +134,7 @@ export function Scene() {
         {infoCards.map((infoCard, index) => (
           <SceneInfoCard
             key={index}
-            id={index as any}
+            id={infoCard._id}
             name={infoCard.name}
             description={infoCard.description.replace(/\. /g, ".\n\n")}
             image={`/infocards/${encodeURIComponent(
@@ -148,6 +151,8 @@ export function Scene() {
         {treesExtended.map((tree, index) => (
           <SceneTreeCard
             key={index}
+            //id={tree.treeCard?._id ?? ""}
+            id={tree._id}
             name={tree.treeCard?.binomialName ?? ""}
             taxonomy={
               tree.treeCard?.taxonomy ?? {

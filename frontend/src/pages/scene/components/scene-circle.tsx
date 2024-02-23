@@ -9,7 +9,7 @@ export function SceneCircle({
   image,
   color,
   isExpanded,
-  handleToggleClick,
+  cardToggle,
 }: CircleProps) {
   // Configuraciones para las líneas
   const numberOfLines = 20 // Número total de líneas
@@ -35,7 +35,7 @@ export function SceneCircle({
     <a-entity
       gps-new-entity-place={`latitude: ${latitude}; longitude: ${longitude}`}
       position={`0 ${circleYPosition} 0`}
-      onClick={handleToggleClick}
+      onClick={cardToggle}
       scale={`${scale} ${scale} ${scale}`}
       distance-displayer
     >

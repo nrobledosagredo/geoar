@@ -5,6 +5,7 @@ export interface Geometry {
 }
 
 export interface Tree {
+  _id: string
   name: string
   geometry: Geometry
   treeCard: string

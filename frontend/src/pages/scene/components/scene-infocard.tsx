@@ -1,4 +1,4 @@
-// infocard.tsx
+// scene-infocard.tsx
 import { useRef, useState } from "react"
 import { SceneCircle } from "@/pages/scene/components/scene-circle"
 
@@ -6,8 +6,10 @@ import { InfoCardProps } from "@/types/scene-types"
 import { config } from "@/lib/scene-config"
 import { useMaxScroll } from "@/hooks/use-max-scroll"
 import { useTextScroll } from "@/hooks/use-text-scroll"
-import { useToggleClick } from "@/hooks/use-toggle-click"
-import { useToggleSpeech } from "@/hooks/use-toggle-speech"
+import { useCardToggle } from "@/hooks/use-card-toggle"
+import { useSpeechToggle } from "@/hooks/use-speech-toggle"
+import { useInteractionDetails } from "@/hooks/use-interaction-details"
+import { Interaction } from "@/types/interaction-types"
 
 import robotoBold from "/fonts/Roboto/Roboto-Bold.ttf"
 import robotoRegular from "/fonts/Roboto/Roboto-Regular.ttf"
@@ -17,12 +19,9 @@ import pauseIcon from "/icons/pause.svg"
 import playIcon from "/icons/play.svg"
 import cardIcon from "/icons/r0.png"
 
+const { cardYPosition, cardScale, cameraHeight } = config
 const cardPrimaryColor = "#ef4928"
 const cardSecondaryColor = "#f9f9f9"
-const cardYPosition = config.cardYPosition
-const cardScale = config.cardScale
-const cardDelay = config.cardDelay
-const cameraHeight = config.cameraHeight
 
 export function SceneInfoCard({
   id,
@@ -33,8 +32,10 @@ export function SceneInfoCard({
   longitude,
 }: InfoCardProps) {
   const ref = useRef<HTMLDivElement>(null)
-  const [isExpanded, handleToggleClick] = useToggleClick(cardDelay)
-  const { speaking, toggleSpeech } = useToggleSpeech(id, description)
+  const cardType = "infoCard"
+  const interactionDetails = useInteractionDetails(id, cardType, latitude, longitude)
+  const [isExpanded, cardToggle] = useCardToggle(interactionDetails as Interaction)
+  const { speaking, speechToggle } = useSpeechToggle(id, description)
   const [scrollPosition, setScrollPosition] = useState(0)
   const maxScrollPosition = useMaxScroll(description)
   const { scrollTextUp, scrollTextDown, stopTextScroll } = useTextScroll(
@@ -53,7 +54,7 @@ export function SceneInfoCard({
         image={cardIcon}
         color={cardPrimaryColor}
         isExpanded={isExpanded}
-        handleToggleClick={handleToggleClick}
+        cardToggle={cardToggle}
       />
 
       {/* Entidad principal que contiene toda la información de la ficha */}
@@ -96,7 +97,7 @@ export function SceneInfoCard({
               position="12.3 -6.5 0.2"
               radius="2.5"
               color="#ef4444"
-              onClick={toggleSpeech}
+              onClick={speechToggle}
               animation__click="property: scale; startEvents: click; from: 1 1 1; to: 0.9 0.9 0.9; dur: 100; easing: easeOutQuad; loop: 2; dir: alternate"
             >
               {/* Icono de play/pause */}

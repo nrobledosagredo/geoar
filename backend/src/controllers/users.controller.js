@@ -1,4 +1,4 @@
-// controllers/user.controller.js
+// user.controller.js
 import User from "../models/users.model.js"
 
 export async function createUser(req, res) {
@@ -21,7 +21,7 @@ export async function createUser(req, res) {
     // Envía una respuesta exitosa al cliente con el usuario recién creado
     res.status(201).json(newUser)
   } catch (error) {
-    console.error("Error al crear el usuario:", error)
+    console.error("Error creating user:", error)
     // Envía una respuesta de error al cliente si algo sale mal
     res
       .status(500)
@@ -42,7 +42,7 @@ export async function getUser(req, res) {
 
     res.status(200).json(user);
   } catch (error) {
-    console.error("Error al obtener el usuario:", error);
+    console.error("Error getting user:", error);
     res.status(500).json({ message: "Error getting user", error: error.message });
   }
 }
@@ -65,7 +65,7 @@ export async function updateUser(req, res) {
 
     res.status(200).json(updatedUser);
   } catch (error) {
-    console.error("Error al actualizar el usuario:", error);
+    console.error("Error updating user:", error);
     res.status(500).json({ message: "Error updating user", error: error.message });
   }
 }

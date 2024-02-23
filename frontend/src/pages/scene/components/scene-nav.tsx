@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import { SceneNavCompass } from "@/pages/scene/components/scene-nav-compass"
 import { SceneNavIcon } from "@/pages/scene/components/scene-nav-icon"
 import { SceneNavText } from "@/pages/scene/components/scene-nav-text"
-import { SceneNavToggleSpeech } from "@/pages/scene/components/scene-nav-toggle-speech"
+import { SceneNavSpeechToggle } from "@/pages/scene/components/scene-nav-speech-toggle"
 import { Flag, Trophy } from "lucide-react"
 import { useTranslation } from "react-i18next"
 
@@ -126,7 +126,7 @@ export function SceneNav() {
       {/* ------------- Barra vertical de botones ------------*/}
       <div className="absolute right-0 top-0 translate-y-24 h-full flex flex-col items-center mx-4 my-4 space-y-4">
         <SceneNavCompass />
-        <SceneNavToggleSpeech
+        <SceneNavSpeechToggle
           bearing={bearing ?? ""}
           distance={distance ?? ""}
         />

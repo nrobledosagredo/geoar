@@ -15,6 +15,5 @@ export function useUser() {
     // Limpiar el listener cuando el componente se desmonte
     return unsubscribe
   }, [])
-
   return user
 }

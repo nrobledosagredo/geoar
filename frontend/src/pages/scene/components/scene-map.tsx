@@ -25,28 +25,35 @@ const defaultLatitude = config.simulateLatitude
 const defaultLongitude = config.simulateLongitude
 
 function LocateControl() {
-  const map = useMap()
+  const map = useMap();
 
   useEffect(() => {
-    const locateControl = L.control
-      .locate({
-        position: "topright",
-        setView: "once", // Centra el mapa en la ubicación del usuario solo una vez
-        locateOptions: {
-          enableHighAccuracy: true,
-        },
-        initialZoomLevel: 20, // Establece un nivel de zoom fijo cuando se encuentra la ubicación
-        showPopup: false,
-      })
-      .addTo(map)
+    const locateControl = L.control.locate({
+      position: "bottomleft",
+      setView: "always",
+      locateOptions: {
+        enableHighAccuracy: true,
+      },
+      initialZoomLevel: 20,
+      showPopup: false,
+    }).addTo(map);
+
+    // Modificar estilos después de que el control se haya agregado al mapa
+    /*
+    const locateContainer = document.querySelector('.leaflet-control-locate');
+    if (locateContainer) {
+      locateContainer.classList.add('top-48', 'left-8', 'border-', 'border-primary', 'bg-white', 'rounded-full', 'p-2');
+    }
+    */
 
     return () => {
-      map.removeControl(locateControl)
-    }
-  }, [map])
+      map.removeControl(locateControl);
+    };
+  }, [map]);
 
-  return null
+  return null;
 }
+
 
 export function SceneMap({ points, infoCards, trees }: SceneMapProps) {
   const { theme } = useTheme()
@@ -69,7 +76,7 @@ export function SceneMap({ points, infoCards, trees }: SceneMapProps) {
     ])
 
   return (
-    <div className="w-full sm:w-[640px] h-[30%] translate-y-20 fixed bottom-0 left-0 right-0 mx-auto flex justify-center items-center overflow-hidden  border-4 border-green-600 landscape:hidden">
+    <div className="w-full max-w-2xl h-[30%] fixed bottom-0 left-0 right-0 mx-auto flex justify-center items-center overflow-hidden rounded-t-full border-2 border-primary md:rounded-tr md:w-96 md:h-96 md:left-auto md:right-0">
       <MapContainer
         center={[defaultLatitude, defaultLongitude]}
         zoom={20}

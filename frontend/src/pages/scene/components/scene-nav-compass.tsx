@@ -12,7 +12,7 @@ export function SceneNavCompass() {
       <Button
         variant="secondary"
         size="icon"
-        className="rounded-full transition duration-150 ease-in-out transform active:scale-90 h-16 w-16"
+        className="rounded-full transition duration-150 ease-in-out transform active:scale-90 h-14 w-14"
       >
         <img
           src={compassIcon}

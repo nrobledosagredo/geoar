@@ -13,6 +13,7 @@ import trailsRoutes from "./src/routes/trails.routes.js"
 import treeCardsRoutes from "./src/routes/treecards.routes.js"
 import treesRoutes from "./src/routes/trees.routes.js"
 import usersRoutes from "./src/routes/users.routes.js"
+import interactionRoutes from "./src/routes/interactions.routes.js"
 
 dotenv.config()
 
@@ -47,6 +48,7 @@ app.use("/api/", trailsRoutes)
 app.use("/api/", treeCardsRoutes)
 app.use("/api/", treesRoutes)
 app.use("/api/", usersRoutes)
+app.use("/api/", interactionRoutes)
 
 // Configuración de HTTPS
 const httpsOptions = {

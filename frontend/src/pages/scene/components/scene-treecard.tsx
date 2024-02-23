@@ -5,20 +5,18 @@ import { useTranslation } from "react-i18next"
 
 import { TreeCardProps } from "@/types/scene-types"
 import { config } from "@/lib/scene-config"
-import { useToggleClick } from "@/hooks/use-toggle-click"
+import { useCardToggle } from "@/hooks/use-card-toggle"
+import { Interaction } from "@/types/interaction-types"
+import { useInteractionDetails } from "@/hooks/use-interaction-details"
 
 import robotoBold from "/fonts/Roboto/Roboto-Bold.ttf"
 import robotoMedium from "/fonts/Roboto/Roboto-Medium.ttf"
 import robotoRegular from "/fonts/Roboto/Roboto-Regular.ttf"
 import cardIcon from "/icons/g0.png"
 
+const { cardYPosition, cardScale, cameraHeight } = config
 const cardPrimaryColor = "#16a34a"
 const cardSecondaryColor = "#f9f9f9"
-const cardYPosition = config.cardYPosition
-const cardScale = config.cardScale
-const cardDelay = config.cardDelay
-const cameraHeight = config.cameraHeight
-
 const conservationStatusColors: {
   [key: string]: { circleColor: string; textColor: string; text: string }
 } = {
@@ -32,6 +30,7 @@ const conservationStatusColors: {
 }
 
 export function SceneTreeCard({
+  id,
   name,
   taxonomy,
   conservationStatus,
@@ -41,7 +40,9 @@ export function SceneTreeCard({
 }: TreeCardProps) {
   const ref = useRef(null)
   const { t } = useTranslation()
-  const [isExpanded, handleToggleClick] = useToggleClick(cardDelay)
+  const cardType = "treeCard"
+  const interactionDetails = useInteractionDetails(id, cardType, latitude, longitude)
+  const [isExpanded, cardToggle] = useCardToggle(interactionDetails as Interaction)
 
   return (
     <>
@@ -54,7 +55,7 @@ export function SceneTreeCard({
         image={cardIcon}
         color={cardPrimaryColor}
         isExpanded={isExpanded}
-        handleToggleClick={handleToggleClick}
+        cardToggle={cardToggle}
       />
 
       {/* Entidad principal que contiene toda la información de la ficha */}

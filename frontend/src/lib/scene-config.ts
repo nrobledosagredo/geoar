@@ -17,12 +17,12 @@ export const config = {
   orderIncrement: 4, // Target será el punto más cercano más el valor proporcionado (default: 4)
 
   // InfoCards y TreeCards
-  cardDelay: 500, // Delay en ms para prevenir dobleclick no intencional (default: 1500)
+  cardToggleDelay: 500, // Delay en ms para prevenir dobleclick no intencional (default: 1500)
   cardScale: 0.2, // Escala de las fichas (default: 0.2)
   cardYPosition: 13, // Posición Y de las fichas con respecto a la cámara (default: 13)
 
   // Arrow
-  arrowDelay: 3000, // Tiempo en ms que se demora en cargar la flecha 3D para prevenir errores (default: 3000)
+  //arrowDelay: 3000, // Tiempo en ms que se demora en cargar la flecha 3D para prevenir errores (default: 3000)
   arrowScale: 0.005, // Escala de la flecha 3D (default: 0.005)
   arrowPositionX: 0, // Posición X de la flecha 3D con respecto a la cámara (default: 0)
   arrowPositionY: -0.03, // Posición Y de la flecha 3D con respecto a la cámara (default: -0.03)

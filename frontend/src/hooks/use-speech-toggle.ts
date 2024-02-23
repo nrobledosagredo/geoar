@@ -5,10 +5,10 @@ import { speak } from "@/lib/speech-synthesis"
 
 let currentId: string | null = null
 
-export function useToggleSpeech(id: string, description: string) {
+export function useSpeechToggle(id: string, description: string) {
   const [speaking, setSpeaking] = useState(false)
 
-  function toggleSpeech() {
+  function speechToggle() {
     if (currentId !== id && window.speechSynthesis.speaking) {
       window.dispatchEvent(new CustomEvent("speechPlay", { detail: { id } }))
       window.speechSynthesis.cancel()
@@ -32,19 +32,19 @@ export function useToggleSpeech(id: string, description: string) {
   }
 
   useEffect(() => {
-    const handleToggleSpeech = (event: Event) => {
+    const handleSpeechToggle = (event: Event) => {
       const e = event as CustomEvent<{ id: string }>
       if (e.detail.id !== id) {
         setSpeaking(false)
       }
     }
 
-    window.addEventListener("speechPlay", handleToggleSpeech)
+    window.addEventListener("speechPlay", handleSpeechToggle)
 
     return () => {
-      window.removeEventListener("speechPlay", handleToggleSpeech)
+      window.removeEventListener("speechPlay", handleSpeechToggle)
     }
   }, [id])
 
-  return { speaking, toggleSpeech }
+  return { speaking, speechToggle }
 }

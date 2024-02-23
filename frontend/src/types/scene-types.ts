@@ -16,7 +16,7 @@ export interface CircleProps {
   image: string
   color: string
   isExpanded: any
-  handleToggleClick: any
+  cardToggle: any
 }
 
 // Definición de tipos para InfoCard
@@ -46,6 +46,7 @@ export interface ConservationStatus {
 }
 
 export interface TreeCardProps {
+  id: string
   name: string
   taxonomy: Taxonomy
   conservationStatus: ConservationStatus
