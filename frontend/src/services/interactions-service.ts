@@ -7,7 +7,9 @@ const BACKEND_HOST = import.meta.env.VITE_BACKEND_HOST
 const BACKEND_PORT = import.meta.env.VITE_BACKEND_PORT
 const BACKEND_URL = `${BACKEND_HOST}:${BACKEND_PORT}/api`
 
-export async function createInteraction(interaction: Interaction): Promise<any> {
+export async function createInteraction(
+  interaction: Interaction
+): Promise<any> {
   try {
     const auth = getAuth()
     const currentUser = auth.currentUser

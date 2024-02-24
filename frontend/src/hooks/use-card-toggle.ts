@@ -1,7 +1,9 @@
 // use-card-toggle.js
 import { useRef, useState } from "react"
-import { config } from "@/lib/scene-config"
+
 import { Interaction } from "@/types/interaction-types"
+import { config } from "@/lib/scene-config"
+
 import { useCreateInteraction } from "./use-create-interaction"
 
 const { cardToggleDelay } = config
@@ -19,7 +21,6 @@ export function useCardToggle(interactionDetails: Interaction) {
     }
 
     if (!isExpanded) {
-      console.log(interactionDetails)
       handleCreateInteraction(interactionDetails)
     }
   }

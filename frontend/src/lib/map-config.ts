@@ -3,11 +3,12 @@ import L from "leaflet"
 import tree from "/icons/markerIcons/g0.png"
 import infoCard from "/icons/markerIcons/r0.png"
 
+// Íconos
 export const infoCardIcon: L.Icon = new L.Icon({
   iconUrl: infoCard,
   iconSize: [24, 24],
-  iconAnchor: [8, 24],
-  popupAnchor: [1, -34],
+  iconAnchor: [12, 24],
+  popupAnchor: [1, -24],
 })
 
 export const treeIcon: L.Icon = new L.Icon({
@@ -17,26 +18,29 @@ export const treeIcon: L.Icon = new L.Icon({
   popupAnchor: [0, -24],
 })
 
-// Opciones de MapPathLayer
+// Configuración de MapPathLayer
 export const primaryPathOptions: any = {
-  delay: 500,
-  dashArray: [10, 30],
-  weight: 5,
-  color: "#16a34a",
-  pulseColor: "#052e16",
+  delay: 600,
+  dashArray: [7],
+  weight: 3,
+  color: "none",
+  pulseColor: "#22c55e",
+  opacity: 1,
   paused: false,
   reverse: false,
-  hardwareAccelerated: false,
+  className: "opacity-50",
+  hardwareAccelerated: true,
 }
 
-// Opciones de MapPathLayer
+// Configuración de MapPathLayer
 export const secondaryPathOptions: any = {
-  delay: 500,
-  dashArray: [10, 30],
-  weight: 5,
-  color: "#020617",
-  pulseColor: "#fff7ed",
+  delay: 600,
+  dashArray: [7],
+  weight: 3,
+  color: "none",
+  pulseColor: "white",
+  opacity: 0.2,
   paused: false,
   reverse: false,
-  hardwareAccelerated: false,
+  hardwareAccelerated: true,
 }

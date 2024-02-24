@@ -1,14 +1,12 @@
 // scene-nav.tsx
 import { useEffect, useState } from "react"
-import { SceneNavCompass } from "@/pages/scene/components/scene-nav-compass"
 import { SceneNavIcon } from "@/pages/scene/components/scene-nav-icon"
+import { SceneNavSettings } from "@/pages/scene/components/scene-nav-settings"
 import { SceneNavText } from "@/pages/scene/components/scene-nav-text"
-import { SceneNavSpeechToggle } from "@/pages/scene/components/scene-nav-speech-toggle"
-import { Flag, Trophy } from "lucide-react"
+import { Info, PartyPopper} from "lucide-react"
 import { useTranslation } from "react-i18next"
 
 export function SceneNav() {
-  // Variables de estado
   const { t } = useTranslation()
   const [bearing, setBearing] = useState<string | null>(null)
   const [distance, setDistance] = useState<string | null>(null)
@@ -49,20 +47,21 @@ export function SceneNav() {
         return (
           <>
             {/* ------------ Sección izquierda -----------*/}
-            <div className="w-1/4 flex">
-              <div className="flex-1 flex items-center justify-center">
-                <Flag className="h-16 w-16 animate-pulse"></Flag>
-              </div>
+            <div className="flex-none w-24 flex items-center justify-center">
+
+              <Info className="h-9 animate-pulse text-muted-foreground"></Info>
+            </div>
+
+            {/* ------------ Sección media -----------*/}
+            <div className="flex-auto flex items-center justify-center text-center text-pretty">
+
+              <p className="text-xl font-medium">{t("start_message")} </p>
             </div>
 
             {/* ------------ Sección derecha -----------*/}
-            <div className="w-3/4 flex">
-              <div className="flex-1 flex items-center justify-left">
-                <p className="text-xl font-medium text-left">
-                  {" "}
-                  {t("start_message")}{" "}
-                </p>
-              </div>
+            <div className="flex-none w-24 flex items-center justify-center">
+
+              <Info className="h-9 animate-pulse text-muted-foreground"></Info>
             </div>
           </>
         )
@@ -72,19 +71,21 @@ export function SceneNav() {
         return (
           <>
             {/* ------------ Sección izquierda -----------*/}
-            <div className="w-1/3 flex flex-col">
-              <div className="flex-1 flex items-center justify-center">
-                <Trophy className="h-16 animate-pulse"></Trophy>
-              </div>
+            <div className="flex-none w-24 flex items-center justify-center">
+              {" "}
+              <PartyPopper className="h-9 animate-pulse text-muted-foreground"></PartyPopper>
+            </div>
+
+            {/* ------------ Sección media -----------*/}
+            <div className="flex-auto flex items-center justify-center text-center text-pretty">
+              {" "}
+              <p className="text-xl font-medium">{t("end_message")}</p>
             </div>
 
             {/* ------------ Sección derecha -----------*/}
-            <div className="w-2/3 flex">
-              <div className="flex-1 flex items-center justify-left">
-                <p className="text-2xl font-semibold text-left ">
-                  {t("end_message")}
-                </p>
-              </div>
+            <div className="flex-none w-24 flex items-center justify-center">
+              {" "}
+              <PartyPopper className="h-9 animate-pulse text-muted-foreground"></PartyPopper>
             </div>
           </>
         )
@@ -94,25 +95,26 @@ export function SceneNav() {
         return (
           <>
             {/* ------------ Sección izquierda -----------*/}
-            <div className="w-1/4 flex flex-col">
-              <div className="flex-1 flex items-center justify-center">
-                <SceneNavIcon direction={bearing || ""} />
-              </div>
+            <div className="flex-none w-24 flex items-center justify-center">
+              {" "}
+              {/* Alineación vertical y horizontal */}
+              <SceneNavIcon direction={bearing || ""} />
+            </div>
 
-              <div className="flex-1 flex items-center justify-center">
-                <SceneNavText distance={distance ?? ""} />
-              </div>
+            {/* ------------ Sección media -----------*/}
+            <div className="flex-auto flex items-center justify-center text-center text-pretty">
+              {" "}
+              {/* Alineación vertical y horizontal */}
+              <p className="text-xl font-medium">
+                {t("head")} <strong>{t(`directions.${bearing}`)}</strong>
+              </p>
             </div>
 
             {/* ------------ Sección derecha -----------*/}
-            <div className="w-3/4 flex">
-              <div className="flex-1 flex items-center justify-left">
-                <p className="text-2xl font-medium">{t("head")}</p>
-                <span className="mx-1"></span>
-                <p className="text-2xl font-bold">
-                  {t(`directions.${bearing}`)}
-                </p>
-              </div>
+            <div className="flex-none w-24 flex items-center justify-center">
+              {" "}
+              {/* Alineación vertical y horizontal */}
+              <SceneNavText distance={distance ?? ""} />
             </div>
           </>
         )
@@ -120,16 +122,12 @@ export function SceneNav() {
   }
 
   return (
-    <div className="h-24 flex mx-1 my-1 rounded-xl bg-green-600 text-white bg-opacity-95">
-      {renderDirectionBarContent()}
-
-      {/* ------------- Barra vertical de botones ------------*/}
-      <div className="absolute right-0 top-0 translate-y-24 h-full flex flex-col items-center mx-4 my-4 space-y-4">
-        <SceneNavCompass />
-        <SceneNavSpeechToggle
-          bearing={bearing ?? ""}
-          distance={distance ?? ""}
-        />
+    <div>
+      <div className="w-full max-w-lg h-20 mx-auto flex rounded-md border-2 border-primary bg-card backdrop-blur-3xl">
+        {renderDirectionBarContent()}
+      </div>
+      <div className="absolute top-[135px] right-[5px] h-full">
+        <SceneNavSettings bearing={bearing ?? ""} distance={distance ?? ""} />
       </div>
     </div>
   )

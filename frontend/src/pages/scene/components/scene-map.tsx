@@ -1,6 +1,11 @@
 // scene-map.tsx
 import L from "leaflet"
-import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet"
+import {
+  MapContainer,
+  Marker,
+  Popup,
+  TileLayer,
+} from "react-leaflet"
 
 import "leaflet.locatecontrol"
 import "leaflet.locatecontrol/dist/L.Control.Locate.min.css"
@@ -25,42 +30,35 @@ const defaultLatitude = config.simulateLatitude
 const defaultLongitude = config.simulateLongitude
 
 function LocateControl() {
-  const map = useMap();
+  const map = useMap()
 
   useEffect(() => {
-    const locateControl = L.control.locate({
-      position: "bottomleft",
-      setView: "always",
-      locateOptions: {
-        enableHighAccuracy: true,
-      },
-      initialZoomLevel: 20,
-      showPopup: false,
-    }).addTo(map);
-
-    // Modificar estilos después de que el control se haya agregado al mapa
-    /*
-    const locateContainer = document.querySelector('.leaflet-control-locate');
-    if (locateContainer) {
-      locateContainer.classList.add('top-48', 'left-8', 'border-', 'border-primary', 'bg-white', 'rounded-full', 'p-2');
-    }
-    */
+    const locateControl = L.control
+      .locate({
+        position: "bottomleft",
+        setView: "always",
+        locateOptions: {
+          enableHighAccuracy: true,
+        },
+        initialZoomLevel: 20,
+        showPopup: false,
+      })
+      .addTo(map)
 
     return () => {
-      map.removeControl(locateControl);
-    };
-  }, [map]);
+      map.removeControl(locateControl)
+    }
+  }, [map])
 
-  return null;
+  return null
 }
-
 
 export function SceneMap({ points, infoCards, trees }: SceneMapProps) {
   const { theme } = useTheme()
-  const tileLayerUrl =
-    theme === "dark"
-      ? "https://www.google.cn/maps/vt?lyrs=y@189&gl=cn&x={x}&y={y}&z={z}"
-      : "https://www.google.cn/maps/vt?lyrs=y@189&gl=cn&x={x}&y={y}&z={z}"
+      const tileLayerUrl =
+      theme === "dark"
+        ? "https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
+        : "https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png"
   const target = useUpdateTarget()
   const traveledPoints = points
     .filter((point) => point.order < target)
@@ -68,15 +66,16 @@ export function SceneMap({ points, infoCards, trees }: SceneMapProps) {
       point.geometry.coordinates[1],
       point.geometry.coordinates[0],
     ])
+
   const remainingPoints = points
-    .filter((point) => point.order >= target - 1)
+    .filter((point) => point.order >= target-1)
     .map((point) => [
       point.geometry.coordinates[1],
       point.geometry.coordinates[0],
     ])
 
   return (
-    <div className="w-full max-w-2xl h-[30%] fixed bottom-0 left-0 right-0 mx-auto flex justify-center items-center overflow-hidden rounded-t-full border-2 border-primary md:rounded-tr md:w-96 md:h-96 md:left-auto md:right-0">
+    <div className="w-full max-w-xs h-[28%] fixed bottom-0 left-0 right-0 mx-auto flex justify-center items-center overflow-hidden rounded-t-full border-2 border-primary sm:rounded-lg sm:w-56 sm:h-56 sm:right-auto sm:left-0 landscape:rounded-lg landscape:w-56 landscape:h-56 landscape:right-auto landscape:left-0">
       <MapContainer
         center={[defaultLatitude, defaultLongitude]}
         zoom={20}
@@ -87,12 +86,16 @@ export function SceneMap({ points, infoCards, trees }: SceneMapProps) {
         {/* Capa de OpenStreetMap */}
         <TileLayer url={tileLayerUrl} />
 
+        {/* Control de localización */}
         <LocateControl />
 
+
+        {/* Capa de camino recorrido */}
         {traveledPoints.length > 0 && (
           <MapPathLayer points={traveledPoints} options={primaryPathOptions} />
         )}
 
+        {/* Capa de camino restante */}
         {remainingPoints.length > 0 && (
           <MapPathLayer
             points={remainingPoints}
@@ -100,7 +103,9 @@ export function SceneMap({ points, infoCards, trees }: SceneMapProps) {
           />
         )}
 
+        {/* Marcadores de tarjetas de información y árboles */}
         {infoCards.map((infoCard, index) => (
+          
           <Marker
             key={index}
             position={[

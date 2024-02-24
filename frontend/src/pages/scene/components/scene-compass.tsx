@@ -28,7 +28,7 @@ export function SceneCompass() {
 
   return (
     <div>
-      <div className="compass relative w-[360px] h-[50px] mx-auto my-[20px] overflow-hidden border border-gray-400">
+      <div className="compass relative w-[360px] h-[50px] mx-auto my-0 overflow-hidden border rounded-md border-gray-400">
         <div className="line absolute top-0 z-[1000] bg-[url('https://i.ibb.co/h25K56D/COMPASS-v4.png')] w-[1080px] h-[50px]"></div>
         <div
           className="bg absolute top-0 z-[200] bg-[url('https://i.ibb.co/DfFhkbM/COMPASS-v4.jpg')] bg-no-repeat w-[1080px] h-[50px]"

@@ -10,8 +10,6 @@ export const HorizontalLogo = () => {
 
       {/* Nombre de la aplicación */}
       <span className="self-center whitespace-nowrap tracking-tighter text-2xl">
-        {" "}
-        {/* Asegúrate de agregar estilos para el texto si es necesario */}
         <span className="font-semibold">Geo</span>
         <span className="font-black">AR</span>
       </span>

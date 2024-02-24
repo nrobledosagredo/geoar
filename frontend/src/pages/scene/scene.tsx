@@ -1,5 +1,6 @@
 import { useEffect } from "react"
 import { SceneArrow } from "@/pages/scene/components/scene-arrow"
+import { SceneCompass } from "@/pages/scene/components/scene-compass"
 import { SceneInfoCard } from "@/pages/scene/components/scene-infocard"
 import { SceneLoadingScreen } from "@/pages/scene/components/scene-loading-screen"
 import { SceneMap } from "@/pages/scene/components/scene-map"
@@ -8,7 +9,6 @@ import { ScenePoint } from "@/pages/scene/components/scene-point"
 import { SceneTreeCard } from "@/pages/scene/components/scene-treecard"
 import { getImage } from "@/services/images-service"
 import { useParams } from "react-router-dom"
-import { SceneCompass} from "@/pages/scene/components/scene-compass"
 
 import { config } from "@/lib/scene-config"
 import { useGetInfoCardsByTrail } from "@/hooks/use-get-infocards-by-trail"
@@ -91,18 +91,13 @@ export function Scene() {
         </div>
       )}
 
-      {/* Barra de dirección */}
+      {/* UI */}
       <div className="relative z-40">
         <SceneNav />
         <SceneCompass />
-      </div>
-
-      {/* Mapa */}
-      <div className="relative z-40">
         <SceneMap points={points} infoCards={infoCards} trees={trees} />
       </div>
-
-
+      
       <a-scene
         vr-mode-ui="enabled: false"
         cursor="rayOrigin: mouse"

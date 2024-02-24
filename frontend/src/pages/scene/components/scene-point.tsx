@@ -1,4 +1,4 @@
-// point.tsx
+// scene-point.tsx
 import { PointProps } from "@/types/scene-types"
 import { config } from "@/lib/scene-config"
 
@@ -17,7 +17,7 @@ export function ScenePoint({ latitude, longitude, order }: PointProps) {
         position={`0 ${cameraHeight} 0`}
         visible={pointIsVisible}
         scale="0.5 0.5 0.5"
-        color="orange"
+        color="#ef4928"
         data-order={order}
         data-latitude={latitude}
         data-longitude={longitude}
@@ -28,7 +28,7 @@ export function ScenePoint({ latitude, longitude, order }: PointProps) {
           font={robotoRegular}
           color="black"
           position="0 0 1"
-          scale="5 5 5"
+          scale="4 4 4<"
           align="center"
         ></a-troika-text>
       </a-sphere>

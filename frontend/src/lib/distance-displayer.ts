@@ -6,7 +6,7 @@ AFRAME.registerComponent("distance-displayer", {
     this.text.setAttribute("align", "center")
     this.text.setAttribute("look-at", "[gps-new-camera]")
     this.text.setAttribute("font-size", "4")
-    this.text.setAttribute("color", "black")
+    this.text.setAttribute("color", "white")
     this.text.setAttribute("font", "/fonts/Roboto/Roboto-Medium.ttf")
     this.el.appendChild(this.text)
   },

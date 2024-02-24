@@ -3,10 +3,10 @@ import { useRef } from "react"
 import { SceneCircle } from "@/pages/scene/components/scene-circle"
 import { useTranslation } from "react-i18next"
 
+import { Interaction } from "@/types/interaction-types"
 import { TreeCardProps } from "@/types/scene-types"
 import { config } from "@/lib/scene-config"
 import { useCardToggle } from "@/hooks/use-card-toggle"
-import { Interaction } from "@/types/interaction-types"
 import { useInteractionDetails } from "@/hooks/use-interaction-details"
 
 import robotoBold from "/fonts/Roboto/Roboto-Bold.ttf"
@@ -41,8 +41,15 @@ export function SceneTreeCard({
   const ref = useRef(null)
   const { t } = useTranslation()
   const cardType = "treeCard"
-  const interactionDetails = useInteractionDetails(id, cardType, latitude, longitude)
-  const [isExpanded, cardToggle] = useCardToggle(interactionDetails as Interaction)
+  const interactionDetails = useInteractionDetails(
+    id,
+    cardType,
+    latitude,
+    longitude
+  )
+  const [isExpanded, cardToggle] = useCardToggle(
+    interactionDetails as Interaction
+  )
 
   return (
     <>

@@ -2,14 +2,14 @@
 import { useRef, useState } from "react"
 import { SceneCircle } from "@/pages/scene/components/scene-circle"
 
+import { Interaction } from "@/types/interaction-types"
 import { InfoCardProps } from "@/types/scene-types"
 import { config } from "@/lib/scene-config"
-import { useMaxScroll } from "@/hooks/use-max-scroll"
-import { useTextScroll } from "@/hooks/use-text-scroll"
 import { useCardToggle } from "@/hooks/use-card-toggle"
-import { useSpeechToggle } from "@/hooks/use-speech-toggle"
 import { useInteractionDetails } from "@/hooks/use-interaction-details"
-import { Interaction } from "@/types/interaction-types"
+import { useMaxScroll } from "@/hooks/use-max-scroll"
+import { useSpeechToggle } from "@/hooks/use-speech-toggle"
+import { useTextScroll } from "@/hooks/use-text-scroll"
 
 import robotoBold from "/fonts/Roboto/Roboto-Bold.ttf"
 import robotoRegular from "/fonts/Roboto/Roboto-Regular.ttf"
@@ -33,8 +33,15 @@ export function SceneInfoCard({
 }: InfoCardProps) {
   const ref = useRef<HTMLDivElement>(null)
   const cardType = "infoCard"
-  const interactionDetails = useInteractionDetails(id, cardType, latitude, longitude)
-  const [isExpanded, cardToggle] = useCardToggle(interactionDetails as Interaction)
+  const interactionDetails = useInteractionDetails(
+    id,
+    cardType,
+    latitude,
+    longitude
+  )
+  const [isExpanded, cardToggle] = useCardToggle(
+    interactionDetails as Interaction
+  )
   const { speaking, speechToggle } = useSpeechToggle(id, description)
   const [scrollPosition, setScrollPosition] = useState(0)
   const maxScrollPosition = useMaxScroll(description)
