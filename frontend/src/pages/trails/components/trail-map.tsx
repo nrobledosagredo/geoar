@@ -34,9 +34,9 @@ export function TrailMap({ trail }: { trail: TrailExtended }) {
   ])
 
   const tileLayerUrl =
-  theme === "dark"
-    ? "https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
-    : "https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png"
+    theme === "dark"
+      ? "https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
+      : "https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png"
 
   // Mostrar alerta si hay errores
   useEffect(() => {

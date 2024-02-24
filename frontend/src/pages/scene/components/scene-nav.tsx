@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import { SceneNavIcon } from "@/pages/scene/components/scene-nav-icon"
 import { SceneNavSettings } from "@/pages/scene/components/scene-nav-settings"
 import { SceneNavText } from "@/pages/scene/components/scene-nav-text"
-import { Info, PartyPopper} from "lucide-react"
+import { Info, PartyPopper } from "lucide-react"
 import { useTranslation } from "react-i18next"
 
 export function SceneNav() {
@@ -47,20 +47,17 @@ export function SceneNav() {
         return (
           <>
             {/* ------------ Sección izquierda -----------*/}
-            <div className="flex-none w-24 flex items-center justify-center">
-
+            <div className="flex-none w-16 flex items-center justify-center">
               <Info className="h-9 animate-pulse text-muted-foreground"></Info>
             </div>
 
             {/* ------------ Sección media -----------*/}
             <div className="flex-auto flex items-center justify-center text-center text-pretty">
-
-              <p className="text-xl font-medium">{t("start_message")} </p>
+              <p className="text-sm font-medium">{t("start_message")} </p>
             </div>
 
             {/* ------------ Sección derecha -----------*/}
-            <div className="flex-none w-24 flex items-center justify-center">
-
+            <div className="flex-none w-16 flex items-center justify-center">
               <Info className="h-9 animate-pulse text-muted-foreground"></Info>
             </div>
           </>
@@ -71,20 +68,17 @@ export function SceneNav() {
         return (
           <>
             {/* ------------ Sección izquierda -----------*/}
-            <div className="flex-none w-24 flex items-center justify-center">
-              {" "}
+            <div className="flex-none w-16 flex items-center justify-center">
               <PartyPopper className="h-9 animate-pulse text-muted-foreground"></PartyPopper>
             </div>
 
             {/* ------------ Sección media -----------*/}
             <div className="flex-auto flex items-center justify-center text-center text-pretty">
-              {" "}
-              <p className="text-xl font-medium">{t("end_message")}</p>
+              <p className="text-sm font-medium">{t("end_message")}</p>
             </div>
 
             {/* ------------ Sección derecha -----------*/}
-            <div className="flex-none w-24 flex items-center justify-center">
-              {" "}
+            <div className="flex-none w-16 flex items-center justify-center">
               <PartyPopper className="h-9 animate-pulse text-muted-foreground"></PartyPopper>
             </div>
           </>
@@ -96,15 +90,11 @@ export function SceneNav() {
           <>
             {/* ------------ Sección izquierda -----------*/}
             <div className="flex-none w-24 flex items-center justify-center">
-              {" "}
-              {/* Alineación vertical y horizontal */}
               <SceneNavIcon direction={bearing || ""} />
             </div>
 
             {/* ------------ Sección media -----------*/}
             <div className="flex-auto flex items-center justify-center text-center text-pretty">
-              {" "}
-              {/* Alineación vertical y horizontal */}
               <p className="text-xl font-medium">
                 {t("head")} <strong>{t(`directions.${bearing}`)}</strong>
               </p>
@@ -112,8 +102,6 @@ export function SceneNav() {
 
             {/* ------------ Sección derecha -----------*/}
             <div className="flex-none w-24 flex items-center justify-center">
-              {" "}
-              {/* Alineación vertical y horizontal */}
               <SceneNavText distance={distance ?? ""} />
             </div>
           </>
@@ -123,7 +111,7 @@ export function SceneNav() {
 
   return (
     <div>
-      <div className="w-full max-w-lg h-20 mx-auto flex rounded-md border-2 border-primary bg-card backdrop-blur-3xl">
+      <div className="w-full max-w-lg h-16 mx-auto flex rounded-md border-2 border-primary bg-card backdrop-blur-3xl">
         {renderDirectionBarContent()}
       </div>
       <div className="absolute top-[135px] right-[5px] h-full">

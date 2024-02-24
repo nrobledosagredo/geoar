@@ -1,9 +1,8 @@
 // scene-nav-settings.tsx
 import { useState } from "react"
-import { SceneSpeechToggle } from "@/pages/scene/components/scene-speech-toggle"
 import { SceneCloseButton } from "@/pages/scene/components/scene-close-button"
-import { ChevronUp, ChevronDown } from "lucide-react"
-import { ModeToggle } from "@/components/mode-toggle"
+import { SceneSpeechToggle } from "@/pages/scene/components/scene-speech-toggle"
+import { ChevronDown, ChevronUp } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -11,6 +10,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible"
+import { ModeToggle } from "@/components/mode-toggle"
 
 export function SceneNavSettings({
   bearing,
@@ -23,22 +23,22 @@ export function SceneNavSettings({
   const [speaking, setSpeaking] = useState(false)
 
   return (
-    <Collapsible
-      open={isOpen}
-      onOpenChange={setIsOpen}
-      className="space-y-2"
-    >
+    <Collapsible open={isOpen} onOpenChange={setIsOpen} className="space-y-2">
       <CollapsibleTrigger asChild>
         <Button
           variant="secondary"
           size="icon"
           className="rounded-full transition duration-150 ease-in-out transform active:scale-90"
         >
-          {isOpen ? <ChevronUp className="h-[1.2rem] w-[1.2rem]" /> : <ChevronDown className="h-[1.2rem] w-[1.2rem]" />}
+          {isOpen ? (
+            <ChevronUp className="h-[1.2rem] w-[1.2rem]" />
+          ) : (
+            <ChevronDown className="h-[1.2rem] w-[1.2rem]" />
+          )}
         </Button>
       </CollapsibleTrigger>
       <CollapsibleContent className="space-y-2">
-      <SceneSpeechToggle
+        <SceneSpeechToggle
           bearing={bearing ?? ""}
           distance={distance ?? ""}
           speaking={speaking}
@@ -46,8 +46,6 @@ export function SceneNavSettings({
         />
         <ModeToggle />
         <SceneCloseButton />
-
-        
       </CollapsibleContent>
     </Collapsible>
   )

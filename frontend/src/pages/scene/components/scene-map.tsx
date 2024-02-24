@@ -1,11 +1,6 @@
 // scene-map.tsx
 import L from "leaflet"
-import {
-  MapContainer,
-  Marker,
-  Popup,
-  TileLayer,
-} from "react-leaflet"
+import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet"
 
 import "leaflet.locatecontrol"
 import "leaflet.locatecontrol/dist/L.Control.Locate.min.css"
@@ -55,10 +50,10 @@ function LocateControl() {
 
 export function SceneMap({ points, infoCards, trees }: SceneMapProps) {
   const { theme } = useTheme()
-      const tileLayerUrl =
-      theme === "dark"
-        ? "https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
-        : "https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png"
+  const tileLayerUrl =
+    theme === "dark"
+      ? "https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
+      : "https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png"
   const target = useUpdateTarget()
   const traveledPoints = points
     .filter((point) => point.order < target)
@@ -68,7 +63,7 @@ export function SceneMap({ points, infoCards, trees }: SceneMapProps) {
     ])
 
   const remainingPoints = points
-    .filter((point) => point.order >= target-1)
+    .filter((point) => point.order >= target - 1)
     .map((point) => [
       point.geometry.coordinates[1],
       point.geometry.coordinates[0],
@@ -89,7 +84,6 @@ export function SceneMap({ points, infoCards, trees }: SceneMapProps) {
         {/* Control de localización */}
         <LocateControl />
 
-
         {/* Capa de camino recorrido */}
         {traveledPoints.length > 0 && (
           <MapPathLayer points={traveledPoints} options={primaryPathOptions} />
@@ -105,7 +99,6 @@ export function SceneMap({ points, infoCards, trees }: SceneMapProps) {
 
         {/* Marcadores de tarjetas de información y árboles */}
         {infoCards.map((infoCard, index) => (
-          
           <Marker
             key={index}
             position={[

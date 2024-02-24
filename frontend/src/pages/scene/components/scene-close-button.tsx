@@ -19,36 +19,36 @@ export function SceneCloseButton() {
 
   const handleConfirm = () => {
     navigate("/")
-    window.location.reload();
+    window.location.reload()
   }
 
   return (
     <div>
-    <AlertDialog>
-      <AlertDialogTrigger asChild>
-        <Button
-          variant="secondary"
-          size="icon"
-          className="rounded-full transition duration-150 ease-in-out transform active:scale-90"
-        >
-          <X className="h-[1.2rem] w-[1.2rem]" />
-        </Button>
-      </AlertDialogTrigger>
-      <AlertDialogContent>
-        <AlertDialogHeader>
-          <AlertDialogTitle>Terminar recorrido</AlertDialogTitle>
-          <AlertDialogDescription>
-            Estás seguro de que quieres terminar el recorrido?
-          </AlertDialogDescription>
-        </AlertDialogHeader>
-        <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction onClick={handleConfirm}>
-            Continuar
-          </AlertDialogAction>
-        </AlertDialogFooter>
-      </AlertDialogContent>
-    </AlertDialog>
+      <AlertDialog>
+        <AlertDialogTrigger asChild>
+          <Button
+            variant="secondary"
+            size="icon"
+            className="rounded-full transition duration-150 ease-in-out transform active:scale-90"
+          >
+            <X className="h-[1.2rem] w-[1.2rem]" />
+          </Button>
+        </AlertDialogTrigger>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Terminar recorrido</AlertDialogTitle>
+            <AlertDialogDescription>
+              Estás seguro de que quieres terminar el recorrido?
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction onClick={handleConfirm}>
+              Continuar
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   )
 }

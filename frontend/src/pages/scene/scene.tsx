@@ -97,7 +97,7 @@ export function Scene() {
         <SceneCompass />
         <SceneMap points={points} infoCards={infoCards} trees={trees} />
       </div>
-      
+
       <a-scene
         vr-mode-ui="enabled: false"
         cursor="rayOrigin: mouse"
