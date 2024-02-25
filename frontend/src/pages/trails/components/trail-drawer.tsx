@@ -28,31 +28,32 @@ export function TrailDrawer({ trail }: { trail: TrailExtended }) {
           <DrawerTitle>{trail.name}</DrawerTitle>
         </DrawerHeader>
 
+        {/* Contenido del drawer
         <ScrollArea className="max-h-[calc(100vh-10rem)] overflow-auto">
-          <div className="space-y-6 mx-4">
+          <div className="space-y-6 mx-8">
             <TrailMap trail={trail} />
             <TrailDetails trail={trail} />
-            <DrawerDescription className="text-justify">
+            <DrawerDescription className="text-justify text-pretty">
               {trail.description}
             </DrawerDescription>
           </div>
         </ScrollArea>
-
-        {/*}
+        */}
+        
+        {/* Contenido del drawer */}
         <ScrollArea className="max-h-[calc(100vh-10rem)] overflow-auto">
-          <div className="mx-4 lg:flex lg:space-y-0 lg:space-x-4">
-            <div className="lg:flex-shrink-0 lg:w-1/2 mb-4 lg:mb-0">
+          <div className="space-y-6 mx-8 md:flex md:space-x-8">
+            <div className="md:flex-shrink-0 md:w-1/2 mb-4 md:mb-0">
               <TrailMap trail={trail} />
             </div>
-            <div className="lg:w-1/2">
+            <div className="md:w-1/2">
               <TrailDetails trail={trail} />
-              <DrawerDescription className="text-justify mt-4">
+              <DrawerDescription className="md:mx-4 mt-4 text-justify text-pretty">
                 {trail.description}
               </DrawerDescription>
             </div>
           </div>
         </ScrollArea>
-        */}
 
         {/* Botones de acción */}
         <DrawerFooter className="flex flex-row justify-center">

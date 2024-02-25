@@ -1,7 +1,7 @@
 // interactions.model.js
-import mongoose from 'mongoose';
+import mongoose from "mongoose"
 
-const { Schema } = mongoose;
+const { Schema } = mongoose
 
 const interactionSchema = new Schema(
   {
@@ -20,7 +20,7 @@ const interactionSchema = new Schema(
     cardType: {
       type: String,
       required: true,
-      enum: ['treeCard', 'infoCard'],
+      enum: ["treeCard", "infoCard"],
     },
     geometry: {
       type: {
@@ -37,6 +37,10 @@ const interactionSchema = new Schema(
   { versionKey: false }
 )
 
-const Interaction = mongoose.model('Interaction', interactionSchema, 'interactions');
+const Interaction = mongoose.model(
+  "Interaction",
+  interactionSchema,
+  "interactions"
+)
 
-export default Interaction;
+export default Interaction

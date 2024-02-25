@@ -17,7 +17,7 @@ const createIcon = (Component: React.ElementType, className: string) => (
 // Modifica la función SceneNavIcon para aceptar un className
 export function SceneNavIcon({
   direction,
-  className = "h-8 text-muted-foreground",
+  className = "h-7 w-7 text-primary font-semibold",
 }: {
   direction: string
   className?: string

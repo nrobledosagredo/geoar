@@ -7,12 +7,16 @@ import { Button } from "@/components/ui/button"
 import { MainNav } from "@/components/main-nav"
 import { VerticalLogo } from "@/components/vertical-logo"
 
+import { SceneCompass } from "@/pages/scene/components/scene-compass2"
+
 export function Home() {
   const { t } = useTranslation()
   return (
     <div className="h-screen flex flex-col">
       {/* Barra de navegación */}
       <MainNav />
+
+      <SceneCompass />
 
       {/* Contenedor de la página de inicio */}
       <div className="flex flex-col flex-1 justify-center text-center p-6 space-y-8">

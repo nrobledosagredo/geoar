@@ -70,7 +70,7 @@ export function SceneMap({ points, infoCards, trees }: SceneMapProps) {
     ])
 
   return (
-    <div className="w-full max-w-xs h-[28%] fixed bottom-0 left-0 right-0 mx-auto flex justify-center items-center overflow-hidden rounded-t-full border-2 border-primary sm:rounded-lg sm:w-56 sm:h-56 sm:right-auto sm:left-0 landscape:rounded-lg landscape:w-56 landscape:h-56 landscape:right-auto landscape:left-0">
+    <div className="overflow-hidden w-full max-w-lg h-[28%] fixed bottom-0 left-0 right-0 mx-auto flex justify-center items-center rounded-t-full border shadow-sm sm:rounded-lg sm:w-60 sm:h-60 sm:right-auto sm:left-0 landscape:rounded-lg landscape:w-60 landscape:h-60 landscape:right-auto landscape:left-0">
       <MapContainer
         center={[defaultLatitude, defaultLongitude]}
         zoom={20}

@@ -8,12 +8,12 @@ import mongoose from "mongoose"
 import serveManifest from "./src/middlewares/serve-manifest.js"
 import imagesRoutes from "./src/routes/images.routes.js"
 import infoCardsRoutes from "./src/routes/infocards.routes.js"
+import interactionRoutes from "./src/routes/interactions.routes.js"
 import pointsRoutes from "./src/routes/points.routes.js"
 import trailsRoutes from "./src/routes/trails.routes.js"
 import treeCardsRoutes from "./src/routes/treecards.routes.js"
 import treesRoutes from "./src/routes/trees.routes.js"
 import usersRoutes from "./src/routes/users.routes.js"
-import interactionRoutes from "./src/routes/interactions.routes.js"
 
 dotenv.config()
 

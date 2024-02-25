@@ -7,15 +7,14 @@ import "leaflet/dist/leaflet.css"
 
 import { TrailExtended } from "@/types/trail-types"
 import { infoCardIcon, primaryPathOptions, treeIcon } from "@/lib/map-config"
-import { config } from "@/lib/scene-config"
 import { useGetPoints } from "@/hooks/use-get-points"
 import { useGetTrees } from "@/hooks/use-get-trees"
 import { useToast } from "@/components/ui/use-toast"
 import { MapPathLayer } from "@/components/map-path-layer"
 import { useTheme } from "@/components/theme-provider"
 
-const defaultLatitude = config.simulateLatitude
-const defaultLongitude = config.simulateLongitude
+const defaultLatitude  = -39.80442;
+const defaultLongitude = -73.24997;
 
 export function TrailMap({ trail }: { trail: TrailExtended }) {
   const { theme } = useTheme()
@@ -68,7 +67,7 @@ export function TrailMap({ trail }: { trail: TrailExtended }) {
           center={[defaultLatitude, defaultLongitude]}
           zoom={17}
           scrollWheelZoom={false}
-          zoomControl={false}
+          zoomControl={true}
           className="w-full h-full rounded-lg border"
         >
           {/* Capa de OpenStreetMap */}

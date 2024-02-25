@@ -48,17 +48,17 @@ export function SceneNav() {
           <>
             {/* ------------ Sección izquierda -----------*/}
             <div className="flex-none w-16 flex items-center justify-center">
-              <Info className="h-9 animate-pulse text-muted-foreground"></Info>
+              <Info className="h-7 w-7 font-semibold text-warning"></Info>
             </div>
 
             {/* ------------ Sección media -----------*/}
             <div className="flex-auto flex items-center justify-center text-center text-pretty">
-              <p className="text-sm font-medium">{t("start_message")} </p>
+              <p className="text-lg leading-none tracking-tight font-semibold">{t("start_message")} </p>
             </div>
 
             {/* ------------ Sección derecha -----------*/}
             <div className="flex-none w-16 flex items-center justify-center">
-              <Info className="h-9 animate-pulse text-muted-foreground"></Info>
+              <Info className="h-7 w-7 text-warning"></Info>
             </div>
           </>
         )
@@ -74,7 +74,7 @@ export function SceneNav() {
 
             {/* ------------ Sección media -----------*/}
             <div className="flex-auto flex items-center justify-center text-center text-pretty">
-              <p className="text-sm font-medium">{t("end_message")}</p>
+              <p className="text-sm leading-none tracking-tight font-semibold">{t("end_message")}</p>
             </div>
 
             {/* ------------ Sección derecha -----------*/}
@@ -95,7 +95,7 @@ export function SceneNav() {
 
             {/* ------------ Sección media -----------*/}
             <div className="flex-auto flex items-center justify-center text-center text-pretty">
-              <p className="text-xl font-medium">
+              <p className="text-xl leading-none tracking-tight font-semibold">
                 {t("head")} <strong>{t(`directions.${bearing}`)}</strong>
               </p>
             </div>
@@ -110,8 +110,8 @@ export function SceneNav() {
   }
 
   return (
-    <div>
-      <div className="w-full max-w-lg h-16 mx-auto flex rounded-md border-2 border-primary bg-card backdrop-blur-3xl">
+    <div className="m-1">
+      <div className="w-full max-w-lg h-16 mx-auto flex rounded-lg border bg-card shadow-sm backdrop-blur-3xl">
         {renderDirectionBarContent()}
       </div>
       <div className="absolute top-[135px] right-[5px] h-full">

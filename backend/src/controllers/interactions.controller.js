@@ -4,7 +4,7 @@ import Interaction from "../models/interactions.model.js"
 export async function createInteraction(req, res) {
   try {
     // Extrae la información de la interacción desde el cuerpo de la solicitud
-    const { userId, trailId, cardId, cardType, geometry} = req.body
+    const { userId, trailId, cardId, cardType, geometry } = req.body
 
     // Crea un nuevo documento de interacción con el modelo Interaction
     const newInteraction = new Interaction({

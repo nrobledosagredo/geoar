@@ -38,13 +38,13 @@ export function SceneCloseButton() {
           <AlertDialogHeader>
             <AlertDialogTitle>Terminar recorrido</AlertDialogTitle>
             <AlertDialogDescription>
-              Estás seguro de que quieres terminar el recorrido?
+              Deseas dar por terminado el recorrido?
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogCancel>Cancelar</AlertDialogCancel>
             <AlertDialogAction onClick={handleConfirm}>
-              Continuar
+              Confirmar
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
