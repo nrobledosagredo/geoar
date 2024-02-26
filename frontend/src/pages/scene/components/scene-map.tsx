@@ -107,7 +107,7 @@ export function SceneMap({ points, infoCards, trees }: SceneMapProps) {
             ]}
             icon={infoCardIcon}
           >
-            <Popup>{infoCard.name}</Popup>
+            <Popup className="font-bold"> {infoCard.name}</Popup>
           </Marker>
         ))}
 
@@ -120,7 +120,7 @@ export function SceneMap({ points, infoCards, trees }: SceneMapProps) {
             ]}
             icon={treeIcon}
           >
-            <Popup>{tree.name}</Popup>
+            <Popup className="font-bold">{tree.name}</Popup>
           </Marker>
         ))}
       </MapContainer>

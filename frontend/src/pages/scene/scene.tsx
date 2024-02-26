@@ -92,7 +92,7 @@ export function Scene() {
       )}
 
       {/* UI */}
-      <div className="relative z-40">
+      <div className="relative z-40 pointer-events-none">
         <SceneNav />
         <SceneCompass />
         <SceneMap points={points} infoCards={infoCards} trees={trees} />

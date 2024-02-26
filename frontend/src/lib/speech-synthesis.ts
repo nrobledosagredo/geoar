@@ -45,6 +45,6 @@ export async function speak(
     utterance.onend = onEndCallback
   }
 
-  console.log("Código del lenguaje:", languageCode)
+  //console.log("Language code:", languageCode)
   window.speechSynthesis.speak(utterance)
 }

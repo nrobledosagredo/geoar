@@ -1,50 +1,58 @@
-// scene-compass.tsx
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
+import { ChevronUp } from "lucide-react"
 
-export function SceneCompass() {
-  const [tiltLR, setTiltLR] = useState(0)
-  const [tiltFB, setTiltFB] = useState(0)
-  const [direction, setDirection] = useState(0)
+const compassPoints = ["S", "SE", "E", "NE", "N", "NW", "W", "SW"]
+
+export const SceneCompass: React.FC = () => {
+  const [orientation, setOrientation] = useState<number>(0)
 
   useEffect(() => {
-    if (window.DeviceOrientationEvent) {
-      window.addEventListener("deviceorientation", (eventData) => {
-        const gamma = eventData.gamma ?? 0 // Tilting the device from left to right.
-        const beta = eventData.beta ?? 0 // Tilting the device from the front to the back.
-        const alpha = eventData.alpha ?? 0 // The direction the compass of the device aims to in degrees.
+    const handleOrientation = (event: DeviceOrientationEvent) => {
+      const { alpha } = event
+      if (alpha !== null) {
+        setOrientation(alpha)
+      }
+    }
 
-        setTiltLR(Math.ceil(gamma))
-        setTiltFB(Math.ceil(beta))
+    window.addEventListener("deviceorientation", handleOrientation)
 
-        const offset = 135
-        const totalDir = -(alpha + offset)
-        setDirection(totalDir)
-      })
+    return () => {
+      window.removeEventListener("deviceorientation", handleOrientation)
     }
   }, [])
 
   return (
-    <div>
-      <div className="compass relative w-full max-w-lg h-[50px] mx-auto my-0 overflow-hidden border rounded-md border-gray-400">
-        <div
-          className="line absolute inset-0 z-[1000] w-full h-full border-l border-green-300"
-          style={{ left: "50%" }}
-        ></div>{" "}
-        <div
-          className="bg absolute top-0 z-[200] bg-[url('https://i.ibb.co/DfFhkbM/COMPASS-v4.jpg')] bg-no-repeat w-[1080px] h-[50px]"
-          style={{ left: `${direction}px` }}
-        ></div>
-      </div>
+    <div className="mx-1">
+      <div className="flex mx-auto w-full max-w-lg h-8 bg-card rounded-b-lg border-b border-l border-r shadow-sm overflow-hidden">
+        <div className="relative w-full">
+          {compassPoints.map((point, index) => {
+            const position =
+              (((index * 45 - orientation + 360) % 360) / 360) * 100
+            const isMainPoint = ["N", "S", "E", "W"].includes(point)
+            return (
+              <div
+                key={index}
+                className="absolute top-1/2 transform -translate-y-1/2 text-center -ml-[6.6px]"
+                style={{ left: `calc(${position}%` }}
+              >
+                <p
+                  className={`${isMainPoint ? "font-bold text-lg -mb-0.5 -mt-0.5" : "text-muted-foreground text-xs"}`}
+                >
+                  {point}
+                </p>
 
-      <div className="orientation-data text-white text-center">
-        <div>
-          Inclinación delantera y trasera: <span>{tiltFB}</span>
-        </div>
-        <div>
-          Inclinación izquierda y derecha: <span>{tiltLR}</span>
-        </div>
-        <div>
-          totalDir: <span>{direction}</span>
+                <p
+                  className={`text-xs font-bold ${isMainPoint ? "" : "text-muted-foreground"}`}
+                >
+                  |
+                </p>
+              </div>
+            )
+          })}
+          <ChevronUp
+            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 text-primary"
+            fill="currentColor"
+          ></ChevronUp>
         </div>
       </div>
     </div>

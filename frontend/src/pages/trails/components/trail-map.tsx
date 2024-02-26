@@ -13,8 +13,8 @@ import { useToast } from "@/components/ui/use-toast"
 import { MapPathLayer } from "@/components/map-path-layer"
 import { useTheme } from "@/components/theme-provider"
 
-const defaultLatitude  = -39.80442;
-const defaultLongitude = -73.24997;
+const defaultLatitude = -39.80442
+const defaultLongitude = -73.24997
 
 export function TrailMap({ trail }: { trail: TrailExtended }) {
   const { theme } = useTheme()

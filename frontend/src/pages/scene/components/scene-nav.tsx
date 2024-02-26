@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import { SceneNavIcon } from "@/pages/scene/components/scene-nav-icon"
 import { SceneNavSettings } from "@/pages/scene/components/scene-nav-settings"
 import { SceneNavText } from "@/pages/scene/components/scene-nav-text"
-import { Info, PartyPopper } from "lucide-react"
+import { MapPin, PartyPopper } from "lucide-react"
 import { useTranslation } from "react-i18next"
 
 export function SceneNav() {
@@ -48,17 +48,19 @@ export function SceneNav() {
           <>
             {/* ------------ Sección izquierda -----------*/}
             <div className="flex-none w-16 flex items-center justify-center">
-              <Info className="h-7 w-7 font-semibold text-warning"></Info>
+              <MapPin className="h-7 w-7 font-semibold text-warning"></MapPin>
             </div>
 
             {/* ------------ Sección media -----------*/}
             <div className="flex-auto flex items-center justify-center text-center text-pretty">
-              <p className="text-lg leading-none tracking-tight font-semibold">{t("start_message")} </p>
+              <p className="text-lg leading-none tracking-tight font-semibold">
+                {t("start_message")}{" "}
+              </p>
             </div>
 
             {/* ------------ Sección derecha -----------*/}
             <div className="flex-none w-16 flex items-center justify-center">
-              <Info className="h-7 w-7 text-warning"></Info>
+              <MapPin className="h-7 w-7 text-warning"></MapPin>
             </div>
           </>
         )
@@ -69,17 +71,19 @@ export function SceneNav() {
           <>
             {/* ------------ Sección izquierda -----------*/}
             <div className="flex-none w-16 flex items-center justify-center">
-              <PartyPopper className="h-9 animate-pulse text-muted-foreground"></PartyPopper>
+              <PartyPopper className="h-7 w-7 font-semibold text-primary"></PartyPopper>
             </div>
 
             {/* ------------ Sección media -----------*/}
             <div className="flex-auto flex items-center justify-center text-center text-pretty">
-              <p className="text-sm leading-none tracking-tight font-semibold">{t("end_message")}</p>
+              <p className="text-lg leading-none tracking-tight font-semibold">
+                {t("end_message")}
+              </p>
             </div>
 
             {/* ------------ Sección derecha -----------*/}
             <div className="flex-none w-16 flex items-center justify-center">
-              <PartyPopper className="h-9 animate-pulse text-muted-foreground"></PartyPopper>
+              <PartyPopper className="h-7 w-7 font-semibold text-primary"></PartyPopper>
             </div>
           </>
         )
@@ -110,11 +114,11 @@ export function SceneNav() {
   }
 
   return (
-    <div className="m-1">
-      <div className="w-full max-w-lg h-16 mx-auto flex rounded-lg border bg-card shadow-sm backdrop-blur-3xl">
+    <div className="mx-1 mt-1">
+      <div className="w-full max-w-lg h-16 mx-auto flex rounded-t-lg border-t border-l border-r bg-card">
         {renderDirectionBarContent()}
       </div>
-      <div className="absolute top-[135px] right-[5px] h-full">
+      <div className="absolute mx-1 mt-1 top-[96px] right-0 h-full sm:mt-0 sm:top-0 pointer-events-auto">
         <SceneNavSettings bearing={bearing ?? ""} distance={distance ?? ""} />
       </div>
     </div>

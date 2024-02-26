@@ -1,9 +1,11 @@
 // scene-nav-settings.tsx
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { SceneCloseButton } from "@/pages/scene/components/scene-close-button"
 import { SceneSpeechToggle } from "@/pages/scene/components/scene-speech-toggle"
 import { ChevronDown, ChevronUp } from "lucide-react"
+import { useTranslation } from "react-i18next"
 
+import { speak } from "@/lib/speech-synthesis"
 import { Button } from "@/components/ui/button"
 import {
   Collapsible,
@@ -21,6 +23,22 @@ export function SceneNavSettings({
 }) {
   const [isOpen, setIsOpen] = useState(false)
   const [speaking, setSpeaking] = useState(false)
+  const { t } = useTranslation()
+
+  useEffect(() => {
+    if (speaking && bearing && distance) {
+      window.speechSynthesis.cancel()
+      const textToSpeak = `${t("head")} ${t(`directions.${bearing}`)} ${t("for")} ${parseInt(distance, 10)} ${t("meters")}`
+      speak(textToSpeak)
+    }
+  }, [bearing, distance, speaking, t])
+
+  const toggleSpeech = () => {
+    if (speaking) {
+      window.speechSynthesis.cancel()
+    }
+    setSpeaking(!speaking)
+  }
 
   return (
     <Collapsible open={isOpen} onOpenChange={setIsOpen} className="space-y-2">
@@ -38,12 +56,7 @@ export function SceneNavSettings({
         </Button>
       </CollapsibleTrigger>
       <CollapsibleContent className="space-y-2">
-        <SceneSpeechToggle
-          bearing={bearing ?? ""}
-          distance={distance ?? ""}
-          speaking={speaking}
-          setSpeaking={setSpeaking}
-        />
+        <SceneSpeechToggle speaking={speaking} onToggle={toggleSpeech} />
         <ModeToggle />
         <SceneCloseButton />
       </CollapsibleContent>

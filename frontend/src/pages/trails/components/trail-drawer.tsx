@@ -39,7 +39,7 @@ export function TrailDrawer({ trail }: { trail: TrailExtended }) {
           </div>
         </ScrollArea>
         */}
-        
+
         {/* Contenido del drawer */}
         <ScrollArea className="max-h-[calc(100vh-10rem)] overflow-auto">
           <div className="space-y-6 mx-8 md:flex md:space-x-8">

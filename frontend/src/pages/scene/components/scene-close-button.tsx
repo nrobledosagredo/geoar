@@ -27,7 +27,7 @@ export function SceneCloseButton() {
       <AlertDialog>
         <AlertDialogTrigger asChild>
           <Button
-            variant="secondary"
+            variant="destructive"
             size="icon"
             className="rounded-full transition duration-150 ease-in-out transform active:scale-90"
           >
@@ -38,7 +38,7 @@ export function SceneCloseButton() {
           <AlertDialogHeader>
             <AlertDialogTitle>Terminar recorrido</AlertDialogTitle>
             <AlertDialogDescription>
-              Deseas dar por terminado el recorrido?
+              ¿Estás seguro de que deseas dar por terminado el recorrido?
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>

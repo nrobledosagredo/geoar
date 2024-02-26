@@ -8,13 +8,13 @@ export const config = {
 
   // Points
   cameraHeight: 1.6, // Altura en metros de la cámara (default: 1.6)
-  pointIsVisible: true, // Mostrar las esferas 3D en el sendero (default: false)
+  pointIsVisible: false, // Mostrar las esferas 3D en el sendero (default: false)
 
   // TargetFinder
   loadingDelay: 7000, // Tiempo en ms que se demora en cargar la lógica de navegación (default: 3000)
   firstPointThreshold: 5, // Distancia mínima en metros entre el usuario y el primer punto para comenzar el recorrido (default: 5)
   searchRadius: 5, // Radio de pointsToCheck (default: 5)
-  orderIncrement: 4, // Target será el punto más cercano más el valor proporcionado (default: 4)
+  orderIncrement: 5, // Target será el punto más cercano más el valor proporcionado (default: 4)
 
   // InfoCards y TreeCards
   cardToggleDelay: 500, // Delay en ms para prevenir dobleclick no intencional (default: 1500)
