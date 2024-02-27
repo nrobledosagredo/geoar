@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { ChevronUp } from "lucide-react";
 
-const compassPoints = ["S", "SE", "E", "NE", "N", "NW", "W", "SW"];
+const compassPoints = ["S", "SW", "W", "NW", "N", "NE", "E", "SE"];
 
 // Extender la interfaz DeviceOrientationEvent para incluir webkitCompassHeading
 declare global {
