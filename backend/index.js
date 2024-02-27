@@ -1,6 +1,6 @@
-import fs from "fs"
-import https from "https"
-import path from "path"
+//import fs from "fs"
+//import https from "https"
+//import path from "path"
 import express from "express"
 import cors from "cors"
 import dotenv from "dotenv"
@@ -57,13 +57,13 @@ app.use("/api/", treesRoutes)
 app.use("/api/", usersRoutes)
 app.use("/api/", interactionRoutes)
 
+
+/* Comentado para realizar deploy en Render
 // Configuración de HTTPS
-/*
 const httpsOptions = {
   key: fs.readFileSync(path.join(path.resolve(), "192.168.159.129+3-key.pem")),
   cert: fs.readFileSync(path.join(path.resolve(), "192.168.159.129+3.pem")),
 }
-
 
 // Crear servidor HTTPS
 https.createServer(httpsOptions, app).listen(3000, () => {
