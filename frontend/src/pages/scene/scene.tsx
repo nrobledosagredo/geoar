@@ -22,7 +22,8 @@ import "@/lib/color-changer"
 import "@/lib/target-finder"
 import "@/lib/distance-displayer"
 
-const { simulateLatitude, simulateLongitude, cameraMaxDistance } = config
+//const { simulateLatitude, simulateLongitude, cameraMaxDistance } = config
+const { cameraMaxDistance } = config
 
 export function Scene() {
   const { toast } = useToast()
@@ -107,7 +108,8 @@ export function Scene() {
         //stats
       >
         <a-camera
-          gps-new-camera={`gpsMinDistance: 5; simulateLatitude: ${String(simulateLatitude)}; simulateLongitude: ${String(simulateLongitude)}`}
+          //gps-new-camera={`gpsMinDistance: 5; simulateLatitude: ${String(simulateLatitude)}; simulateLongitude: ${String(simulateLongitude)}`}
+          gps-new-camera={`gpsMinDistance: 5`}
           target-finder
           far={cameraMaxDistance}
         >
