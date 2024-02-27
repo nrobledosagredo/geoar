@@ -1,23 +1,58 @@
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { ChevronUp } from "lucide-react"
 
 const compassPoints = ["S", "SE", "E", "NE", "N", "NW", "W", "SW"]
 
-export const SceneCompass: React.FC = () => {
+declare global {
+  interface Window {
+    DeviceOrientationEvent: typeof DeviceOrientationEvent & {
+      requestPermission?: () => Promise<string>
+    }
+  }
+}
+
+export function SceneCompass() {
   const [orientation, setOrientation] = useState<number>(0)
 
   useEffect(() => {
-    const handleOrientation = (event: DeviceOrientationEvent) => {
-      const { alpha } = event
+    const handleOrientation = (event: Event) => {
+      const orientationEvent = event as DeviceOrientationEvent
+      const { alpha } = orientationEvent
       if (alpha !== null) {
         setOrientation(alpha)
       }
     }
 
-    window.addEventListener("deviceorientation", handleOrientation)
+    const requestOrientationPermission = async () => {
+      if (
+        typeof window.DeviceOrientationEvent.requestPermission === "function"
+      ) {
+        const permissionState =
+          await window.DeviceOrientationEvent.requestPermission()
+        if (permissionState === "granted") {
+          addOrientationListener()
+        }
+      } else {
+        addOrientationListener()
+      }
+    }
+
+    const addOrientationListener = () => {
+      const orientationEventType =
+        "ondeviceorientationabsolute" in window
+          ? "deviceorientationabsolute"
+          : "deviceorientation"
+      window.addEventListener(
+        orientationEventType as keyof WindowEventMap,
+        handleOrientation
+      )
+    }
+
+    requestOrientationPermission()
 
     return () => {
       window.removeEventListener("deviceorientation", handleOrientation)
+      window.removeEventListener("deviceorientationabsolute", handleOrientation)
     }
   }, [])
 

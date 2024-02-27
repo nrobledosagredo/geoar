@@ -76,7 +76,7 @@ export function SceneMap({ points, infoCards, trees }: SceneMapProps) {
         zoom={20}
         scrollWheelZoom={false}
         zoomControl={false}
-        className="w-full h-full rounded-t-full"
+        className="w-full h-full overflow-hidden"
       >
         {/* Capa de OpenStreetMap */}
         <TileLayer url={tileLayerUrl} />
