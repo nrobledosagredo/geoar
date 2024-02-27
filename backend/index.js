@@ -33,9 +33,16 @@ database.once("connected", () => {
 const app = express()
 
 // Habilitar CORS
+/*
 app.use(
   cors({
     origin: [process.env.ORIGIN1, process.env.ORIGIN2, process.env.ORIGIN3],
+  })
+)
+*/
+app.use(
+  cors({
+    origin: "*",
   })
 )
 
@@ -51,10 +58,12 @@ app.use("/api/", usersRoutes)
 app.use("/api/", interactionRoutes)
 
 // Configuración de HTTPS
+/*
 const httpsOptions = {
   key: fs.readFileSync(path.join(path.resolve(), "192.168.159.129+3-key.pem")),
   cert: fs.readFileSync(path.join(path.resolve(), "192.168.159.129+3.pem")),
 }
+*/
 
 // Crear servidor HTTPS
 https.createServer(httpsOptions, app).listen(3000, () => {
