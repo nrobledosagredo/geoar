@@ -2,7 +2,7 @@
 // import admin from "firebase-admin";
 const admin = require('firebase-admin');
 //import serviceAccount from '../lib/geoar-92b66-firebase-adminsdk-2zfdm-6c2c627e4b.json' assert { type: 'json' };
-import * as serviceAccount from '../lib/geoar-92b66-firebase-adminsdk-2zfdm-6c2c627e4b.json' assert { type: 'json' };
+const serviceAccount = require('../lib/geoar-92b66-firebase-adminsdk-2zfdm-6c2c627e4b.json');
 
 
 admin.initializeApp({
