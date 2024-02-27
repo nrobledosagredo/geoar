@@ -5,7 +5,8 @@ import i18n from "@/lib/i18n"
 
 const BACKEND_HOST = import.meta.env.VITE_BACKEND_HOST
 const BACKEND_PORT = import.meta.env.VITE_BACKEND_PORT
-const BACKEND_URL = `${BACKEND_HOST}:${BACKEND_PORT}/api`
+//const BACKEND_URL = `${BACKEND_HOST}:${BACKEND_PORT}/api`
+const BACKEND_URL = `${BACKEND_HOST}/api`
 
 export async function getTrails(): Promise<Trail[]> {
   const lang = i18n.language

@@ -63,9 +63,10 @@ const httpsOptions = {
   key: fs.readFileSync(path.join(path.resolve(), "192.168.159.129+3-key.pem")),
   cert: fs.readFileSync(path.join(path.resolve(), "192.168.159.129+3.pem")),
 }
-*/
+
 
 // Crear servidor HTTPS
 https.createServer(httpsOptions, app).listen(3000, () => {
   console.log("HTTPS server running on port 3000")
 })
+*/
