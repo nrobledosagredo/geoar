@@ -2,7 +2,7 @@
 import { Trees } from "lucide-react"
 import { Link } from "react-router-dom"
 
-export const HorizontalLogo = () => {
+export function HorizontalLogo() {
   return (
     <Link to="/" className="flex flex-row items-center no-underline ml-[-3px]">
       {/* Logo de la aplicación */}
@@ -10,7 +10,7 @@ export const HorizontalLogo = () => {
 
       {/* Nombre de la aplicación */}
       <span className="self-center whitespace-nowrap tracking-tighter text-2xl">
-        <span className="font-semibold">Geo</span>
+        <span className="font-medium">Geo</span>
         <span className="font-black">AR</span>
       </span>
     </Link>
