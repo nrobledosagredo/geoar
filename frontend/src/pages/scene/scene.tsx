@@ -10,7 +10,7 @@ import { SceneTreeCard } from "@/pages/scene/components/scene-treecard"
 import { getImage } from "@/services/images-service"
 import { useParams } from "react-router-dom"
 
-import { config } from "@/lib/scene-config"
+//import { config } from "@/lib/scene-config"
 import { useGetInfoCardsByTrail } from "@/hooks/use-get-infocards-by-trail"
 import { useGetPoints } from "@/hooks/use-get-points"
 import { useGetTrail } from "@/hooks/use-get-trail"
@@ -23,7 +23,7 @@ import "@/lib/target-finder"
 import "@/lib/distance-displayer"
 
 //const { simulateLatitude, simulateLongitude, cameraMaxDistance } = config
-const { cameraMaxDistance } = config
+//const { cameraMaxDistance } = config
 
 export function Scene() {
   const { toast } = useToast()
@@ -84,18 +84,20 @@ export function Scene() {
 
   useEffect(() => {
     let testEntityAdded = false;
-
+  
     const el = document.querySelector("[gps-new-camera]");
-
+  
     if (el) {
       el.addEventListener("gps-camera-update-position", (e) => {
+        const event = e as CustomEvent; // Utiliza un type assertion para indicar que e es un CustomEvent
         if (!testEntityAdded) {
-          alert(`Got first GPS position: lon ${e.detail.position.longitude} lat ${e.detail.position.latitude}`);
+          alert(`Got first GPS position: lon ${event.detail.position.longitude} lat ${event.detail.position.latitude}`);
           testEntityAdded = true;
         }
       });
     }
   }, []);
+  
   
 
   return loading ? (
