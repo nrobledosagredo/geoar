@@ -71,6 +71,7 @@ export function SceneMap({ points, infoCards, trees }: SceneMapProps) {
     ])
 
   return (
+    <div className="border-2 dark:border-[#464843] pointer-events-auto overflow-hidden w-full max-w-lg h-[28%] fixed bottom-[-2px] left-0 right-0 mx-auto flex justify-center items-center rounded-t-full sm:rounded-lg sm:w-60 sm:h-60 sm:right-auto sm:left-0 landscape:rounded-lg landscape:w-60 landscape:h-60 landscape:right-auto landscape:left-0">
       <MapContainer
         center={[defaultLatitude, defaultLongitude]}
         zoom={20}
@@ -124,5 +125,6 @@ export function SceneMap({ points, infoCards, trees }: SceneMapProps) {
           </Marker>
         ))}
       </MapContainer>
+      </div>
   )
 }
