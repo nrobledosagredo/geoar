@@ -5,6 +5,7 @@ import {
 import { RequestCamera } from "./components/request-camera"
 import { RequestDeviceMotion } from "./components/request-device-motion"
 import { RequestDeviceOrientation } from "./components/request-device-orientation"
+import { RequestGeolocation } from "./components/request-geolocation"
 
 export function Permissions() {
   return (
@@ -12,6 +13,7 @@ export function Permissions() {
       <RequestCamera />
       <RequestDeviceMotion />
       <RequestDeviceOrientation />
+      <RequestGeolocation />
     </Accordion>
   )
 }
