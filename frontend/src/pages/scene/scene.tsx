@@ -10,7 +10,7 @@ import { SceneTreeCard } from "@/pages/scene/components/scene-treecard"
 import { getImage } from "@/services/images-service"
 import { useParams } from "react-router-dom"
 
-//import { config } from "@/lib/scene-config"
+import { config } from "@/lib/scene-config"
 import { useGetInfoCardsByTrail } from "@/hooks/use-get-infocards-by-trail"
 import { useGetPoints } from "@/hooks/use-get-points"
 import { useGetTrail } from "@/hooks/use-get-trail"
@@ -22,7 +22,7 @@ import "@/lib/color-changer"
 import "@/lib/target-finder"
 import "@/lib/distance-displayer"
 
-//const { simulateLatitude, simulateLongitude, cameraMaxDistance } = config
+const { simulateLatitude, simulateLongitude } = config
 //const { cameraMaxDistance } = config
 
 export function Scene() {
@@ -127,8 +127,8 @@ export function Scene() {
         //device-orientation-permission-ui="enabled: false"
       >
         <a-camera
-          //gps-new-camera={`gpsMinDistance: 5; simulateLatitude: ${String(simulateLatitude)}; simulateLongitude: ${String(simulateLongitude)}`}
-          gps-new-camera="gpsMinDistance: 5"
+          gps-new-camera={`gpsMinDistance: 5; simulateLatitude: ${String(simulateLatitude)}; simulateLongitude: ${String(simulateLongitude)}`}
+          //gps-new-camera="gpsMinDistance: 5"
           target-finder
           //far={cameraMaxDistance}
         >

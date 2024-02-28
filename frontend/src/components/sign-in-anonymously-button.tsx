@@ -30,10 +30,10 @@ export function SignInAnonymouslyButton({
           userId: result.user.uid,
           language: i18n.language,
         }).then(() => {
-          navigate("/")
           toast({
             description: t("guest_toast"),
           })
+          navigate("/")
         })
       })
 
