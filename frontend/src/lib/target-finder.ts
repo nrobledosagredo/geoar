@@ -104,8 +104,7 @@ AFRAME.registerComponent("target-finder", {
     })
     this.lastPointOrder = maxOrder // Establece el último order después de iterar todos los puntos
     this.pointsCached = true
-    document.dispatchEvent(new CustomEvent("pointsCached"))
-    //console.log("El último punto tiene el order:", this.lastPointOrder);
+    console.log("El último punto tiene el order:", this.lastPointOrder);
   },
 
   // Función para guiar al usuario hacia el primer punto
@@ -122,7 +121,7 @@ AFRAME.registerComponent("target-finder", {
 
     // Verificar si ya se mostró el mensaje antes de imprimirlo
     if (!this.firstPointMessageShown) {
-      //console.log("Camina hacia el inicio del sendero siguiendo la flecha.");
+      console.log("Camina hacia el inicio del sendero siguiendo la flecha.");
       this.firstPointMessageShown = true // Marcar que el mensaje ha sido mostrado
       document.dispatchEvent(new CustomEvent("trailStarted"))
     }
@@ -131,10 +130,11 @@ AFRAME.registerComponent("target-finder", {
     document.dispatchEvent(
       new CustomEvent("updateTarget", { detail: { order: 1 } })
     )
+    console.log("El usuario está a", distance, "metros del primer punto.");
 
     // Verificar si el jugador ha alcanzado el primer punto
     if (distance < this.firstPointThreshold) {
-      //console.log("Comienza el sendero.");
+      console.log("Comienza el sendero.");
       this.firstPointReached = true // Marcar que el primer punto ha sido alcanzado
     }
   },

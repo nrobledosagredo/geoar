@@ -81,6 +81,23 @@ export function Scene() {
     }
   }, [error, toast])
 
+
+  useEffect(() => {
+    let testEntityAdded = false;
+
+    const el = document.querySelector("[gps-new-camera]");
+
+    if (el) {
+      el.addEventListener("gps-camera-update-position", (e) => {
+        if (!testEntityAdded) {
+          alert(`Got first GPS position: lon ${e.detail.position.longitude} lat ${e.detail.position.latitude}`);
+          testEntityAdded = true;
+        }
+      });
+    }
+  }, []);
+  
+
   return loading ? (
     <SceneLoadingScreen />
   ) : (
@@ -105,13 +122,13 @@ export function Scene() {
         raycaster="objects: .raycastable; near: 0; far: 50000"
         arjs="sourceType: webcam; videoTexture: true; debugUIEnabled: false;"
         renderer="antialias: true; alpha: true"
-        device-orientation-permission-ui="enabled: false"
+        //device-orientation-permission-ui="enabled: false"
       >
         <a-camera
           //gps-new-camera={`gpsMinDistance: 5; simulateLatitude: ${String(simulateLatitude)}; simulateLongitude: ${String(simulateLongitude)}`}
-          gps-new-camera={`gpsMinDistance: 5`}
+          gps-new-camera="gpsMinDistance: 5"
           target-finder
-          far={cameraMaxDistance}
+          //far={cameraMaxDistance}
         >
           {/* Flecha 3D que apunta al siguiente punto */}
           <SceneArrow />
