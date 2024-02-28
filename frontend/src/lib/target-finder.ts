@@ -107,37 +107,51 @@ AFRAME.registerComponent("target-finder", {
     console.log("El último punto tiene el order:", this.lastPointOrder);
   },
 
-  // Función para guiar al usuario hacia el primer punto
-  firstPointGuide: function () {
-    if (this.firstPointReached) return
+// Función para guiar al usuario hacia el primer punto
+firstPointGuide: function () {
+  if (this.firstPointReached) return;
 
-    const firstPoint = this.points.get(1)
-    if (!firstPoint) return
+  const firstPoint = this.points.get(1);
+  if (!firstPoint) return;
 
-    // Calcular la distancia al primer punto
-    const distance = firstPoint.object3D.position.distanceTo(
-      this.el.object3D.position
-    )
+  // Iniciar la observación de la posición del usuario
+  navigator.geolocation.watchPosition((position) => {
+    const userLatitude = position.coords.latitude;
+    const userLongitude = position.coords.longitude;
 
-    // Verificar si ya se mostró el mensaje antes de imprimirlo
-    if (!this.firstPointMessageShown) {
-      console.log("Camina hacia el inicio del sendero siguiendo la flecha.");
-      this.firstPointMessageShown = true // Marcar que el mensaje ha sido mostrado
-      document.dispatchEvent(new CustomEvent("trailStarted"))
-    }
+    console.log("Latitud del usuario:", userLatitude, "Longitud del usuario:", userLongitude);
+  }, (error) => {
+    console.error("Error al obtener la posición del usuario:", error);
+  }, {
+    enableHighAccuracy: true,
+    timeout: 5000,
+    maximumAge: 0
+  });
 
-    // Desencadenar evento de actualización del objetivo solo si es necesario
-    document.dispatchEvent(
-      new CustomEvent("updateTarget", { detail: { order: 1 } })
-    )
-    console.log("El usuario está a", distance, "metros del primer punto.");
+  // Calcular la distancia al primer punto
+  const distance = firstPoint.object3D.position.distanceTo(
+    this.el.object3D.position
+  );
 
-    // Verificar si el jugador ha alcanzado el primer punto
-    if (distance < this.firstPointThreshold) {
-      console.log("Comienza el sendero.");
-      this.firstPointReached = true // Marcar que el primer punto ha sido alcanzado
-    }
-  },
+  // Verificar si ya se mostró el mensaje antes de imprimirlo
+  if (!this.firstPointMessageShown) {
+    console.log("Camina hacia el inicio del sendero siguiendo la flecha.");
+    this.firstPointMessageShown = true; // Marcar que el mensaje ha sido mostrado
+    document.dispatchEvent(new CustomEvent("trailStarted"));
+  }
+
+  // Desencadenar evento de actualización del objetivo solo si es necesario
+  document.dispatchEvent(
+    new CustomEvent("updateTarget", { detail: { order: 1 } })
+  );
+  console.log("El usuario está a", distance, "metros del primer punto.");
+
+  // Verificar si el jugador ha alcanzado el primer punto
+  if (distance < this.firstPointThreshold) {
+    console.log("Comienza el sendero.");
+    this.firstPointReached = true; // Marcar que el primer punto ha sido alcanzado
+  }
+},
 
   // Función para actualizar el target de la flecha 3D
   updateTarget: function () {
