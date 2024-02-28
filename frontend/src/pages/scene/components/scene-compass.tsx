@@ -35,6 +35,7 @@ export function SceneCompass() {
       }
     };
 
+    
     const requestOrientationPermission = async () => {
       if (
         typeof window.DeviceOrientationEvent.requestPermission === "function"

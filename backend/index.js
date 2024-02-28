@@ -1,6 +1,6 @@
-//import fs from "fs"
-//import https from "https"
-//import path from "path"
+import fs from "fs"
+import https from "https"
+import path from "path"
 import express from "express"
 import cors from "cors"
 import dotenv from "dotenv"
@@ -57,12 +57,11 @@ app.use("/api/", treesRoutes)
 app.use("/api/", usersRoutes)
 app.use("/api/", interactionRoutes)
 
-
-/* Comentado para realizar deploy en Render
+/*
 // Configuración de HTTPS
 const httpsOptions = {
-  key: fs.readFileSync(path.join(path.resolve(), "192.168.159.129+3-key.pem")),
-  cert: fs.readFileSync(path.join(path.resolve(), "192.168.159.129+3.pem")),
+  key: fs.readFileSync(path.join(path.resolve(), process.env.SSL_KEY_PATH)),
+  cert: fs.readFileSync(path.join(path.resolve(), process.env.SSL_CERT_PATH)),
 }
 
 // Crear servidor HTTPS
@@ -71,6 +70,8 @@ https.createServer(httpsOptions, app).listen(3000, () => {
 })
 */
 
+
 app.listen(3000, () => {
   console.log("Running on port 3000")
 })
+

@@ -105,7 +105,7 @@ export function Scene() {
         raycaster="objects: .raycastable; near: 0; far: 50000"
         arjs="sourceType: webcam; videoTexture: true; debugUIEnabled: false;"
         renderer="antialias: true; alpha: true"
-        //stats
+        device-orientation-permission-ui="enabled: false"
       >
         <a-camera
           //gps-new-camera={`gpsMinDistance: 5; simulateLatitude: ${String(simulateLatitude)}; simulateLongitude: ${String(simulateLongitude)}`}

@@ -9,6 +9,7 @@ import { NotFound } from "@/pages/not-found/not-found"
 import { Scene } from "@/pages/scene/scene"
 import { Settings } from "@/pages/settings/settings"
 import { Trails } from "@/pages/trails/trails"
+import { Permissions } from "@/pages/permissions/permissions"
 import {
   browserLocalPersistence,
   getAuth,
@@ -86,6 +87,11 @@ function App() {
             <Route
               path="/trails/:id"
               element={currentUser ? <Scene /> : <Navigate to="/auth/login" />}
+            />
+
+            <Route
+              path="/permissions"
+              element={currentUser ? <Permissions /> : <Navigate to="/auth/login" />}
             />
 
             <Route path="*" element={<NotFound />} />

@@ -58,13 +58,13 @@ export function TrailDrawer({ trail }: { trail: TrailExtended }) {
         {/* Botones de acción */}
         <DrawerFooter className="flex flex-row justify-center">
           <DrawerClose asChild>
-            <Button variant="destructive" className="w-24">
+            <Button variant="destructive" className="w-32">
               Cerrar
             </Button>
           </DrawerClose>
 
-          <Button className="w-24 font-semibold">
-            <Link to={`/trails/${trail._id}`} className="block w-full h-full">
+          <Button className="w-32 font-semibold">
+            <Link to={`/trails/${trail._id}`}>
               Comenzar
             </Link>
           </Button>

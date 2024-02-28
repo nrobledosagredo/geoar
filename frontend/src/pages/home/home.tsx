@@ -35,6 +35,16 @@ export function Home() {
             </Button>
           </Link>
         </div>
+
+        {/* Botón para ir a la página de permisos */}
+        <div>
+          <Link to="/permissions">
+            <Button className="font-semibold">
+              Permisos
+              <ChevronRight className="h-4 mt-0.5 -mr-2" />
+            </Button>
+          </Link>
+        </div>
       </div>
     </div>
   )
