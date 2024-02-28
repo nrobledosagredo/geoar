@@ -1,13 +1,13 @@
 // scene-map.tsx
 import L from "leaflet"
-import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet"
+import { MapContainer, Marker, Popup, TileLayer, useMapEvents } from "react-leaflet"
 
 import "leaflet.locatecontrol"
 import "leaflet.locatecontrol/dist/L.Control.Locate.min.css"
 import "leaflet/dist/leaflet.css"
 
-import { useEffect } from "react"
-import { useMap } from "react-leaflet"
+//import { useEffect } from "react"
+//import { useMap } from "react-leaflet"
 
 import { SceneMapProps } from "@/types/scene-types"
 import {
@@ -24,6 +24,28 @@ import { useTheme } from "@/components/theme-provider"
 const defaultLatitude = config.simulateLatitude
 const defaultLongitude = config.simulateLongitude
 
+function LocationMarker() {
+  const map = useMapEvents({
+    locationfound(e) {
+      const radius = e.accuracy;
+      const latlng = e.latlng;
+
+      L.marker(latlng).addTo(map)
+        .bindPopup(`You are within ${radius} meters from this point`).openPopup();
+
+      L.circle(latlng, radius).addTo(map);
+
+      map.flyTo(latlng, map.getZoom()); // Centra el mapa en la ubicación del usuario
+    },
+    locationerror(e) {
+      alert(e.message);
+    }
+  });
+
+  return null; // Este componente no necesita renderizar nada por sí mismo
+}
+
+/*
 function LocateControl() {
   const map = useMap()
 
@@ -47,6 +69,7 @@ function LocateControl() {
 
   return null
 }
+*/
 
 export function SceneMap({ points, infoCards, trees }: SceneMapProps) {
   const { theme } = useTheme()
@@ -77,10 +100,11 @@ export function SceneMap({ points, infoCards, trees }: SceneMapProps) {
         zoomControl={false}
         className="border-2 dark:border-[#464843] pointer-events-auto overflow-hidden w-full max-w-lg h-[28%] fixed bottom-[-2px] left-0 right-0 mx-auto flex justify-center items-center rounded-t-full sm:rounded-lg sm:w-60 sm:h-60 sm:right-auto sm:left-0 landscape:rounded-lg landscape:w-60 landscape:h-60 landscape:right-auto landscape:left-0"
       >
+        <LocationMarker />
         {/* Capa de OpenStreetMap */}
         <TileLayer url={tileLayerUrl} />
 
-        {/* Control de localización */}
+        {/* Control de localización
         <LocateControl />
 
         {/* Capa de camino recorrido */}
