@@ -6,9 +6,6 @@ import "leaflet.locatecontrol"
 import "leaflet.locatecontrol/dist/L.Control.Locate.min.css"
 import "leaflet/dist/leaflet.css"
 
-//import { useEffect } from "react"
-//import { useMap } from "react-leaflet"
-
 import { useEffect } from "react"
 import { SceneMapProps } from "@/types/scene-types"
 import {
@@ -25,33 +22,6 @@ import { useTheme } from "@/components/theme-provider"
 const defaultLatitude = config.simulateLatitude
 const defaultLongitude = config.simulateLongitude
 
-function LocationMarker() {
-  const map = useMap();
-
-  useEffect(() => {
-    map.locate({ watch: true, setView: true, maxZoom: 16 });
-
-    const onLocationFound = (e: { accuracy: number; latlng: any }) => {
-      const radius = e.accuracy / 2;
-      const latlng = e.latlng;
-
-      L.marker(latlng).addTo(map)
-        .bindPopup(`You are within ${radius} meters from this point`).openPopup();
-
-      L.circle(latlng, radius).addTo(map);
-    };
-
-    map.on('locationfound', onLocationFound);
-
-    return () => {
-      map.off('locationfound', onLocationFound);
-    };
-  }, [map]);
-
-  return null;
-}
-
-/*
 function LocateControl() {
   const map = useMap()
 
@@ -66,16 +36,18 @@ function LocateControl() {
         initialZoomLevel: 20,
         showPopup: false,
       })
-      .addTo(map)
+      .addTo(map);
+
+    // Iniciar la localización automáticamente
+    locateControl.start();
 
     return () => {
-      map.removeControl(locateControl)
-    }
-  }, [map])
+      map.removeControl(locateControl);
+    };
+  }, [map]);
 
-  return null
+  return null;
 }
-*/
 
 export function SceneMap({ points, infoCards, trees }: SceneMapProps) {
   const { theme } = useTheme()
@@ -106,11 +78,10 @@ export function SceneMap({ points, infoCards, trees }: SceneMapProps) {
         zoomControl={false}
         className="border-2 dark:border-[#464843] pointer-events-auto overflow-hidden w-full max-w-lg h-[28%] fixed bottom-[-2px] left-0 right-0 mx-auto flex justify-center items-center rounded-t-full sm:rounded-lg sm:w-60 sm:h-60 sm:right-auto sm:left-0 landscape:rounded-lg landscape:w-60 landscape:h-60 landscape:right-auto landscape:left-0"
       >
-        <LocationMarker />
         {/* Capa de OpenStreetMap */}
         <TileLayer url={tileLayerUrl} />
 
-        {/* Control de localización
+        {/* Control de localización */}
         <LocateControl />
 
         {/* Capa de camino recorrido */}
