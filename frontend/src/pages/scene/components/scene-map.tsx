@@ -1,6 +1,6 @@
 // scene-map.tsx
 import L from "leaflet"
-import { MapContainer, Marker, Popup, TileLayer, useMapEvents } from "react-leaflet"
+import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet"
 
 import "leaflet.locatecontrol"
 import "leaflet.locatecontrol/dist/L.Control.Locate.min.css"
@@ -9,6 +9,7 @@ import "leaflet/dist/leaflet.css"
 //import { useEffect } from "react"
 //import { useMap } from "react-leaflet"
 
+import { useEffect } from "react"
 import { SceneMapProps } from "@/types/scene-types"
 import {
   infoCardIcon,
@@ -25,24 +26,29 @@ const defaultLatitude = config.simulateLatitude
 const defaultLongitude = config.simulateLongitude
 
 function LocationMarker() {
-  const map = useMapEvents({
-    locationfound(e) {
-      const radius = e.accuracy;
+  const map = useMap();
+
+  useEffect(() => {
+    map.locate({ watch: true, setView: true, maxZoom: 16 });
+
+    const onLocationFound = (e: { accuracy: number; latlng: any }) => {
+      const radius = e.accuracy / 2;
       const latlng = e.latlng;
 
       L.marker(latlng).addTo(map)
         .bindPopup(`You are within ${radius} meters from this point`).openPopup();
 
       L.circle(latlng, radius).addTo(map);
+    };
 
-      map.flyTo(latlng, map.getZoom()); // Centra el mapa en la ubicación del usuario
-    },
-    locationerror(e) {
-      alert(e.message);
-    }
-  });
+    map.on('locationfound', onLocationFound);
 
-  return null; // Este componente no necesita renderizar nada por sí mismo
+    return () => {
+      map.off('locationfound', onLocationFound);
+    };
+  }, [map]);
+
+  return null;
 }
 
 /*
