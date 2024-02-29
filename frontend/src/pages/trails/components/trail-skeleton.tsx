@@ -25,8 +25,8 @@ export function TrailSkeleton() {
           <Skeleton className="border rounded-lg object-cover w-full h-full" />
         </AspectRatio>
       </CardContent>
-      <CardFooter className="flex flex-row">
-        <div className="justify-between">
+      <CardFooter className="flex flex-col">
+        <div className="flex justify-between">
           {Array.from({ length: 3 }).map((_, index) => (
             <div
               key={index}
