@@ -162,6 +162,12 @@ AFRAME.registerComponent("target-finder", {
       firstPointLongitude
     )
 
+    document.addEventListener("gps-camera-update-position", (e) => {
+      const customEvent = e as CustomEvent;
+      const { latitude, longitude } = customEvent.detail.position;
+      console.log(`GPS position updated: Latitude: ${latitude}, Longitude: ${longitude}`);
+    });
+
     // Verificar si ya se mostró el mensaje antes de imprimirlo
     if (!this.firstPointMessageShown) {
       //console.log("Camina hacia el inicio del sendero siguiendo la flecha.")
