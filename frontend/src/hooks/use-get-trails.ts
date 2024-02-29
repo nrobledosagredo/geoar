@@ -16,8 +16,12 @@ export function useGetTrails() {
     async function handleGetTrails() {
       try {
         setLoading(true)
-        const trails = await getTrails()
-        setTrails(trails)
+        const fetchedTrails = await getTrails()
+        // Ordena los trails por nombre
+        const sortedTrails = fetchedTrails.sort((a, b) =>
+          a.name.localeCompare(b.name, language)
+        )
+        setTrails(sortedTrails)
         setError(null)
       } catch (err: unknown) {
         const message =
