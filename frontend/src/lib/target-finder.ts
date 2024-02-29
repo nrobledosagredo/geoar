@@ -128,7 +128,7 @@ AFRAME.registerComponent("target-finder", {
       this.userLongitude = longitude
     })
 
-    console.log("El usuario está en", this.userLatitude, this.userLongitude)
+    //console.log("El usuario está en", this.userLatitude, this.userLongitude)
 
     // Obtener las coordenadas del primer punto
     const firstPointLatitude = parseFloat(firstPoint.dataset.latitude)
@@ -141,7 +141,7 @@ AFRAME.registerComponent("target-finder", {
       firstPointLatitude,
       firstPointLongitude
     )
-    console.log("El usuario está a", distance, "metros del primer punto.")
+    //console.log("El usuario está a", distance, "metros del primer punto.")
 
     // Verificar si ya se mostró el mensaje antes de imprimirlo
     if (!this.firstPointMessageShown) {

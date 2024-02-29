@@ -36,7 +36,7 @@ export function Home() {
           </Link>
         </div>
 
-        {/* Botón para ir a la página de permisos */}
+        {/* Botón para ir a la página de permisos 
         <div>
           <Link to="/permissions">
             <Button className="font-semibold">
@@ -45,6 +45,7 @@ export function Home() {
             </Button>
           </Link>
         </div>
+        */}
       </div>
     </div>
   )

@@ -94,9 +94,9 @@
   "pagination_prev": "Anterior",
   "pagination_next": "Siguiente",
 
-  "loading1": "Cargando...",
-  "loading2": "Por favor espera...",
-  "loading3": "Casi listo...",
+  "loading1": "Activa la ubicación precisa en tu dispositivo para una experiencia más enriquecedora.",
+  "loading2": "Mantén la atención en tu entorno para evitar distracciones y garantizar una experiencia segura.",
+  "loading3": "Asegúrate de otorgar los permisos del dispositivo necesarios para un funcionamiento óptimo.",
 
   "start_message": "Dirígete a la entrada para comenzar el sendero",
   "end_message": "¡Has llegado al final del sendero!",

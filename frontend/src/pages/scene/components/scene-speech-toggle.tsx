@@ -21,7 +21,7 @@ export function SceneSpeechToggle({
         {speaking ? (
           <Volume2 className="h-[1.2rem] w-[1.2rem] " />
         ) : (
-          <VolumeX className="text-[#ef4928] h-[1.2rem] w-[1.2rem] " />
+          <VolumeX className="text-[#ef4444] dark:text-[#7f1d1d] h-[1.2rem] w-[1.2rem] " />
         )}
       </Button>
     </div>

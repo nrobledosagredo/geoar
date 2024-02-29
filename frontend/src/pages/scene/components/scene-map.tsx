@@ -41,6 +41,7 @@ function LocateControl() {
     // Función para iniciar la localización
     const startLocation = () => {
       locateControl.start();
+      document.dispatchEvent(new CustomEvent("locationStarted"));
     };
 
     // Agregar el escuchador del evento 'trailStarted'
