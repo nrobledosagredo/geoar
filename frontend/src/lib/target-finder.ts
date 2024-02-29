@@ -53,6 +53,13 @@ AFRAME.registerComponent("target-finder", {
 
     //await new Promise((resolve) => setTimeout(resolve, loadingDelay)) // Esperar a que se cargue el DOM antes de llamar a cachePoints
     await this.cachePoints() // Cachear los puntos del sendero
+
+    // Obtener las coordenadas del usuario
+    document.addEventListener("gps-camera-update-position", (e) => {
+      const { latitude, longitude } = (e as CustomEvent).detail.position
+      this.userLatitude = latitude
+      this.userLongitude = longitude
+    })
   },
 
   /*
