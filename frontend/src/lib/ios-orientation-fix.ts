@@ -12,14 +12,18 @@ AFRAME.registerComponent('ios-orientation-fix', {
     window.addEventListener('deviceorientation', (event: ExtendedDeviceOrientationEvent) => {
       // Verifica si el dispositivo es iOS y si el evento tiene la propiedad webkitCompassHeading
       if ('webkitCompassHeading' in event && typeof event.webkitCompassHeading === 'number') {
+        console.log("Es iOS");
         if (initialOrientation === null) {
           // Almacena la orientación inicial del dispositivo
           initialOrientation = event.webkitCompassHeading;
+          console.log("Orientación inicial", initialOrientation);
         } else {
           // Calcula la diferencia entre la orientación actual y la inicial
           const rotationDiff = event.webkitCompassHeading - initialOrientation;
+          console.log("Diferencia de rotación", rotationDiff);
           // Aplica la corrección a la rotación de la cámara
           cameraEl.rotation.y = THREE.Math.degToRad(rotationDiff);
+          console.log("Rotación de la cámara", cameraEl.rotation.y);
         }
       }
     });
