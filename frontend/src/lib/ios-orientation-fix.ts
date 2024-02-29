@@ -19,7 +19,7 @@ AFRAME.registerComponent('ios-orientation-fix', {
             console.log("Diferencia de rotación", rotationDiff);
             // Aplica la corrección a la rotación de la cámara
             const currentRotation = cameraEl.getAttribute('rotation');
-            console.log("Rotación actual de la cámara", currentRotation);
+            console.log("Rotación actual de la cámara", `x: ${currentRotation.x}, y: ${currentRotation.y}, z: ${currentRotation.z}`);
             cameraEl.setAttribute('rotation', {
               x: currentRotation.x,
               y: THREE.Math.radToDeg(rotationDiff),
