@@ -23,7 +23,7 @@ const defaultLatitude = config.simulateLatitude
 const defaultLongitude = config.simulateLongitude
 
 function LocateControl() {
-  const map = useMap()
+  const map = useMap();
 
   useEffect(() => {
     const locateControl = L.control
@@ -38,16 +38,24 @@ function LocateControl() {
       })
       .addTo(map);
 
-    // Iniciar la localización automáticamente
-    //locateControl.start();
+    // Función para iniciar la localización
+    const startLocation = () => {
+      locateControl.start();
+    };
+
+    // Agregar el escuchador del evento 'trailStarted'
+    document.addEventListener("trailStarted", startLocation);
 
     return () => {
       map.removeControl(locateControl);
+      // Remover el escuchador del evento para evitar fugas de memoria
+      document.removeEventListener("trailStarted", startLocation);
     };
   }, [map]);
 
   return null;
 }
+
 
 export function SceneMap({ points, infoCards, trees }: SceneMapProps) {
   const { theme } = useTheme()
