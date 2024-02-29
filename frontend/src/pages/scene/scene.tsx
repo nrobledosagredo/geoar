@@ -81,58 +81,33 @@ export function Scene() {
     }
   }, [error, toast])
 
+  const [sceneRotation, setSceneRotation] = useState<string | null>(null);
   const [initialCompassHeading, setInitialCompassHeading] = useState<
     number | null
   >(null)
 
   useEffect(() => {
     const handleOrientationEvent = (event: any) => {
-      const compassHeading = event.webkitCompassHeading
+      const compassHeading = event.webkitCompassHeading;
       if (!initialCompassHeading && compassHeading) {
-        setInitialCompassHeading(compassHeading)
+        setInitialCompassHeading(compassHeading);
+        setSceneRotation(`0 ${360 - compassHeading} 0`);
       }
-    }
-
+    };
+  
     // Verificar si el navegador soporta webkitCompassHeading
     if ("ondeviceorientationabsolute" in window) {
-      window.addEventListener(
-        "deviceorientationabsolute",
-        handleOrientationEvent,
-        true
-      )
+      window.addEventListener("deviceorientationabsolute", handleOrientationEvent, true);
     } else if ("ondeviceorientation" in window) {
-      window.addEventListener("deviceorientation", handleOrientationEvent, true)
+      window.addEventListener("deviceorientation", handleOrientationEvent, true);
     }
-
-    return () => {
-      window.removeEventListener(
-        "deviceorientationabsolute",
-        handleOrientationEvent,
-        true
-      )
-      window.removeEventListener(
-        "deviceorientation",
-        handleOrientationEvent,
-        true
-      )
-    }
-  }, [initialCompassHeading])
-
-  useEffect(() => {
-    if (initialCompassHeading !== null) {
-      console.log('initialCompassHeading', initialCompassHeading);
-      setTimeout(() => {
-        const camera = document.querySelector('a-camera');
-        if (camera) {
-          console.log('Camera:', camera);
-          console.log('ANTES: Camera rotation:', camera.getAttribute('rotation'));
-          camera.setAttribute('rotation', `0 ${360 - initialCompassHeading} 0`);
-          console.log('DESPUES: Camera rotation:', camera.getAttribute('rotation'));
-        }
-      }, 3000); // Espera 3 segundos antes de ajustar la rotación de la cámara
-    }
-  }, [initialCompassHeading]);
   
+    return () => {
+      window.removeEventListener("deviceorientationabsolute", handleOrientationEvent, true);
+      window.removeEventListener("deviceorientation", handleOrientationEvent, true);
+    };
+  }, [initialCompassHeading]);
+
 
   return loading ? (
     <SceneLoadingScreen />
@@ -158,6 +133,7 @@ export function Scene() {
         raycaster="objects: .raycastable; near: 0; far: 50000"
         arjs="sourceType: webcam; videoTexture: true; debugUIEnabled: false;"
         renderer="antialias: true; alpha: true"
+        rotation={sceneRotation}
         //device-orientation-permission-ui="enabled: false"
       >
         <a-camera
