@@ -51,33 +51,8 @@ AFRAME.registerComponent("target-finder", {
     this.lastBearing = null // Variable para almacenar el último bearing
     this.nextBearing = null // Variable para almacenar el siguiente bearing
 
-    // Esperar a que se cargue el DOM antes de llamar a cachePoints
-    //await new Promise((resolve) => setTimeout(resolve, loadingDelay))
-
-    // Cachear los puntos del sendero
-    await this.cachePoints()
-
-    document.addEventListener("gps-camera-update-position", (e) => {
-      const customEvent = e as CustomEvent;
-      const { latitude, longitude } = customEvent.detail.position;
-      console.log(`GPS position updated: Latitude: ${latitude}, Longitude: ${longitude}`);
-    });
-
-    // Inicializar la posición del usuario
-    this.watchID = navigator.geolocation.watchPosition(
-      (position) => {
-        this.userLatitude = position.coords.latitude
-        this.userLongitude = position.coords.longitude
-      },
-      (error) => {
-        console.error("Error obtaining user position:", error)
-      },
-      {
-        enableHighAccuracy: true,
-        timeout: 5000,
-        maximumAge: 0,
-      }
-    )
+    //await new Promise((resolve) => setTimeout(resolve, loadingDelay)) // Esperar a que se cargue el DOM antes de llamar a cachePoints
+    await this.cachePoints() // Cachear los puntos del sendero
   },
 
   /*
@@ -107,27 +82,16 @@ AFRAME.registerComponent("target-finder", {
     this.isAnimating = false
   },
 
-  /*
-  remove: function () {
-    if (this.watchID) {
-      navigator.geolocation.clearWatch(this.watchID)
-    }
-  },
-*/
-
   animate: function () {
     if (!this.isAnimating) return
 
     this.updateTarget() // Llama a la función que actualiza el objetivo
-
-    // Solicita el siguiente frame para la animación
-    requestAnimationFrame(this.animate.bind(this))
+    requestAnimationFrame(this.animate.bind(this)) // Solicita el siguiente frame para la animación
   },
 
   // Función para cachear los puntos
   cachePoints: function () {
-    // Si ya hemos cacheado los puntos, no hacemos nada más
-    if (this.pointsCached) return
+    if (this.pointsCached) return // Si ya hemos cacheado los puntos, no hacemos nada más
 
     let maxOrder = 0 // Inicializa una variable para encontrar el valor máximo de 'order'
     document.querySelectorAll("a-sphere[data-order]").forEach((point) => {
@@ -150,6 +114,13 @@ AFRAME.registerComponent("target-finder", {
     const firstPoint = this.points.get(1)
     if (!firstPoint) return
 
+    // Obtener las coordenadas del usuario
+    document.addEventListener("gps-camera-update-position", (e) => {
+      const { latitude, longitude } = (e as CustomEvent).detail.position
+      this.userLatitude = latitude
+      this.userLongitude = longitude
+    })
+
     // Obtener las coordenadas del primer punto
     const firstPointLatitude = parseFloat(firstPoint.dataset.latitude)
     const firstPointLongitude = parseFloat(firstPoint.dataset.longitude)
@@ -161,12 +132,7 @@ AFRAME.registerComponent("target-finder", {
       firstPointLatitude,
       firstPointLongitude
     )
-
-    document.addEventListener("gps-camera-update-position", (e) => {
-      const customEvent = e as CustomEvent;
-      const { latitude, longitude } = customEvent.detail.position;
-      console.log(`GPS position updated: Latitude: ${latitude}, Longitude: ${longitude}`);
-    });
+    //console.log("El usuario está a", distance, "metros del primer punto.")
 
     // Verificar si ya se mostró el mensaje antes de imprimirlo
     if (!this.firstPointMessageShown) {
@@ -179,12 +145,11 @@ AFRAME.registerComponent("target-finder", {
     document.dispatchEvent(
       new CustomEvent("updateTarget", { detail: { order: 1 } })
     )
-    //console.log("El usuario está a", distance, "metros del primer punto.")
 
     // Verificar si el jugador ha alcanzado el primer punto
     if (distance < this.firstPointThreshold) {
-      //console.log("Comienza el sendero.")
       this.firstPointReached = true // Marcar que el primer punto ha sido alcanzado
+      //console.log("Comienza el sendero.")
     }
   },
 
