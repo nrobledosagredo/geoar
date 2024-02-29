@@ -22,7 +22,7 @@ AFRAME.registerComponent('ios-orientation-fix', {
           const rotationDiff = event.webkitCompassHeading - initialOrientation;
           console.log("Diferencia de rotación", rotationDiff);
           // Aplica la corrección a la rotación de la cámara
-          cameraEl.rotation.y = THREE.Math.degToRad(rotationDiff);
+          cameraEl.setAttribute('rotation', {x: cameraEl.getAttribute('rotation').x, y: THREE.Math.radToDeg(rotationDiff), z: cameraEl.getAttribute('rotation').z});
           console.log("Rotación de la cámara", cameraEl.rotation.y);
         }
       }
