@@ -39,7 +39,7 @@ function LocateControl() {
       .addTo(map);
 
     // Iniciar la localización automáticamente
-    locateControl.start();
+    //locateControl.start();
 
     return () => {
       map.removeControl(locateControl);

@@ -3,7 +3,7 @@ import { SceneArrow } from "@/pages/scene/components/scene-arrow"
 import { SceneCompass } from "@/pages/scene/components/scene-compass"
 import { SceneInfoCard } from "@/pages/scene/components/scene-infocard"
 import { SceneLoadingScreen } from "@/pages/scene/components/scene-loading-screen"
-//import { SceneMap } from "@/pages/scene/components/scene-map"
+import { SceneMap } from "@/pages/scene/components/scene-map"
 import { SceneNav } from "@/pages/scene/components/scene-nav"
 import { ScenePoint } from "@/pages/scene/components/scene-point"
 import { SceneTreeCard } from "@/pages/scene/components/scene-treecard"
@@ -98,8 +98,7 @@ export function Scene() {
       <div className="relative z-40 pointer-events-none">
         <SceneNav />
         <SceneCompass />
-        {/* <SceneMap points={points} infoCards={infoCards} trees={trees} />
-        */}
+        <SceneMap points={points} infoCards={infoCards} trees={trees} />
       </div>
 
       {/* Scene */}
