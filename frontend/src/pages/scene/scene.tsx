@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { SceneArrow } from "@/pages/scene/components/scene-arrow"
 import { SceneCompass } from "@/pages/scene/components/scene-compass"
 import { SceneInfoCard } from "@/pages/scene/components/scene-infocard"
@@ -80,7 +80,53 @@ export function Scene() {
       })
     }
   }, [error, toast])
-  
+
+  const [initialCompassHeading, setInitialCompassHeading] = useState<
+    number | null
+  >(null)
+
+  useEffect(() => {
+    const handleOrientationEvent = (event: any) => {
+      const compassHeading = event.webkitCompassHeading
+      if (!initialCompassHeading && compassHeading) {
+        setInitialCompassHeading(compassHeading)
+      }
+    }
+
+    // Verificar si el navegador soporta webkitCompassHeading
+    if ("ondeviceorientationabsolute" in window) {
+      window.addEventListener(
+        "deviceorientationabsolute",
+        handleOrientationEvent,
+        true
+      )
+    } else if ("ondeviceorientation" in window) {
+      window.addEventListener("deviceorientation", handleOrientationEvent, true)
+    }
+
+    return () => {
+      window.removeEventListener(
+        "deviceorientationabsolute",
+        handleOrientationEvent,
+        true
+      )
+      window.removeEventListener(
+        "deviceorientation",
+        handleOrientationEvent,
+        true
+      )
+    }
+  }, [initialCompassHeading])
+
+  useEffect(() => {
+    if (initialCompassHeading !== null) {
+      const camera = document.querySelector("a-camera")
+      if (camera) {
+        camera.setAttribute("rotation", `0 ${360 - initialCompassHeading} 0`)
+      }
+    }
+  }, [initialCompassHeading])
+
   return loading ? (
     <SceneLoadingScreen />
   ) : (
