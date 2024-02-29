@@ -25,18 +25,19 @@ export function TrailSkeleton() {
           <Skeleton className="border rounded-lg object-cover w-full h-full" />
         </AspectRatio>
       </CardContent>
-      <CardFooter className="flex justify-between">
-        {Array.from({ length: 3 }).map((_, index) => (
-          <div
-            key={index}
-            className="basis-1/3 flex flex-col items-center justify-center"
-          >
-            <Skeleton className="h-7 w-7 rounded-full" />
-            <Skeleton className="mt-2 w-20 h-3" />
-          </div>
-        ))}
-
-        <Skeleton className="w-full h-12" />
+      <CardFooter className="flex flex-row">
+        <div className="justify-between">
+          {Array.from({ length: 3 }).map((_, index) => (
+            <div
+              key={index}
+              className="basis-1/3 flex flex-col items-center justify-center"
+            >
+              <Skeleton className="h-7 w-7 rounded-full" />
+              <Skeleton className="mt-2 w-20 h-3" />
+            </div>
+          ))}
+        </div>
+        <Skeleton className="w-full h-10" />
       </CardFooter>
     </Card>
   )
