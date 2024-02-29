@@ -35,6 +35,8 @@ export function TrailSkeleton() {
             <Skeleton className="mt-2 w-20 h-3" />
           </div>
         ))}
+
+        <Skeleton className="w-full h-12" />
       </CardFooter>
     </Card>
   )

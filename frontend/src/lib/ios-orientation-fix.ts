@@ -4,6 +4,7 @@ AFRAME.registerComponent('ios-orientation-fix', {
       var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !navigator.maxTouchPoints;
   
       if (isIOS) {
+        console.log("Es iOS")
         // Espera a que la cámara esté lista
         this.el.addEventListener('loaded', () => {
           var camera = this.el.components.camera.camera;
