@@ -58,20 +58,25 @@ AFRAME.registerComponent("target-finder", {
     await this.cachePoints()
 
     // Inicializar la posición del usuario
-    this.watchID = navigator.geolocation.watchPosition(
-      (position) => {
-        this.userLatitude = position.coords.latitude
-        this.userLongitude = position.coords.longitude
-      },
-      (error) => {
-        console.error("Error obtaining user position:", error)
-      },
-      {
-        enableHighAccuracy: true,
-        timeout: 5000,
-        maximumAge: 0,
-      }
-    )
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          this.userLatitude = position.coords.latitude;
+          this.userLongitude = position.coords.longitude;
+        },
+        (error) => {
+          console.error("Error obtaining user position:", error);
+        },
+        {
+          enableHighAccuracy: true,
+          timeout: 5000,
+          maximumAge: 0,
+        }
+      );
+    } else {
+      console.error("Geolocation is not supported by this browser.");
+    }
+
   },
 
   /*
