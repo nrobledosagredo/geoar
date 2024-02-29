@@ -126,10 +126,11 @@ export function Scene() {
           console.log('initialCompassHeading', initialCompassHeading);
           const camera = document.querySelector('a-camera');
           if (camera) {
-            console.log('Camera:', camera);
-            console.log('ANTES: Camera rotation:', camera.getAttribute('rotation'));
+            console.log("HOLA");
+            //console.log('Camera:', camera);
+            //console.log('ANTES: Camera rotation:', camera.getAttribute('rotation'));
             camera.setAttribute('rotation', `0 ${360 - initialCompassHeading} 0`);
-            console.log('DESPUES: Camera rotation:', camera.getAttribute('rotation'));
+            //console.log('DESPUES: Camera rotation:', camera.getAttribute('rotation'));
           }
         }
       };
