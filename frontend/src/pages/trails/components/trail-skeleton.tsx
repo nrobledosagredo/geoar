@@ -20,12 +20,11 @@ export function TrailSkeleton() {
       </CardHeader>
 
       {/* Contenido del skeleton */}
-      <CardContent>
+      <CardContent className="space-y-6">
         <AspectRatio ratio={20 / 9}>
           <Skeleton className="border rounded-lg object-cover w-full h-full" />
         </AspectRatio>
-      </CardContent>
-      <CardFooter className="flex flex-col">
+
         <div className="flex justify-between">
           {Array.from({ length: 3 }).map((_, index) => (
             <div
@@ -37,6 +36,8 @@ export function TrailSkeleton() {
             </div>
           ))}
         </div>
+      </CardContent>
+      <CardFooter>
         <Skeleton className="w-full h-10" />
       </CardFooter>
     </Card>
