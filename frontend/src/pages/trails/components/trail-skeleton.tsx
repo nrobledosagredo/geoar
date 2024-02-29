@@ -14,7 +14,7 @@ export function TrailSkeleton() {
     <Card className="w-full md:w-[740px] mb-4">
       {/* Header del skeleton */}
       <CardHeader>
-        <CardTitle className="space-y-2">
+        <CardTitle className="space-y-1">
           <Skeleton className="w-full h-5" />
           <Skeleton className="w-full h-5" />
         </CardTitle>
