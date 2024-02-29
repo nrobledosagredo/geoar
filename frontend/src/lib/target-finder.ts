@@ -1,4 +1,7 @@
-import { getWalkingInstruction } from "@/lib/get-walking-instruction"
+import {
+  calculateDistance,
+  getWalkingInstruction,
+} from "@/lib/get-walking-instruction"
 import { config } from "@/lib/scene-config"
 
 const { firstPointThreshold, searchRadius, orderIncrement } = config
@@ -48,9 +51,15 @@ AFRAME.registerComponent("target-finder", {
     this.lastBearing = null // Variable para almacenar el último bearing
     this.nextBearing = null // Variable para almacenar el siguiente bearing
 
-    // Esperar a que se cargue el DOM antes de llamar a cachePoints
-    //await new Promise((resolve) => setTimeout(resolve, loadingDelay))
-    await this.cachePoints()
+    //await new Promise((resolve) => setTimeout(resolve, loadingDelay)) // Esperar a que se cargue el DOM antes de llamar a cachePoints
+    await this.cachePoints() // Cachear los puntos del sendero
+
+    // Obtener las coordenadas del usuario
+    document.addEventListener("gps-camera-update-position", (e) => {
+      const { latitude, longitude } = (e as CustomEvent).detail.position
+      this.userLatitude = latitude
+      this.userLongitude = longitude
+    })
   },
 
   /*
@@ -84,15 +93,12 @@ AFRAME.registerComponent("target-finder", {
     if (!this.isAnimating) return
 
     this.updateTarget() // Llama a la función que actualiza el objetivo
-
-    // Solicita el siguiente frame para la animación
-    requestAnimationFrame(this.animate.bind(this))
+    requestAnimationFrame(this.animate.bind(this)) // Solicita el siguiente frame para la animación
   },
 
   // Función para cachear los puntos
   cachePoints: function () {
-    // Si ya hemos cacheado los puntos, no hacemos nada más
-    if (this.pointsCached) return
+    if (this.pointsCached) return // Si ya hemos cacheado los puntos, no hacemos nada más
 
     let maxOrder = 0 // Inicializa una variable para encontrar el valor máximo de 'order'
     document.querySelectorAll("a-sphere[data-order]").forEach((point) => {
@@ -104,25 +110,42 @@ AFRAME.registerComponent("target-finder", {
     })
     this.lastPointOrder = maxOrder // Establece el último order después de iterar todos los puntos
     this.pointsCached = true
-    document.dispatchEvent(new CustomEvent("pointsCached"))
-    //console.log("El último punto tiene el order:", this.lastPointOrder);
+    //console.log("El último punto tiene el order:", this.lastPointOrder)
   },
 
   // Función para guiar al usuario hacia el primer punto
   firstPointGuide: function () {
-    if (this.firstPointReached) return
+    if (this.firstPointReached || !this.userLatitude || !this.userLongitude)
+      return
 
     const firstPoint = this.points.get(1)
     if (!firstPoint) return
 
-    // Calcular la distancia al primer punto
-    const distance = firstPoint.object3D.position.distanceTo(
-      this.el.object3D.position
+    // Obtener las coordenadas del usuario
+    document.addEventListener("gps-camera-update-position", (e) => {
+      const { latitude, longitude } = (e as CustomEvent).detail.position
+      this.userLatitude = latitude
+      this.userLongitude = longitude
+    })
+
+    console.log("El usuario está en", this.userLatitude, this.userLongitude)
+
+    // Obtener las coordenadas del primer punto
+    const firstPointLatitude = parseFloat(firstPoint.dataset.latitude)
+    const firstPointLongitude = parseFloat(firstPoint.dataset.longitude)
+
+    // Calcular la distancia real entre el usuario y el primer punto
+    const distance = calculateDistance(
+      this.userLatitude,
+      this.userLongitude,
+      firstPointLatitude,
+      firstPointLongitude
     )
+    console.log("El usuario está a", distance, "metros del primer punto.")
 
     // Verificar si ya se mostró el mensaje antes de imprimirlo
     if (!this.firstPointMessageShown) {
-      //console.log("Camina hacia el inicio del sendero siguiendo la flecha.");
+      //console.log("Camina hacia el inicio del sendero siguiendo la flecha.")
       this.firstPointMessageShown = true // Marcar que el mensaje ha sido mostrado
       document.dispatchEvent(new CustomEvent("trailStarted"))
     }
@@ -134,8 +157,8 @@ AFRAME.registerComponent("target-finder", {
 
     // Verificar si el jugador ha alcanzado el primer punto
     if (distance < this.firstPointThreshold) {
-      //console.log("Comienza el sendero.");
       this.firstPointReached = true // Marcar que el primer punto ha sido alcanzado
+      //console.log("Comienza el sendero.")
     }
   },
 
