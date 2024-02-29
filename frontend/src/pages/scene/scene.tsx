@@ -119,29 +119,20 @@ export function Scene() {
   }, [initialCompassHeading])
 
   useEffect(() => {
-    const sceneEl = document.querySelector('a-scene');
-    if (sceneEl) {
-      const onSceneLoaded = () => {
-        if (initialCompassHeading !== null) {
-          console.log('initialCompassHeading', initialCompassHeading);
-          const camera = document.querySelector('a-camera');
-          if (camera) {
-            console.log("HOLA");
-            //console.log('Camera:', camera);
-            //console.log('ANTES: Camera rotation:', camera.getAttribute('rotation'));
-            camera.setAttribute('rotation', `0 ${360 - initialCompassHeading} 0`);
-            //console.log('DESPUES: Camera rotation:', camera.getAttribute('rotation'));
-          }
+    if (initialCompassHeading !== null) {
+      console.log('initialCompassHeading', initialCompassHeading);
+      setTimeout(() => {
+        const camera = document.querySelector('a-camera');
+        if (camera) {
+          console.log('Camera:', camera);
+          console.log('ANTES: Camera rotation:', camera.getAttribute('rotation'));
+          camera.setAttribute('rotation', `0 ${360 - initialCompassHeading} 0`);
+          console.log('DESPUES: Camera rotation:', camera.getAttribute('rotation'));
         }
-      };
-  
-      sceneEl.addEventListener('loaded', onSceneLoaded);
-  
-      return () => {
-        sceneEl.removeEventListener('loaded', onSceneLoaded);
-      };
+      }, 3000); // Espera 3 segundos antes de ajustar la rotación de la cámara
     }
   }, [initialCompassHeading]);
+  
 
   return loading ? (
     <SceneLoadingScreen />
