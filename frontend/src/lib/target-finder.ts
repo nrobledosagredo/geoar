@@ -67,7 +67,7 @@ AFRAME.registerComponent("target-finder", {
         console.error("Error obtaining user position:", error)
       },
       {
-        enableHighAccuracy: false,
+        enableHighAccuracy: true,
         timeout: 5000,
         maximumAge: 0,
       }
@@ -101,11 +101,13 @@ AFRAME.registerComponent("target-finder", {
     this.isAnimating = false
   },
 
+  /*
   remove: function () {
     if (this.watchID) {
       navigator.geolocation.clearWatch(this.watchID)
     }
   },
+*/
 
   animate: function () {
     if (!this.isAnimating) return
