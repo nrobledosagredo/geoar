@@ -57,6 +57,12 @@ AFRAME.registerComponent("target-finder", {
     // Cachear los puntos del sendero
     await this.cachePoints()
 
+    document.addEventListener("gps-camera-update-position", (e) => {
+      const customEvent = e as CustomEvent;
+      const { latitude, longitude } = customEvent.detail.position;
+      console.log(`GPS position updated: Latitude: ${latitude}, Longitude: ${longitude}`);
+    });
+
     // Inicializar la posición del usuario
     this.watchID = navigator.geolocation.watchPosition(
       (position) => {
