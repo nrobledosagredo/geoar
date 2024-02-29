@@ -16,6 +16,7 @@ export function TrailSkeleton() {
       <CardHeader>
         <CardTitle>
           <Skeleton className="w-full h-6" />
+          <Skeleton className="w-full h-6" />
         </CardTitle>
       </CardHeader>
 
