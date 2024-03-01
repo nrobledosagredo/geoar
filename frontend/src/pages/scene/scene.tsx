@@ -23,11 +23,14 @@ import "@/lib/target-finder"
 import "@/lib/distance-displayer"
 import "@/lib/ios-orientation-fix"
 
+import { useRequestPermissions } from "@/hooks/use-request-permissions"
+
 //const { simulateLatitude, simulateLongitude } = config
 //const { cameraMaxDistance } = config
 
 export function Scene() {
   const { toast } = useToast()
+  const permissionsGranted = useRequestPermissions()
   const trailId = useParams().id
 
   const {
@@ -108,7 +111,11 @@ export function Scene() {
       )}
 
       {/* Renderiza condicionalmente la UI y la escena solo cuando los datos estén cargados */}
-      { !loading &&
+      {permissionsGranted.geolocation &&
+        permissionsGranted.camera &&
+        permissionsGranted.orientation &&
+        permissionsGranted.motion &&
+        !loading &&
         !error && (
           <>
             {/* UI */}
