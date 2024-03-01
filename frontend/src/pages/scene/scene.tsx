@@ -22,12 +22,14 @@ import "@/lib/color-changer"
 import "@/lib/target-finder"
 import "@/lib/distance-displayer"
 import "@/lib/ios-orientation-fix"
+import { useRequestPermissions } from "@/hooks/use-request-permissions"
 
 //const { simulateLatitude, simulateLongitude } = config
 //const { cameraMaxDistance } = config
 
 export function Scene() {
   const { toast } = useToast()
+  const permissionsGranted = useRequestPermissions()
   const trailId = useParams().id
 
   const {
@@ -97,40 +99,6 @@ export function Scene() {
       document.removeEventListener("locationStarted", hideLoadingScreen)
     }
   }, [])
-
-  // Lógica de permisos
-  const [permissionsGranted, setPermissionsGranted] = useState({
-    geolocation: false,
-    camera: false,
-  })
-
-  useEffect(() => {
-    // Solicitar permiso de geolocalización
-    navigator.geolocation.getCurrentPosition(
-      () => setPermissionsGranted((prev) => ({ ...prev, geolocation: true })),
-      () => {
-        toast({
-          title: "Permiso de geolocalización denegado",
-          description: "La aplicación necesita acceso a la geolocalización.",
-          variant: "destructive",
-        })
-        setPermissionsGranted((prev) => ({ ...prev, geolocation: false }))
-      }
-    )
-
-    // Solicitar permiso de cámara
-    navigator.mediaDevices
-      .getUserMedia({ video: true })
-      .then(() => setPermissionsGranted((prev) => ({ ...prev, camera: true })))
-      .catch(() => {
-        toast({
-          title: "Permiso de cámara denegado",
-          description: "La aplicación necesita acceso a la cámara.",
-          variant: "destructive",
-        })
-        setPermissionsGranted((prev) => ({ ...prev, camera: false }))
-      })
-  }, [toast])
 
   return (
     <div className="relative bg-opacity-0 h-screen">
