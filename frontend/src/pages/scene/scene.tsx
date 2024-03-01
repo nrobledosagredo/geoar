@@ -107,7 +107,6 @@ useEffect(() => {
         navigator.mediaDevices.getUserMedia({ video: true })
           .then(() => {
             setPermissionsGranted(true);
-            setShowLoadingScreen(false);
           })
           .catch(() => {
             navigate(-1);
@@ -146,7 +145,7 @@ useEffect(() => {
             raycaster="objects: .raycastable; near: 0; far: 50000"
             arjs="sourceType: webcam; videoTexture: true; debugUIEnabled: false;"
             renderer="antialias: true; alpha: true"
-            //device-orientation-permission-ui="enabled: false"
+            device-orientation-permission-ui="enabled: false"
           >
             <a-camera
               //gps-new-camera={`gpsMinDistance: 5; simulateLatitude: ${String(simulateLatitude)}; simulateLongitude: ${String(simulateLongitude)}`}

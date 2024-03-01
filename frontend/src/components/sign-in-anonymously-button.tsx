@@ -21,35 +21,31 @@ export function SignInAnonymouslyButton({
   const { toast } = useToast()
   const { t, i18n } = useTranslation()
 
-  const handlesignInAnonymously = () => {
-    setIsLoading(true)
-    const auth = getAuth()
-    signInAnonymously(auth)
-      .then((result) => {
-        handleCreateUser({
-          userId: result.user.uid,
-          language: i18n.language,
-        }).then(() => {
-          toast({
-            description: t("guest_toast"),
-          })
-          navigate("/")
-        })
-      })
-
-      .catch((error) => {
-        console.error(error.message)
-        const errorMessage = getErrorMessage(error.code)
-        toast({
-          description: errorMessage,
-          variant: "destructive",
-        })
-      })
-
-      .finally(() => {
-        setIsLoading(false)
-      })
-  }
+  const handlesignInAnonymously = async () => {
+    setIsLoading(true);
+    const auth = getAuth();
+    try {
+      const result = await signInAnonymously(auth);
+      await handleCreateUser({
+        userId: result.user.uid,
+        language: i18n.language,
+      });
+      toast({
+        description: t("guest_toast"),
+      });
+      navigate("/");
+    } catch (error: any) {
+      console.error(error.message);
+      const errorMessage = getErrorMessage(error.code);
+      toast({
+        description: errorMessage,
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  
 
   return (
     <Button
