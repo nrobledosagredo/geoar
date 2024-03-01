@@ -8,7 +8,7 @@ import { SceneNav } from "@/pages/scene/components/scene-nav"
 import { ScenePoint } from "@/pages/scene/components/scene-point"
 import { SceneTreeCard } from "@/pages/scene/components/scene-treecard"
 import { getImage } from "@/services/images-service"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 
 //import { config } from "@/lib/scene-config"
 import { useGetInfoCardsByTrail } from "@/hooks/use-get-infocards-by-trail"
@@ -27,6 +27,7 @@ import "@/lib/ios-orientation-fix"
 //const { cameraMaxDistance } = config
 
 export function Scene() {
+  const navigate = useNavigate()
   const { toast } = useToast()
   const trailId = useParams().id
 
@@ -98,11 +99,31 @@ useEffect(() => {
   };
 }, []);
 
+  const [permissionsGranted, setPermissionsGranted] = useState(false);
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(
+      () => {
+        navigator.mediaDevices.getUserMedia({ video: true })
+          .then(() => {
+            setPermissionsGranted(true);
+            setShowLoadingScreen(false);
+          })
+          .catch(() => {
+            navigate(-1);
+          });
+      },
+      () => {
+        navigate(-1);
+      }
+    );
+  }, [navigate]);
+
   return (
     <div className="relative bg-opacity-0 h-screen">
 
       {/* Renderiza condicionalmente la pantalla de carga */}
-      {showLoadingScreen && (
+      {showLoadingScreen && permissionsGranted && (
         <div className="absolute top-0 left-0 w-full h-full z-50">
           <SceneLoadingScreen />
         </div>
