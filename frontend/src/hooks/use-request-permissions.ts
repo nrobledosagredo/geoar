@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react"
-
 import { useToast } from "@/components/ui/use-toast"
 
 declare global {
@@ -20,48 +19,18 @@ declare global {
 }
 
 interface Permissions {
-  geolocation: boolean
-  camera: boolean
   orientation: boolean
-  motion: boolean // Agregar estado para el permiso de movimiento
+  motion: boolean
 }
 
 export function useRequestPermissions(): Permissions {
   const { toast } = useToast()
   const [permissionsGranted, setPermissionsGranted] = useState<Permissions>({
-    geolocation: false,
-    camera: false,
     orientation: false,
-    motion: false, // Inicializar el permiso de movimiento como falso
+    motion: false,
   })
 
   useEffect(() => {
-    // Solicitar permiso de geolocalización
-    navigator.geolocation.getCurrentPosition(
-      () => setPermissionsGranted((prev) => ({ ...prev, geolocation: true })),
-      () => {
-        toast({
-          title: "Permiso de geolocalización denegado",
-          description: "La aplicación necesita acceso a la geolocalización.",
-          variant: "destructive",
-        })
-        setPermissionsGranted((prev) => ({ ...prev, geolocation: false }))
-      }
-    )
-
-    // Solicitar permiso de cámara
-    navigator.mediaDevices
-      .getUserMedia({ video: true })
-      .then(() => setPermissionsGranted((prev) => ({ ...prev, camera: true })))
-      .catch(() => {
-        toast({
-          title: "Permiso de cámara denegado",
-          description: "La aplicación necesita acceso a la cámara.",
-          variant: "destructive",
-        })
-        setPermissionsGranted((prev) => ({ ...prev, camera: false }))
-      })
-
     // Solicitar permiso de orientación
     const requestOrientationPermission = async () => {
       if (
@@ -102,13 +71,14 @@ export function useRequestPermissions(): Permissions {
           }))
         }
       } else {
-        // Non-iOS devices or iOS < 13, no explicit permission required
+        // Dispositivos no iOS o iOS < 13, no se requiere permiso explícito
         setPermissionsGranted((prev) => ({
           ...prev,
           motion: true,
         }))
       }
     }
+
     requestOrientationPermission()
     requestMotionPermission()
   }, [toast])

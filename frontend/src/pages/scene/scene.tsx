@@ -91,13 +91,13 @@ export function Scene() {
     const hideLoadingScreen = () => {
       setTimeout(() => {
         setShowLoadingScreen(false)
-      }, 2000) // Retraso de 1000 milisegundos (1 segundo)
+      }, 3000)
     }
-    document.addEventListener("locationStarted", hideLoadingScreen)
+    document.addEventListener("trailStarted", hideLoadingScreen)
 
     // Limpiar el evento al desmontar el componente
     return () => {
-      document.removeEventListener("locationStarted", hideLoadingScreen)
+      document.removeEventListener("trailStarted", hideLoadingScreen)
     }
   }, [])
 
@@ -111,8 +111,7 @@ export function Scene() {
       )}
 
       {/* Renderiza condicionalmente la UI y la escena solo cuando los datos estén cargados */}
-      {permissionsGranted.geolocation &&
-        permissionsGranted.camera &&
+      {
         permissionsGranted.orientation &&
         permissionsGranted.motion &&
         !loading &&
