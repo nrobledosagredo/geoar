@@ -8,7 +8,7 @@ import { SceneNav } from "@/pages/scene/components/scene-nav"
 import { ScenePoint } from "@/pages/scene/components/scene-point"
 import { SceneTreeCard } from "@/pages/scene/components/scene-treecard"
 import { getImage } from "@/services/images-service"
-import { useNavigate, useParams } from "react-router-dom"
+import { useParams } from "react-router-dom"
 
 //import { config } from "@/lib/scene-config"
 import { useGetInfoCardsByTrail } from "@/hooks/use-get-infocards-by-trail"
@@ -27,7 +27,6 @@ import "@/lib/ios-orientation-fix"
 //const { cameraMaxDistance } = config
 
 export function Scene() {
-  const navigate = useNavigate()
   const { toast } = useToast()
   const trailId = useParams().id
 
@@ -83,143 +82,159 @@ export function Scene() {
     }
   }, [error, toast])
 
-// Lógica para ocultar la pantalla de carga cuando la escena esté lista
-const [showLoadingScreen, setShowLoadingScreen] = useState(true);
-useEffect(() => {
-  const hideLoadingScreen = () => {
-    setTimeout(() => {
-      setShowLoadingScreen(false);
-    }, 2000); // Retraso de 1000 milisegundos (1 segundo)
-  };
-  document.addEventListener("locationStarted", hideLoadingScreen);
+  // Lógica para ocultar la pantalla de carga cuando la escena esté lista
+  const [showLoadingScreen, setShowLoadingScreen] = useState(true)
+  useEffect(() => {
+    const hideLoadingScreen = () => {
+      setTimeout(() => {
+        setShowLoadingScreen(false)
+      }, 2000) // Retraso de 1000 milisegundos (1 segundo)
+    }
+    document.addEventListener("locationStarted", hideLoadingScreen)
 
-  // Limpiar el evento al desmontar el componente
-  return () => {
-    document.removeEventListener("locationStarted", hideLoadingScreen);
-  };
-}, []);
+    // Limpiar el evento al desmontar el componente
+    return () => {
+      document.removeEventListener("locationStarted", hideLoadingScreen)
+    }
+  }, [])
 
-  const [permissionsGranted, setPermissionsGranted] = useState(false);
+  // Lógica de permisos
+  const [permissionsGranted, setPermissionsGranted] = useState({
+    geolocation: false,
+    camera: false,
+  })
 
   useEffect(() => {
+    // Solicitar permiso de geolocalización
     navigator.geolocation.getCurrentPosition(
+      () => setPermissionsGranted((prev) => ({ ...prev, geolocation: true })),
       () => {
-        navigator.mediaDevices.getUserMedia({ video: true })
-          .then(() => {
-            setPermissionsGranted(true);
-          })
-          .catch(() => {
-            navigate(-1);
-          });
-      },
-      () => {
-        navigate(-1);
+        toast({
+          title: "Permiso de geolocalización denegado",
+          description: "La aplicación necesita acceso a la geolocalización.",
+          variant: "destructive",
+        })
+        setPermissionsGranted((prev) => ({ ...prev, geolocation: false }))
       }
-    );
-  }, [navigate]);
+    )
+
+    // Solicitar permiso de cámara
+    navigator.mediaDevices
+      .getUserMedia({ video: true })
+      .then(() => setPermissionsGranted((prev) => ({ ...prev, camera: true })))
+      .catch(() => {
+        toast({
+          title: "Permiso de cámara denegado",
+          description: "La aplicación necesita acceso a la cámara.",
+          variant: "destructive",
+        })
+        setPermissionsGranted((prev) => ({ ...prev, camera: false }))
+      })
+  }, [toast])
 
   return (
     <div className="relative bg-opacity-0 h-screen">
-
       {/* Renderiza condicionalmente la pantalla de carga */}
-      {showLoadingScreen && permissionsGranted && (
+      {showLoadingScreen && (
         <div className="absolute top-0 left-0 w-full h-full z-50">
           <SceneLoadingScreen />
         </div>
       )}
-  
+
       {/* Renderiza condicionalmente la UI y la escena solo cuando los datos estén cargados */}
-      {!loading && !error && (
-        <>
-          {/* UI */}
-          <div className="relative z-40 pointer-events-none">
-            <SceneNav />
-            <SceneCompass />
-            <SceneMap points={points} infoCards={infoCards} trees={trees} />
-          </div>
-  
-          {/* Scene */}
-          <a-scene
-            vr-mode-ui="enabled: false"
-            cursor="rayOrigin: mouse"
-            raycaster="objects: .raycastable; near: 0; far: 50000"
-            arjs="sourceType: webcam; videoTexture: true; debugUIEnabled: false;"
-            renderer="antialias: true; alpha: true"
-            device-orientation-permission-ui="enabled: false"
-          >
-            <a-camera
-              //gps-new-camera={`gpsMinDistance: 5; simulateLatitude: ${String(simulateLatitude)}; simulateLongitude: ${String(simulateLongitude)}`}
-              gps-new-camera="gpsMinDistance: 5"
-              target-finder
-              //ios-orientation-fix
-              //far={cameraMaxDistance}
+      {permissionsGranted.geolocation &&
+        permissionsGranted.camera &&
+        !loading &&
+        !error && (
+          <>
+            {/* UI */}
+            <div className="relative z-40 pointer-events-none">
+              <SceneNav />
+              <SceneCompass />
+              <SceneMap points={points} infoCards={infoCards} trees={trees} />
+            </div>
+
+            {/* Scene */}
+            <a-scene
+              vr-mode-ui="enabled: false"
+              cursor="rayOrigin: mouse"
+              raycaster="objects: .raycastable; near: 0; far: 50000"
+              arjs="sourceType: webcam; videoTexture: true; debugUIEnabled: false;"
+              renderer="antialias: true; alpha: true"
+              device-orientation-permission-ui="enabled: false"
             >
-              {/* Flecha 3D que apunta al siguiente punto */}
-              <SceneArrow />
-            </a-camera>
-  
-            {/* Puntos del sendero */}
-            {points.map((point, index) => (
-              <ScenePoint
-                key={index}
-                longitude={point.geometry.coordinates[0]}
-                latitude={point.geometry.coordinates[1]}
-                order={point.order}
-              />
-            ))}
-  
-            {/* infoCards */}
-            {infoCards.map((infoCard, index) => (
-              <SceneInfoCard
-                key={index}
-                id={infoCard._id}
-                name={infoCard.name}
-                description={infoCard.description.replace(/\. /g, ".\n\n")}
-                image={`/infocards/${encodeURIComponent(
-                  Array.isArray(infoCard.images)
-                    ? infoCard.images[0]
-                    : infoCard.images
-                )}`}
-                longitude={infoCard.geometry.coordinates[0]}
-                latitude={infoCard.geometry.coordinates[1]}
-              />
-            ))}
-  
-            {/* treeCards */}
-            {treesExtended.map((tree, index) => (
-              <SceneTreeCard
-                key={index}
-                //id={tree.treeCard?._id ?? ""}
-                id={tree._id}
-                name={tree.treeCard?.binomialName ?? ""}
-                taxonomy={
-                  tree.treeCard?.taxonomy ?? {
-                    kingdom: "",
-                    division: "",
-                    class: "",
-                    order: "",
-                    family: "",
-                    genus: "",
-                    species: "",
+              <a-camera
+                //gps-new-camera={`gpsMinDistance: 5; simulateLatitude: ${String(simulateLatitude)}; simulateLongitude: ${String(simulateLongitude)}`}
+                gps-new-camera="gpsMinDistance: 5"
+                target-finder
+                //ios-orientation-fix
+                //far={cameraMaxDistance}
+              >
+                {/* Flecha 3D que apunta al siguiente punto */}
+                <SceneArrow />
+              </a-camera>
+
+              {/* Puntos del sendero */}
+              {points.map((point, index) => (
+                <ScenePoint
+                  key={index}
+                  longitude={point.geometry.coordinates[0]}
+                  latitude={point.geometry.coordinates[1]}
+                  order={point.order}
+                />
+              ))}
+
+              {/* infoCards */}
+              {infoCards.map((infoCard, index) => (
+                <SceneInfoCard
+                  key={index}
+                  id={infoCard._id}
+                  name={infoCard.name}
+                  description={infoCard.description.replace(/\. /g, ".\n\n")}
+                  image={`/infocards/${encodeURIComponent(
+                    Array.isArray(infoCard.images)
+                      ? infoCard.images[0]
+                      : infoCard.images
+                  )}`}
+                  longitude={infoCard.geometry.coordinates[0]}
+                  latitude={infoCard.geometry.coordinates[1]}
+                />
+              ))}
+
+              {/* treeCards */}
+              {treesExtended.map((tree, index) => (
+                <SceneTreeCard
+                  key={index}
+                  //id={tree.treeCard?._id ?? ""}
+                  id={tree._id}
+                  name={tree.treeCard?.binomialName ?? ""}
+                  taxonomy={
+                    tree.treeCard?.taxonomy ?? {
+                      kingdom: "",
+                      division: "",
+                      class: "",
+                      order: "",
+                      family: "",
+                      genus: "",
+                      species: "",
+                    }
                   }
-                }
-                conservationStatus={
-                  tree.treeCard?.conservationStatus ?? {
-                    acronym: "",
-                    description: "",
+                  conservationStatus={
+                    tree.treeCard?.conservationStatus ?? {
+                      acronym: "",
+                      description: "",
+                    }
                   }
-                }
-                image={getImage(
-                  tree.treeCard?.images ? tree.treeCard.images[0] : ""
-                )}
-                longitude={tree.geometry.coordinates[0]}
-                latitude={tree.geometry.coordinates[1]}
-              />
-            ))}
-          </a-scene>
-        </>
-      )}
+                  image={getImage(
+                    tree.treeCard?.images ? tree.treeCard.images[0] : ""
+                  )}
+                  longitude={tree.geometry.coordinates[0]}
+                  latitude={tree.geometry.coordinates[1]}
+                />
+              ))}
+            </a-scene>
+          </>
+        )}
     </div>
-  );
+  )
 }
-  
