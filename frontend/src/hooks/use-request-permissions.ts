@@ -1,9 +1,22 @@
 import { useEffect, useState } from 'react';
 import { useToast } from '@/components/ui/use-toast';
 
+declare global {
+  interface DeviceOrientationEvent {
+    webkitCompassHeading?: number;
+  }
+
+  interface Window {
+    DeviceOrientationEvent: typeof DeviceOrientationEvent & {
+      requestPermission?: () => Promise<string>;
+    };
+  }
+}
+
 interface Permissions {
   geolocation: boolean;
   camera: boolean;
+  orientation: boolean;
 }
 
 export function useRequestPermissions(): Permissions {
@@ -11,6 +24,7 @@ export function useRequestPermissions(): Permissions {
   const [permissionsGranted, setPermissionsGranted] = useState<Permissions>({
     geolocation: false,
     camera: false,
+    orientation: false,
   });
 
   useEffect(() => {
@@ -39,6 +53,25 @@ export function useRequestPermissions(): Permissions {
         });
         setPermissionsGranted((prev) => ({ ...prev, camera: false }));
       });
+
+    // Solicitar permiso de orientación
+    const requestOrientationPermission = async () => {
+      if (
+        typeof window.DeviceOrientationEvent.requestPermission === "function"
+      ) {
+        const permissionState =
+          await window.DeviceOrientationEvent.requestPermission();
+        setPermissionsGranted((prev) => ({
+          ...prev,
+          orientation: permissionState === "granted",
+        }));
+      } else {
+        // Si no es necesario solicitar permiso, se asume que está concedido
+        setPermissionsGranted((prev) => ({ ...prev, orientation: true }));
+      }
+    };
+
+    requestOrientationPermission();
   }, [toast]);
 
   return permissionsGranted;

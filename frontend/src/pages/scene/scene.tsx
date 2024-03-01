@@ -22,14 +22,12 @@ import "@/lib/color-changer"
 import "@/lib/target-finder"
 import "@/lib/distance-displayer"
 import "@/lib/ios-orientation-fix"
-import { useRequestPermissions } from "@/hooks/use-request-permissions"
 
 //const { simulateLatitude, simulateLongitude } = config
 //const { cameraMaxDistance } = config
 
 export function Scene() {
   const { toast } = useToast()
-  const permissionsGranted = useRequestPermissions()
   const trailId = useParams().id
 
   const {
@@ -110,9 +108,7 @@ export function Scene() {
       )}
 
       {/* Renderiza condicionalmente la UI y la escena solo cuando los datos estén cargados */}
-      {permissionsGranted.geolocation &&
-        permissionsGranted.camera &&
-        !loading &&
+      { !loading &&
         !error && (
           <>
             {/* UI */}
