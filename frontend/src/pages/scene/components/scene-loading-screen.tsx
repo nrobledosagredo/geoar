@@ -30,12 +30,13 @@ export function SceneLoadingScreen() {
 
       {/* Spinner */}
       <div className="flex w-full justify-center">
-        <div className="animate-spin w-12 h-12 border-4 rounded-full border-t-primary"></div>
+        <div className="animate-spin w-9 h-9 border-4 rounded-full border-t-primary"></div>
       </div>
 
       {/* Carousel con textos de carga */}
       <div className="flex w-full justify-center">
         <Carousel
+          className="w-full"
           opts={{
             loop: true,
           }}
@@ -48,8 +49,10 @@ export function SceneLoadingScreen() {
           <CarouselContent>
             {texts.map((text, index) => (
               <CarouselItem key={index}>
-                <div className="text-base mx-4 sm:text-lg md:text-xl lg:text-2xl font-semibold text-center text-pretty">
+                <div className="mx-4">
+                <div className="w-full h-full sm:text-lg md:text-xl lg:text-2xl font-semibold text-center text-pretty">
                   {text}
+                </div>
                 </div>
               </CarouselItem>
             ))}

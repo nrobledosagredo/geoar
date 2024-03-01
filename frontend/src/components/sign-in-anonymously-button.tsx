@@ -17,7 +17,7 @@ export function SignInAnonymouslyButton({
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
 }) {
   const navigate = useNavigate()
-  const { handleCreateUser, response } = useCreateUser()
+  const { handleCreateUser } = useCreateUser()
   const { toast } = useToast()
   const { t, i18n } = useTranslation()
 
@@ -30,19 +30,13 @@ export function SignInAnonymouslyButton({
         userId: result.user.uid,
         language: i18n.language,
       });
-
-      // Verifica si la respuesta de createUser es exitosa
-      if (response && response.success) {
-        toast({
-          description: t("guest_toast"),
-        });
-        navigate("/");
-      } else {
-        throw new Error("Error creating user in backend");
-      }
+      toast({
+        description: t("guest_toast"),
+      });
+      navigate("/");
     } catch (error: any) {
       console.error(error.message);
-      const errorMessage = getErrorMessage(error.code) || error.message;
+      const errorMessage = getErrorMessage(error.code);
       toast({
         description: errorMessage,
         variant: "destructive",
@@ -52,6 +46,7 @@ export function SignInAnonymouslyButton({
     }
   };
   
+
   return (
     <Button
       variant="outline"
