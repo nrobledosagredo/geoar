@@ -35,6 +35,21 @@ export function SceneCompass() {
       }
     };
 
+    
+    const requestOrientationPermission = async () => {
+      if (
+        typeof window.DeviceOrientationEvent.requestPermission === "function"
+      ) {
+        const permissionState =
+          await window.DeviceOrientationEvent.requestPermission();
+        if (permissionState === "granted") {
+          addOrientationListener();
+        }
+      } else {
+        addOrientationListener();
+      }
+    };
+
     const addOrientationListener = () => {
       const orientationEventType: string =
         "ondeviceorientationabsolute" in window
@@ -43,27 +58,14 @@ export function SceneCompass() {
       window.addEventListener(orientationEventType, handleOrientation);
     };
 
-    const requestOrientationPermission = async () => {
-      if (typeof window.DeviceOrientationEvent.requestPermission === "function") {
-        const permissionStatus = await navigator.permissions.query({ name: 'deviceorientation' as PermissionName });
-        if (permissionStatus.state === 'granted') {
-          addOrientationListener();
-        } else {
-          const permissionState = await window.DeviceOrientationEvent.requestPermission();
-          if (permissionState === "granted") {
-            addOrientationListener();
-          }
-        }
-      } else {
-        addOrientationListener();
-      }
-    };
-
     requestOrientationPermission();
 
     return () => {
       window.removeEventListener("deviceorientation", handleOrientation);
-      window.removeEventListener("deviceorientationabsolute", handleOrientation);
+      window.removeEventListener(
+        "deviceorientationabsolute",
+        handleOrientation
+      );
     };
   }, []);
 
