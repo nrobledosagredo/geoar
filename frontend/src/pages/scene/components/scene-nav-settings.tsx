@@ -21,7 +21,7 @@ export function SceneNavSettings({
   bearing: string
   distance: string
 }) {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(true)
   const [speaking, setSpeaking] = useState(false)
   const { t } = useTranslation()
 
