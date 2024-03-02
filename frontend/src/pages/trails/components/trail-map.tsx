@@ -39,10 +39,10 @@ export function TrailMap({ trail }: { trail: TrailExtended }) {
 
   // Mostrar alerta si hay errores
   useEffect(() => {
-    if (pointsError || treesError) {
+    const error = pointsError || treesError
+    if (error) {
       toast({
-        title: "Error",
-        description: "No se pudieron cargar los puntos del sendero",
+        description: error,
         variant: "destructive",
       })
     }
