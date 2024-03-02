@@ -1,4 +1,5 @@
 // settings.tsx
+import { useEffect } from "react"
 import { SettingsForm } from "@/pages/settings/components/settings-form"
 import { useTranslation } from "react-i18next"
 
@@ -7,6 +8,14 @@ import { ControlPanel } from "@/components/control-panel"
 
 export function Settings() {
   const { t } = useTranslation()
+  useEffect(() => {
+    document.title = `GeoAR: ${t("settings_title")}`
+
+    return () => {
+      document.title = "GeoAR"
+    }
+  }, [t])
+
   return (
     <ControlPanel>
       <div className="space-y-6">

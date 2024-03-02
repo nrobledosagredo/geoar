@@ -1,4 +1,7 @@
 {
+  "not_found_title": "404: Página no encontrada",
+  "not_found_description": "No se pudo encontrar esta página.",
+
   "login_title": "Ingresa con tu cuenta",
   "login_description": "Escribe tu email y contraseña para iniciar sesión",
   "no_account": "¿No tienes una cuenta?",
@@ -39,12 +42,12 @@
   "account": "Cuenta",
   "settings": "Ajustes",
 
-  "auth_wrong_password": "Contraseña incorrecta.",
-  "auth_user_not_found": "No se encontró una cuenta asociada a este correo electrónico.",
-  "auth_too_many_requests": "Error: Demasiados intentos. Inténtalo de nuevo más tarde.",
-  "auth_email_already_in_use": "La dirección de correo electrónico ya está en uso.",
-  "auth_invalid_email": "La dirección de correo electrónico no es válida.",
-  "auth_default_error": "Ha ocurrido un error inesperado. Por favor, inténtalo de nuevo.",
+  "auth/wrong-password": "Contraseña incorrecta.",
+  "auth/user-not-found": "No se encontró una cuenta asociada a este correo electrónico.",
+  "auth/too-many-requests": "Error: Demasiados intentos. Inténtalo de nuevo más tarde.",
+  "auth/email-already-in-use": "La dirección de correo electrónico ya está en uso.",
+  "auth/invalid-email": "La dirección de correo electrónico no es válida.",
+  "auth/default-error": "Ha ocurrido un error inesperado. Por favor, inténtalo de nuevo.",
 
   "control_panel_title": "Panel de control",
   "control_panel_description": "Administra tu cuenta y ajustes de la aplicación.",
@@ -94,7 +97,11 @@
   "pagination_prev": "Anterior",
   "pagination_next": "Siguiente",
 
-  "loading1": "Activa la ubicación precisa en tu dispositivo para una experiencia más enriquecedora.",
+  "details_button": "Ver más detalles",
+  "drawer_close_button": "Cerrar",
+  "drawer_start_button": "Comenzar",
+
+  "loading1": "Activa la ubicación precisa en tu dispositivo para la mejor experiencia posible.",
   "loading2": "Mantén la atención en tu entorno para evitar distracciones y garantizar una experiencia segura.",
   "loading3": "Asegúrate de otorgar los permisos del dispositivo necesarios para un funcionamiento óptimo.",
 
@@ -112,7 +119,16 @@
     "South": "sur",
     "Southwest": "suroeste",
     "West": "oeste",
-    "Northwest": "noroeste"
+    "Northwest": "noroeste",
+
+    "N": "N",
+    "NE": "NE",
+    "E": "E",
+    "SE": "SE",
+    "S": "S",
+    "SW": "SO",
+    "W": "O",
+    "NW": "NO"
   },
 
   "taxonomy": {
@@ -136,5 +152,10 @@
     "EW": "Extinto en estado silvestre",
     "EX": "Extinto",
     "DD": "Datos insuficientes"
-  }
+  },
+
+  "end_trail_title": "Terminar recorrido",
+  "end_trail_description": "¿Estás seguro de que deseas terminar el recorrido?",
+  "end_trail_confirm": "Confirmar",
+  "end_trail_cancel": "Cancelar"
 }

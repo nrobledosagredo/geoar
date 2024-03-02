@@ -1,6 +1,7 @@
 // trail-drawer.tsx
 import { TrailDetails } from "@/pages/trails/components/trail-details"
 import { TrailMap } from "@/pages/trails/components/trail-map"
+import { useTranslation } from "react-i18next"
 import { Link } from "react-router-dom"
 
 import { TrailExtended } from "@/types/trail-types"
@@ -18,10 +19,11 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area"
 
 export function TrailDrawer({ trail }: { trail: TrailExtended }) {
+  const { t } = useTranslation()
   return (
     <Drawer>
       <DrawerTrigger asChild className="w-full">
-        <Button className="w-full font-semibold">Ver más detalles</Button>
+        <Button className="w-full font-semibold"> {t("details_button")}</Button>
       </DrawerTrigger>
       <DrawerContent className="h-auto max-h-screen overflow-hidden">
         <DrawerHeader className="justify-center">
@@ -58,15 +60,13 @@ export function TrailDrawer({ trail }: { trail: TrailExtended }) {
         {/* Botones de acción */}
         <DrawerFooter className="flex flex-row justify-center">
           <DrawerClose asChild>
-            <Button variant="destructive" className="w-32">
-              Cerrar
+            <Button variant="destructive" className="w-32 font-semibold">
+              {t("drawer_close_button")}
             </Button>
           </DrawerClose>
 
           <Button className="w-32 font-semibold">
-            <Link to={`/trails/${trail._id}`}>
-              Comenzar
-            </Link>
+            <Link to={`/trails/${trail._id}`}>{t("drawer_start_button")}</Link>
           </Button>
         </DrawerFooter>
       </DrawerContent>

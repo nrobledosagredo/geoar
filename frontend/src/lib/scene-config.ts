@@ -25,6 +25,6 @@ export const config = {
   //arrowDelay: 3000, // Tiempo en ms que se demora en cargar la flecha 3D para prevenir errores (default: 3000)
   arrowScale: 0.004, // Escala de la flecha 3D (default: 0.005)
   arrowPositionX: 0, // Posición X de la flecha 3D con respecto a la cámara (default: 0)
-  arrowPositionY: -0.03, // Posición Y de la flecha 3D con respecto a la cámara (default: -0.03)
+  arrowPositionY: -0.025, // Posición Y de la flecha 3D con respecto a la cámara (default: -0.03)
   arrowPositionZ: -0.1, // Posición Z de la flecha 3D con respecto a la cámara (default: -0.1)
 }

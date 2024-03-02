@@ -50,9 +50,9 @@ export function SceneLoadingScreen() {
             {texts.map((text, index) => (
               <CarouselItem key={index}>
                 <div className="mx-4">
-                <div className="w-full h-full sm:text-lg md:text-xl lg:text-2xl font-semibold text-center text-pretty">
-                  {text}
-                </div>
+                  <div className="w-full h-full sm:text-lg md:text-xl lg:text-2xl font-semibold text-center text-pretty">
+                    {text}
+                  </div>
                 </div>
               </CarouselItem>
             ))}

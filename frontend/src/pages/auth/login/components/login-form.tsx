@@ -10,7 +10,6 @@ import { z } from "zod"
 import { makeZodI18nMap } from "zod-i18n-map"
 
 import { auth } from "@/lib/firebase-config"
-import { getErrorMessage } from "@/lib/get-error-message"
 import { Button } from "@/components/ui/button"
 import {
   Form,
@@ -46,7 +45,7 @@ export function LoginForm({
     },
   })
 
-  // Función para manejar el envío del formulario
+  // Función que maneja el envío del formulario
   function onSubmit(data: z.infer<typeof loginSchema>) {
     setIsLoading(true)
     signInWithEmailAndPassword(auth, data.email, data.password)
@@ -57,10 +56,9 @@ export function LoginForm({
         })
       })
       .catch((error) => {
-        console.error(error.message)
-        const errorMessage = getErrorMessage(error.code)
+        //console.error(error)
         toast({
-          description: errorMessage,
+          description: t(error.code, { defaultValue: t("auth/default-error") }),
           variant: "destructive",
         })
       })
@@ -68,6 +66,7 @@ export function LoginForm({
         setIsLoading(false)
       })
   }
+
   return (
     <div>
       {/* Formulario de login */}

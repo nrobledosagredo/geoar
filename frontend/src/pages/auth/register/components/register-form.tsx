@@ -12,7 +12,6 @@ import { z } from "zod"
 import { makeZodI18nMap } from "zod-i18n-map"
 
 import { auth } from "@/lib/firebase-config"
-import { getErrorMessage } from "@/lib/get-error-message"
 import { cn } from "@/lib/utils"
 import { useCreateUser } from "@/hooks/use-create-user"
 import { Button } from "@/components/ui/button"
@@ -82,17 +81,10 @@ export function RegisterForm({
             description: t("register_toast"),
           })
         })
-        navigate("/")
-        toast({
-          description: t("register_toast"),
-        })
-        console.log(data.dob)
       })
       .catch((error) => {
-        console.error(error.message)
-        const errorMessage = getErrorMessage(error.code)
         toast({
-          description: errorMessage,
+          description: t(error.code, { defaultValue: t("auth/default-error") }),
           variant: "destructive",
         })
       })

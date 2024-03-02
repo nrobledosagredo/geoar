@@ -6,7 +6,7 @@ export function HorizontalLogo() {
   return (
     <Link to="/" className="flex flex-row items-center no-underline ml-[-3px]">
       {/* Logo de la aplicación */}
-      <Trees className="h-6 w-6 text-green-600 mr-1" />
+      <Trees className="h-6 w-6 text-primary mr-1" />
 
       {/* Nombre de la aplicación */}
       <span className="self-center whitespace-nowrap tracking-tighter text-2xl">

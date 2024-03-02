@@ -43,7 +43,7 @@ function App() {
   }, [])
 
   if (loading) {
-    return <div className="w-full h-full bg-black"></div>
+    return <div className="w-full h-full bg-background"></div>
   }
 
   return (

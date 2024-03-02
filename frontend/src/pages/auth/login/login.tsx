@@ -1,15 +1,24 @@
 // login.tsx
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { LoginForm } from "@/pages/auth/login/components/login-form"
 import { useTranslation } from "react-i18next"
 import { Link } from "react-router-dom"
 
+import { Separator } from "@/components/ui/separator"
 import { SignInAnonymouslyButton } from "@/components/sign-in-anonymously-button"
 import { VerticalLogo } from "@/components/vertical-logo"
 
 export function Login() {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
+
+  useEffect(() => {
+    document.title = `GeoAR: ${t("login_title")}`
+
+    return () => {
+      document.title = "GeoAR"
+    }
+  }, [t])
   return (
     <div className="flex flex-col min-h-screen max-w-sm mx-auto">
       {/* Logo */}
@@ -33,7 +42,7 @@ export function Login() {
           </div>
 
           {/* Enlace a la página de registro */}
-          <div className="mt-4 text-center text-sm">
+          <div className="mt-8 text-center text-sm">
             {t("no_account")}{" "}
             <Link
               to="/auth/register"
@@ -66,12 +75,12 @@ export function Login() {
       </div>
 
       {/* Enlaces a términos de uso y política de privacidad */}
-      <div className="my-2 w-full">
-        <div className="text-center text-sm text-muted-foreground">
-          <Link to="/terms-of-uso" className="underline mr-2">
+      <div className="mb-4 w-full">
+        <div className="text-center text-sm text-muted-foreground flex justify-center items-center">
+          <Link to="/terms-of-use" className="underline mr-2">
             {t("terms_of_use")}
           </Link>
-          |
+          <Separator className="h-4" orientation="vertical" />
           <Link to="/privacy-policy" className="underline ml-2">
             {t("privacy_policy")}
           </Link>

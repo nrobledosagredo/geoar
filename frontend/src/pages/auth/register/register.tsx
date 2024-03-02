@@ -1,15 +1,24 @@
 // login.tsx
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { RegisterForm } from "@/pages/auth/register/components/register-form"
 import { useTranslation } from "react-i18next"
 import { Link } from "react-router-dom"
 
+import { Separator } from "@/components/ui/separator"
 import { SignInAnonymouslyButton } from "@/components/sign-in-anonymously-button"
 import { VerticalLogo } from "@/components/vertical-logo"
 
 export function Register() {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
+
+  useEffect(() => {
+    document.title = `GeoAR: ${t("register_title")}`
+
+    return () => {
+      document.title = "GeoAR"
+    }
+  }, [t])
   return (
     <div className="flex flex-col min-h-screen max-w-sm mx-auto">
       {/* Logo */}
@@ -35,7 +44,7 @@ export function Register() {
           </div>
 
           {/* Enlace a la página de login */}
-          <div className="mt-4 text-center text-sm">
+          <div className="mt-8 text-center text-sm">
             {t("already_have_account")}{" "}
             <Link to="/auth/login" className="underline font-bold text-primary">
               {t("login")}
@@ -65,12 +74,12 @@ export function Register() {
       </div>
 
       {/* Enlaces a términos de uso y política de privacidad */}
-      <div className="my-2 w-full">
-        <div className="text-center text-sm text-muted-foreground">
+      <div className="mt-8 mb-4 w-full">
+        <div className="text-center text-sm text-muted-foreground flex justify-center items-center">
           <Link to="/terms-of-use" className="underline mr-2">
             {t("terms_of_use")}
           </Link>
-          |
+          <Separator className="h-4" orientation="vertical" />
           <Link to="/privacy-policy" className="underline ml-2">
             {t("privacy_policy")}
           </Link>

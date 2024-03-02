@@ -1,4 +1,5 @@
 import { X } from "lucide-react"
+import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
 
 import {
@@ -16,6 +17,7 @@ import { Button } from "@/components/ui/button"
 
 export function SceneCloseButton() {
   const navigate = useNavigate()
+  const { t } = useTranslation()
 
   const handleConfirm = () => {
     navigate("/")
@@ -36,15 +38,15 @@ export function SceneCloseButton() {
         </AlertDialogTrigger>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Terminar recorrido</AlertDialogTitle>
+            <AlertDialogTitle>{t("end_trail_title")}</AlertDialogTitle>
             <AlertDialogDescription>
-              ¿Estás seguro de que deseas dar por terminado el recorrido?
+              {t("end_trail_description")}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancelar</AlertDialogCancel>
+            <AlertDialogCancel>{t("end_trail_cancel")}</AlertDialogCancel>
             <AlertDialogAction onClick={handleConfirm}>
-              Confirmar
+              {t("end_trail_confirm")}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

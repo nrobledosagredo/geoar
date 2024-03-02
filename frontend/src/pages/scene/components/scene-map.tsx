@@ -7,6 +7,7 @@ import "leaflet.locatecontrol/dist/L.Control.Locate.min.css"
 import "leaflet/dist/leaflet.css"
 
 import { useEffect } from "react"
+
 import { SceneMapProps } from "@/types/scene-types"
 import {
   infoCardIcon,
@@ -23,7 +24,7 @@ const defaultLatitude = config.simulateLatitude
 const defaultLongitude = config.simulateLongitude
 
 function LocateControl() {
-  const map = useMap();
+  const map = useMap()
 
   useEffect(() => {
     const locateControl = L.control
@@ -33,29 +34,38 @@ function LocateControl() {
         locateOptions: {
           enableHighAccuracy: true,
         },
-        initialZoomLevel: 20,
+        //initialZoomLevel: 20,
+        keepCurrentZoomLevel: true,
         showPopup: false,
+        markerStyle: {
+          fillColor: "#16a34a",
+        },
+        circleStyle: {
+          fillColor: "#16a34a",
+        },
+        compassStyle: {
+          fillColor: "#16a34a",
+        },
       })
-      .addTo(map);
+      .addTo(map)
 
     // Función para iniciar la localización
     const startLocation = () => {
-      locateControl.start();
-    };
+      locateControl.start()
+    }
 
     // Agregar el escuchador del evento 'trailStarted'
-    document.addEventListener("trailStarted", startLocation);
+    document.addEventListener("trailStarted", startLocation)
 
     return () => {
-      map.removeControl(locateControl);
+      map.removeControl(locateControl)
       // Remover el escuchador del evento para evitar fugas de memoria
-      document.removeEventListener("trailStarted", startLocation);
-    };
-  }, [map]);
+      document.removeEventListener("trailStarted", startLocation)
+    }
+  }, [map])
 
-  return null;
+  return null
 }
-
 
 export function SceneMap({ points, infoCards, trees }: SceneMapProps) {
   const { theme } = useTheme()
@@ -79,7 +89,7 @@ export function SceneMap({ points, infoCards, trees }: SceneMapProps) {
     ])
 
   return (
-    <div className="border-2 dark:border-[#464843] pointer-events-auto overflow-hidden w-full max-w-lg h-[28%] fixed bottom-[-2px] left-0 right-0 mx-auto flex justify-center items-center rounded-t-full sm:rounded-lg sm:w-60 sm:h-60 sm:right-auto sm:left-0 landscape:rounded-lg landscape:w-60 landscape:h-60 landscape:right-auto landscape:left-0">
+    <div className="border-2 dark:border-[#464843] pointer-events-auto overflow-hidden w-full max-w-lg h-[29%] fixed bottom-[-4px] left-0 right-0 mx-auto flex justify-center items-center rounded-t-full lg:rounded-lg lg:w-60 lg:h-60 lg:right-auto lg:left-0 landscape:rounded-lg landscape:w-60 landscape:h-60 landscape:right-auto landscape:left-0">
       <MapContainer
         center={[defaultLatitude, defaultLongitude]}
         zoom={20}
@@ -133,6 +143,6 @@ export function SceneMap({ points, infoCards, trees }: SceneMapProps) {
           </Marker>
         ))}
       </MapContainer>
-      </div>
+    </div>
   )
 }

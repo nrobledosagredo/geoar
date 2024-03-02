@@ -10,20 +10,20 @@ import { SceneTreeCard } from "@/pages/scene/components/scene-treecard"
 import { getImage } from "@/services/images-service"
 import { useParams } from "react-router-dom"
 
-//import { config } from "@/lib/scene-config"
 import { useGetInfoCardsByTrail } from "@/hooks/use-get-infocards-by-trail"
 import { useGetPoints } from "@/hooks/use-get-points"
 import { useGetTrail } from "@/hooks/use-get-trail"
 import { useGetTreeCards } from "@/hooks/use-get-treecards"
 import { useGetTrees } from "@/hooks/use-get-trees"
+import { useRequestPermissions } from "@/hooks/use-request-permissions"
 import { useToast } from "@/components/ui/use-toast"
 
 import "@/lib/color-changer"
-import "@/lib/target-finder"
 import "@/lib/distance-displayer"
-import "@/lib/ios-orientation-fix"
+import "@/lib/target-finder"
+import "@/lib/target-finder-debug"
 
-import { useRequestPermissions } from "@/hooks/use-request-permissions"
+//import { config } from "@/lib/scene-config"
 
 //const { simulateLatitude, simulateLongitude } = config
 //const { cameraMaxDistance } = config
@@ -74,6 +74,16 @@ export function Scene() {
   const error =
     trailError || pointsError || infoCardsError || treesError || treeCardsError
 
+  useEffect(() => {
+    if (trail?.name) {
+      document.title = `GeoAR: ${trail.name}`
+    }
+
+    return () => {
+      document.title = "GeoAR"
+    }
+  }, [trail])
+
   // Toast con errores
   useEffect(() => {
     if (error) {
@@ -95,7 +105,6 @@ export function Scene() {
     }
     document.addEventListener("trailStarted", hideLoadingScreen)
 
-    // Limpiar el evento al desmontar el componente
     return () => {
       document.removeEventListener("trailStarted", hideLoadingScreen)
     }
@@ -111,8 +120,7 @@ export function Scene() {
       )}
 
       {/* Renderiza condicionalmente la UI y la escena solo cuando los datos estén cargados */}
-      {
-        permissionsGranted.orientation &&
+      {permissionsGranted.orientation &&
         permissionsGranted.motion &&
         !loading &&
         !error && (
@@ -135,9 +143,9 @@ export function Scene() {
             >
               <a-camera
                 //gps-new-camera={`gpsMinDistance: 5; simulateLatitude: ${String(simulateLatitude)}; simulateLongitude: ${String(simulateLongitude)}`}
-                gps-new-camera="gpsMinDistance: 5"
+                gps-new-camera="gpsMinDistance: 4"
                 target-finder
-                //ios-orientation-fix
+                //target-finder-debug
                 //far={cameraMaxDistance}
               >
                 {/* Flecha 3D que apunta al siguiente punto */}
