@@ -27,9 +27,9 @@ export function Home() {
 
         {/* Descripción */}
         <p className="text-xl text-muted-foreground pb-4">
-          <span className="font-semibold">{t("welcome_description")}</span>
+          <span className="font-medium">{t("welcome_description")}</span>
           <span className="font-bold"> {t("augmented_reality")}</span>
-          <span className="font-semibold">.</span>
+          <span className="font-medium">.</span>
         </p>
 
         {/* Botón para ir a la lista de senderos */}
