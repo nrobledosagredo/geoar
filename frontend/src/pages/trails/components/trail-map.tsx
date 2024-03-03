@@ -88,7 +88,7 @@ export function TrailMap({ trail }: { trail: TrailExtended }) {
               title={infoCard.name}
             >
               {/* Popup con el nombre de la infoCard */}
-              <Popup className="max-w-64 border-2 border-[#fe0000] rounded-xl font-medium text-pretty"> {infoCard.name}</Popup>
+              <Popup className="max-w-64 border-4 border-[#fe0000] rounded-2xl font-medium text-pretty"> {infoCard.name}</Popup>
             </Marker>
           ))}
 
@@ -103,7 +103,7 @@ export function TrailMap({ trail }: { trail: TrailExtended }) {
               icon={treeIcon}
             >
               {/* Popup con el nombre del árbol */}
-              <Popup className="max-w-64 border-2 border-[#60e501] rounded-xl font-medium text-pretty">{tree.name}</Popup>
+              <Popup className="max-w-64 border-4 border-[#60e501] rounded-2xl font-medium text-pretty">{tree.name}</Popup>
             </Marker>
           ))}
         </MapContainer>
