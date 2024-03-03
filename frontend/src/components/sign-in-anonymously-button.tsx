@@ -2,7 +2,6 @@
 import { getAuth, signInAnonymously } from "firebase/auth"
 import { Loader2, User } from "lucide-react"
 import { useTranslation } from "react-i18next"
-import { useNavigate } from "react-router-dom"
 
 import { useCreateUser } from "@/hooks/use-create-user"
 import { Button } from "@/components/ui/button"
@@ -15,7 +14,6 @@ export function SignInAnonymouslyButton({
   isLoading: boolean
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
 }) {
-  const navigate = useNavigate()
   const { handleCreateUser } = useCreateUser()
   const { toast } = useToast()
   const { t, i18n } = useTranslation()
@@ -23,22 +21,17 @@ export function SignInAnonymouslyButton({
   function handlesignInAnonymously() {
     setIsLoading(true)
     const auth = getAuth()
-
     signInAnonymously(auth)
       .then((result) => {
+        toast({
+          description: t("guest_toast"),
+        })
         return handleCreateUser({
           userId: result.user.uid,
           language: i18n.language,
         })
       })
-      .then(() => {
-        toast({
-          description: t("guest_toast"),
-        })
-        navigate("/")
-      })
       .catch((error) => {
-        //console.error(error);
         toast({
           description: t(error.code, { defaultValue: t("auth/default-error") }),
           variant: "destructive",

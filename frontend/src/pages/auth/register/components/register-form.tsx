@@ -7,7 +7,6 @@ import { createUserWithEmailAndPassword } from "firebase/auth"
 import { CalendarIcon, Loader2 } from "lucide-react"
 import { useForm } from "react-hook-form"
 import { useTranslation } from "react-i18next"
-import { useNavigate } from "react-router-dom"
 import { z } from "zod"
 import { makeZodI18nMap } from "zod-i18n-map"
 
@@ -43,7 +42,6 @@ export function RegisterForm({
   const { t, i18n } = useTranslation()
   const { handleCreateUser } = useCreateUser()
   const { toast } = useToast()
-  const navigate = useNavigate()
 
   // Configura el mapa de errores de Zod para que use i18n
   z.setErrorMap(makeZodI18nMap({ t, handlePath: { ns: ["common", "zod"] } }))
@@ -71,15 +69,13 @@ export function RegisterForm({
     setIsLoading(true)
     createUserWithEmailAndPassword(auth, data.email, data.password)
       .then((result) => {
+        toast({
+          description: t("register_toast"),
+        })
         handleCreateUser({
           userId: result.user.uid,
           dob: data.dob,
           language: i18n.language,
-        }).then(() => {
-          navigate("/")
-          toast({
-            description: t("register_toast"),
-          })
         })
       })
       .catch((error) => {

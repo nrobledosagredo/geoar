@@ -5,7 +5,6 @@ import { signInWithEmailAndPassword } from "firebase/auth"
 import { Loader2 } from "lucide-react"
 import { useForm } from "react-hook-form"
 import { useTranslation } from "react-i18next"
-import { useNavigate } from "react-router-dom"
 import { z } from "zod"
 import { makeZodI18nMap } from "zod-i18n-map"
 
@@ -29,7 +28,6 @@ export function LoginForm({
   isLoading: boolean
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
 }) {
-  const navigate = useNavigate()
   const { toast } = useToast()
   const { t } = useTranslation()
 
@@ -50,13 +48,11 @@ export function LoginForm({
     setIsLoading(true)
     signInWithEmailAndPassword(auth, data.email, data.password)
       .then(() => {
-        navigate("/")
         toast({
           description: t("login_toast"),
         })
       })
       .catch((error) => {
-        //console.error(error)
         toast({
           description: t(error.code, { defaultValue: t("auth/default-error") }),
           variant: "destructive",
