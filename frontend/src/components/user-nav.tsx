@@ -53,27 +53,27 @@ export function UserNav() {
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           {/* Cuenta */}
-          <DropdownMenuItem>
-            <Link to="/account" className="flex items-center">
-              <User className="mr-2 h-4 w-4" />
-              <span>{t("account")}</span>
-            </Link>
-          </DropdownMenuItem>
+          <Link to="/account">
+            <DropdownMenuItem className="cursor-pointer">
+                <User className="mr-2 h-4 w-4" />
+                <span>{t("account")}</span>
+            </DropdownMenuItem>
+          </Link>
 
           {/* Accesibilidad */}
-          <DropdownMenuItem>
-            <Link to="/settings" className="flex items-center">
+          <Link to="/settings">
+          <DropdownMenuItem className="cursor-pointer">
               <Settings className="mr-2 h-4 w-4" />
               <span>{t("settings")}</span>
-            </Link>
           </DropdownMenuItem>
+          </Link>
         </DropdownMenuGroup>
 
         {/* Separador */}
         <DropdownMenuSeparator />
 
         {/* Cerrar sesión */}
-        <DropdownMenuItem onSelect={handleLogOut}>
+        <DropdownMenuItem onSelect={handleLogOut} className="cursor-pointer">
           <LogOut className="mr-2 h-4 w-4 text-destructive" />
           <span className="text-destructive">{t("logout_button")}</span>
         </DropdownMenuItem>

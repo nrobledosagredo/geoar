@@ -95,16 +95,10 @@ export function AccountForm() {
   async function onSubmit(data: AccountFormValues) {
     await handleUpdateUser(userID || "", data)
     if (!updateError) {
-      // Cambia el idioma de la aplicación
       changeLanguage(data.language)
       navigate(-1)
       toast({
         title: t("account_toast"),
-        description: (
-          <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-            <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-          </pre>
-        ),
       })
     }
   }
@@ -114,8 +108,9 @@ export function AccountForm() {
   const error = userError || updateError
   if (error) {
     toast({
-      title: t("error"),
+      title: t("Error"),
       description: userError,
+      variant: "destructive"
     })
   }
 

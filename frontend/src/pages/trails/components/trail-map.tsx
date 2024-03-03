@@ -68,7 +68,7 @@ export function TrailMap({ trail }: { trail: TrailExtended }) {
           zoom={17}
           scrollWheelZoom={false}
           zoomControl={true}
-          className="w-full h-full rounded-lg border"
+          className="w-full h-full rounded-lg"
         >
           {/* Capa de OpenStreetMap */}
           <TileLayer url={tileLayerUrl} />
@@ -88,7 +88,7 @@ export function TrailMap({ trail }: { trail: TrailExtended }) {
               title={infoCard.name}
             >
               {/* Popup con el nombre de la infoCard */}
-              <Popup className="font-bold"> {infoCard.name}</Popup>
+              <Popup className="max-w-64 border-2 border-[#fe0000] rounded-xl font-medium text-pretty"> {infoCard.name}</Popup>
             </Marker>
           ))}
 
@@ -103,7 +103,7 @@ export function TrailMap({ trail }: { trail: TrailExtended }) {
               icon={treeIcon}
             >
               {/* Popup con el nombre del árbol */}
-              <Popup className="font-bold">{tree.name}</Popup>
+              <Popup className="max-w-64 border-2 border-[#60e501] rounded-xl font-medium text-pretty">{tree.name}</Popup>
             </Marker>
           ))}
         </MapContainer>
