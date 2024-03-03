@@ -37,6 +37,9 @@
   "guest_toast": "Has iniciado sesión exitosamente como invitado.",
   "guest_button": "Continuar como invitado",
 
+  "google_toast": "Has iniciado sesión exitosamente.",
+  "google_button": "Iniciar sesión con Google",
+
   "logout_toast": "Has cerrado sesión exitosamente.",
   "logout_button": "Cerrar sesión",
   "account": "Cuenta",

@@ -37,6 +37,9 @@
   "guest_toast": "You have successfully logged in as a guest.",
   "guest_button": "Continue as guest",
 
+  "google_toast": "You have successfully logged in with Google.",
+  "google_button": "Sign in with Google",
+
   "logout_toast": "You have successfully logged out.",
   "logout_button": "Log out",
   "account": "Account",
