@@ -45,7 +45,7 @@ export function SignInAnonymouslyButton({
   return (
     <Button
       variant="outline"
-      className="w-full font-semibold bg-card"
+      className="w-full font-semibold"
       onClick={handlesignInAnonymously}
       disabled={isLoading}
     >
