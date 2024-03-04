@@ -36,11 +36,6 @@ export function Trails() {
   const [currentPage, setCurrentPage] = useState(1)
   const [cardsPerPage] = useState(3)
 
-  // Scroll al inicio de la página
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   // Mostrar alerta si hay errores
   useEffect(() => {
     if (trailsError || infoCardsError) {
