@@ -57,19 +57,21 @@ app.use("/api/", treesRoutes)
 app.use("/api/", usersRoutes)
 app.use("/api/", interactionRoutes)
 
-/*
-// Configuración de HTTPS
-const httpsOptions = {
-  key: fs.readFileSync(path.join(path.resolve(), process.env.SSL_KEY_PATH)),
-  cert: fs.readFileSync(path.join(path.resolve(), process.env.SSL_CERT_PATH)),
+// Verificar si HTTPS está habilitado
+if (process.env.USE_HTTPS === 'true') {
+  // Configuración de HTTPS
+  const httpsOptions = {
+    key: fs.readFileSync(path.join(path.resolve(), process.env.SSL_KEY_PATH)),
+    cert: fs.readFileSync(path.join(path.resolve(), process.env.SSL_CERT_PATH)),
+  }
+
+  // Crear servidor HTTPS
+  https.createServer(httpsOptions, app).listen(3000, () => {
+    console.log("HTTPS server running on port 3000")
+  })
+} else {
+  // Crear servidor HTTP
+  app.listen(3000, () => {
+    console.log("Running on port 3000")
+  })
 }
-
-// Crear servidor HTTPS
-https.createServer(httpsOptions, app).listen(3000, () => {
-  console.log("HTTPS server running on port 3000")
-})
-*/
-
-app.listen(3000, () => {
-  console.log("Running on port 3000")
-})
