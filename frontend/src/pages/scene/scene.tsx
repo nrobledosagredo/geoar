@@ -110,6 +110,12 @@ export function Scene() {
     }
   }, [])
 
+  useEffect(() => {
+    return () => {
+      document.documentElement.style.scrollBehavior = '';
+    };
+  }, []);
+
   return (
     <div className="relative h-screen bg-opacity-0">
       {/* Renderiza condicionalmente la pantalla de carga */}
