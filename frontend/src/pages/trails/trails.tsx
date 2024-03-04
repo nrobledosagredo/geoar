@@ -86,7 +86,7 @@ export function Trails() {
   }, [searchTerm])
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col h-full">
       <div className="fixed top-0 z-50 w-full">
         <MainNav />
         <div className="pointer-events-none absolute top-3 w-full pl-32 pr-16  md:w-[350px] md:px-0 md:right-16">

@@ -110,14 +110,8 @@ export function Scene() {
     }
   }, [])
 
-  useEffect(() => {
-    return () => {
-      document.body.style.height = "auto"
-    }
-  }, [])
-
   return (
-    <div className="relative bg-opacity-0 h-screen">
+    <div className="relative h-screen bg-opacity-0">
       {/* Renderiza condicionalmente la pantalla de carga */}
       {showLoadingScreen && (
         <div className="absolute top-0 left-0 w-full h-full z-50">
