@@ -34,7 +34,7 @@ export function SettingsForm() {
   function onSubmit() {
     navigate(-1)
     toast({
-      title: t("settings_toast")
+      title: t("settings_toast"),
     })
   }
 

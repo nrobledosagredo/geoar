@@ -142,8 +142,8 @@ export function Scene() {
               device-orientation-permission-ui="enabled: false"
             >
               <a-camera
-                look-controls-enabled='false' 
-                arjs-device-orientation-controls='smoothingFactor: 0.1'
+                look-controls-enabled="false"
+                arjs-device-orientation-controls="smoothingFactor: 0.1"
                 gps-new-camera="gpsMinDistance: 3"
                 far={cameraMaxDistance}
                 target-finder

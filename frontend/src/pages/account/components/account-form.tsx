@@ -110,7 +110,7 @@ export function AccountForm() {
     toast({
       title: t("Error"),
       description: userError,
-      variant: "destructive"
+      variant: "destructive",
     })
   }
 

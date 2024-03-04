@@ -1,6 +1,7 @@
 // scene-nav-settings.tsx
 import { useEffect, useState } from "react"
 import { SceneCloseButton } from "@/pages/scene/components/scene-close-button"
+import { SceneModeToggle } from "@/pages/scene/components/scene-mode-toggle"
 import { SceneSpeechToggle } from "@/pages/scene/components/scene-speech-toggle"
 import { ChevronDown, ChevronUp } from "lucide-react"
 import { useTranslation } from "react-i18next"
@@ -12,7 +13,6 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible"
-import { SceneModeToggle } from "@/pages/scene/components/scene-mode-toggle"
 
 export function SceneNavSettings({
   bearing,

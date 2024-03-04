@@ -52,7 +52,12 @@ export function TrailSearchForm({ onSearch }: TrailSearchProps) {
 
           {/* Botón para cerrar el diálogo */}
           <DrawerClose asChild>
-            <Button variant="ghost" size="icon" type="submit" className="-ml-[38px] mr-4 text-muted-foreground hover:text-primary bg-transparent hover:bg-transparent">
+            <Button
+              variant="ghost"
+              size="icon"
+              type="submit"
+              className="-ml-[38px] mr-4 text-muted-foreground hover:text-primary bg-transparent hover:bg-transparent"
+            >
               <Search className="h-5" />
               <span className="sr-only">{t("search_bar_label")}</span>
             </Button>

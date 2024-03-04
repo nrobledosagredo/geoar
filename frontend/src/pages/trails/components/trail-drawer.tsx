@@ -60,7 +60,10 @@ export function TrailDrawer({ trail }: { trail: TrailExtended }) {
         {/* Botones de acción */}
         <DrawerFooter className="flex flex-row justify-center">
           <DrawerClose asChild>
-            <Button variant="destructive" className="w-full max-w-xs font-semibold">
+            <Button
+              variant="destructive"
+              className="w-full max-w-xs font-semibold"
+            >
               {t("drawer_close_button")}
             </Button>
           </DrawerClose>

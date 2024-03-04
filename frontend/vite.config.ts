@@ -11,14 +11,21 @@ export default defineConfig({
   plugins: [react()],
   server: {
     host: true,
-    https: process.env.USE_HTTPS === 'true' ? {
-      key: fs.readFileSync(path.resolve(__dirname, process.env.SSL_KEY_PATH)),
-      cert: fs.readFileSync(path.resolve(__dirname, process.env.SSL_CERT_PATH)),
-    } : undefined,
+    https:
+      process.env.USE_HTTPS === "true"
+        ? {
+            key: fs.readFileSync(
+              path.resolve(__dirname, process.env.SSL_KEY_PATH)
+            ),
+            cert: fs.readFileSync(
+              path.resolve(__dirname, process.env.SSL_CERT_PATH)
+            ),
+          }
+        : undefined,
   },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
   },
-});
+})

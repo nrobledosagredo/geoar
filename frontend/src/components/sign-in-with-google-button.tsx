@@ -1,5 +1,5 @@
 // sign-in-with-google-button.tsx
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth"
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth"
 import { Loader2 } from "lucide-react"
 import { useTranslation } from "react-i18next"
 

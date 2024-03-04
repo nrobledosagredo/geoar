@@ -55,17 +55,17 @@ export function UserNav() {
           {/* Cuenta */}
           <Link to="/account">
             <DropdownMenuItem className="cursor-pointer">
-                <User className="mr-2 h-4 w-4" />
-                <span>{t("account")}</span>
+              <User className="mr-2 h-4 w-4" />
+              <span>{t("account")}</span>
             </DropdownMenuItem>
           </Link>
 
           {/* Accesibilidad */}
           <Link to="/settings">
-          <DropdownMenuItem className="cursor-pointer">
+            <DropdownMenuItem className="cursor-pointer">
               <Settings className="mr-2 h-4 w-4" />
               <span>{t("settings")}</span>
-          </DropdownMenuItem>
+            </DropdownMenuItem>
           </Link>
         </DropdownMenuGroup>
 
