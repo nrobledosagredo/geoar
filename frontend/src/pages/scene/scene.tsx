@@ -110,29 +110,11 @@ export function Scene() {
     }
   }, [])
 
-
-
   useEffect(() => {
-    const originalOverflow = document.body.style.overflow;
-  
     return () => {
-      document.body.style.overflow = originalOverflow;
-    };
-  }, []);
-
-  useEffect(() => {
-    const handleBeforeUnload = () => {
-      window.scrollTo(0, 0);
-    };
-  
-    window.addEventListener('beforeunload', handleBeforeUnload);
-  
-    return () => {
-      window.removeEventListener('beforeunload', handleBeforeUnload);
-    };
-  }, []);
-  
-  
+      document.body.style.height = "auto"
+    }
+  }, [])
 
   return (
     <div className="relative bg-opacity-0 h-screen">
