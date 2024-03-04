@@ -110,6 +110,19 @@ export function Scene() {
     }
   }, [])
 
+  // Lógica para resetear el scroll cuando se cambia de página
+  useEffect(() => {
+    const resetScroll = () => {
+      window.scrollTo(0, 0);
+    };
+
+    window.addEventListener('pageshow', resetScroll);
+
+    return () => {
+      window.removeEventListener('pageshow', resetScroll);
+    };
+  }, []);
+
   return (
     <div className="relative bg-opacity-0 h-screen">
       {/* Renderiza condicionalmente la pantalla de carga */}
