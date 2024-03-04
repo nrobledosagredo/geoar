@@ -86,7 +86,7 @@ export function Trails() {
   }, [searchTerm])
 
   return (
-    <div className="flex flex-col h-auto">
+    <div className="flex flex-col">
       <div className="fixed top-0 z-50 w-full">
         <MainNav />
         <div className="pointer-events-none absolute top-3 w-full pl-32 pr-16  md:w-[350px] md:px-0 md:right-16">
@@ -134,7 +134,7 @@ export function Trails() {
       </div>
 
       {/* Tarjetas de senderos */}
-      <div className="flex flex-col h-auto items-center mx-4">
+      <div className="flex flex-col items-center mx-4">
         {trailsLoading || infoCardsLoading
           ? // Repite SkeletonCard basado en cardsPerPage
             Array.from({ length: cardsPerPage }, (_, index) => (
