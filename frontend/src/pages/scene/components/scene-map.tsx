@@ -116,7 +116,7 @@ export function SceneMap({ points, infoCards, trees }: SceneMapProps) {
           />
         )}
 
-        {/* Marcadores de tarjetas de información y árboles */}
+        {/* Marcadores de cada infoCard */}
         {infoCards.map((infoCard, index) => (
           <Marker
             key={index}
@@ -126,10 +126,15 @@ export function SceneMap({ points, infoCards, trees }: SceneMapProps) {
             ]}
             icon={infoCardIcon}
           >
-            <Popup className="font-bold"> {infoCard.name}</Popup>
+            {/* Popup con el nombre de la infoCard */}
+            <Popup className="max-w-64 border-4 border-[#fe0000] rounded-2xl font-medium text-pretty">
+              {" "}
+              {infoCard.name}
+            </Popup>
           </Marker>
         ))}
 
+        {/* Marcadores de cada árbol */}
         {trees.map((tree, index) => (
           <Marker
             key={index}
@@ -139,7 +144,10 @@ export function SceneMap({ points, infoCards, trees }: SceneMapProps) {
             ]}
             icon={treeIcon}
           >
-            <Popup className="font-bold">{tree.name}</Popup>
+            {/* Popup con el nombre del árbol */}
+            <Popup className="max-w-64 border-4 border-[#60e501] rounded-2xl font-medium text-pretty">
+              {tree.name}
+            </Popup>
           </Marker>
         ))}
       </MapContainer>

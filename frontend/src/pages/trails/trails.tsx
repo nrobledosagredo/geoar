@@ -97,7 +97,7 @@ export function Trails() {
       </div>
 
       {/* Título */}
-      <div className="mt-16 mx-auto flex max-w-[980px] flex-col items-center gap-2 py-8">
+      <div className="mt-16 mx-auto flex max-w-[980px] h-full flex-col items-center gap-2 py-8">
         <h1 className="text-center text-4xl font-bold leading-tight tracking-tighter sm:text-5xl md:text-6xl">
           {t("trails_title")}
         </h1>
