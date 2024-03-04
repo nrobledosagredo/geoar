@@ -86,7 +86,7 @@ export function Trails() {
   }, [searchTerm])
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-auto">
       <div className="fixed top-0 z-50 w-full">
         <MainNav />
         <div className="pointer-events-none absolute top-3 w-full pl-32 pr-16  md:w-[350px] md:px-0 md:right-16">
@@ -97,7 +97,7 @@ export function Trails() {
       </div>
 
       {/* Título */}
-      <div className="mt-16 mx-auto flex max-w-[980px] h-full flex-col items-center gap-2 py-8">
+      <div className="mt-16 mx-auto flex max-w-[980px] flex-col items-center gap-2 py-8">
         <h1 className="text-center text-4xl font-bold leading-tight tracking-tighter sm:text-5xl md:text-6xl">
           {t("trails_title")}
         </h1>
