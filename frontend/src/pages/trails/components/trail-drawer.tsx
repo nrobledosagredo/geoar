@@ -2,7 +2,6 @@
 import { TrailDetails } from "@/pages/trails/components/trail-details"
 import { TrailMap } from "@/pages/trails/components/trail-map"
 import { useTranslation } from "react-i18next"
-import { Link } from "react-router-dom"
 
 import { TrailExtended } from "@/types/trail-types"
 import { Button } from "@/components/ui/button"
