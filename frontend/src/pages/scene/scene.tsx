@@ -112,14 +112,16 @@ export function Scene() {
 
   // Lógica para resetear el scroll cuando se cambia de página
   useEffect(() => {
-    const resetScroll = () => {
-      window.scrollTo(0, 0);
+    const forceRefreshOnBack = (event: { persisted: any }) => {
+      if (event.persisted) {
+        window.location.reload();
+      }
     };
 
-    window.addEventListener('pageshow', resetScroll);
+    window.addEventListener('pageshow', forceRefreshOnBack);
 
     return () => {
-      window.removeEventListener('pageshow', resetScroll);
+      window.removeEventListener('pageshow', forceRefreshOnBack);
     };
   }, []);
 
