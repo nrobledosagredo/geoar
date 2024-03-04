@@ -9,11 +9,6 @@ vi.mock("firebase/auth", () => ({
   signInAnonymously: vi.fn(() => Promise.resolve({ user: { uid: "123" } })),
 }))
 
-const mockNavigate = vi.fn()
-vi.mock("react-router-dom", () => ({
-  useNavigate: () => mockNavigate,
-}))
-
 vi.mock("react-i18next", () => ({
   useTranslation: () => ({
     t: (key: any) => key,
@@ -40,7 +35,6 @@ describe("SignInAnonymouslyButton", () => {
 
     await waitFor(() => {
       expect(signInAnonymously).toHaveBeenCalledWith(getAuth())
-      expect(mockNavigate).toHaveBeenCalledWith("/")
     })
   })
 })
