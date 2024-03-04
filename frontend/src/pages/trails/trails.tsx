@@ -85,16 +85,6 @@ export function Trails() {
     setCurrentPage(1)
   }, [searchTerm])
 
-
-  // Forzar un reflujo del documento y restablecer el scroll a la parte superior de la página
-  useEffect(() => {
-    // Forzar un reflujo del documento
-    document.body.offsetHeight;
-  
-    // Opcional: restablecer el scroll a la parte superior de la página
-    window.scrollTo(0, 0);
-  }, []);
-
   return (
     <div className="flex flex-col h-auto">
       <div className="fixed top-0 z-50 w-full">

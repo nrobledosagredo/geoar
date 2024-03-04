@@ -111,10 +111,17 @@ export function Scene() {
   }, [])
 
   useEffect(() => {
+    // Set styles for A-Frame page
+    document.body.style.height = '100vh';
+    document.body.style.overflow = 'hidden';
+  
     return () => {
-      document.documentElement.style.scrollBehavior = '';
+      // Reset styles when leaving the A-Frame page
+      document.body.style.height = 'auto';
+      document.body.style.overflow = 'auto';
     };
   }, []);
+  
 
   return (
     <div className="relative h-screen bg-opacity-0">
