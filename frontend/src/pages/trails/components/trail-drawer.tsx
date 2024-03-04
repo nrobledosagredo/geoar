@@ -68,11 +68,11 @@ export function TrailDrawer({ trail }: { trail: TrailExtended }) {
             </Button>
           </DrawerClose>
 
-          <Link to={`/trails/${trail._id}`} className="w-full max-w-xs">
+          <a href={`/trails/${trail._id}`} className="w-full max-w-xs">
             <Button className="w-full max-w-xs font-semibold">
               {t("drawer_start_button")}
             </Button>
-          </Link>
+          </a>
         </DrawerFooter>
       </DrawerContent>
     </Drawer>
