@@ -65,7 +65,7 @@ export function Login() {
             </div>
           </div>
 
-          {/* Botón de login adicionales */}
+          {/* Botones de login adicionales */}
           <div className="mt-4 space-y-4">
             <SignInWithGoogleButton
               isLoading={isLoading}

@@ -3,12 +3,12 @@
   "not_found_description": "No se pudo encontrar esta página.",
 
   "login_title": "Ingresa con tu cuenta",
-  "login_description": "Escribe tu email y contraseña para iniciar sesión",
+  "login_description": "Escribe tu correo electrónico y contraseña para iniciar sesión.",
   "no_account": "¿No tienes una cuenta?",
   "register": "Regístrate",
 
   "register_title": "Crea una cuenta",
-  "register_description": "Rellena el formulario para registrarte",
+  "register_description": "Rellena el formulario para registrarte.",
   "already_have_account": "¿Ya tienes una cuenta?",
   "login": "Iniciar sesión",
 
@@ -17,14 +17,14 @@
   "privacy_policy": "Política de privacidad",
 
   "login_toast": "Has iniciado sesión exitosamente.",
-  "login_email_label": "Email",
+  "login_email_label": "Correo electrónico",
   "login_email_placeholder": "Ejemplo@correo.com",
   "login_password_label": "Contraseña",
   "login_password_placeholder": "Contraseña",
   "login_button": "Iniciar sesión",
 
   "register_toast": "Tu cuenta ha sido creada exitosamente.",
-  "register_email_label": "Email",
+  "register_email_label": "Correo electrónico",
   "register_email_placeholder": "Ejemplo@correo.com",
   "register_password_label": "Contraseña",
   "register_password_placeholder": "Debe tener al menos 6 caracteres",

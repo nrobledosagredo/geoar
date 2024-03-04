@@ -23,10 +23,10 @@ import "@/lib/distance-displayer"
 import "@/lib/target-finder"
 import "@/lib/target-finder-debug"
 
-//import { config } from "@/lib/scene-config"
+import { config } from "@/lib/scene-config"
 
 //const { simulateLatitude, simulateLongitude } = config
-//const { cameraMaxDistance } = config
+const { cameraMaxDistance } = config
 
 export function Scene() {
   const { toast } = useToast()
@@ -142,11 +142,13 @@ export function Scene() {
               device-orientation-permission-ui="enabled: false"
             >
               <a-camera
-                //gps-new-camera={`gpsMinDistance: 5; simulateLatitude: ${String(simulateLatitude)}; simulateLongitude: ${String(simulateLongitude)}`}
-                gps-new-camera="gpsMinDistance: 4"
+                look-controls-enabled='false' 
+                arjs-device-orientation-controls='smoothingFactor: 0.1'
+                gps-new-camera="gpsMinDistance: 3"
+                far={cameraMaxDistance}
                 target-finder
+                //gps-new-camera={`gpsMinDistance: 5; simulateLatitude: ${String(simulateLatitude)}; simulateLongitude: ${String(simulateLongitude)}`}
                 //target-finder-debug
-                //far={cameraMaxDistance}
               >
                 {/* Flecha 3D que apunta al siguiente punto */}
                 <SceneArrow />

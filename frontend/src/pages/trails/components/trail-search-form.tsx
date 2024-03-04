@@ -45,12 +45,14 @@ export function TrailSearchForm({ onSearch }: TrailSearchProps) {
             <Input
               placeholder={t("search_bar_placeholder")}
               {...form.register("searchTerm")}
+              className="text-md"
+              autoFocus
             />
           </FormControl>
 
           {/* Botón para cerrar el diálogo */}
           <DrawerClose asChild>
-            <Button size="icon" type="submit" className="-ml-[38px] mr-4">
+            <Button variant="ghost" size="icon" type="submit" className="-ml-[38px] mr-4 text-muted-foreground hover:text-primary bg-transparent hover:bg-transparent">
               <Search className="h-5" />
               <span className="sr-only">{t("search_bar_label")}</span>
             </Button>

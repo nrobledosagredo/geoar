@@ -18,8 +18,8 @@ export const config = {
 
   // InfoCards y TreeCards
   cardToggleDelay: 500, // Delay en ms para prevenir dobleclick no intencional (default: 1500)
-  cardScale: 0.2, // Escala de las fichas (default: 0.2)
-  cardYPosition: 13, // Posición Y de las fichas con respecto a la cámara (default: 13)
+  cardScale: 0.15, // Escala de las fichas (default: 0.2)
+  cardYPosition: 0, // Posición Y de las fichas con respecto a la cámara (default: 0)
 
   // Arrow
   //arrowDelay: 3000, // Tiempo en ms que se demora en cargar la flecha 3D para prevenir errores (default: 3000)

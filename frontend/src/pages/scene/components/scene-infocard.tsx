@@ -101,8 +101,8 @@ export function SceneInfoCard({
             {/* Botón TTS */}
             <a-circle
               class="raycastable"
-              position="12.3 -6.5 0.2"
-              radius="2.5"
+              position="11.3 -5.5 0.2"
+              radius="3.5"
               color="#ef4444"
               onClick={speechToggle}
               animation__click="property: scale; startEvents: click; from: 1 1 1; to: 0.9 0.9 0.9; dur: 100; easing: easeOutQuad; loop: 2; dir: alternate"
@@ -110,7 +110,7 @@ export function SceneInfoCard({
               {/* Icono de play/pause */}
               <a-circle
                 position="0 -0.1 0.2"
-                radius="2"
+                radius="3"
                 src={speaking ? pauseIcon : playIcon}
                 material="transparent: true"
               ></a-circle>
@@ -151,8 +151,8 @@ export function SceneInfoCard({
             <a-plane
               class="raycastable"
               src={chevronUpIcon}
-              height="4"
-              width="4"
+              height="6"
+              width="6"
               material="transparent: true"
               position="0 -6.9 1"
               onMouseDown={scrollTextDown}
@@ -165,8 +165,8 @@ export function SceneInfoCard({
             <a-plane
               class="raycastable"
               src={chevronDownIcon}
-              height="4"
-              width="4"
+              height="6"
+              width="6"
               material="transparent: true"
               position="0 -25.2 1"
               onMouseDown={scrollTextUp}

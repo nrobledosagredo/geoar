@@ -19,9 +19,9 @@ export function SceneSpeechToggle({
         className="rounded-full transition duration-150 ease-in-out transform active:scale-90"
       >
         {speaking ? (
-          <Volume2 className="h-[1.2rem] w-[1.2rem] " />
+          <Volume2 className="h-[1.3rem] w-[1.3rem] " />
         ) : (
-          <VolumeX className="text-[#ef4444] dark:text-[#7f1d1d] h-[1.2rem] w-[1.2rem] " />
+          <VolumeX className="text-destructive h-[1.3rem] w-[1.3rem] " />
         )}
       </Button>
     </div>

@@ -12,24 +12,24 @@ export function SceneCircle({
   cardToggle,
 }: CircleProps) {
   // Configuraciones para las líneas
-  const numberOfLines = 20 // Número total de líneas
+  const numberOfLines = 25 // Número total de líneas
   const spacing = 4 // Espaciado entre cada línea
   const lineLength = 2 // Longitud de cada línea
 
   // Crea un objeto con las líneas para usar en JSX
   const lineProps: { [key: string]: string } = {}
   for (let i = 0; i < numberOfLines; i++) {
-    const start = -5 - i * spacing
+    const start = -10 - i * spacing
     const end = start - lineLength
     lineProps[`line__${i + 1}`] =
       `start: 0 ${start} 0; end: 0 ${end} 0; color: ${color}`
   }
 
   // Configuraciones para el círculo
-  const circleScale = isExpanded ? "1 1 1" : "1.5 1.5 1.5"
+  const circleScale = isExpanded ? "2 2 2" : "3 3 3"
   const circleOpacity = isExpanded ? "0.75" : "1"
   const linesIsVisible = isExpanded ? "false" : "true"
-  const circleYPosition = -2.4 + yPosition
+  const circleYPosition = yPosition + 7
 
   return (
     <a-entity

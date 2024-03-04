@@ -7,6 +7,7 @@ import { Link } from "react-router-dom"
 import { Separator } from "@/components/ui/separator"
 import { SignInAnonymouslyButton } from "@/components/sign-in-anonymously-button"
 import { VerticalLogo } from "@/components/vertical-logo"
+import { SignInWithGoogleButton } from "@/components/sign-in-with-google-button"
 
 export function Register() {
   const { t } = useTranslation()
@@ -63,8 +64,12 @@ export function Register() {
             </div>
           </div>
 
-          {/* Botón de login anónimo */}
-          <div className="mt-4">
+          {/* Botones de login adicionales */}
+          <div className="mt-4 space-y-4">
+            <SignInWithGoogleButton
+              isLoading={isLoading}
+              setIsLoading={setIsLoading}
+            />
             <SignInAnonymouslyButton
               isLoading={isLoading}
               setIsLoading={setIsLoading}

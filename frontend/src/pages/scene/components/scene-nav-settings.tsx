@@ -12,7 +12,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible"
-import { ModeToggle } from "@/components/mode-toggle"
+import { SceneModeToggle } from "@/pages/scene/components/scene-mode-toggle"
 
 export function SceneNavSettings({
   bearing,
@@ -49,15 +49,15 @@ export function SceneNavSettings({
           className="rounded-full transition duration-150 ease-in-out transform active:scale-90"
         >
           {isOpen ? (
-            <ChevronUp className="h-[1.2rem] w-[1.2rem]" />
+            <ChevronUp className="h-[1.3rem] w-[1.3rem]" />
           ) : (
-            <ChevronDown className="h-[1.2rem] w-[1.2rem]" />
+            <ChevronDown className="h-[1.3rem] w-[1.3rem]" />
           )}
         </Button>
       </CollapsibleTrigger>
       <CollapsibleContent className="space-y-2">
         <SceneSpeechToggle speaking={speaking} onToggle={toggleSpeech} />
-        <ModeToggle />
+        <SceneModeToggle />
         <SceneCloseButton />
       </CollapsibleContent>
     </Collapsible>

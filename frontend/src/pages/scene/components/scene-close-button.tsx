@@ -33,7 +33,7 @@ export function SceneCloseButton() {
             size="icon"
             className="rounded-full transition duration-150 ease-in-out transform active:scale-90"
           >
-            <X className="h-[1.2rem] w-[1.2rem]" />
+            <X className="h-[1.3rem] w-[1.3rem]" />
           </Button>
         </AlertDialogTrigger>
         <AlertDialogContent>

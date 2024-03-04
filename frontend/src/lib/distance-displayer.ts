@@ -2,10 +2,10 @@
 AFRAME.registerComponent("distance-displayer", {
   init: function () {
     this.text = document.createElement("a-troika-text")
-    this.text.setAttribute("position", { x: 0, y: 9, z: 0.1 })
+    this.text.setAttribute("position", { x: 0, y: 15, z: 0.1 })
     this.text.setAttribute("align", "center")
     this.text.setAttribute("look-at", "[gps-new-camera]")
-    this.text.setAttribute("font-size", "4")
+    this.text.setAttribute("font-size", "8")
     this.text.setAttribute("color", "white")
     this.text.setAttribute("font", "/fonts/Roboto/Roboto-Medium.ttf")
     this.el.appendChild(this.text)

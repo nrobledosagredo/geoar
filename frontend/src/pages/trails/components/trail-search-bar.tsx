@@ -31,7 +31,7 @@ export function TrailSearchBar({ onSearch }: TrailSearchProps) {
         <DialogTrigger asChild>
           <Button
             variant="outline"
-            className="w-full justify-start text-muted-foreground"
+            className="w-full justify-start text-muted-foreground bg-background/50 backdrop-blur-3xl hover:bg-background/75 hover:backdrop-blur-3xl"
           >
             <Search className="h-4 -ml-2 mr-2" />
             {t("search_bar_placeholder")}
@@ -51,7 +51,7 @@ export function TrailSearchBar({ onSearch }: TrailSearchProps) {
       <DrawerTrigger asChild>
         <Button
           variant="outline"
-          className="w-full justify-start text-muted-foreground"
+          className="w-full justify-start text-muted-foreground bg-background/50 backdrop-blur-3xl hover:bg-background/75 hover:backdrop-blur-3xl"
         >
           <Search className="h-4 -ml-2 mr-2" />
           {t("search_bar_placeholder")}
