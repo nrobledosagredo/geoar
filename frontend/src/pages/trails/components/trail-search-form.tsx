@@ -43,11 +43,11 @@ export function TrailSearchForm({ onSearch }: TrailSearchProps) {
           {/* Campo de búsqueda */}
           <FormControl className="flex-grow">
             <Input
+              type="search"
               placeholder={t("search_bar_placeholder")}
               {...form.register("searchTerm")}
-              className="text-md pointer-events-none"
+              className="text-md"
               autoFocus
-
             />
           </FormControl>
 
