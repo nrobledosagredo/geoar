@@ -45,8 +45,9 @@ export function TrailSearchForm({ onSearch }: TrailSearchProps) {
             <Input
               placeholder={t("search_bar_placeholder")}
               {...form.register("searchTerm")}
-              className="text-md"
+              className="text-md pointer-events-none"
               autoFocus
+
             />
           </FormControl>
 

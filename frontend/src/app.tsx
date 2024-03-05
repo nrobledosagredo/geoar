@@ -47,53 +47,59 @@ function App() {
   }
 
   return (
-    <LanguageProvider>
-      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-        <Router>
-          <Routes>
-            <Route
-              path="/auth/login"
-              element={currentUser ? <Navigate to="/" /> : <Login />}
-            />
-            <Route
-              path="/auth/register"
-              element={currentUser ? <Navigate to="/" /> : <Register />}
-            />
-            <Route
-              path="/"
-              element={currentUser ? <Home /> : <Navigate to="/auth/login" />}
-            />
+    <div className="bg-background">
+      <LanguageProvider>
+        <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+          <Router>
+            <Routes>
+              <Route
+                path="/auth/login"
+                element={currentUser ? <Navigate to="/" /> : <Login />}
+              />
+              <Route
+                path="/auth/register"
+                element={currentUser ? <Navigate to="/" /> : <Register />}
+              />
+              <Route
+                path="/"
+                element={currentUser ? <Home /> : <Navigate to="/auth/login" />}
+              />
 
-            <Route
-              path="/account"
-              element={
-                currentUser ? <Account /> : <Navigate to="/auth/login" />
-              }
-            />
+              <Route
+                path="/account"
+                element={
+                  currentUser ? <Account /> : <Navigate to="/auth/login" />
+                }
+              />
 
-            <Route
-              path="/settings"
-              element={
-                currentUser ? <Settings /> : <Navigate to="/auth/login" />
-              }
-            />
+              <Route
+                path="/settings"
+                element={
+                  currentUser ? <Settings /> : <Navigate to="/auth/login" />
+                }
+              />
 
-            <Route
-              path="/trails"
-              element={currentUser ? <Trails /> : <Navigate to="/auth/login" />}
-            />
+              <Route
+                path="/trails"
+                element={
+                  currentUser ? <Trails /> : <Navigate to="/auth/login" />
+                }
+              />
 
-            <Route
-              path="/trails/:id"
-              element={currentUser ? <Scene /> : <Navigate to="/auth/login" />}
-            />
+              <Route
+                path="/trails/:id"
+                element={
+                  currentUser ? <Scene /> : <Navigate to="/auth/login" />
+                }
+              />
 
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Router>
-        <Toaster />
-      </ThemeProvider>
-    </LanguageProvider>
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Router>
+          <Toaster />
+        </ThemeProvider>
+      </LanguageProvider>
+    </div>
   )
 }
 
