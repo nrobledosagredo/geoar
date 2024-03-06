@@ -32,10 +32,10 @@ export function SettingsForm() {
     },
   })
   function onSubmit() {
-    navigate(-1)
     toast({
-      title: t("settings_toast"),
+      description: t("settings_toast"),
     })
+    navigate(-1)
   }
 
   return (

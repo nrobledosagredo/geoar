@@ -1,6 +1,6 @@
 // trail-search-form.tsx
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Search } from "lucide-react"
+import { ArrowLeft, Search } from "lucide-react"
 import { useForm } from "react-hook-form"
 import { useTranslation } from "react-i18next"
 import { z } from "zod"
@@ -39,14 +39,25 @@ export function TrailSearchForm({ onSearch }: TrailSearchProps) {
         onSubmit={form.handleSubmit(onSubmit)}
         className="space-y-4 ml-4 md:ml-0"
       >
-        <div className="flex items-center">
+        <div className="flex">
+          <DrawerClose asChild>
+            <Button
+              variant="ghost"
+              size="icon"
+              type="submit"
+              className="z-[1000] -mr-[38px] text-muted-foreground hover:text-primary bg-transparent hover:bg-transparent"
+            >
+              <ArrowLeft className="h-4" />
+            </Button>
+          </DrawerClose>
+
           {/* Campo de búsqueda */}
           <FormControl className="flex-grow">
             <Input
               type="search"
               placeholder={t("search_bar_placeholder")}
               {...form.register("searchTerm")}
-              className="text-md"
+              className="text-md pl-9 pt-[7px]"
               autoFocus
             />
           </FormControl>
@@ -59,7 +70,7 @@ export function TrailSearchForm({ onSearch }: TrailSearchProps) {
               type="submit"
               className="-ml-[38px] mr-4 text-muted-foreground hover:text-primary bg-transparent hover:bg-transparent"
             >
-              <Search className="h-5" />
+              <Search className="h-4" />
               <span className="sr-only">{t("search_bar_label")}</span>
             </Button>
           </DrawerClose>

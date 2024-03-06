@@ -13,6 +13,7 @@ import { TrailExtended } from "@/types/trail-types"
 import { useGetInfoCards } from "@/hooks/use-get-infocards"
 import { useGetTrails } from "@/hooks/use-get-trails"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
@@ -108,27 +109,33 @@ export function Trails() {
         {/* Texto de término de búsqueda y cantidad de resultados */}
         {searchTerm && filteredTrails.length > 0 && (
           <div className="mt-4">
-            <span className="text-lg font-semibold">"{searchTerm}"</span>
-            <span className="text-sm font-medium text-muted-foreground">
-              {" "}
-              {filteredTrails.length}{" "}
-              {filteredTrails.length > 1 ? "resultados" : "resultado"}
-            </span>
+              <span className="text-lg">"<strong>{searchTerm}</strong>"</span>
+              <span className="text-sm font-medium text-muted-foreground">
+                {" "}
+                {filteredTrails.length}{" "}
+                {filteredTrails.length > 1 ? "resultados" : "resultado"}
+              </span>
           </div>
         )}
 
         {/* Alerta si no hay resultados */}
         {searchTerm && filteredTrails.length === 0 && (
-          <div className="mt-6 mx-4">
-            <Alert variant="destructive">
+          <div className="mt-6 mx-4 text-center">
+            <Alert variant="destructive" className="text-left">
               <SearchX className="h-6 mr-2" />
               <AlertTitle className="ml-2">
-                {t("search_alert_title")}
+                {t("search_alert_title")} "<strong>{searchTerm}</strong>".
               </AlertTitle>
               <AlertDescription className="ml-2">
                 {t("search_alert_description", { searchTerm })}
               </AlertDescription>
             </Alert>
+            <Button
+      variant="link"
+      onClick={() => setSearchTerm("")}
+    >
+      {t("reset_search")}
+    </Button>
           </div>
         )}
       </div>

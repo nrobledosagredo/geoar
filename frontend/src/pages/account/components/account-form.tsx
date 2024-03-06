@@ -96,10 +96,10 @@ export function AccountForm() {
     await handleUpdateUser(userID || "", data)
     if (!updateError) {
       changeLanguage(data.language)
-      navigate(-1)
       toast({
-        title: t("account_toast"),
+        description: t("account_toast"),
       })
+      navigate(-1)
     }
   }
 

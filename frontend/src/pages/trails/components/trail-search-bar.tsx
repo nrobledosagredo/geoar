@@ -10,7 +10,6 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
 import {
   Drawer,
   DrawerContent,
-  DrawerFooter,
   DrawerHeader,
   DrawerTrigger,
 } from "@/components/ui/drawer"
@@ -22,9 +21,11 @@ type TrailSearchProps = {
 export function TrailSearchBar({ onSearch }: TrailSearchProps) {
   const { t } = useTranslation()
   const [open, setOpen] = useState(false)
+
   const isDesktop = useMediaQuery("(min-width: 768px)")
 
   if (isDesktop) {
+
     return (
       <Dialog>
         {/* Botón para abrir el diálogo de búsqueda */}
@@ -57,10 +58,9 @@ export function TrailSearchBar({ onSearch }: TrailSearchProps) {
           {t("search_bar_placeholder")}
         </Button>
       </DrawerTrigger>
-      <DrawerContent>
+      <DrawerContent className="h-screen">
         <DrawerHeader className="pt-2"></DrawerHeader>
         <TrailSearchForm onSearch={onSearch} />
-        <DrawerFooter className="pt-2"></DrawerFooter>
       </DrawerContent>
     </Drawer>
   )

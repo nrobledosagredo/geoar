@@ -45,7 +45,7 @@ export function SignInWithGoogleButton({
 
   return (
     <Button
-      variant="outline"
+      variant="secondary"
       className="w-full font-semibold"
       onClick={handleSignInWithGoogle}
       disabled={isLoading}

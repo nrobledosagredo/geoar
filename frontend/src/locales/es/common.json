@@ -88,8 +88,9 @@
   "search_bar_placeholder": "Buscar senderos...",
   "search_bar_description": "Busca senderos por nombre, dificultad, distancia o cualquier palabra clave relacionada.",
 
-  "search_alert_title": "No se encontraron senderos que coincidan con tu búsqueda.",
-  "search_alert_description": "Intenta con un término de búsqueda diferente o limpia el campo de búsqueda para ver todos los senderos.",
+  "search_alert_title": "No se encontraron senderos que coincidan con ",
+  "search_alert_description": "Intenta con un término de búsqueda diferente.",
+  "reset_search": "Restablecer búsqueda",
 
   "trails_toast_description": "Ocurrió un error al obtener los datos.",
 

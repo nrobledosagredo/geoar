@@ -25,7 +25,6 @@ export function SceneCloseButton() {
   }
 
   return (
-    <div>
       <AlertDialog>
         <AlertDialogTrigger asChild>
           <Button
@@ -51,6 +50,5 @@ export function SceneCloseButton() {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
-    </div>
   )
 }
