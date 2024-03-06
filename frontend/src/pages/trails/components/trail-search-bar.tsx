@@ -58,7 +58,7 @@ export function TrailSearchBar({ onSearch }: TrailSearchProps) {
           {t("search_bar_placeholder")}
         </Button>
       </DrawerTrigger>
-      <DrawerContent className="h-screen">
+      <DrawerContent className="h-full">
         <DrawerHeader className="pt-2"></DrawerHeader>
         <TrailSearchForm onSearch={onSearch} />
       </DrawerContent>
