@@ -16,12 +16,12 @@ export function Home() {
   }, [t])
 
   return (
-    <div className="h-screen flex flex-col">
+    <div className="h-screen flex flex-col overflow-hidden">
       {/* Barra de navegación */}
       <MainNav />
 
       {/* Contenedor de la página de inicio */}
-      <div className="flex flex-col flex-1 justify-center text-center p-6 space-y-8">
+      <div className="flex-grow flex flex-col justify-center items-center text-center space-y-8">
         {/* Título */}
         <VerticalLogo />
 
@@ -41,17 +41,6 @@ export function Home() {
             </Button>
           </Link>
         </div>
-
-        {/* Botón para ir a la página de permisos 
-        <div>
-          <Link to="/permissions">
-            <Button className="font-semibold">
-              Permisos
-              <ChevronRight className="h-4 mt-0.5 -mr-2" />
-            </Button>
-          </Link>
-        </div>
-        */}
       </div>
     </div>
   )
