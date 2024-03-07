@@ -1,29 +1,31 @@
 // home.tsx
-import { useEffect } from "react";
-import { ChevronRight } from "lucide-react";
-import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { useEffect } from "react"
+import { ChevronRight } from "lucide-react"
+import { useTranslation } from "react-i18next"
+import { Link } from "react-router-dom"
 
-import { Button } from "@/components/ui/button";
-import { MainNav } from "@/components/main-nav";
-import { VerticalLogo } from "@/components/vertical-logo";
+import { Button } from "@/components/ui/button"
+import { MainNav } from "@/components/main-nav"
+import { VerticalLogo } from "@/components/vertical-logo"
 
 export function Home() {
-  const { t } = useTranslation();
+  const { t } = useTranslation()
 
   useEffect(() => {
-    document.title = "GeoAR";
-  }, [t]);
+    document.title = "GeoAR"
+  }, [t])
 
   return (
-    <div className="h-screen flex overflow-hidden overflow-y-auto relative">
+    <div className="h-screen max-h-screen flex flex-col">
+      
       {/* Barra de navegación */}
-      <div className="absolute w-full z-10">
+      <div className="fixed top-0 z-50 w-full">
         <MainNav />
       </div>
 
       {/* Contenedor de la página de inicio */}
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center space-y-8">
+      <div className="flex-1 flex flex-col justify-center items-center text-center space-y-8">
+
         {/* Título */}
         <VerticalLogo />
 
@@ -45,5 +47,5 @@ export function Home() {
         </div>
       </div>
     </div>
-  );
+  )
 }
