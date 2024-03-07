@@ -16,9 +16,9 @@ export function Home() {
   }, [t]);
 
   return (
-    <div className="h-screen flex overflow-hidden relative">
+    <div className="h-screen flex overflow-hidden overflow-y-auto relative">
       {/* Barra de navegación */}
-      <div className="absolute w-full">
+      <div className="absolute w-full z-10">
         <MainNav />
       </div>
 
