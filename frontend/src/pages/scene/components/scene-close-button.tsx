@@ -25,30 +25,30 @@ export function SceneCloseButton() {
   }
 
   return (
-      <AlertDialog>
-        <AlertDialogTrigger asChild>
-          <Button
-            variant="destructive"
-            size="icon"
-            className="rounded-full transition duration-150 ease-in-out transform active:scale-90"
-          >
-            <X className="h-[1.3rem] w-[1.3rem]" />
-          </Button>
-        </AlertDialogTrigger>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>{t("end_trail_title")}</AlertDialogTitle>
-            <AlertDialogDescription>
-              {t("end_trail_description")}
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel>{t("end_trail_cancel")}</AlertDialogCancel>
-            <AlertDialogAction onClick={handleConfirm}>
-              {t("end_trail_confirm")}
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+    <AlertDialog>
+      <AlertDialogTrigger asChild>
+        <Button
+          variant="destructive"
+          size="icon"
+          className="rounded-full transition duration-150 ease-in-out transform active:scale-90"
+        >
+          <X className="h-[1.3rem] w-[1.3rem]" />
+        </Button>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>{t("end_trail_title")}</AlertDialogTitle>
+          <AlertDialogDescription>
+            {t("end_trail_description")}
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>{t("end_trail_cancel")}</AlertDialogCancel>
+          <AlertDialogAction onClick={handleConfirm}>
+            {t("end_trail_confirm")}
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
   )
 }

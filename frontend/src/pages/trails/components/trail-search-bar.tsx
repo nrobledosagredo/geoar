@@ -25,7 +25,6 @@ export function TrailSearchBar({ onSearch }: TrailSearchProps) {
   const isDesktop = useMediaQuery("(min-width: 768px)")
 
   if (isDesktop) {
-
     return (
       <Dialog>
         {/* Botón para abrir el diálogo de búsqueda */}

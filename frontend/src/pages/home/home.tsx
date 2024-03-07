@@ -17,7 +17,6 @@ export function Home() {
 
   return (
     <div className="h-screen max-h-screen flex flex-col">
-      
       {/* Barra de navegación */}
       <div className="fixed top-0 z-50 w-full">
         <MainNav />
@@ -25,7 +24,6 @@ export function Home() {
 
       {/* Contenedor de la página de inicio */}
       <div className="flex-1 flex flex-col justify-center items-center text-center space-y-8">
-
         {/* Título */}
         <VerticalLogo />
 

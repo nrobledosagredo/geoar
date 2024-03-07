@@ -58,7 +58,7 @@ app.use("/api/", usersRoutes)
 app.use("/api/", interactionRoutes)
 
 // Verificar si HTTPS está habilitado
-if (process.env.USE_HTTPS === 'true') {
+if (process.env.USE_HTTPS === "true") {
   // Configuración de HTTPS
   const httpsOptions = {
     key: fs.readFileSync(path.join(path.resolve(), process.env.SSL_KEY_PATH)),

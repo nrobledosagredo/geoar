@@ -109,12 +109,14 @@ export function Trails() {
         {/* Texto de término de búsqueda y cantidad de resultados */}
         {searchTerm && filteredTrails.length > 0 && (
           <div className="mt-4">
-              <span className="text-lg">"<strong>{searchTerm}</strong>"</span>
-              <span className="text-sm font-medium text-muted-foreground">
-                {" "}
-                {filteredTrails.length}{" "}
-                {filteredTrails.length > 1 ? "resultados" : "resultado"}
-              </span>
+            <span className="text-lg">
+              "<strong>{searchTerm}</strong>"
+            </span>
+            <span className="text-sm font-medium text-muted-foreground">
+              {" "}
+              {filteredTrails.length}{" "}
+              {filteredTrails.length > 1 ? "resultados" : "resultado"}
+            </span>
           </div>
         )}
 
@@ -130,12 +132,9 @@ export function Trails() {
                 {t("search_alert_description", { searchTerm })}
               </AlertDescription>
             </Alert>
-            <Button
-      variant="link"
-      onClick={() => setSearchTerm("")}
-    >
-      {t("reset_search")}
-    </Button>
+            <Button variant="link" onClick={() => setSearchTerm("")}>
+              {t("reset_search")}
+            </Button>
           </div>
         )}
       </div>
