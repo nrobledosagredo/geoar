@@ -25,6 +25,8 @@ export const TrailPagination: React.FC<TrailPaginationProps> = ({
         {/* Botón de página anterior */}
         <PaginationItem>
           <PaginationPrevious
+            className={currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""}
+            aria-disabled={currentPage === 1}
             href="#"
             onClick={() => currentPage !== 1 && setCurrentPage(currentPage - 1)}
           />
@@ -46,6 +48,8 @@ export const TrailPagination: React.FC<TrailPaginationProps> = ({
         {/* Botón de página siguiente */}
         <PaginationItem>
           <PaginationNext
+            className = {currentPage === totalPages ? "opacity-50 cursor-not-allowed" : ""}
+            aria-disabled={currentPage === totalPages}
             href="#"
             onClick={() =>
               currentPage !== totalPages && setCurrentPage(currentPage + 1)

@@ -132,7 +132,7 @@ export function Trails() {
                 {t("search_alert_description", { searchTerm })}
               </AlertDescription>
             </Alert>
-            <Button variant="link" onClick={() => setSearchTerm("")}>
+            <Button variant="link" onClick={() => setSearchTerm("")} className="text-destructive">
               {t("reset_search")}
             </Button>
           </div>
