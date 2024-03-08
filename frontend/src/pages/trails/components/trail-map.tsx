@@ -37,6 +37,8 @@ export function TrailMap({ trail }: { trail: TrailExtended }) {
       ? "https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
       : "https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png"
 
+  //const tileLayerUrl = "https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
+
   // Mostrar alerta si hay errores
   useEffect(() => {
     const error = pointsError || treesError

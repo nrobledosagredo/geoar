@@ -69,10 +69,13 @@ function LocateControl() {
 
 export function SceneMap({ points, infoCards, trees }: SceneMapProps) {
   const { theme } = useTheme()
+
   const tileLayerUrl =
     theme === "dark"
       ? "https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
       : "https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png"
+
+  //const tileLayerUrl = "https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
   const target = useUpdateTarget()
   const traveledPoints = points
     .filter((point) => point.order < target)

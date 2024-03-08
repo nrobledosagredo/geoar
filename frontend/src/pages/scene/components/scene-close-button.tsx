@@ -21,7 +21,7 @@ export function SceneCloseButton() {
 
   const handleConfirm = () => {
     navigate("/")
-    window.location.reload()
+    //window.location.reload()
   }
 
   return (
