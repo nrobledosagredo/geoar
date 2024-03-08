@@ -24,7 +24,7 @@ export function TrailDrawer({ trail }: { trail: TrailExtended }) {
       <DrawerTrigger asChild className="w-full">
         <Button className="w-full font-semibold"> {t("details_button")}</Button>
       </DrawerTrigger>
-      <DrawerContent className="h-auto max-h-fit overflow-hidden">
+      <DrawerContent className="h-auto max-h-[99%] overflow-hidden">
         <DrawerHeader className="justify-center">
           <DrawerTitle>{trail.name}</DrawerTitle>
         </DrawerHeader>
