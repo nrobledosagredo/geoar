@@ -1,18 +1,18 @@
 // trail-search-bar.tsx
-import { useState } from "react"
-import { TrailSearchForm } from "@/pages/trails/components/trail-search-form"
-import { Search } from "lucide-react"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { Search, X } from "lucide-react"
+import { useForm } from "react-hook-form"
 import { useTranslation } from "react-i18next"
+import { z } from "zod"
 
-import { useMediaQuery } from "@/hooks/use-media-query"
 import { Button } from "@/components/ui/button"
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
-import {
-  Drawer,
-  DrawerContent,
-  DrawerHeader,
-  DrawerTrigger,
-} from "@/components/ui/drawer"
+import { Form, FormControl } from "@/components/ui/form"
+import { Input } from "@/components/ui/input"
+
+// Esquema de validación con Zod para el término de búsqueda
+const SearchSchema = z.object({
+  searchTerm: z.string().min(0),
+})
 
 // Props del componente SearchBar
 type TrailSearchProps = {
@@ -20,47 +20,57 @@ type TrailSearchProps = {
 }
 export function TrailSearchBar({ onSearch }: TrailSearchProps) {
   const { t } = useTranslation()
-  const [open, setOpen] = useState(false)
+  const form = useForm<z.infer<typeof SearchSchema>>({
+    resolver: zodResolver(SearchSchema),
+    defaultValues: {
+      searchTerm: "",
+    },
+  })
 
-  const isDesktop = useMediaQuery("(min-width: 768px)")
+  // Función para manejar el envío del formulario
+  const onSubmit = (data: z.infer<typeof SearchSchema>) => {
+    onSearch(data.searchTerm)
+  }
+  const searchTerm = form.watch("searchTerm")
 
-  if (isDesktop) {
-    return (
-      <Dialog>
-        {/* Botón para abrir el diálogo de búsqueda */}
-        <DialogTrigger asChild>
-          <Button
-            variant="outline"
-            className="w-full justify-start text-muted-foreground bg-background/50 backdrop-blur-3xl hover:bg-background/75 hover:backdrop-blur-3xl"
-          >
-            <Search className="h-4 -ml-2 mr-2" />
-            {t("search_bar_placeholder")}
-          </Button>
-        </DialogTrigger>
-
-        {/* Contenido del diálogo de búsqueda */}
-        <DialogContent className="rounded-lg">
-          <TrailSearchForm onSearch={onSearch} />
-        </DialogContent>
-      </Dialog>
-    )
+  const resetSearch = () => {
+    form.setValue("searchTerm", "")
+    form.handleSubmit(onSubmit)()
   }
 
   return (
-    <Drawer open={open} onOpenChange={setOpen}>
-      <DrawerTrigger asChild>
-        <Button
-          variant="outline"
-          className="w-full justify-start text-muted-foreground bg-background/50 backdrop-blur-3xl hover:bg-background/75 hover:backdrop-blur-3xl"
-        >
-          <Search className="h-4 -ml-2 mr-2" />
-          {t("search_bar_placeholder")}
-        </Button>
-      </DrawerTrigger>
-      <DrawerContent className="h-96">
-        <DrawerHeader className="pt-2"></DrawerHeader>
-        <TrailSearchForm onSearch={onSearch} />
-      </DrawerContent>
-    </Drawer>
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        <div className="flex">
+          <Button
+            variant="ghost"
+            size="icon"
+            type="submit"
+            className="z-[1000] -mr-[38px] text-muted-foreground hover:text-primary bg-transparent hover:bg-transparent"
+          >
+            <Search className="h-4" />
+          </Button>
+          {/* Campo de búsqueda */}
+          <FormControl className="flex-grow">
+            <Input
+              type="search"
+              placeholder={t("search_bar_placeholder")}
+              {...form.register("searchTerm")}
+              className="text-md pl-9 pt-[7px]"
+              autoFocus
+            />
+          </FormControl>
+          <Button
+            variant="ghost"
+            size="icon"
+            type="submit"
+            className={`-ml-[38px] mr-4 text-muted-foreground hover:text-destructive bg-transparent hover:bg-transparent ${searchTerm ? "" : "invisible"}`}
+            onClick={resetSearch}
+          >
+            <X className="h-4" />
+          </Button>
+        </div>
+      </form>
+    </Form>
   )
 }

@@ -57,7 +57,7 @@ export function TrailSearchForm({ onSearch }: TrailSearchProps) {
               type="search"
               placeholder={t("search_bar_placeholder")}
               {...form.register("searchTerm")}
-              className="text-md pl-9 pt-[7px]"
+              className="text-sm pl-9 pt-[7px]"
               autoFocus
             />
           </FormControl>

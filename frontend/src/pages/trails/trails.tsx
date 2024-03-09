@@ -13,7 +13,6 @@ import { TrailExtended } from "@/types/trail-types"
 import { useGetInfoCards } from "@/hooks/use-get-infocards"
 import { useGetTrails } from "@/hooks/use-get-trails"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
@@ -132,9 +131,6 @@ export function Trails() {
                 {t("search_alert_description", { searchTerm })}
               </AlertDescription>
             </Alert>
-            <Button variant="link" onClick={() => setSearchTerm("")} className="text-destructive">
-              {t("reset_search")}
-            </Button>
           </div>
         )}
       </div>
