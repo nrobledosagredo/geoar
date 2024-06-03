@@ -25,64 +25,67 @@ interface Permissions {
 }
 
 export function useRequestPermissions(): Permissions {
-  const { toast } = useToast()
+  const { toast } = useToast();
   const [permissionsGranted, setPermissionsGranted] = useState<Permissions>({
     orientation: false,
     motion: false,
-  })
+  });
 
   useEffect(() => {
-    // Solicitar permiso de orientación
+    // Solicitar permiso de orientación solo si no es iOS
     const requestOrientationPermission = async () => {
       if (
-        typeof window.DeviceOrientationEvent.requestPermission === "function"
+        typeof window.DeviceOrientationEvent.requestPermission === "function" &&
+        !navigator.userAgent.includes("iPhone") && // Excluir dispositivos iOS
+        !navigator.userAgent.includes("iPad") &&
+        !navigator.userAgent.includes("iPod")
       ) {
-        const permissionState =
-          await window.DeviceOrientationEvent.requestPermission()
+        const permissionState = await window.DeviceOrientationEvent.requestPermission();
         setPermissionsGranted((prev) => ({
           ...prev,
           orientation: permissionState === "granted",
-        }))
+        }));
       } else {
         // Si no es necesario solicitar permiso, se asume que está concedido
-        setPermissionsGranted((prev) => ({ ...prev, orientation: true }))
+        setPermissionsGranted((prev) => ({ ...prev, orientation: true }));
       }
-    }
+    };
 
-    // Solicitar permiso de movimiento
+    // Solicitar permiso de movimiento solo si no es iOS
     const requestMotionPermission = async () => {
       if (
         typeof DeviceMotionEvent !== "undefined" &&
-        typeof (DeviceMotionEvent as any).requestPermission === "function"
+        typeof (DeviceMotionEvent as any).requestPermission === "function" &&
+        !navigator.userAgent.includes("iPhone") && // Excluir dispositivos iOS
+        !navigator.userAgent.includes("iPad") &&
+        !navigator.userAgent.includes("iPod")
       ) {
         // iOS 13+
         try {
-          const permissionState = await (
-            DeviceMotionEvent as any
-          ).requestPermission()
+          const permissionState = await (DeviceMotionEvent as any).requestPermission();
           setPermissionsGranted((prev) => ({
             ...prev,
             motion: permissionState === "granted",
-          }))
+          }));
         } catch (error) {
-          console.error("Error requesting device motion permission:", error)
+          console.error("Error requesting device motion permission:", error);
           setPermissionsGranted((prev) => ({
             ...prev,
             motion: false,
-          }))
+          }));
         }
       } else {
         // Dispositivos no iOS o iOS < 13, no se requiere permiso explícito
         setPermissionsGranted((prev) => ({
           ...prev,
           motion: true,
-        }))
+        }));
       }
-    }
+    };
 
-    requestOrientationPermission()
-    requestMotionPermission()
-  }, [toast])
+    requestOrientationPermission();
+    requestMotionPermission();
+  }, [toast]);
 
-  return permissionsGranted
+  return permissionsGranted;
 }
