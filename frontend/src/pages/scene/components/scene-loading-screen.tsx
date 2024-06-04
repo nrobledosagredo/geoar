@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import Autoplay from "embla-carousel-autoplay"
 import { useTranslation } from "react-i18next"
+import { Apple } from 'lucide-react';
 
 import {
   Carousel,
@@ -8,6 +9,11 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel"
 import { VerticalLogo } from "@/components/vertical-logo"
+import {
+  Alert,
+  AlertDescription,
+  AlertTitle,
+} from "@/components/ui/alert"
 
 export function SceneLoadingScreen() {
   const { t } = useTranslation()
@@ -16,13 +22,35 @@ export function SceneLoadingScreen() {
     t("loading2"),
     t("loading3"),
   ])
+  const [isIOS, setIsIOS] = useState(false)
 
   useEffect(() => {
     setTexts([t("loading1"), t("loading2"), t("loading3")])
   }, [t])
 
+  useEffect(() => {
+    // Detectar si el dispositivo es iOS
+    const userAgent = navigator.userAgent;
+    if (/iPad|iPhone|iPod/.test(userAgent) && !(window as any).MSStream) {
+      setIsIOS(true);
+    }
+  }, [])
+
   return (
     <div className="fixed inset-0 bg-background flex flex-col justify-evenly h-screen">
+      {/* Mostrar alerta si es iOS */}
+      {isIOS && (
+        <div className="fixed top-4 left-1/2 transform -translate-x-1/2 w-11/12 max-w-md z-50">
+          <Alert>
+            <Apple className="h-4 w-4" />
+            <AlertTitle>¡Importante!</AlertTitle>
+            <AlertDescription>
+              Dale un toque a la pantalla para activar los permisos necesarios
+            </AlertDescription>
+          </Alert>
+        </div>
+      )}
+      
       {/* Logo */}
       <div className="">
         <VerticalLogo />
