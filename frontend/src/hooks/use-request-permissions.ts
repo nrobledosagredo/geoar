@@ -1,27 +1,26 @@
-import { useEffect, useState } from "react"
-
-import { useToast } from "@/components/ui/use-toast"
+import { useEffect, useState } from "react";
+import { useToast } from "@/components/ui/use-toast";
 
 declare global {
   interface DeviceOrientationEvent {
-    webkitCompassHeading?: number
+    webkitCompassHeading?: number;
   }
 
   interface DeviceMotionEvent {
-    requestPermission?: () => Promise<string>
+    requestPermission?: () => Promise<string>;
   }
 
   interface Window {
     DeviceOrientationEvent: typeof DeviceOrientationEvent & {
-      requestPermission?: () => Promise<string>
-    }
-    DeviceMotionEvent: typeof DeviceMotionEvent
+      requestPermission?: () => Promise<string>;
+    };
+    DeviceMotionEvent: typeof DeviceMotionEvent;
   }
 }
 
 interface Permissions {
-  orientation: boolean
-  motion: boolean
+  orientation: boolean;
+  motion: boolean;
 }
 
 export function useRequestPermissions(): Permissions {
@@ -32,13 +31,10 @@ export function useRequestPermissions(): Permissions {
   });
 
   useEffect(() => {
-    // Solicitar permiso de orientación solo si no es iOS
+    // Solicitar permiso de orientación
     const requestOrientationPermission = async () => {
       if (
-        typeof window.DeviceOrientationEvent.requestPermission === "function" &&
-        !navigator.userAgent.includes("iPhone") && // Excluir dispositivos iOS
-        !navigator.userAgent.includes("iPad") &&
-        !navigator.userAgent.includes("iPod")
+        typeof window.DeviceOrientationEvent.requestPermission === "function"
       ) {
         const permissionState = await window.DeviceOrientationEvent.requestPermission();
         setPermissionsGranted((prev) => ({
@@ -51,16 +47,12 @@ export function useRequestPermissions(): Permissions {
       }
     };
 
-    // Solicitar permiso de movimiento solo si no es iOS
+    // Solicitar permiso de movimiento
     const requestMotionPermission = async () => {
       if (
         typeof DeviceMotionEvent !== "undefined" &&
-        typeof (DeviceMotionEvent as any).requestPermission === "function" &&
-        !navigator.userAgent.includes("iPhone") && // Excluir dispositivos iOS
-        !navigator.userAgent.includes("iPad") &&
-        !navigator.userAgent.includes("iPod")
+        typeof (DeviceMotionEvent as any).requestPermission === "function"
       ) {
-        // iOS 13+
         try {
           const permissionState = await (DeviceMotionEvent as any).requestPermission();
           setPermissionsGranted((prev) => ({
