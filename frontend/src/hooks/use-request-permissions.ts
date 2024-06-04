@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react"
-
 import { useToast } from "@/components/ui/use-toast"
 
 declare global {
@@ -32,14 +31,19 @@ export function useRequestPermissions(): Permissions {
   });
 
   useEffect(() => {
-    // Solicitar permiso de orientación solo si no es iOS
-    const requestOrientationPermission = async () => {
+    const requestPermissions = async () => {
+      // Solicitar permiso de orientación
       if (
         typeof window.DeviceOrientationEvent.requestPermission === "function" &&
-        !navigator.userAgent.includes("iPhone") && // Excluir dispositivos iOS
+        !navigator.userAgent.includes("iPhone") &&
         !navigator.userAgent.includes("iPad") &&
         !navigator.userAgent.includes("iPod")
       ) {
+        await new Promise((resolve) => {
+          // Simulamos la interacción del usuario al esperar un evento de click o touch
+          window.addEventListener("click", resolve, { once: true });
+          window.addEventListener("touchstart", resolve, { once: true });
+        });
         const permissionState = await window.DeviceOrientationEvent.requestPermission();
         setPermissionsGranted((prev) => ({
           ...prev,
@@ -49,18 +53,20 @@ export function useRequestPermissions(): Permissions {
         // Si no es necesario solicitar permiso, se asume que está concedido
         setPermissionsGranted((prev) => ({ ...prev, orientation: true }));
       }
-    };
 
-    // Solicitar permiso de movimiento solo si no es iOS
-    const requestMotionPermission = async () => {
+      // Solicitar permiso de movimiento
       if (
         typeof DeviceMotionEvent !== "undefined" &&
         typeof (DeviceMotionEvent as any).requestPermission === "function" &&
-        !navigator.userAgent.includes("iPhone") && // Excluir dispositivos iOS
+        !navigator.userAgent.includes("iPhone") &&
         !navigator.userAgent.includes("iPad") &&
         !navigator.userAgent.includes("iPod")
       ) {
-        // iOS 13+
+        await new Promise((resolve) => {
+          // Simulamos la interacción del usuario al esperar un evento de click o touch
+          window.addEventListener("click", resolve, { once: true });
+          window.addEventListener("touchstart", resolve, { once: true });
+        });
         try {
           const permissionState = await (DeviceMotionEvent as any).requestPermission();
           setPermissionsGranted((prev) => ({
@@ -83,8 +89,7 @@ export function useRequestPermissions(): Permissions {
       }
     };
 
-    requestOrientationPermission();
-    requestMotionPermission();
+    requestPermissions();
   }, [toast]);
 
   return permissionsGranted;
