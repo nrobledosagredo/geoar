@@ -108,6 +108,8 @@
   "loading1": "Activa la ubicación precisa en tu dispositivo para la mejor experiencia posible.",
   "loading2": "Mantén la atención en tu entorno para evitar distracciones y garantizar una experiencia segura.",
   "loading3": "Asegúrate de otorgar los permisos del dispositivo necesarios para un funcionamiento óptimo.",
+  "iosTitle": "¡Atención!",
+  "iosWarning": "Toque la pantalla para activar los permisos necesarios.",
 
   "start_message": "Dirígete a la entrada para comenzar el sendero",
   "end_message": "¡Has llegado al final del sendero!",

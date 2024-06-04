@@ -108,6 +108,8 @@
   "loading1": "Enable precise location on your device for the best experience possible.",
   "loading2": "Keep your attention on your surroundings to avoid distractions and ensure a safe experience.",
   "loading3": "Make sure to grant necessary device permissions for optimal functioning.",
+  "iosTitle": "Heads up!",
+  "iosWarning": "Tap the screen to enable necessary permissions.",
 
   "start_message": "Go to the entrance to start the trail",
   "end_message": "You have reached the end of the trail!",
