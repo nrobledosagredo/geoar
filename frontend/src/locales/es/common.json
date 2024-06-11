@@ -81,6 +81,14 @@
   "augmented_reality": "realidad aumentada",
   "start_button": "Comenzar",
 
+  "faq": "Preguntas frecuentes",
+  "faq1_question": "¿Qué es esta app?",
+  "faq1_answer": "Es una aplicación web que utiliza realidad aumentada, una tecnología que superpone información digital sobre el entorno físico a través de la cámara de tu dispositivo.",
+  "faq2_question": "¿Dónde están ubicados los senderos?",
+  "faq2_answer": "Los senderos se encuentran en el Jardín Botánico UACh. Al seleccionar un sendero, la flecha te guiará hacia la entrada del Jardín.",
+  "faq3_question": "No me carga el sendero, ¿qué hago?",
+  "faq3_answer": "Asegúrate de que los permisos de tu navegador no estén bloqueados. Revisa la configuración de tu navegador y verifica que los permisos de cámara y geolocalización estén habilitados.",
+
   "trails_title": "Senderos disponibles",
   "trails_description": "Explora nuestros senderos disponibles. Selecciona un sendero para ver más detalles.",
 

@@ -3,7 +3,7 @@ import { useEffect } from "react"
 import { ChevronRight } from "lucide-react"
 import { useTranslation } from "react-i18next"
 import { Link } from "react-router-dom"
-
+import { HomeFAQ } from "@/pages/home/components/home-faq"
 import { Button } from "@/components/ui/button"
 import { MainNav } from "@/components/main-nav"
 import { VerticalLogo } from "@/components/vertical-logo"
@@ -16,7 +16,7 @@ export function Home() {
   }, [t])
 
   return (
-    <div className="h-screen max-h-screen flex flex-col">
+    <div className="h-screen flex flex-col">
       {/* Barra de navegación */}
       <div className="fixed top-0 z-50 w-full">
         <MainNav />
@@ -44,6 +44,10 @@ export function Home() {
           </Link>
         </div>
       </div>
+
+      {/* FAQ */}
+      <HomeFAQ />
+
     </div>
   )
 }

@@ -81,6 +81,17 @@
   "augmented_reality": "augmented reality",
   "start_button": "Get Started",
 
+  
+    "faq": "FAQ",
+    "faq1_question": "What is this app?",
+    "faq1_answer": "It is a web application that uses augmented reality, a technology that overlays digital information on the physical environment through your device's camera.",
+    "faq2_question": "Where are the trails located?",
+    "faq2_answer": "The trails are located in the UACh Botanical Garden. When you select a trail, the arrow will guide you to the Garden's entrance.",
+    "faq3_question": "The trail won't load, what should I do?",
+    "faq3_answer": "Ensure that your browser permissions are not blocked. Check your browser settings and make sure that camera and geolocation permissions are enabled.",
+  
+  
+
   "trails_title": "Available trails",
   "trails_description": "Explore our available trails. Select a trail to see more details.",
 
