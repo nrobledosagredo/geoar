@@ -33,7 +33,7 @@ export function TrailMap({ trail }: { trail: TrailExtended }) {
   ])
 
   // Definir el centro inicial usando el primer punto
-  const initialCenter = pathPoints.length > 0 ? pathPoints[0] : [0, 0]
+  const initialCenter: [number, number] = pathPoints.length > 0 ? pathPoints[0] as [number, number] : [0, 0];
 
   const tileLayerUrl =
     theme === "dark"
