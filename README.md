@@ -6,7 +6,9 @@
 ![Firebase](https://img.shields.io/badge/firebase-a08021?style=for-the-badge&logo=firebase&logoColor=ffcd34)
 ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
 
-https://github.com/user-attachments/assets/614421e0-c9fa-4c7e-8daf-daf016efb88d
+<div align="center">
+    <video src="https://github.com/user-attachments/assets/614421e0-c9fa-4c7e-8daf-daf016efb88d" alt="Attachment">
+</div>
 
 ## Overview
 
