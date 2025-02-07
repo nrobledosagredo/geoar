@@ -1,6 +1,8 @@
 #  🌳 GeoAR
 ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![Vite](https://img.shields.io/badge/Vite-B73BFE?style=for-the-badge&logo=vite&logoColor=FFD62E)
+![Three.js](https://img.shields.io/badge/ThreeJs-black?style=for-the-badge&logo=three.js&logoColor=white)
 ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
 ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
 ![Firebase](https://img.shields.io/badge/firebase-a08021?style=for-the-badge&logo=firebase&logoColor=ffcd34)
@@ -10,17 +12,29 @@
     <video src="https://github.com/user-attachments/assets/614421e0-c9fa-4c7e-8daf-daf016efb88d" alt="Attachment">
 </div>
 
-## Overview
+## 🌟 Overview
+[GeoAR](https://geoar-zeta.vercel.app) is a progressive web application (PWA) developed as part of my thesis project to enhance visitor experiences in the natural areas of the Los Ríos Region, Chile. The app uses augmented reality (AR) to present real-time, interactive information about local biodiversity and ecosystems directly in your mobile browser. Initially built for the Botanical Garden at [Austral University of Chile](https://www.uach.cl) (UACh), GeoAR overlays digital content on real-world views, making it easier to learn about the environment during a visit.
 
-GeoAR is an progressive web application (PWA) that enhances the visitor experience in the natural areas of the Los Ríos Region, Chile, using augmented reality (AR) to deliver real-time, interactive information about biodiversity and local ecosystems. Initially focused on the Botanical Garden of Universidad Austral de Chile (UACh), GeoAR overlays digital content on the real world, making it accessible directly from mobile browsers. The application guides users through the park with 3D navigation arrows, provides educational content about specific species through geolocated AR pop-ups, and supports accessibility features like multiple languages and text-to-speech. GeoAR is designed to be scalable for other natural parks, promoting sustainable, educational tourism.
+The project features simple 3D navigation arrows to guide users through the park and AR pop-ups that offer educational content about nearby species.
 
-## Features
+## 🔍 Features
 
-- **Augmented reality (AR)**: Enhances the visitor's interaction with the environment by superimposing real-time digital content, including 3D navigation arrows and informative 3D cards (InfoCards and TreeCards) linked to specific park locations.
-- **Progressive web application (PWA)**: Accessible directly via a URL without needing an app store download. It provides offline functionality, automatic updates, and easy installation on devices for a seamless user experience.
-- **Geolocation-based interaction**: The app activates specific content when users approach predefined locations in the park, encouraging exploration and engagement with the surroundings.
-- **Multilingual support and accessibility**: Offers content in multiple languages and supports text-to-speech, making the app accessible to a broader audience, including users with disabilities.
-- **Educational content**: Provides detailed information about plants and other species, conservation statuses, and ecological significance. Includes georeferenced data and multimedia such as images, scientific names, and taxonomies.
-- **Modular and scalable architecture**: Designed to easily integrate into other natural areas, allowing for simple adaptation by inserting relevant data into the database.
-- **Data analytics**: Tracks user interactions, providing valuable insights into visitor engagement and behavior through interaction logging.
-- **Secure and efficient backend**: A RESTful API and MongoDB database ensure secure and fast data management, with a modular structure that supports easy updates and extensions. The backend handles user data, geospatial coordinates, and content management.
+- **✨ Augmented Reality (AR) Content**: Displays digital information over the real world with interactive 3D navigation arrows and AR cards linked to specific locations.
+
+- **🚀 Progressive Web Application (PWA)**: Runs directly in a web browser without requiring a download. Enjoy offline access, automatic updates, and a seamless installation process.
+
+- **📍 Location-Based Interactions**: Activates specific content when users approach certain areas, encouraging exploration and engagement with the surroundings.
+
+- **🔒 Firebase Authentication & Authorization**: Utilizes Firebase to manage secure user logins and data protection.
+
+- **🌐 Multilingual and Accessible Design**: Provides content in multiple languages and includes text-to-speech, making the app friendly for users with different needs.
+
+- **📚 Educational Material**: Offers detailed information about local flora and fauna, including images, scientific names, and conservation details.
+
+- **🛠️ Modular and Scalable Architecture**: Designed to be easily updated for other natural areas by simply modifying the content database.
+
+- **📊 User Interaction Analytics**: Tracks user engagement to help understand how visitors interact with the app and identify areas for improvement.
+
+- **⚡ Efficient Backend Infrastructure**: Powered by a RESTful API and MongoDB for reliable management of user data, geospatial information, and content.
+
+GeoAR combines technology with nature in a straightforward way, aiming to enrich the visitor experience through enhanced learning and exploration. This project represents an important part of my thesis work, exploring how digital tools can add a new dimension to environmental education.
