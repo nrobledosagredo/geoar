@@ -16,15 +16,15 @@ Initially designed for the Botanical Garden at [Austral University of Chile](htt
 
 ## Features
 
-* **Augmented Reality (AR) Overlay:** Displays digital information over real-world views, including location-linked AR pop-ups and 3D navigation.
-* **Progressive Web Application (PWA) Implementation:** Operates within a web browser, providing offline functionality and automatic updates.
-* **Location-Based Content Activation:** Triggers specific content based on user proximity to designated areas.
-* **User Authentication and Authorization:** Implements Firebase for secure user login and data access control.
-* **Multilingual and Text-to-Speech Support:** Offers content in multiple languages with text-to-speech functionality.
-* **Detailed Flora and Fauna Information:** Includes images, scientific names, and conservation details for local species.
-* **Modular Architecture:** Designed for content database modifications to support additional natural areas.
-* **User Interaction Tracking:** Collects data on user engagement for analysis and improvement.
-* **RESTful API and MongoDB Backend:** Provides data management for user information, geospatial data, and content.
+* **Augmented reality (AR) overlay:** Displays digital information over real-world views, including location-linked AR pop-ups and 3D navigation.
+* **Progressive web application (PWA) implementation:** Operates within a web browser, providing offline functionality and automatic updates.
+* **Location-based content activation:** Triggers specific content based on user proximity to designated areas.
+* **User authentication and authorization:** Implements Firebase for secure user login and data access control.
+* **Multilingual and text-to-speech support:** Offers content in multiple languages with text-to-speech functionality.
+* **Detailed flora and fauna information:** Includes images, scientific names, and conservation details for local species.
+* **Modular architecture:** Designed for content database modifications to support additional natural areas.
+* **User interaction tracking:** Collects data on user engagement for analysis and improvement.
+* **RESTful API and MongoDB backend:** Provides data management for user information, geospatial data, and content.
 
 GeoAR integrates augmented reality and location-based technologies to provide information about the natural environment. This project explores the application of digital tools in environmental education within the context of my thesis.
 ## Demo
